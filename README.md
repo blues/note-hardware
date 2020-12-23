@@ -28,6 +28,10 @@ Each directory in this repo contains schematics, layout files, 3D models, and BO
   - [Layout](/Notecarrier-Pi/v4/Notecarrier-Pi%20drawing%20v4.pdf)
   - [BOM](/Notecarrier-Pi/v4/Notecarrier-Pi%20BOM%20v4.pdf)
 
+Dimension files for the Notecard are available in the [notecard](/Notecard/) directory.
+
+- [Dimension Drawing (PDF)](/Notecard/20173047_NOTECARD-M2-EG91-NAX_V11_DIMENSION.pdf)
+- [STP File](/Notecard/20173047_NOTECARD-M2-EG91-NAX_V11.stp)
 ## Contributing
 
 We love issues, fixes, and pull requests from everyone. By participating in this
