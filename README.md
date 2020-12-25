@@ -1,37 +1,17 @@
 # note-hardware
 
-Open Hardware Designs for Notecarriers and other Notecard-related Hardware
+### Open hardware designs for Notecarriers and other Notecard-related hardware available through our [online store](https://shop.blues.io).
 
-Each directory in this repo contains schematics, layout files, 3D models, and BOMs for each Notecarrier we produce and sell through our
-[online store](https://shop.blues.io).
+- Notecard 
+  - Dimensioned drawings
+  - 3D models
+- Notecarrier
+  - Schematics
+  - Bills of material
+  - PCB layouts and Gerber files
+  - Dimensioned drawings
+  - 3D models
 
-- [Notecarrier-AA](/Notecarrier-AA/v14/)
-  - [Schematic](/Notecarrier-AA/v14/Notecarrier-AA%20schematic%20v14.pdf)
-  - [Layout](/Notecarrier-AA/v14/Notecarrier-AA%20drawing%20v14.pdf)
-  - [BOM](/Notecarrier-AA/v14/Notecarrier-AA%20BOM%20v14.pdf)
-- [Notecarrier-AE](/Notecarrier-AA/v14/)
-  - [Schematic](/Notecarrier-AE/v14/Notecarrier-AE%20schematic%20v14.pdf)
-  - [Layout](/Notecarrier-AE/v14/Notecarrier-AE%20drawing%20v14.pdf)
-  - [BOM](/Notecarrier-AE/v14/Notecarrier-AE%20BOM%20v14.pdf)
-- [Notecarrier-AF](/Notecarrier-AA/v6/)
-  - Coming Soon
-- [Notecarrier-AL](/Notecarrier-AL/v14/)
-  - [Schematic](/Notecarrier-AL/v14/Notecarrier-AL%20schematic%20v14.pdf)
-  - [Layout](/Notecarrier-AL/v14/Notecarrier-AL%20drawing%20v14.pdf)
-  - [BOM](/Notecarrier-AL/v14/Notecarrier-AL%20BOM%20v14.pdf)
-- [Notecarrier-B](/Notecarrier-B/v12/)
-  - [Schematic](/Notecarrier-B/v12/Notecarrier-B%20schematic%20v12.pdf)
-  - [Layout](/Notecarrier-B/v12/Notecarrier-B%20drawing%20v12.pdf)
-  - [BOM](/Notecarrier-B/v12/Notecarrier-B%20BOM%20v12.pdf)
-- [Notecarrier-Pi](/Notecarrier-Pi/v4/)
-  - [Schematic](/Notecarrier-Pi/v4/Notecarrier-Pi%20schematic%20v4.pdf)
-  - [Layout](/Notecarrier-Pi/v4/Notecarrier-Pi%20drawing%20v4.pdf)
-  - [BOM](/Notecarrier-Pi/v4/Notecarrier-Pi%20BOM%20v4.pdf)
-
-Dimension files for the Notecard are available in the [notecard](/Notecard/) directory.
-
-- [Dimension Drawing (PDF)](/Notecard/20173047_NOTECARD-M2-EG91-NAX_V11_DIMENSION.pdf)
-- [STP File](/Notecard/20173047_NOTECARD-M2-EG91-NAX_V11.stp)
 ## Contributing
 
 We love issues, fixes, and pull requests from everyone. By participating in this
