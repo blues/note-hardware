@@ -18,7 +18,7 @@ clean up inconsistent whitespace )
 * by closing [issues][]
 * by reviewing patches
 
-[issues]: https://blues.github.com/blues/note-hardware/issues
+[issues]: https://github.com/blues/note-hardware/issues
 
 ## Submitting an Issue
 
