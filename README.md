@@ -2,7 +2,7 @@
 
 ### Open hardware designs for Notecarriers and other Notecard-related hardware available through our [online store](https://shop.blues.io).
 
-- Notecard 
+- Notecard
   - Dimensioned drawings
   - 3D models
 - Notecarrier
@@ -21,6 +21,10 @@ project, you agree to abide by the Blues Inc.
 For details on contributions we accept and the process for contributing, see our
 [contribution guide](CONTRIBUTING.md).
 
+## Hardware Application Notes
+
+* [Notecarrier-A Series Solar JST Input](https://dev.blues.io/hardware/application-notes/notecarrier-a-series-solar-jst-input)
+* [Notecard Host System Design Guide](https://dev.blues.io/hardware/application-notes/notecard-host-system-design-guide)
 ## More Information
 
 For Notecard SDKs and Libraries, see:
