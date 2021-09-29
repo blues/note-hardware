@@ -11,6 +11,13 @@
   - PCB layouts and Gerber files
   - Dimensioned drawings
   - 3D models
+- Swan
+  - Schematics
+  - Bills of material
+  - PCB layouts and Gerber files
+  - Dimensioned drawings
+  - 3D Models
+  - Eagle Library files for Swan Carrier
 
 ## Contributing
 
