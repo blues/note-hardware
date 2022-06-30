@@ -1,0 +1,1 @@
+STEP and Parasolid files of the Airnote enclosure, which consists of three white plastic parts and two clear windows.
