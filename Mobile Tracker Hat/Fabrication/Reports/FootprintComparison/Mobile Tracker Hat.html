@@ -1,0 +1,430 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 { 
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body { 
+			font-family : segoe ui;
+		}
+
+		td, th {  
+			padding: 0.5em;
+			text-align : left;
+		}
+		th { 
+			background-color : #EEEEEE;
+		
+		}
+		th.column1, td.column1 { 
+			width : 50%; 
+		}
+
+        th.column2, td.column2 {
+            width : 25%;
+        }
+
+		table { 
+			width : 100%; 
+            font-size: 0.9em;
+		}
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 5em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error { 
+			color : red;
+			font-weight : bold;
+		}	
+		tr.onmouseout_odd { 
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+			
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);		
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {	
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}	
+	</script><title>Footprint Comparison Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD21\Templates\AD_logo.png
+		"><a href="dxpprocess://Client:SetupPreferences?Server=PCB|PageName=Reports" class="customize"><acronym title="dxpprocess://Client:SetupPreferences?Server=PCB|PageName=Reports">customize</acronym></a><h1>Footprint Comparison Report</h1>
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">6/17/2021</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">10:59:58 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\joech\AppData\Local\TempReleases\Snapshot\1\Mobile Tracker Hat.PcbDoc" class="file"><acronym title="C:\Users\joech\AppData\Local\TempReleases\Snapshot\1\Mobile Tracker Hat.PcbDoc">C:\Users\joech\AppData\Local\TempReleases\Snapshot\1\Mobile Tracker Hat.PcbDoc</acronym></a></td>
+</tr>
+</table><a name="ID3LZV4I50AM4AMZ34SOPI4QYP0FBP4402PEZNEHMVOSNUH1RU0XI"><h2>Contents</h2></a><p class="contents_level1"><a href="#ID3LZV4I50AM4AMZ34SOPI4QYP0FBP4402PEZNEHMVOSNUH1RU0XI">Contents</a></p>
+<p class="contents_level1"><a href="#IDVIRFW4Z0U32ENCWEGEPMV0BDFU5FNSTMB4RUWDFD204VM0EEOCO">Components Status Summary</a></p>
+<p class="contents_level2"><a href="#IDZRASAQPEDHULLRUZ43X4MWJIULPHI5NTSPM1M5DBRQBJAXKTAYPM">Matched Components List<br></a></p><br><a name="IDVIRFW4Z0U32ENCWEGEPMV0BDFU5FNSTMB4RUWDFD204VM0EEOCO"><h2>Components Status Summary</h2></a><h2>Matched Components List</h2><a name="IDZRASAQPEDHULLRUZ43X4MWJIULPHI5NTSPM1M5DBRQBJAXKTAYPM"><table>
+<tr>
+<th class="column1">Designator</th>
+<th class="column2">Footprint</th>
+<th class="column3">Footprint reference</th>
+<th class="column4">Footprint to reference Library</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">C1</td>
+<td style="Width:20%" class="column2">FP-CL21-IPC_A</td>
+<td style="Width:20%" class="column3">FP-CL21-IPC_A</td>
+<td style="Width:60%" class="column4">Altium Content Vault</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">C2</td>
+<td style="Width:20%" class="column2">FP-CL21-IPC_A</td>
+<td style="Width:20%" class="column3">FP-CL21-IPC_A</td>
+<td style="Width:60%" class="column4">Altium Content Vault</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">C3</td>
+<td style="Width:20%" class="column2">SAMS-C0603-2_M</td>
+<td style="Width:20%" class="column3">SAMS-C0603-2_M</td>
+<td style="Width:60%" class="column4">Altium Content Vault</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">C4</td>
+<td style="Width:20%" class="column2">SAMS-C0603-2_M</td>
+<td style="Width:20%" class="column3">SAMS-C0603-2_M</td>
+<td style="Width:60%" class="column4">Altium Content Vault</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">C5</td>
+<td style="Width:20%" class="column2">SAMS-C0603-2_M</td>
+<td style="Width:20%" class="column3">SAMS-C0603-2_M</td>
+<td style="Width:60%" class="column4">Altium Content Vault</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">C6</td>
+<td style="Width:20%" class="column2">SAMS-C0603-2_M</td>
+<td style="Width:20%" class="column3">SAMS-C0603-2_M</td>
+<td style="Width:60%" class="column4">Altium Content Vault</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">CLIENT1</td>
+<td style="Width:20%" class="column2">CLIENT_MARK</td>
+<td style="Width:20%" class="column3">CLIENT_MARK</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Common.PcbLib</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">COPYRIGHT</td>
+<td style="Width:20%" class="column2">COPYRIGHT_MARK</td>
+<td style="Width:20%" class="column3">COPYRIGHT_MARK</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Common.PcbLib</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">FD1</td>
+<td style="Width:20%" class="column2">FID_1mm_3mm</td>
+<td style="Width:20%" class="column3">FID_1mm_3mm</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Common.PcbLib</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">FD2</td>
+<td style="Width:20%" class="column2">FID_1mm_3mm</td>
+<td style="Width:20%" class="column3">FID_1mm_3mm</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Common.PcbLib</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">FD3</td>
+<td style="Width:20%" class="column2">FID_1mm_3mm</td>
+<td style="Width:20%" class="column3">FID_1mm_3mm</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Common.PcbLib</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">FD4</td>
+<td style="Width:20%" class="column2">FID_1mm_3mm</td>
+<td style="Width:20%" class="column3">FID_1mm_3mm</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Common.PcbLib</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">FD5</td>
+<td style="Width:20%" class="column2">FID_1mm_3mm</td>
+<td style="Width:20%" class="column3">FID_1mm_3mm</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Common.PcbLib</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">FD6</td>
+<td style="Width:20%" class="column2">FID_1mm_3mm</td>
+<td style="Width:20%" class="column3">FID_1mm_3mm</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Common.PcbLib</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">J1</td>
+<td style="Width:20%" class="column2">HDR-NC-AX-22_4UCON</td>
+<td style="Width:20%" class="column3">HDR-NC-AX-22_4UCON</td>
+<td style="Width:60%" class="column4">C:\Users\joech\AppData\Local\TempReleases\Snapshot\1\NC-A GPS Hat.PcbLib</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">J2</td>
+<td style="Width:20%" class="column2">HDR-NC-AX-3_4UCON</td>
+<td style="Width:20%" class="column3">HDR-NC-AX-3_4UCON</td>
+<td style="Width:60%" class="column4">C:\Users\joech\AppData\Local\TempReleases\Snapshot\1\NC-A GPS Hat.PcbLib</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">L1</td>
+<td style="Width:20%" class="column2">COIL_4040x18</td>
+<td style="Width:20%" class="column3">COIL_4040x18</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Inductors.PcbLib</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">LED1</td>
+<td style="Width:20%" class="column2">E6C0603VGAC1UDA</td>
+<td style="Width:20%" class="column3">E6C0603VGAC1UDA</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Miscellaneous LEDs.PcbLib</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">MH1</td>
+<td style="Width:20%" class="column2">HOLE_3MM</td>
+<td style="Width:20%" class="column3">HOLE_3MM</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Mechanical.PcbLib</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">MH2</td>
+<td style="Width:20%" class="column2">HOLE_3MM</td>
+<td style="Width:20%" class="column3">HOLE_3MM</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Mechanical.PcbLib</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">MH3</td>
+<td style="Width:20%" class="column2">HOLE_3MM</td>
+<td style="Width:20%" class="column3">HOLE_3MM</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Mechanical.PcbLib</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">MH4</td>
+<td style="Width:20%" class="column2">HOLE_3MM</td>
+<td style="Width:20%" class="column3">HOLE_3MM</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Mechanical.PcbLib</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">MOD1</td>
+<td style="Width:20%" class="column2">Quectel L86</td>
+<td style="Width:20%" class="column3">Quectel L86</td>
+<td style="Width:60%" class="column4">C:\Users\joech\AppData\Local\TempReleases\Snapshot\1\NC-A GPS Hat.PcbLib</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">MTG1</td>
+<td style="Width:20%" class="column2">SPACER_M3_8MM (4.75 OD)</td>
+<td style="Width:20%" class="column3">SPACER_M3_8MM (4.75 OD)</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Mechanical.PcbLib</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">MTG2</td>
+<td style="Width:20%" class="column2">SPACER_M3_8MM (4.75 OD)</td>
+<td style="Width:20%" class="column3">SPACER_M3_8MM (4.75 OD)</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Mechanical.PcbLib</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">MTG3</td>
+<td style="Width:20%" class="column2">SPACER_M3_8MM (4.75 OD)</td>
+<td style="Width:20%" class="column3">SPACER_M3_8MM (4.75 OD)</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Mechanical.PcbLib</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">MTG4</td>
+<td style="Width:20%" class="column2">SPACER_M3_8MM (4.75 OD)</td>
+<td style="Width:20%" class="column3">SPACER_M3_8MM (4.75 OD)</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Mechanical.PcbLib</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">PROJECTID</td>
+<td style="Width:20%" class="column2">PROJECTID_MARK</td>
+<td style="Width:20%" class="column3">PROJECTID_MARK</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Common.PcbLib</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">R1</td>
+<td style="Width:20%" class="column2">RESC0603(1608)_N</td>
+<td style="Width:20%" class="column3">RESC0603(1608)_N</td>
+<td style="Width:60%" class="column4">Altium Content Vault</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">R2</td>
+<td style="Width:20%" class="column2">RESC1609X50X30ML10T20</td>
+<td style="Width:20%" class="column3">RESC1609X50X30ML10T20</td>
+<td style="Width:60%" class="column4">ToyBuilder Labs</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">R3</td>
+<td style="Width:20%" class="column2">RESC0603(1608)_L</td>
+<td style="Width:20%" class="column3">RESC0603(1608)_L</td>
+<td style="Width:60%" class="column4">ToyBuilder Labs</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">R4</td>
+<td style="Width:20%" class="column2">RESC2013X50X30NL20T20</td>
+<td style="Width:20%" class="column3">RESC2013X50X30NL20T20</td>
+<td style="Width:60%" class="column4">ToyBuilder Labs</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">R5</td>
+<td style="Width:20%" class="column2">RESC0603(1608)_N</td>
+<td style="Width:20%" class="column3">RESC0603(1608)_N</td>
+<td style="Width:60%" class="column4">Altium Content Vault</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">R6</td>
+<td style="Width:20%" class="column2">RESC0603(1608)_N</td>
+<td style="Width:20%" class="column3">RESC0603(1608)_N</td>
+<td style="Width:60%" class="column4">Altium Content Vault</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">U1</td>
+<td style="Width:20%" class="column2">FP-L622-1C-MFG</td>
+<td style="Width:20%" class="column3">FP-L622-1C-MFG</td>
+<td style="Width:60%" class="column4">ToyBuilder Labs</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">U2</td>
+<td style="Width:20%" class="column2">BOSC-BME280-8_V</td>
+<td style="Width:20%" class="column3">BOSC-BME280-8_V</td>
+<td style="Width:60%" class="column4">Altium Content Vault</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">Z1</td>
+<td style="Width:20%" class="column2">testp_40pad</td>
+<td style="Width:20%" class="column3">testp_40pad</td>
+<td style="Width:60%" class="column4">C:\Users\joech\Dropbox\work\altium\library\TBL Common.PcbLib</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
