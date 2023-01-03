@@ -1,6 +1,7 @@
 # note-hardware
 
-### Open hardware designs for Notecarriers and other Notecard-related hardware available through our [online store](https://shop.blues.io).
+## Designs
+ Open hardware designs for Notecarriers and other Notecard-related hardware available through our [online store](https://shop.blues.io).
 
 |Item|Description|Contents|
 |---|---|---|
@@ -8,8 +9,8 @@
 |Notecarrier *|Notecard daughter boards | Full electrical and mechanical design|
 |[Swan](Swan)| STM32 in Adafruit Feather form| Full electrical and mechanical design|
 |[Sparrow](Sparrow)| Local sensor network over LoRa| Full electrical and mechanical design|
-|[Airnote](Airnote)|Device to cloud data pump|Mechanical design files|
-|[_deprecitated](_depreciated)|Components and designs no longer sold| Assorted design files
+|[Airnote](Airnote)|Air quality monitor powered by Notecard|Mechanical design files|
+|[_deprecated](_deprecated)|Components and designs no longer sold| Assorted design files
 
 ## Hardware Application Notes
 
