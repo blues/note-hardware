@@ -1,32 +1,16 @@
 # note-hardware
 
-### Open hardware designs for Notecarriers and other Notecard-related hardware available through our [online store](https://shop.blues.io).
+## Designs
+ Open hardware designs for Notecarriers and other Notecard-related hardware available through our [online store](https://shop.blues.io).
 
-- Notecard
-  - Dimensioned drawings
-  - 3D models
-- Notecarrier
-  - Schematics
-  - Bills of material
-  - PCB layouts and Gerber files
-  - Dimensioned drawings
-  - 3D models
-- Swan
-  - Schematics
-  - Bills of material
-  - PCB layouts and Gerber files
-  - Dimensioned drawings
-  - 3D Models
-  - Eagle Library files for Swan Carrier
-
-## Contributing
-
-We love issues, fixes, and pull requests from everyone. By participating in this
-project, you agree to abide by the Blues Inc.
-[code of conduct](CODE_OF_CONDUCT.md).
-
-For details on contributions we accept and the process for contributing, see our
-[contribution guide](CONTRIBUTING.md).
+|Item|Description|Contents|
+|---|---|---|
+|[Notecard](Notecard)|Device to cloud data pump|Mechanical design files|
+|Notecarrier *|Notecard daughter boards | Full electrical and mechanical design|
+|[Swan](Swan)| STM32 in Adafruit Feather form| Full electrical and mechanical design|
+|[Sparrow](Sparrow)| Local sensor network over LoRa| Full electrical and mechanical design|
+|[Airnote](Airnote)|Air quality monitor powered by Notecard|Mechanical design files|
+|[_deprecated](_deprecated)|Components and designs no longer sold| Assorted design files
 
 ## Hardware Application Notes
 
@@ -45,6 +29,15 @@ For Notecard SDKs and Libraries, see:
 * [blues.com](https://blues.io)
 * [notehub.io][Notehub]
 * [wireless.dev](https://wireless.dev)
+
+## Contributing
+
+We love issues, fixes, and pull requests from everyone. By participating in this
+project, you agree to abide by the Blues Inc.
+[code of conduct](CODE_OF_CONDUCT.md).
+
+For details on contributions we accept and the process for contributing, see our
+[contribution guide](CONTRIBUTING.md).
 
 ## License
 
