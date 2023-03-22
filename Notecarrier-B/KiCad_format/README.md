@@ -5,10 +5,15 @@ This folder contains the design files for the Blues Wireless Notcarrier-B, in Ki
 
 ## Porting Notes
 
+### Project
+
 - The revision history and block diagram sheets have not been ported, and instead have been extracted into more suitable formats.
 	- The revision history is captured at the end of this README.
 		- The mechanical symbols have been moved to the schematic sheet.
 	- The block diagram is captured in XXX.
+
+### Schematic
+
 - For the appearance of nets, I am erring on the side of visually identical, rather than applying new KiCad conventions, since these can be interpreted as electrically significant and diverging may introduce doubt.
 	- Eg. `VIO`, `VMODEM` power pins; power net thickness and colours; position of netnames.
 	- Note the net appearance is visual only - no netclass is applied, in keeping with the original.
@@ -25,6 +30,20 @@ This folder contains the design files for the Blues Wireless Notcarrier-B, in Ki
 - In keeping with the decisions above, the BOM content has been ported accurately, rather than introducing KiCad conventions, improvements or translations.
 	- Similarly, reference designators have been retained. Again, if the BOM were to be revisited, this information may warrant an update.
 	- A notable exception is the exclusion of the PCB itself from the BOM. In keeping with the KiCad convention, the association with the PCB is a project-level attribute, rather than a schematic-level attribute.
+
+### PCB
+
+- Both the design and the physical sample exhibit the distinctive style of FAE: eg. black soldermask, no designators, rectangular non-solder mask defined pads, no guidelines on silkscreen, thick lines on fabrication layer. The footprints typical in a KiCad project are both visually different, and potentially electrically different. After some assessment, these differences were significant enough to warrant porting the footprints as well. Alas, a revisit of the available conversion tools confirmed they are not practical, introducing complications, missing details and producing difficult to maintain results. Further, the provided design files do not include the source library, so the footprints have to be extracted from the PCB design.
+	- An example showing the differences between the two footprint styles is shown below for `J23`, the JST-PH LiPo connector.
+
+| OrCAD | KiCad |
+| ----- | ----- |
+| ![OrCAD example](Reference/example_OrCAD_footprint.png) | ![KiCad example](Reference/example_KiCad_footprint.png) |
+
+- 
+	- Hence the decision has been made to redraw them all manually. Only insignificant visual aspects will use KiCad conventions, such as fonts. The guiding principle here is to ensure the gerbers are as similar as practicable, to aid in a representative and efficient validation.
+		- If the port were to undergo a design revision, consider replacing all footprints with those from a trustworthy KiCad library to adopt fit-for-purpose conventions and maintainability.
+
 
 ### Validation Method
 
