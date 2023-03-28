@@ -1,13 +1,13 @@
-(footprint "CS_C_0402" (version 20221018) (generator pcbnew)
+(footprint "RS-0402" (version 20221018) (generator pcbnew)
   (layer "F.Cu")
-  (descr "Capacitor SMD 0402 (1005 Metric), ported from OrCad")
-  (tags "capacitor")
+  (descr "Resistor SMD 0402 (1005 Metric), ported from OrCad")
+  (tags "resistor")
   (attr smd)
   (fp_text reference "REF**" (at 0 -1.16) (layer "F.SilkS") hide
       (effects (font (size 1 1) (thickness 0.15)))
     (tstamp 3f001d39-98c9-450a-a6f0-b7475527fbd7)
   )
-  (fp_text value "CS_C_0402" (at 0 1.16) (layer "F.Fab") hide
+  (fp_text value "RS-0402" (at 0 1.4) (layer "F.Fab") hide
       (effects (font (size 1 1) (thickness 0.15)))
     (tstamp 7ef18d46-39df-486f-9543-b00228cf866a)
   )
@@ -35,6 +35,20 @@
     (solder_mask_margin 0.05) (tstamp f0d6bdbe-8dea-4984-9c52-f76168ceed26))
   (pad "2" smd rect (at 0.45 0) (size 0.62 0.62) (layers "F.Cu" "F.Paste" "F.Mask")
     (solder_mask_margin 0.05) (tstamp 07bccb1b-781c-4561-a379-63c349828818))
+  (zone (net 0) (net_name "") (layer "F.Cu") (tstamp 364c927e-ec23-4f0d-b9b7-51ec5241bcfc) (hatch edge 0.5)
+    (connect_pads (clearance 0))
+    (min_thickness 0.25) (filled_areas_thickness no)
+    (keepout (tracks allowed) (vias allowed) (pads allowed) (copperpour not_allowed) (footprints allowed))
+    (fill (thermal_gap 0.5) (thermal_bridge_width 0.5))
+    (polygon
+      (pts
+        (xy -0.87 -0.44)
+        (xy 0.89 -0.44)
+        (xy 0.89 0.42)
+        (xy -0.87 0.42)
+      )
+    )
+  )
   (model "${KICAD6_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0402_1005Metric.wrl"
     (offset (xyz 0 0 0))
     (scale (xyz 1 1 1))
