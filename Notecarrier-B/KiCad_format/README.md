@@ -43,18 +43,126 @@ This folder contains the design files for the Blues Wireless Notcarrier-B, in Ki
 - 
 	- Hence the decision has been made to redraw them all manually. Only insignificant visual aspects will use KiCad conventions, such as fonts. The guiding principle here is to ensure the gerbers are as similar as practicable, to aid in a representative and efficient validation.
 		- If the port were to undergo a design revision, consider replacing all footprints with those from a trustworthy KiCad library to adopt fit-for-purpose conventions and maintainability.
+- After evaluating various methods of importing the PCB, and weighing up the accuracy and maintainability, have decided on this workflow:
+	1. In OrCAD, make key layers visible one-by-one. Eg. TOP ETCH, then TOP VIA, then TOP SILKSCREEN, etc.
+	2. Export to DXF v12, auto-generating layer names, possibly including the outline if it helps with alignment, but not bothering with polyline or fill options since I've not found a combination which actually results in directly useable polygons.
+	3. Import graphics in KiCad putting each export on a separate User layer, placing them all at the same spot, with 0.1mm line width and millimeter units.
+	4. Trace over them using native KiCad tools, to generate a high quality digital design that is physical equivalent to the original.
+- OrCAD layer to KiCad layer mapping:
 
+| OrCAD | KiCad | Notes |
+| ----- | ----- | ----- |
+| OUTLINE.dxf | User.1 | Includes edge cuts, edge clearance and dimension annotations. |
+| ASSEMBLY-TOP.dxf | User.2 | Courtyards sufficient to align components. |
+| ASSEMBLY-BOT.dxf | User.3 | Courtyards sufficient to align components. |
+| SILKSCREEN-TOP.dxf | User.4 | Text came through as text! So now needs to be repositioned because fonts are different. || SILKSCREEN-BOT.dxf | User.5 | Text came through as text! So now needs to be repositioned because fonts are different. || TOP-ETCH.dxf | User.6 | Fills came through as outlines, traces as thin lines. Will be used as guides for new elements. |
+| BOT-ETCH.dxf | User.7 | Fills came through as outlines, traces as thin lines. Will be used as guides for new elements. |
+| TOP-VIA.dxf | User.8 | Also includes test points, so need top and bottom. || TOP-VIA.dxf | User.9 | But doesn't include fiducials, so do them manually. |
+| TOP/BOT-PIN.dxf | - | No useful information. |
+
+- To convert the `ETCH.dxf` layers into tracks:
+	- Hide all other layers. Select everything. Unselect any text.
+	- "Create from selection" --> "Create Tracks From Selection".
+- To remove the flood fill outlines and correct the track widths (easier to do after creating the tracks, because scripting doesn't work well when changing the selection set or creating tracks):
+
+```python
+import pcbnew
+pcb = pcbnew.GetBoard()
+for t in pcb.GetTracks():
+    if t.GetLayerName() != 'B.Cu':
+        continue
+    w = t.GetWidth()
+    if w <= 10000:
+        t.SetWidth(w*100)
+    else:
+        t.DeleteStructure()
+```
+
+- Failed attempt to modify the selection set:
+
+```python
+for d in pcb.GetDrawings():
+    if d.GetLayerName() != 'User.7' or d.GetClass() != 'PCB_SHAPE' or d.GetWidth() > 10000:
+        d.ClearSelected()
+```
+
+- One of the Front fiducials is out of place (it doesn't correspond with its Back pair and yet its keep out remains) assumedly to avoid fouling the connecter silkscreen. I've opted to retain the position, but allow the keep out to re-fill, which produces more copper (with no effect) but a visually similar PCB, keeping the more important details intact.
+- The original flood fill is strange - it follows curves as if the minimum width is exactly 0.2mm, yet has a couple of stubs that are only 0.12mm wide. I've stuck with the 0.2mm since it has the majority effect, and sacrificed the couple of small stubs.
+	- I've now reversed this decision - following the curves turns out to be a far less significant difference compared to the stubs.
+	- Still need lots of rule areas to tidy up the exceptions and limit the flood fill to match the original. The rules change from part to part, so much easier to add rule areas than try to edit clearance settings.
+- Place vias by generating a drill report (Export -> Reports -> New/Edit -> Database View = `FULL_GEOMETRY` -> Double click `DRILL_HOLE_NAME`, `DRILL_HOLE_PLATING`, `DRILL_HOLE_X` and `DRILL_HOLE_Y` -> Ok -> Generate Reports -> Save), copying the contents into a spreadsheet, sorting by name, calculating x+100 and 100-y, copying values into a text editor to create python code to generate lists, creating a via with the correct properties, duplicating it to get the right number, then running something like this:
+
+```python
+i=0
+for t in pcb.GetTracks():
+    if t.IsSelected():
+        t.SetPosition(pcbnew.VECTOR2I(pcbnew.wxPoint(x[i]*1000000,y[i]*1000000)))
+        i += 1
+```
+
+- and this:
+
+```python
+for t in pcb.GetTracks():
+    if t.IsSelected():
+        t.SetNet(pcb.FindNet("GND"))
+```
+
+- Place test points in a similar way using Export -> Quick Reports -> Testprep Report, extracting the ref des info as well as x and y, and using something like:
+
+```python
+i = 0
+for t in pcb.GetFootprints():
+    if t.IsSelected():
+        t.SetPosition(pcbnew.VECTOR2I(pcbnew.wxPoint(x[i]*1000000,y[i]*1000000)))
+        t.SetReference(r[i])
+        i += 1
+```
+
+- The M.2 connector locating holes in the OrCAD design are excluded from the copper layers. They're drilled out anyway so it makes little difference, but the KiCad standard is to leave them in (avoiding a redundant action). Since it makes little difference, and the footprint is custom anyway, I've adopted the OrCAD method.
+- The fiducials in OrCAD have a paste layer. I'm comfortable excluding that since it clearly serves no purpose.
+- The "Manufacturing Specifications" on the PCB mention a thickness of "1.6mm". The stack-up doesn't add up to this and I can't see a justification for it, so am assuming it's just a nominal figure. In KiCad the thickness reported is from the stack-up, so I've left it as "1.57mm".
+	- The "Manufacturing Specifications" also mention a "Copper Thickness Base" of 35um. Again, I can't see this justified anywhere, since the copper layers are given as 0.018mm. I've adopted the 0.018mm figure and not included the 35um figure.
+	- In general I haven't tried to recreate the appearance of the drawing sheet, since it has little effect on the design and is not a important part of the ongoing maintainability as a KiCad project. Instead, I have added some useful field data to the default drawing sheet template, and added a few additional elements to the User.Drawings layer to broadly capture the nature and any key details in the OrCAD originals.
+- Pin 6 of the M.2 connector (`J20`) is assigned to `GND` but is not connected in the PCB. This apparent oversight has been retained.
 
 ### Validation Method
 
 1. Validate Schematic
 	1. Print both schematics at same scale.
-	2. Perform visual comparison. Confirm that differences are expected, documented and acceptable.
+	1. Perform visual comparison. Confirm that any differences are expected, documented and acceptable.
 1. Validate BOM.
 	1. Export `Notecarrier-B BOM v2.1.xlsx` columns `Reference`, `Part`, `MPN`, `MPN2`, `Description`, `Temperature` and `Pkg Type` to CSV.
-	2. Export KiCad BOM using Symbol Fields Table.
-	3. Run BeyondCompare and match column headings.
-	4. Confirm all differences are expected, documented and acceptable.
+	1. Export KiCad BOM using Symbol Fields Table.
+	1. Run BeyondCompare and match column headings.
+	1. Confirm all differences are expected, documented and acceptable.
+1. Validate PCB.
+	1. Run DRC. Confirm that any errors and warnings are expected, documented and acceptable.
+	1. Painstakingly create a film for each gerber layer in OrCAD by:
+		1. Setup -> Colors -> Off, then use "Filter layers" and the "Stack-Up" tree to only enable:
+			1. Design_Outline
+			1. Pin/Top, Via/Top, Etch/Top
+			1. Pin/Bottom, Via/Bottom, Etch/Bottom
+			1. Pin/Pastemask_Top, Via/Pastemask_Top, PackageGeometry/Pastemask_Top
+			1. Pin/Pastemask_Bottom, Via/Pastemask_Bottom, PackageGeometry/Pastemask_Bottom
+			1. Pin/Soldermask_Top, Via/Soldermask_Top, PackageGeometry/Soldermask_Top, BoardGeometry/Soldermask_Top
+			1. Pin/Soldermask_Bottom, Via/Soldermask_Bottom, PackageGeometry/Soldermask_Bottom, BoardGeometry/Soldermask_Bottom
+			1. All/Silkscreen_Top
+			1. All/Silkscreen_Bottom
+		1. Ok -> Export -> Gerber -> Right-click a film and choose "Add" with names like:
+			1. Edge_Cuts
+			1. F_Cu
+			1. B_Cu
+			1. F_Paste
+			1. B_Paste
+			1. F_Mask
+			1. B_Mask
+			1. F_Silkscreen
+			1. B_Silkscreen
+	1. Produce Gerbers in OrCAD and KiCad using the same settings. In OrCAD, select each of the new films, offset **each** film by (100,-100) to end up in the same spot as KiCad, and click "Create Artwork".
+		1. 	Edge_Cuts also needs an "undefined line width" set (say, 0.1) so the zero width edge is not dropped.
+	1. Produce drill files using Export -> NC Drill. Parameters that must be set are the offset (same as gerbers), "Auto tool select", "Separate files for plated/non-plated holes", and "Enhanced Excellon format". But "Repeat codes" must not be set. 
+	1. Open pairs of the gerbers in Gerber Viewer and flick between them to scan for differences. The contrasting colours of the layers automatically creates a useful visual diff, and is more definitive than the "diff" and "xor" views.
 
 ---
 
