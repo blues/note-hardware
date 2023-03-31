@@ -90,7 +90,7 @@ for d in pcb.GetDrawings():
 - The original flood fill is strange - it follows curves as if the minimum width is exactly 0.2mm, yet has a couple of stubs that are only 0.12mm wide. I've stuck with the 0.2mm since it has the majority effect, and sacrificed the couple of small stubs.
 	- I've now reversed this decision - following the curves turns out to be a far less significant difference compared to the stubs.
 	- Still need lots of rule areas to tidy up the exceptions and limit the flood fill to match the original. The rules change from part to part, so much easier to add rule areas than try to edit clearance settings.
-- Place vias by generating a drill report (Export -> Reports -> New/Edit -> Database View = `FULL_GEOMETRY` -> Double click `DRILL_HOLE_NAME`, `DRILL_HOLE_PLATING`, `DRILL_HOLE_X` and `DRILL_HOLE_Y` -> Ok -> Generate Reports -> Save), copying the contents into a spreadsheet, sorting by name, calculating x+100 and 100-y, copying values into a text editor to create python code to generate lists, creating a via with the correct properties, duplicating it to get the right number, then running something like this:
+- Place vias by generating a drill report (Export --> Reports --> New/Edit --> Database View = `FULL_GEOMETRY` --> Double click `DRILL_HOLE_NAME`, `DRILL_HOLE_PLATING`, `DRILL_HOLE_X` and `DRILL_HOLE_Y` --> Ok --> Generate Reports --> Save), copying the contents into a spreadsheet, sorting by name, calculating x+100 and 100-y, copying values into a text editor to create python code to generate lists, creating a via with the correct properties, duplicating it to get the right number, then running something like this:
 
 ```python
 i=0
@@ -108,7 +108,7 @@ for t in pcb.GetTracks():
         t.SetNet(pcb.FindNet("GND"))
 ```
 
-- Place test points in a similar way using Export -> Quick Reports -> Testprep Report, extracting the ref des info as well as x and y, and using something like:
+- Place test points in a similar way using Export --> Quick Reports --> Testprep Report, extracting the ref des info as well as x and y, and using something like:
 
 ```python
 i = 0
@@ -118,13 +118,19 @@ for t in pcb.GetFootprints():
         t.SetReference(r[i])
         i += 1
 ```
-
+	- Note introducing test points in the PCB is not typical of a KiCad project, which usually defines them in the schematic. Not having them in the schematic produces a warning in KiCad, but we can safely ignore it since they have been created according to a sound OrCAD workflow and we're copying them and their metadata faithfully.
+	- However, without OrCAD's testpoint report, it's difficult to extract the metadata in the same way. If the testpoints were in the schematic, then the information would be in the netlist and easy to extract with something like [this](https://github.com/Peboli/kicad_netlist_tp_parser). All the information is contained in KiCad's "Component Placement" and "Footprint Report" under "File --> Fabrication Outputs", but these files are not fit for purpose right out of the box. To preserve the *availability* as well as the existance of this data from the OrCAD source files, a script to extract and present it is included in the Validation section.
 - The M.2 connector locating holes in the OrCAD design are excluded from the copper layers. They're drilled out anyway so it makes little difference, but the KiCad standard is to leave them in (avoiding a redundant action). Since it makes little difference, and the footprint is custom anyway, I've adopted the OrCAD method.
 - The fiducials in OrCAD have a paste layer. I'm comfortable excluding that since it clearly serves no purpose.
 - The "Manufacturing Specifications" on the PCB mention a thickness of "1.6mm". The stack-up doesn't add up to this and I can't see a justification for it, so am assuming it's just a nominal figure. In KiCad the thickness reported is from the stack-up, so I've left it as "1.57mm".
 	- The "Manufacturing Specifications" also mention a "Copper Thickness Base" of 35um. Again, I can't see this justified anywhere, since the copper layers are given as 0.018mm. I've adopted the 0.018mm figure and not included the 35um figure.
 	- In general I haven't tried to recreate the appearance of the drawing sheet, since it has little effect on the design and is not a important part of the ongoing maintainability as a KiCad project. Instead, I have added some useful field data to the default drawing sheet template, and added a few additional elements to the User.Drawings layer to broadly capture the nature and any key details in the OrCAD originals.
 - Pin 6 of the M.2 connector (`J20`) is assigned to `GND` but is not connected in the PCB. This apparent oversight has been retained.
+- 3D models were a nightmare to extract. The only effective method I found was to load the supplied `Notecarrier-B 3D model v2.1.stp` full board model into Fusion360 and export each component one by one.
+	- Even this wasn't complete, since the non-populated components aren't included. I was able to find them in `Notecarrier-B 3D model v1.6.stp` using the same method.
+	- The `CS-C-1206` model looks funny. It seems to be on its side and off centre. All others seem okay though, so will retain this one.
+	- The `S2B-PH-SM4-TB(LF)(SN)` model (for the `J-2-0200-MOS-S2B` footprint) was missing. Funnily enough it's missing in the KiCad library too. I found one on SnapEDA to use.
+
 
 ### Validation Method
 
@@ -138,8 +144,9 @@ for t in pcb.GetFootprints():
 	1. Confirm all differences are expected, documented and acceptable.
 1. Validate PCB.
 	1. Run DRC. Confirm that any errors and warnings are expected, documented and acceptable.
+	1. Produce the Testpoint Report from OrCAD via Export --> Quick Reports --> Testprep Report, and ensure all test points are accounted for and accurate.
 	1. Painstakingly create a film for each gerber layer in OrCAD by:
-		1. Setup -> Colors -> Off, then use "Filter layers" and the "Stack-Up" tree to only enable:
+		1. Setup --> Colors --> Off, then use "Filter layers" and the "Stack-Up" tree to only enable:
 			1. Design_Outline
 			1. Pin/Top, Via/Top, Etch/Top
 			1. Pin/Bottom, Via/Bottom, Etch/Bottom
@@ -163,6 +170,78 @@ for t in pcb.GetFootprints():
 		1. 	Edge_Cuts also needs an "undefined line width" set (say, 0.1) so the zero width edge is not dropped.
 	1. Produce drill files using Export -> NC Drill. Parameters that must be set are the offset (same as gerbers), "Auto tool select", "Separate files for plated/non-plated holes", and "Enhanced Excellon format". But "Repeat codes" must not be set. 
 	1. Open pairs of the gerbers in Gerber Viewer and flick between them to scan for differences. The contrasting colours of the layers automatically creates a useful visual diff, and is more definitive than the "diff" and "xor" views.
+
+### Produce Outputs
+
+Now the validation method has been refined and the design has reached maturity, the following method allows for easy, repeatable generation of the artefacts used for validation. A fast, reliable method is important to ensure the validation is not undermined by small on-going tweaks.
+
+1. Prerequisites:
+	1. KiCad 7 (download from http://www.kicad.org)
+	1. gerbv and Imagemagick (`brew install gerbv imagemagick`)
+	1. The gerber comparison method is from my work on GrbDiff (https://www.github.com/hraftery/GrbDiff/) but the tool itself is not directly applicable.
+1. Proof schematic:
+	1. Open schematic in KiCad.
+	1. File --> Plot
+	1. Leave output directory blank, set output format to "PDF", page size to "Schematic size", check "Plot drawing sheet", output mode to "Color", and click "Plot All Pages".
+	1. Append "_RevX" to the filename, where "X" is the current schematic rev.
+1. TODO: produce BOM.
+1. Produce testpoint report:
+	1. Open pcb in KiCad.
+	1. Run the following script and copy the output into "output/testprep.md":
+	
+	```
+	if True:
+	    print("| {:<6} | {:<4} | {:<8} | {:<7} |  {:<21}  |".format("RefDes", "Side", "X", "Y", "Net"))
+	    print("|--------|------|----------|---------|-------------------------|")
+	    for f in pcb.GetFootprints():
+	        if f.GetValue() == "TPS-SPEA":
+	            refdes = f.GetReference()
+	            layer = f.GetLayerName()
+	            side = "Top" if layer == "F.Cu" else ("Bot" if layer == "B.Cu" else layer)
+	            x = round(f.GetX()/1000000, 4)
+	            y = round(f.GetY()/1000000, 4)
+	            net = f.Pads()[0].GetNetname().lstrip("/")
+	            print("| {:<6} | {:<4} | {:8.4f} | {:7.4f} | `{:<21}` |".format(refdes, side, x, y, net))
+	```
+1. Proof PCB:
+	1. Open pcb in KiCad.
+	1. File --> Print
+	1. Select all layers except "User.1" through "User.9"
+	1. Set output mode to "Color", check "Print drawing sheet" and "Print background color" but uncheck "Print according to objects tab of appearance manager" and "Use a different color theme for printing". Set drill marks to "Real drill", and uncheck "Print mirrored" and "Print one page per layer".
+	1. Click print, then save as PDF to "validation/proof.pdf".
+1. Generate Gerbers:
+	1. Open pcb in KiCad.
+	1. File --> Print
+	1. Set plot format to "Gerber" and output directory to "output".
+	1. Include layers "F.Cu", "B.Cu", "F.Paste", "B.Paste", "F.Silkscreen", "B.Silkscreen", "F.Mask", "B.Mask" and "Edge.Cuts".
+	1. Exclude all layers from "Plot on All Layers".
+	1. Uncheck "Plot drawing sheet" and "Force plotting of invisible values / refs", "Check zone fills before plotting", "Use drill/place file origin", and "Do not tent vias".
+	1. Check "Plot footprint values" and "Plot reference designators".
+	1. Set coordinate format to "4.6 unit mm".
+	1. Uncheck "Use Protel filename extensions", "Subtract soldermask from silkscreen" and "Disable aperture macros".
+	1. Check "Generate Gerber job file", "Use extended X2 format" and "Include netlist attributes".
+	1. Click Plot.
+	1. Click Generate Drill Files
+	1. Select "Excellon" drill file format.
+	2. Uncheck "Mirror Y axis", "Minimal header" and "PTH and NPTH in single file".
+	1. Set "Absolute" drill origin, "Inches" drill units and "Decimal format" zeros format.
+	1. Click "Generate Drill File".
+1. Produce Gerber diffs:
+	1. Re-generate PNGs from the Gerbers and create visual diffs by running these commands in `zsh` from the "validation" directory.
+		- The equivalent PNGs for the OrCAD gerbers were generated in a similar way, using the gerbers generated in the **Validation** section. Note however `gerbv` must be explicitly told the file format for the drill files is "5" digits (or the gerbers re-generated with the format set to "2.4" instead). Since specifying the file format cannot be scripted, and non-scripted exports are anti-aliased, `gerbv` was first used to manually open the drill files and re-export them as gerbers first, so then the command line `gerbv` can be used on all the gerbers at once.
+	
+	```
+	set -k # turn on commenting support
+	for f in ../output/*.(gbr|drl)
+	do
+	fname=${${f:t:r}:14} # strip off path, extension, and "Notecarrier-B" prefix
+	gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B "../output/Notecarrier-B-Edge_Cuts.gbr" "$f" --export=png --dpi 1200 -o "${fname}-KiCad.png"
+	convert \( ${fname}-KiCad.png -grayscale Rec709Luminance \) \
+            \( ${fname}-OrCAD.png -grayscale Rec709Luminance \) \
+            \( -clone 0-1 -compose darken -composite \) \
+            -channel RGB -combine ${fname}-diff.png
+	done
+	```
 
 ---
 
