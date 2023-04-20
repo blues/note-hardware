@@ -1,5 +1,90 @@
 (kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 3e57c059-f782-40ac-b9a3-c1636ed27a63)
+
   (paper "A4")
-  (lib_symbols)
-  (symbol_instances)
+
+  (title_block
+    (title "Notecarrier-F")
+    (date "DRAFT")
+    (rev "A")
+    (comment 1 "Blues Inc")
+    (comment 2 "Heath Raftery")
+  )
+
+  (lib_symbols
+  )
+
+
+  (sheet (at 142.24 106.68) (size 48.26 43.18) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 6c9bf8d8-0c78-4875-ab69-7d90dd6d229b)
+    (property "Sheetname" "IO" (at 142.24 105.9684 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "Notecarrier-F_IO.kicad_sch" (at 142.24 150.4446 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "Notecarrier-F"
+        (path "/3e57c059-f782-40ac-b9a3-c1636ed27a63" (page "5"))
+      )
+    )
+  )
+
+  (sheet (at 57.15 38.1) (size 50.8 44.45) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 88418874-7972-4492-bdff-7ad1935acea6)
+    (property "Sheetname" "Power" (at 57.15 37.3884 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "Notecarrier-F_Power.kicad_sch" (at 57.15 83.1346 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "Notecarrier-F"
+        (path "/3e57c059-f782-40ac-b9a3-c1636ed27a63" (page "2"))
+      )
+    )
+  )
+
+  (sheet (at 140.97 39.37) (size 49.53 43.18) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid e1550e15-b436-4be3-9685-75e1568dff4b)
+    (property "Sheetname" "Notecard" (at 140.97 38.6584 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "Notecarrier-F_Notecard.kicad_sch" (at 140.97 83.1346 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "Notecarrier-F"
+        (path "/3e57c059-f782-40ac-b9a3-c1636ed27a63" (page "3"))
+      )
+    )
+  )
+
+  (sheet (at 57.15 106.68) (size 50.8 43.18) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid fb5887cf-5e51-4ae9-9749-dbe8e6b41d9d)
+    (property "Sheetname" "Feather" (at 57.15 105.9684 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "Notecarrier-F_Feather.kicad_sch" (at 57.15 150.4446 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "Notecarrier-F"
+        (path "/3e57c059-f782-40ac-b9a3-c1636ed27a63" (page "4"))
+      )
+    )
+  )
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
 )
