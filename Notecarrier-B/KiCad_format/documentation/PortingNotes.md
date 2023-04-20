@@ -238,6 +238,21 @@ Now the validation method has been refined and the design has reached maturity, 
 	done
 	```
 
+## Libraries
+
+The `blues-kicad-lib` was initially reviewed and the list of contents tabled below. Part of the scope of work is to correct the M.2 connector part, but the usefulness of the other parts is not known. While there is potentially some valuable work here, the inconsistent symbol conventions, slightly obscure naming conventions, missing pin types and the unpredictable overlap with the requirements of the Notecarrier-B port has warranted creation of a bespoke library. This has allowed confident and fast execution, without the distraction of third-party dependencies, and allows quality and consistency to be controlled.
+
+Nonetheless, now that one port is complete and the next started, there is clearly valuable overlap between parts in each design (even between OrCAD and Altium projects). Thus, it makes sense to consolidate libraries.
+
+The existing library contents, the needs of the porting project and the future maintainability of the design files, were all assessed to determine an effective way forward. The approach taken is to carefully document the original contents in the table below, and then add all new parts to the library as required by the porting process, overwriting existing parts where there is a name clash. This will allow the source control history will track and retain the provenance of each part, highlight the deliberate nature of the new parts, provide an easy and predictable way to share parts between projects, and retain the existing naming and location conventions of the library.
+
+Further, where new parts are introduced, paths will be made relative to ensure the library can be used by others. It is noted that existing parts contain absolute paths, but correcting this is out of scope.
+
+A README has been added to the library to explain important usage requirements associated with configuring paths, and detail the motivation for the choices made. Note that KiCad produces self-contained project files, so if a user opens the project without access to the library, they will be warned but can still proceed. All content will still be available, except 3D models. An explanation of this phenomena is included in the library README, and a reference to the library made in each project's README.
+
+As an aside, moving the drawing sheet file into the library was also considered, since it is also common to all projects. However, unlike other library content, the user experience if you do not have access to the library is poor - when opening the schematic, KiCad warns about the missing file but also substitutes a generic drawing sheet, which results in an ugly and incorrect mess. Instead, the file could be moved into a shared location within the current repository, but the same doubts remain - if the link to the file is ever broken, or it is modified to suit future needs, all existing schematics are affected. Furthermore, having a common file which is specific to a third-party contractor may appear strange. Thus the decision was made to make it local to each project, and name it according to the project as per the KiCad convention.
+
+
 ---
 
 ## References
@@ -252,24 +267,19 @@ Now the validation method has been refined and the design has reached maturity, 
 
 | Symbol | Footprint | Model |
 | ------ | --------- | ----- |
-|        | 9774025151R | 9774025151R (rev1) |
 | BQ24210DQCT | BQ24210DQCT | BQ24210DQCT |
 | CJS-1200TA | CJS-1200TA | |
 | FSV1045V | | |
-|        | JAE_SF72S006VBDR2500 | K3D-SF72S006VBD-V1\_JAE\_Proprietary |
-|        |                      | K3D-SF72S006VBD-V1-S |
-|        | JST_S2B-PH-SM4-TB(LF)(SN) | |
 | MAX17225ELT | MAX17225ELT | |
 | MDT420E01001 | MDT420E01001 | mdt420e0x001_c3d |
 | PTS810-SJS-250-SMTR-LES | PTS810-SJS-250-SMTR-LFS | PTS810SJG250SMTRLFS |
-| RND\_STNDFF\_M2.5X0.45\_STEEL\_2.5MM | | |
-| S2B-PH-SM4-TB(LF) (SN) | | S2B-PH-SM4-TB |
-|        | SAMTEC_TSM-112-01-L-SV | |
-|        | SAMTEC_TSM-116-01-T-SV | |
-| SF72S006VBDR2500 | | |
+| RND\_STNDFF\_M2.5X0.45\_STEEL\_2.5MM | 9774025151R | 9774025151R (rev1) |
+| S2B-PH-SM4-TB(LF)(SN) | JST_S2B-PH-SM4-TB(LF)(SN) | S2B-PH-SM4-TB |
+| SF72S006VBDR2500 | JAE_SF72S006VBDR2500 | K3D-SF72S006VBD-V1\_JAE\_Proprietary |
+|        |                      | K3D-SF72S006VBD-V1-S |
 | TPS62748YFPT | TPS62748YFPT | TPS62748YFPT v1 |
-| TSM-112-01-L-SV | | TSM-112-01-L-SV |
-| TSM-116-01-T-SV | | TSM-116-01-T-SV |
+| TSM-112-01-L-SV | SAMTEC_TSM-112-01-L-SV | TSM-112-01-L-SV |
+| TSM-116-01-T-SV | SAMTEC_TSM-116-01-T-SV | TSM-116-01-T-SV |
 | USB4105-GF-A | USB4105-GF-A | |
 | USB4105-GF-A-ULTRA-LIBRARIAN | USB4105-GF-A-ULTRA-LIBRARIAN | |
 | WS2812B-2020 | WS2812B-2020 | ws2812b-2020 v1 |
