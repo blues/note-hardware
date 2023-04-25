@@ -32,7 +32,10 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      "lib_symbol_issues|1397000|2184400|32a4a7a1-5f22-40ed-ac95-4cfab1042ee1|00000000-0000-0000-0000-000000000000|||",
+      "lib_symbol_issues|635000|2184400|9a3cc62f-9312-486a-8d1f-ef2e23e3ae59|00000000-0000-0000-0000-000000000000|||"
+    ],
     "meta": {
       "version": 0
     },
@@ -311,7 +314,7 @@
     "meta": {
       "version": 1
     },
-    "net_format_name": "",
+    "net_format_name": "OrcadPCB2",
     "page_layout_descr_file": "Notecarrier-F.kicad_wks",
     "plot_directory": "",
     "spice_current_sheet_as_root": false,
