@@ -1,0 +1,4 @@
+(version 1)
+(rule Cu2Cu
+   (constraint clearance (min 0.3mm))
+   (condition "A.Type == 'Zone' && B.Type == 'Zone'"))

@@ -29,26 +29,37 @@ As per [Notecarrier-B](../../../Notecarrier-B/KiCad_format/documentation/Porting
 		- There is one instance where things are the other way around: `F_NRST` is a Off Sheet Connector in the original, but is not used off sheet. I have left it as is, and it produces the only error in the ERC for posterity.
 - A minor one, but came up a lot: in KiCad net labels are anchored at either the start or end of the text, and nets themselves indicate they have not been terminated (eg. with a net label) with a little empty box. This prompts quality control conventions like using net labels to terminate the right or left of nets, rather than adding them at arbitrary locations along the net. That means labels on nets that terminate to the right will be aligned on their right side, with a staggered left side according to the length of the label. I have opted to adopt this KiCad convention, since it is cosmetic only, and prevents the non-conventional and doubt-inducing empty boxes.
 - Many footprints overlap with those already ported from Notecarrier-B.
-	- Where substantial differences exist, the footprint name tends to also be different, so the new footprint has been retained and lives alongside the existing in the shared library.
-	- Occasionally, where differences are not substantial, or the existing is a superset of the new (eg. same copper but additional silkscreen/fab graphics), the existing has been substituted.
-		- Eg, `TO277-3` or `FS-0603` or `DIST-WASMSIM0250` vs `9774025151R` or `BQ24210DQCT` vs `WSON10-EXP`.
+	- One of two strategies was applied:
+		1. Where substantial differences exist and the existing is not a worthy substitute, the footprint name tends to also be different, so the new footprint has been retained and lives alongside the existing in the shared library.
+			- In one case the names were the same so an alternate name was picked: `9774025151R` instead of `DIST-WASMSIM0250`.
+		1. Occasionally, where differences are not substantial, or the existing is a superset of the new (eg. same copper but additional silkscreen/fab graphics), the existing has been substituted.
+			- Eg, `TO277-3` or `FS-0603` or `BQ24210DQCT` vs `WSON10-EXP`.
+			- This did mean having to rotate each of the `TO277-3` parts 180° on the PCB.
 	- This way, nothing is lost but we also don't end up with insignificant duplicates in the library.
 	- Still, there remains multiple footprints for the same part (eg. `PTS810-SJS-250-SMTR-LFS` and `C&K PTS810`, or `CJS-1200TA` and `SW_CJS-1200TA`, or even the passives like `RS-0402` and `RES 0402_1005`) so to further differentiate them the "Description" field for the new footprints indicates they're from Notecarrier-F. This is intended to help filter them out in the future, so new designs can go forward with a single footprint convention.
 	- There are two special cases:
 		- The Nano SIM footprint in the KiCad library has pin names that match the KiCad symbol. The KiCad symbol was used in place of the original symbol as per the porting conventions, but this means the pin names don't match up with the ported footprint. Since the ported footprint is significantly different to the KiCad default, the ported footprint has been modified just to match up the pin names.
 		- The `SMB` footprint in the KiCad library and the `SMB` footprint from the Notecarrier-B project follow the common convention of indicating the cathode on pin 1. The `SMB` footprint from the Notecarrier-F project indicates the cathode is on pin 2, yet the pin assignment is the same! In other words, the silkscreen is backwards. To avoid introducing confusion, I've kept the original design as is, but renamed the footprint `SMB_Backwards`.
 
-
 | Altium NanoSIM Footprint | KiCad NanoSIM Footprint |
 | --------- | ------------ |
 | ![Altium Footprint](NanoSIM-Altium.png) | ![KiCad Footprint](NanoSIM-KiCad.png) |
 
+- KiCad symbols must be annotated (ie. the reference designator starts with a letter and ends with a number) for various functions to work like ERC and synchronising the schematic with the PCB. Thus for ease of use I've renamed `MOD1L` to `MODL1` and `MOD1R` to `MODR1`, since I can't see any possibility for harm.
+- Altium can't natively generate a drill report like OrCAD. Two options are to parse the NC Drill file, or extract the drill coordinates from the imported PCB file. I've opted to do the latter for expediency. Something like (after setting the selection filter to vias and selecting all):
+
+```
+for t in pcb.GetTracks():
+    if t.IsSelected():
+        print(f"{t.GetWidth()};{t.GetDrill()};{t.GetPosition()}")
+```
+
+
 **TODO:**
 
-- Add logo symbol/footprint.
+- Add drill/stack tables.
 - During import of footprints:
 	- Altium layer 72 moved to Eco1_User
 	- Altium layer 71 moved to Eco1_User
 	- OBJ1 pad 1 complex pad stack not supported.
 	- Ignored polygon shape of kind 2.
-- The font "Barlow SemiBold" was not embedded in the PCB document.
