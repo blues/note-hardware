@@ -179,7 +179,12 @@ Now the validation method has been refined and the design has reached maturity, 
 	1. File --> Plot
 	1. Leave output directory blank, set output format to "PDF", page size to "Schematic size", check "Plot drawing sheet", output mode to "Color", and click "Plot All Pages".
 	1. Append "_RevX" to the filename, where "X" is the current schematic rev.
-1. TODO: produce BOM.
+1. Produce BOM:
+	1. Open schematic in KiCad.
+	1. Tools --> Edit Symbol Fields
+	1. Click "Export as CSV".
+	1. Append "_RevX" to the filename, where "X" is the current schematic rev.
+		- Note this is not an ordering BOM. It is a raw table of all symbol fields, including non-BOM items, and is useful primarily for validation purposes.
 1. Produce testpoint report:
 	1. Open pcb in KiCad.
 	1. Run the following script and copy the output into "output/testprep.md":
@@ -212,7 +217,7 @@ Now the validation method has been refined and the design has reached maturity, 
 	1. Exclude all layers from "Plot on All Layers".
 	1. Uncheck "Plot drawing sheet" and "Force plotting of invisible values / refs", "Check zone fills before plotting", "Use drill/place file origin", and "Do not tent vias".
 	1. Check "Plot footprint values" and "Plot reference designators".
-	1. Set coordinate format to "4.6 unit mm".
+	1. Set coordinate format to "4.6, unit mm".
 	1. Uncheck "Use Protel filename extensions", "Subtract soldermask from silkscreen" and "Disable aperture macros".
 	1. Check "Generate Gerber job file", "Use extended X2 format" and "Include netlist attributes".
 	1. Click Plot.

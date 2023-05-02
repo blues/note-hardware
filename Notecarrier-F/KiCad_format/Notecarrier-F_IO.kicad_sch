@@ -1047,7 +1047,7 @@
     (effects (font (size 2.54 2.54) (thickness 0.508) bold) (justify left bottom))
     (uuid 276150f6-7444-44b6-8de9-5327c84efe00)
   )
-  (text "Several of the net labels on this sheet need to be common with other sheets.\nIn the original Altium source files, this was achieved for some labels by\nadding Off-Sheet Connectors to the nets. But the remainder (inadvertently\nperhaps) rely on promoting all net labels to global using the \"Net\nIdentifier Scope\" setting. This renders the original Off Sheet Connectors\nredundant. To avoid losing that distinction, and to take advantage of the\ninformative and scope-maintainance benefits of the top-level sheet\nintroduced in the port, we opt to leave net labels as local, and promote\nthe scope of those that require it here.\n\nSee PortingNotes.md for more details."
+  (text "Several of the net labels on this sheet need to be common with other sheets.\nIn the original Altium source files, this was achieved for some labels by\nadding Off-Sheet Connectors to the nets. But any others (inadvertently\nperhaps) rely on promoting all net labels to global using the \"Net\nIdentifier Scope\" setting. This renders the original Off Sheet Connectors\nredundant. To avoid losing that distinction, and to take advantage of the\ninformative and scope-maintainance benefits of the top-level sheet\nintroduced in the port, we opt to leave net labels as local, and promote\nthe scope of those that require it here.\n\nSee Porting-Notes.md for more details."
     (at 274.32 55.88 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 277a109e-e8fc-442c-83d7-43496acd8f13)
