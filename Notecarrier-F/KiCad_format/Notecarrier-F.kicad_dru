@@ -2,3 +2,21 @@
 (rule Cu2Cu
    (constraint clearance (min 0.3mm))
    (condition "A.Type == 'Zone' && B.Type == 'Zone'"))
+(rule Cu2SMDPad
+   (constraint clearance (min 0.2mm))
+   (condition "A.Type == 'Zone' && B.Type == 'Pad'"))
+(rule Cu2THPad
+   (constraint clearance (min 0.216mm))
+   (condition "A.Type == 'Zone' && B.Pad_Type == 'Through-hole'"))
+(rule Cu2Hole
+   (constraint hole_clearance (min 0.216mm))
+   (condition "A.Type == 'Zone'"))
+(rule Cu2Via127
+   (constraint hole_clearance (min 0.4295mm))
+   (condition "A.Type == 'Zone' && B.Type == 'Via' && B.Diameter == 1.27mm"))
+(rule Cu2Via100
+   (constraint hole_clearance (min 0.4mm))
+   (condition "A.Type == 'Zone' && B.Type == 'Via' && B.Diameter == 1.0mm"))
+(rule Cu2Via045
+   (constraint hole_clearance (min 0.275mm))
+   (condition "A.Type == 'Zone' && B.Type == 'Via' && B.Diameter == 0.45mm"))
