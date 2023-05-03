@@ -112,19 +112,41 @@ for t in pcb.GetTracks():
 	- The impedance control table has been manually recreated, since the information is important and is difficult to source in other ways.
 	- As in Notecarrier-B, the sheet title block itself hasn't been given much attention since it serves little purpose. Just the important details like names, copyrights and versioning information has been applied.
 - Not only is the `TO277-3` footprint not in the project pcblib (it's in "notecarrier-afv2-V1I1.PcbLib" which is not available), one of the instances is different to the others! Pad 3 of `DS4` is shifted left compared to the other footprints, relative to pads 1 and 2. This is most obvious in the validation of the `B_` layers. It has little effect, and is obviously not desirable, so has been acknowledged and not ported.
+- The source footprint for the fiducial numbers the pad "1". In KiCad this is used to indicate it is an electrical pin. Since it serves no electrical purpose, and creates a number of warnings, I've adopted the KiCad convention and removed the pad number.
+	- Similarly for `JST SM04B-SRSS-TB` and `JST S2B-PH-SM4-TB` footprints. They had pads named "M", which are mechanical only. I've removed the pad names.
+- The footprint for `MOD2` doesn't make much sense to me (and the symbol only barely, to be fair), so I've just left it be. It produces lots of warnings about there being no correspondance between the pins and the pads.
+
+## 3D
+
+- The KiCad importer produced the wrong model for the `1285AS-H-2R2M=P2-INDC2016X100N` inductor footprint, `L3`. The name, `step_temp.STEP`, matches, but the model is for a DIP switch not an inductor. I've extracted the correct model from the PCB step file (using Fusion 360, because FreeCAD always messes up the origin, eDrawings doesn't export to STEP and CAD Assignment produces empty files - argh!). To identify it I've used the name embedded in the PCB step file: `6328683376` (although it also seems to go by `_328683376`).
+	- Turns out `step_temp.STEP` was for the `SW_CJS-1200TA`. I've renamed it to match that footprint's model setting (`CJS-1200TA--3DModel-STEP-56544.step`) then corrected the path.
+	- Same story for the `SOP50P310X90-8N` footprint, `U4`. I've extracted `6104714848` and matched it up.
+	- Slightly different story for `TI PVSON-14 DSJ` footprint, `U3`, and `TPS62748YFPT-DSBGA4x2` footprint, `U1`. I've extracted them as `6103526784` and `6427268096` respectively because in Altium they are extruded models, not standalone STEP files.
+- The `notecarrier-f-v1-3d-122322.step` file seems to differ from the design files in two ways:
+	- The `MOD1L`/`MOD2L` models are the same (`CES-116-01-L-S`/`CES-112-01-L-S`), but the step file *also* includes two taller pin headers (`SSW-116-01-T-S v1`/`SSW-112-01-S-S v1`). I can't find them anywhere else, so have excluded them from the port.
+	- The design files include a `NOTECARD_STEP.step` body plugged into the M.2 connector. KiCad doesn't support models without an associated footprint, so I've opted to duplicate the `J-75-0050-MOS-M2` footprint and add the body to that. The duplicate is only so the name can indicate the presence of the model - the footprint is otherwise the same, and the model can easily be shown/hidden on an instance by instance basis.
+
 
 ## Library
 
-- Many footprints overlap with those already ported from Notecarrier-B.
+- Many footprints and models overlap with those already ported from Notecarrier-B.
 	- One of two strategies was applied:
-		1. Where substantial differences exist and the existing is not a worthy substitute, the footprint name tends to also be different, so the new footprint has been retained and lives alongside the existing in the shared library.
-			- In one case the names were the same so an alternate name was picked: `9774025151R` instead of `DIST-WASMSIM0250`.
-			- In one case the existing footprint had a different name (or `BQ24210DQCT` instead of `WSON10-EXP`), but it did not come from the Notecarrier-B project so as per the library convention I've written over it to consolidate footprints.
+		1. Where substantial differences exist and the existing is not a worthy substitute, the name tends to also be different, so the new footprint/model has been retained and lives alongside the existing in the shared library.
+			- In three cases the names were the same so an alternate name was picked:
+				- `9774025151R` instead of `DIST-WASMSIM0250`.
+				- `FIDUCIAL-F` instead of `FIDUCIAL`.
+				- `DO214AA SMB.STEP` instead of `SMB.STEP`.
+			- In one case the existing model/footprint had a different name (`BQ24210DQCT` instead of `WSON10-EXP`), but it did not come from the Notecarrier-B project so as per the library convention I've written over it to consolidate footprints.
 		1. Occasionally, where differences are not substantial, or the existing is a superset of the new (eg. same copper but additional silkscreen/fab graphics), the existing has been substituted.
-			- Eg, `TO277-3` or `FS-0603`.
+			- Eg, `TO277-3`, `FS-0603` or `DIST-WASMSIM0250.step`.
 			- This did mean having to rotate each of the `TO277-3` parts 180° on the PCB.
 	- This way, nothing is lost but we also don't end up with insignificant duplicates in the library.
-	- Still, there remains multiple footprints for the same part (eg. `PTS810-SJS-250-SMTR-LFS` and `C&K PTS810`, or `CJS-1200TA` and `SW_CJS-1200TA`, or even the passives like `RS-0402` and `RES 0402_1005`) so to further differentiate them the "Description" field for the new footprints indicates they're from Notecarrier-F. This is intended to help filter them out in the future, so new designs can go forward with a single footprint convention.
+	- Still, there remains multiple footprints for the same part (eg. `PTS810-SJS-250-SMTR-LFS` and `C&K PTS810`, or `CJS-1200TA` and `SW_CJS-1200TA`, or `RR-8X-1506` and `RESNET 1506-16 CONVEX`, or even the passives like `RS-0402` and `RES 0402_1005`) so to further differentiate them the "Description" field for the new footprints indicates they're from Notecarrier-F. This is intended to help filter them out in the future, so new designs can go forward with a single footprint convention.
+		- The same is true for 3D models. In this case there is no useful metadata field to distinguish them so a file naming scheme becomes important. At the moment it is difficult to identify similar footprints since those from an OrCAD original might be something like `J-5-0065-FOS-MICROUSB10118192.step` while from an Altium origin is `FCI USB 10118193-0001lfc.STEP`. Their commonality (both SMD Micro USB receptacle models) and differences (the `10118192` variant vs the `10118193`) are not easy to spot. Further, they tend to differ in subjective ways (orientiation, colour and fine detail) so it is hard to pick a favourite and tricky to backport. Other examples are:
+			- `CS-C-0603.step` vs `0603 cap.step`
+			- `9774025151R (rev1).stp` vs `DIST-WASMSIM0250.step`
+			- `S2B-PH-SM4-TB.STEP` vs `S2B-PH-SM4-TB(LF)(SN).STEP` vs `JST S2B-PH-SM4-TB.step`
+			- `DO214AA SMB.STEP` vs `SMB.step`
 	- There are two special cases:
 		- The Nano SIM footprint in the KiCad library has pin names that match the KiCad symbol. The KiCad symbol was used in place of the original symbol as per the porting conventions, but this means the pin names don't match up with the ported footprint. Since the ported footprint is significantly different to the KiCad default, the ported footprint has been modified just to match up the pin names.
 		- The `SMB` footprint in the KiCad library and the `SMB` footprint from the Notecarrier-B project follow the common convention of indicating the cathode on pin 1. The `SMB` footprint from the Notecarrier-F project indicates the cathode is on pin 2, yet the pin assignment is the same! In other words, the silkscreen is backwards. To avoid introducing confusion, I've kept the original design as is, but renamed the footprint `SMB_Backwards`.
