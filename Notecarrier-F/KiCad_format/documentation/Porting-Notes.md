@@ -43,7 +43,7 @@ As per [Notecarrier-B](../../../Notecarrier-B/KiCad_format/documentation/Porting
 
 | U2 Symbol | U2 Footprint |
 | --------- | ------------ |
-| ![U2 Symbol](U2-Symbol.png) | ![U2 Footprint](U2-Footprint.png) |
+| ![U2 Symbol](media/U2-Symbol.png) | ![U2 Footprint](media/U2-Footprint.png) |
 
 
 - Altium can't natively generate a drill report like OrCAD. Two options are to parse the NC Drill file, or extract the drill coordinates from the imported PCB file. I've opted to do the latter for expediency. Something like (after setting the selection filter to vias and selecting all):
@@ -62,7 +62,7 @@ for t in pcb.GetTracks():
 
 | Unconnected ends example | Via with one connection example |
 | --------- | ------------ |
-| ![Unconnected ends](unconnected-ends.png) | ![Via to nowhere](via-to-nowhere.png) |
+| ![Unconnected ends](media/unconnected-ends.png) | ![Via to nowhere](media/via-to-nowhere.png) |
 
 - The copper pour settings in the original design specify islands are to be removed if they're less than 1.613 sq.mm. However, many of the pours *also* have "Remove Dead Copper" set. KiCad makes no distinction, so I've changed the setting on those pours that require it to "Always".
 	- For those pours that do not have "Remove Dead Copper" set, a lot of isolated copper fills exist. I've checked these are all as intended, and then turned off the DRC warning to suit.
@@ -70,13 +70,13 @@ for t in pcb.GetTracks():
 
 | Pour island | Severed neck |
 | --------- | ------------ |
-| ![Pour island](pour-island.png) | ![Neck removed](neck-removed.png) |
+| ![Pour island](media/pour-island.png) | ![Neck removed](media/neck-removed.png) |
 
 - A couple of courtyards overlap. This was either true in the original, or true now that footprints have been consolidated in the library. In both cases, an exclusion has been added to the DRC, since the design remains faithful to the original.
 
 | Existing overlapped courtyards | New overlapped courtyards due to new `TO277` footprint. |
 | --------- | ------------ |
-| ![Existing overlapped courtyards](overlapped-courtyard_existing.png) | ![New overlapped courtyards](overlapped-courtyard_new.png) |
+| ![Existing overlapped courtyards](media/overlapped-courtyard_existing.png) | ![New overlapped courtyards](media/overlapped-courtyard_new.png) |
 
 - Silkscreens overlap a lot, despite there being an explicit SilkToSilkClearance design rule of 0.127mm. I've left the design rule in but turned off the warning so DRC is not awash with meaningless warnings.
 - In the original design, clearance around fiducials is managed with a specific design rule. In KiCad we can do that as a footprint setting, which has the same effect and is both more [appropriate](https://www.eevblog.com/forum/altium/fiducials/msg1274268/#msg1274268) (because the scoping is more accurate and because having a mask opening wider than the clearance leads to DRC warnings) and more in keeping with KiCad conventions. So I've added it to the footprint instead.
@@ -153,7 +153,7 @@ for t in pcb.GetTracks():
 
 | Altium NanoSIM Footprint | KiCad NanoSIM Footprint |
 | --------- | ------------ |
-| ![Altium Footprint](NanoSIM-Altium.png) | ![KiCad Footprint](NanoSIM-KiCad.png) |
+| ![Altium Footprint](media/NanoSIM-Altium.png) | ![KiCad Footprint](media/NanoSIM-KiCad.png) |
 
 
 ## Validation Method
@@ -214,10 +214,10 @@ done
 
 ```
 set -k # turn on commenting support
-for f in ../output/*.(gtl|g2|g3|gbl|gtp|gbp|gts|gbs|gto|gbo|drl); do
+for f in ../manufacturing/*.(gtl|g2|g3|gbl|gtp|gbp|gts|gbs|gto|gbo|drl); do
 fname=${${f:t:r}:14} # strip off path, extension, and "Notecarrier-F-" prefix
 if [ -z $fname ]; then fname="Drill"; fi
-gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B "../output/Notecarrier-F-Edge_Cuts.gm1" "$f" --export=png --dpi 1200 -o "${fname}-KiCad.png"
+gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B "../manufacturing/Notecarrier-F-Edge_Cuts.gm1" "$f" --export=png --dpi 1200 -o "${fname}-KiCad.png"
 # I never did figure out why, but some of the KiCad gerbers produce
 # slightly more whitespace around the edge cuts, even when used with the
 # Altium edge cuts. So just take a knife to them here.

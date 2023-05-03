@@ -177,13 +177,13 @@ Now the validation method has been refined and the design has reached maturity, 
 1. Proof schematic:
 	1. Open schematic in KiCad.
 	1. File --> Plot
-	1. Leave output directory blank, set output format to "PDF", page size to "Schematic size", check "Plot drawing sheet", output mode to "Color", and click "Plot All Pages".
+	1. Set output directory to "documentation", set output format to "PDF", page size to "Schematic size", check "Plot drawing sheet", output mode to "Color", and click "Plot All Pages".
 	1. Append "_RevX" to the filename, where "X" is the current schematic rev.
 1. Produce BOM:
 	1. Open schematic in KiCad.
 	1. Tools --> Edit Symbol Fields
 	1. Click "Export as CSV".
-	1. Append "_RevX" to the filename, where "X" is the current schematic rev.
+	1. Append "_RevX" to the filename, where "X" is the current schematic rev, and save in the "validation" folder.
 		- Note this is not an ordering BOM. It is a raw table of all symbol fields, including non-BOM items, and is useful primarily for validation purposes.
 1. Produce testpoint report:
 	1. Open pcb in KiCad.
@@ -212,7 +212,7 @@ Now the validation method has been refined and the design has reached maturity, 
 1. Generate Gerbers:
 	1. Open pcb in KiCad.
 	1. File --> Print
-	1. Set plot format to "Gerber" and output directory to "output".
+	1. Set plot format to "Gerber" and output directory to "manufacturing".
 	1. Include layers "F.Cu", "B.Cu", "F.Paste", "B.Paste", "F.Silkscreen", "B.Silkscreen", "F.Mask", "B.Mask" and "Edge.Cuts".
 	1. Exclude all layers from "Plot on All Layers".
 	1. Uncheck "Plot drawing sheet" and "Force plotting of invisible values / refs", "Check zone fills before plotting", "Use drill/place file origin", and "Do not tent vias".
