@@ -15,7 +15,7 @@ The complexity falls neatly between Notecarrier-B (single sheet) and Notecarrier
 	- Eg. `3xAA`, `B2B-PH-SM4-TBT(LF)(SN)`.
 	- The USB micro and B symbols are good too, but for now I will stick with the convention in Notecarrier-B to avoid creating a new one.
 		- This has the side-effect of losing the subtle visual indication that one is vertical and one is horizontal, but is in keeping with the convention that schematic symbols don't include this sort of detail.
-
+- KiCad only supports two orientations of schematic text, so I've flipped `L7` and `L8` 180°.
 
 ## PCB
 
