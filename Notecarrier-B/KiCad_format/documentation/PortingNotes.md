@@ -39,25 +39,35 @@
 	- Hence the decision has been made to redraw them all manually. Only insignificant visual aspects will use KiCad conventions, such as fonts. The guiding principle here is to ensure the gerbers are as similar as practicable, to aid in a representative and efficient validation.
 		- If the port were to undergo a design revision, consider replacing all footprints with those from a trustworthy KiCad library to adopt fit-for-purpose conventions and maintainability.
 - After evaluating various methods of importing the PCB, and weighing up the accuracy and maintainability, have decided on this workflow:
-	1. In OrCAD, make key layers visible one-by-one. Eg. TOP ETCH, then TOP VIA, then TOP SILKSCREEN, etc.
-	2. Export to DXF v12, auto-generating layer names, possibly including the outline if it helps with alignment, but not bothering with polyline or fill options since I've not found a combination which actually results in directly useable polygons.
-	3. Import graphics in KiCad putting each export on a separate User layer, placing them all at the same spot, with 0.1mm line width and millimeter units.
-	4. Trace over them using native KiCad tools, to generate a high quality digital design that is physical equivalent to the original.
+	1. In OrCAD, make key layers visible one-by-one. Eg. TOP ETCH, then TOP VIA, then TOP SILKSCREEN, etc using the Setup --> Colors dialog (obviously...).
+		2. Possibly include the outline if it helps with alignment, but should be able to do it with absolute placement instead.
+	2. Export to DXF (Export --> MCAD --> DXF...) with options: 
+		1. Name according to table below.
+		1. Revision: 12, units: MM, accuracy: 4.
+		2. Select the `ecad_mcad` layer conversion file from the library (if a default isn't provided), and edit it:
+			1. Select all, then select "Use layer names generated from class and subclass names".
+			2. Click "map".
+			3. Click "OK", overwriting whatever was there because in characteristically obscure OrCAD fashion, other layers can otherwise appear in the exported file, and "just" removing layers from a DXF can be the start of a terrible nightmare.
+			3. Don't bother with polyline or fill options since I've not found a combination which actually results in directly useable polygons. PS. can you imagine how long I spent trying to understand this insane dialog?
+		4. Click Export.
+	3. Import graphics in KiCad putting each export on a separate User layer, placing them all at the board origin, with 0.1mm line width and millimeter units.
+	4. Trace over or convert them using native KiCad tools, to generate a high quality digital design that is physically equivalent to the original.
 - OrCAD layer to KiCad layer mapping:
 
 | OrCAD | KiCad | Notes |
 | ----- | ----- | ----- |
-| OUTLINE.dxf | User.1 | Includes edge cuts, edge clearance and dimension annotations. |
-| ASSEMBLY-TOP.dxf | User.2 | Courtyards sufficient to align components. |
+| OUTLINE.dxf | User.1 | Could be Board geometry --> Design_Outline. Who knows? Includes edge cuts, edge clearance and dimension annotations. |
+| ASSEMBLY-TOP.dxf | User.2 | RefDes is in Components. Courtyard is in Package Geometry. Courtyards sufficient to align components. |
 | ASSEMBLY-BOT.dxf | User.3 | Courtyards sufficient to align components. |
-| SILKSCREEN-TOP.dxf | User.4 | Text came through as text! So now needs to be repositioned because fonts are different. || SILKSCREEN-BOT.dxf | User.5 | Text came through as text! So now needs to be repositioned because fonts are different. || TOP-ETCH.dxf | User.6 | Fills came through as outlines, traces as thin lines. Will be used as guides for new elements. |
+| SILKSCREEN-TOP.dxf | User.4 | Again, check Geometry and Components. Text came through as text! So now needs to be repositioned because fonts are different. || SILKSCREEN-BOT.dxf | User.5 | Text came through as text! So now needs to be repositioned because fonts are different. || TOP-ETCH.dxf | User.6 | Fills came through as outlines, traces as thin lines. Will be used as guides for new elements. |
 | BOT-ETCH.dxf | User.7 | Fills came through as outlines, traces as thin lines. Will be used as guides for new elements. |
-| TOP-VIA.dxf | User.8 | Also includes test points, so need top and bottom. || TOP-VIA.dxf | User.9 | But doesn't include fiducials, so do them manually. |
+| TOP-VIA.dxf | User.8 | Also includes test points, so need top and bottom. || BOT-VIA.dxf | User.9 | But doesn't include fiducials, so do them manually. |
 | TOP/BOT-PIN.dxf | - | No useful information. |
 
 - To convert the `ETCH.dxf` layers into tracks:
 	- Hide all other layers. Select everything. Unselect any text.
-	- "Create from selection" --> "Create Tracks From Selection".
+	- Right click --> "Create from selection" --> "Create Tracks From Selection".
+		- If "Create Tracks From Selection" doesn't appear, something other than lines (like text) is selected somewhere.
 - To remove the flood fill outlines and correct the track widths (easier to do after creating the tracks, because scripting doesn't work well when changing the selection set or creating tracks):
 
 ```python
