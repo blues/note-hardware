@@ -54,7 +54,9 @@ The complexity falls neatly between Notecarrier-B (single sheet) and Notecarrier
 			- This is a sufficient compromise between the two source footprints, but there's still room for improvement if the footprint conventions were to be consolidated in the future.
 		- For `SOT666` there are elements duplicated on "Mechanical 18" and "Mechanical 255"! In Notecarrier-A, similar elements are duplicated on the Assembly and Silkscreen layers! Yet, shockingly, the footprint that actually appears on the board is different again (eg. the pin 1 dot is *inside* the outline).
 			- Keeping true to the strategy of favouring equivalence in manufactured layers over everything else, and adopting the new conventions for `J-NANOSIM-SF72S006VBA` I will move the pin numbers to the `User.Comments` and move the outline off the Silkscreen on to the `F.Fab` layer.
-
+- The `TO277-3` footprint has been strange from the start. It wasn't available in the original Notecarrier-F files, and the PCB consisted of only the pads anyway. So the existing footprint from the library was used, which adds basic outline, courtyard and paste layers. Now in this port the footprint has an extra detail on the outline indicating the cathode, a custom paste layer and also includes a silkscreen layer. But the silkscreen is not used in the PCB! So I'll incorporate the extra outline detail since we're already introducing these details in Notecarrier-F, and it's hard to justify multiple footprints for such a standard package, so this makes it consistent with Notecarrier-A.
+- Frustratingly, even after porting all the footprints from OrCAD, the way they appear on the PCB is different. In particular, the silkscreen layer does not appear, but there are also some other minor differences.
+	- To ease porting of the PCB without throwing away the footprint option, I've opted to duplicate each of the affected footprints, suffix the copy with `_NO-SILK`, and make the changes to suit.
 
 ### Layout
 
@@ -78,7 +80,9 @@ for p in pcb.GetFootprints():
 
 - Back side and mechanical only footprints can have their positions set by hand.
 - Layers were imported as DXF as in Notecarrier-B, except this is a 4 layer board so the `GND` and `POWER` layers were imported to layers `User.8` and `User.9` respectively. The `VIA` layers they displaced were imported using the drill file technique described in Notecarrier-F instead.
-
+- As with Notecarrier-B, the default OrCAD "ANSI" font is used for the majority of the text on the silkscreen. In the Notecarrier-B port this was substituted with the default KiCad font, which is quite a good match. I had a look for better matches (the `O` should be rounder and `I` should have serifs) but couldn't find a free option. "Copyright Violation" (seriously, that's the name of it) is free and has very good character matching, unfortunately the kerning is far too tight. "Rational TW" and "Dress Code Regular Round" are probably better matches, but neither are free.
+	- So sticking with the KiCad default font for now.
+- Unlike Notecarrier-B, fills are not excluded from `RS-0402` footprints. Now it turns out the exclusion is board specific, it makes sense not to have it as part of the standard part. To accommodate I've duplicated the original footprints, suffixed the originals with `_NO-FILL`, and removed the fill keepout from the copy. I've then gone back to Notecarrier-B and updated the footprints to the `_NO-FILL` variants.
 
 ### 3D
 
