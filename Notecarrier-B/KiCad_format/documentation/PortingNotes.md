@@ -77,7 +77,7 @@ for t in pcb.GetTracks():
     if t.GetLayerName() != 'B.Cu':
         continue
     w = t.GetWidth()
-    if w <= 10000:
+    if w <= 20000:
         t.SetWidth(w*100)
     else:
         t.DeleteStructure()
