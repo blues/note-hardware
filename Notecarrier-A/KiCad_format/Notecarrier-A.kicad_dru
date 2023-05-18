@@ -1,0 +1,7 @@
+(version 1)
+(rule Zone2Zone
+	(constraint clearance (min 0.3mm))
+	(condition "A.Type == 'Zone' && B.Type == 'Zone'"))
+(rule Zone2USB
+	(constraint clearance (min 0.5mm))
+	(condition "A.Type == 'Zone' && B.Type == 'Track' && (B.NetName == 'USB_DP' || B.NetName == 'USB_DM')"))

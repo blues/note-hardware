@@ -35,8 +35,8 @@
         "other_text_upright": false,
         "pads": {
           "drill": 0.0,
-          "height": 1.0,
-          "width": 1.0
+          "height": 0.62,
+          "width": 0.62
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -45,7 +45,7 @@
         "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.19999999999999998
+          "min_clearance": 0.15
         }
       },
       "diff_pair_dimensions": [
@@ -114,7 +114,7 @@
         "min_clearance": 0.15,
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.5,
-        "min_hole_clearance": 0.248,
+        "min_hole_clearance": 0.19999999999999998,
         "min_hole_to_hole": 0.246,
         "min_microvia_diameter": 0.19999999999999998,
         "min_microvia_drill": 0.09999999999999999,
@@ -190,7 +190,13 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      "pin_to_pin|1193800|2247900|7faa768b-8b1e-4d71-ab6e-edb86f9dd8bc|541bf1dc-af9d-41c8-9b3c-3be6451d2d3b|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be",
+      "pin_to_pin|1193800|2247900|7faa768b-8b1e-4d71-ab6e-edb86f9dd8bc|66cc09d5-c367-40d1-9c55-081f48bc7a08|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be",
+      "pin_to_pin|1244600|2692400|541bf1dc-af9d-41c8-9b3c-3be6451d2d3b|66cc09d5-c367-40d1-9c55-081f48bc7a08|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be",
+      "pin_to_pin|1244600|2692400|541bf1dc-af9d-41c8-9b3c-3be6451d2d3b|7faa768b-8b1e-4d71-ab6e-edb86f9dd8bc|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be",
+      "pin_to_pin|1270000|2095500|b09aea76-79d5-4d11-91a7-3764b9e35a4c|cf8ee6aa-6e00-4054-9060-4d13f3814113|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be"
+    ],
     "meta": {
       "version": 0
     },
@@ -393,7 +399,7 @@
       "pin_to_pin": "error",
       "power_pin_not_driven": "error",
       "similar_labels": "warning",
-      "simulation_model_issue": "error",
+      "simulation_model_issue": "ignore",
       "unannotated": "error",
       "unit_value_mismatch": "error",
       "unresolved_variable": "error",
@@ -412,7 +418,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.15,
+        "clearance": 0.3,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -420,6 +426,40 @@
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
         "name": "Default",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.25,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.45,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "Antenna",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.25,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "EN",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.25,
@@ -538,7 +578,19 @@
     "netclass_patterns": [
       {
         "netclass": "Shield",
-        "pattern": "Net-(J19-Shield)"
+        "pattern": "*Shield*"
+      },
+      {
+        "netclass": "Antenna",
+        "pattern": "*LTE_50*"
+      },
+      {
+        "netclass": "EN",
+        "pattern": "*/EN"
+      },
+      {
+        "netclass": "GND",
+        "pattern": "GND"
       }
     ]
   },
