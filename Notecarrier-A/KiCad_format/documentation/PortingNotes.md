@@ -48,6 +48,7 @@ The complexity falls neatly between Notecarrier-B (single sheet) and Notecarrier
 	- Some discussion [here](https://forum.kicad.info/t/kicad-6-0-footprint-editor-how-to-set-pads-as-one-sided/35167).
 - Can't see the difference between `J-5-0065-FOS-USB10118192-NOF` and the existing `J-5-0065-FOS-MICROUSB10118192` so am substituting the latter for now.
 - `J-NANOSIM-SF72S006VBA` looks the same as the existing, except for the addition of some complex keepout voids. They don't affect the manufacturing output and are of unknown value, so I've not ported them.
+	- I later reversed this decision - they affect fills quite intricately, so I've duplicated the symbol, added a `_NO-FILL` suffix and painstakingly recreated them.
 - I used the existing `SOT666` and `J-NANOSIM-SF72S006VBA` footprints but in early validation realised some improvements. They both derived features from existing Altium footprints, which had elements on Mechanical layers 1, 5, 13, 15, 17, 18, 19, 26 and 255. Naturally this was a nightmare to convert to meaningful layers.
 	- While it's not possible to be "wrong" given there's no one-to-one mapping for non-manufactured layers, on reflection it would suit both projects better to move some elements to other layers.
 		- For `J-NANOSIM-SF72S006VBA` the elements I introduced to the `F.Silkscreen` layer (originally in "Mechanical 255") I will move to the `User.Drawings` since it's a better match to be visible in manufacturing documents, not on the board. While the OrCAD footprint does have these on the silkscreen, that is not how it is used on the board. And the elements originally on "Mechanical 17" (pin numbers) I will move to `User.Comments` to distinguish them from the `User.Drawings` (originally "Mechanical 18"). `F.Fab` will still get the component outline (which was also on "Mechanical 18", unlike other footprints that have it on "Mechanical 13"!).
@@ -57,6 +58,7 @@ The complexity falls neatly between Notecarrier-B (single sheet) and Notecarrier
 - The `TO277-3` footprint has been strange from the start. It wasn't available in the original Notecarrier-F files, and the PCB consisted of only the pads anyway. So the existing footprint from the library was used, which adds basic outline, courtyard and paste layers. Now in this port the footprint has an extra detail on the outline indicating the cathode, a custom paste layer and also includes a silkscreen layer. But the silkscreen is not used in the PCB! So I'll incorporate the extra outline detail since we're already introducing these details in Notecarrier-F, and it's hard to justify multiple footprints for such a standard package, so this makes it consistent with Notecarrier-A.
 - Frustratingly, even after porting all the footprints from OrCAD, the way they appear on the PCB is different. In particular, the silkscreen layer does not appear, but there are also some other minor differences.
 	- To ease porting of the PCB without throwing away the footprint option, I've opted to duplicate each of the affected footprints, suffix the copy with `_NO-SILK`, and make the changes to suit.
+	- In fact, for `ANT-NN03310-LTE` the version on the PCB is quite a bit different: no keep out and no tail on the main trace. I've made these changes in the `_NO-SILK` version too.
 
 ### Layout
 
@@ -82,7 +84,33 @@ for p in pcb.GetFootprints():
 - Layers were imported as DXF as in Notecarrier-B, except this is a 4 layer board so the `GND` and `POWER` layers were imported to layers `User.8` and `User.9` respectively. The `VIA` layers they displaced were imported using the drill file technique described in Notecarrier-F instead.
 - As with Notecarrier-B, the default OrCAD "ANSI" font is used for the majority of the text on the silkscreen. In the Notecarrier-B port this was substituted with the default KiCad font, which is quite a good match. I had a look for better matches (the `O` should be rounder and `I` should have serifs) but couldn't find a free option. "Copyright Violation" (seriously, that's the name of it) is free and has very good character matching, unfortunately the kerning is far too tight. "Rational TW" and "Dress Code Regular Round" are probably better matches, but neither are free.
 	- So sticking with the KiCad default font for now.
+- To position and size text on the silkscreen, I imported the corresponding Gerber into a layer and used it to align the native text elements imported from the DXF.
 - Unlike Notecarrier-B, fills are not excluded from `RS-0402` footprints. Now it turns out the exclusion is board specific, it makes sense not to have it as part of the standard part. To accommodate I've duplicated the original footprints, suffixed the originals with `_NO-FILL`, and removed the fill keepout from the copy. I've then gone back to Notecarrier-B and updated the footprints to the `_NO-FILL` variants.
+	- I still can't figure out the pattern of fills flooding on to pads or not. After correcting all the `0402` footprints to allow fill into the pads, I find many other footprints exclude the fill, often to one pad only! This is true of `C13`, but also `J12` through `J14`.
+	- Since the pattern is not clear, I'm just adding lots of exceptions to the footprints on the PCB themselves.
+	- This includes the M.2 connector holes. In Notecarrier-B there was a 0.35mm and 0.375mm clearance around them. In Notecarrier-F (which uses a different non-E key footprint) and Notecarrier-A there is not. No pattern established yet, so I will leave the footprint alone and remove the clearance rule in the Notecarrier-A PCB.
+	- Not only is the pattern not clear, it changes within and across components.
+		- See below for an example near the 6-pin `U5`. The outline of the zones in the original design is shown in blue. An attempt to create similar zones is shown in dark red. On `U5`, the `GND` pads have different clearances to pad 6 and to pads 3 and 5. While pad 1 of `L5` (left) has a different setting to the ground pads 1 of `R22` (bottom) and 2 of `C22` (bottom right). Meanwhile the zone itself has a different clearance from all other copper. So I've found the zone clearance sweet spot and then fixed individual pads with a combination of overriding them with "Solid" or with "Thermal Relief".
+			- Even then, the phantom curves in the fill (eg. below pad 6 and above pad 3) have no basis in logic. The upper one I'm happy to ignore. The lower one I can recreate by deleting half the track to pad 6 (leaving a round end as highlighted for the fill to clear around), re-pouring and then putting the half track back. The fill is closer, but will of course violate DRC.
+
+![Multiple zone clearance settings](multiple_zone_clearance_settings.png)
+
+- Another example of a phantom curve in the original design is also shown below, between `C3` and `C2`. The ported result, where I've ignored the rule violating bottom part of the curve, is shown alongside.
+
+| OrCAD Phantom Curve | KiCad Without Curve |
+| ------------------- | ------------------- |
+| ![Phantom curve](phantom_curve.png) | ![Result in KiCad](no_phantom_curve.png) |
+
+- The fills are absolutely legion, and OrCAD doesn't provide great tools for reverse engineering them. So my strategy is to recreate their bulk features, and add tweaks as necessary to result in similar copper, rather than trying to copy every little ineffectual feature.
+	- This required a small clearance for the fill, overridden by various netclass specific clearances, plus a custom rule for zone to zone clearance like in Notecarrier-F.
+	- This combination proved more reliable than an initial rule that provided a different clearance for fills of different nets, which was something like:
+
+```
+(rule DifferentNets
+	(constraint clearance (min 0.25mm))
+	(condition "A.Net != B.Net"))
+```
+
 
 ### 3D
 
@@ -97,3 +125,8 @@ for p in pcb.GetFootprints():
 ---
 
 ## References
+
+# TODO
+
+- Re-fill after temporarily deleting track at (62.9, 109.5).
+- Figure out why one of the squares in the SIM card footpart doesn't fill.
