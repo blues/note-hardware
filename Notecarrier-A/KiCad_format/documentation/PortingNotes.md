@@ -44,8 +44,9 @@ The complexity falls neatly between Notecarrier-B (single sheet) and Notecarrier
 	- Best way I've found is Export --> More --> Libraries and just export everything.
 	- Then each footprint can be opened via its `.dra` file.
 	- And each pad can be viewed via Tools --> Padstack --> Modify Design Padstack.
-- The `J-22-0254-FDT-H0508_EDGE` footprint uses a complicated pad stack to both add a castellated hole alongside the through-hole, and make the pad on the back side bigger. Typically in KiCad you would do complicated pad stacks piecewise by putting pads on top of pads, but still I ran into trouble because THT pads don't allow a different front/back pad. Instead of adding a 3rd pad of type SMD, I opted to use two THT pads to capture the two holes, and edit the file by hand to change one to front only and one to back only so the two different pad sizes can be captured.
+- The `J-22-0254-FDT-H0508_EDGE` footprint uses a complicated pad stack to both add a castellated hole alongside the through-hole, and make the pad on the back side bigger. Typically in KiCad you would do complicated pad stacks piecewise by putting pads on top of pads, but still I ran into trouble because THT pads don't allow a different front/back pad. Instead of adding a 3rd pad of type SMD, I opted to use two THT pads to capture the two holes, and edit the file by hand to change the larger pad to back only so the two different pad sizes can be captured.
 	- Some discussion [here](https://forum.kicad.info/t/kicad-6-0-footprint-editor-how-to-set-pads-as-one-sided/35167).
+	- Similar for `J-5-0065-FDS-UUSB1051330001`. The different size top and bottom pad is easy to accommodate by stacking a THT pad for the smaller top pad, with a SMD pad for the larger bottom pad. Unfortunately, the THT pad also controls the inner layer size, which in the original design shares the size of the larger bottom layer pad. Since setting the THT pad to the larger size would also cover the smaller SMD pad, the best we can easily do is make the inner layers the same as the smaller outer layer pad instead. The effect is insignificant - the clearances remain the same, just that the inner two layers (which are not connected to the pads) have smaller circles of copper around the hole.
 - Can't see the difference between `J-5-0065-FOS-USB10118192-NOF` and the existing `J-5-0065-FOS-MICROUSB10118192` so am substituting the latter for now.
 - `J-NANOSIM-SF72S006VBA` looks the same as the existing, except for the addition of some complex keepout voids. They don't affect the manufacturing output and are of unknown value, so I've not ported them.
 	- I later reversed this decision - they affect fills quite intricately, so I've duplicated the symbol, added a `_NO-FILL` suffix and painstakingly recreated them.
@@ -111,6 +112,15 @@ for p in pcb.GetFootprints():
 	(condition "A.Net != B.Net"))
 ```
 
+- Inexplicably, the fill cutouts around the antenna tracks is different on `In1.Cu` compared to `F.Cu`. I've gone ahead and made explicit cutouts to suit.
+- There's only two test points. In Notecarrier-B I just added them to the PCB. I've since come to regret that because updating the PCB from the schematic might delete them. So I'm going to add them to the schematic first. This is more in keeping with KiCad conventions. It also adheres to the porting convention I've established of introducing visual-only (ie. no manufacturing effect) changes (eg. `PWR_FLAG`'s or symbols) to the schematic, where it makes it a more maintainable KiCad project.
+- Even though they're in the original design, I'm deleting all the little stubs where a track meets a pad, which trigger a "Track has unconnected end" warning in KiCad. Since they're fully contained with the pad, they make no manufacturing difference, so making the DRC happy is better than being exact.
+- Shockingly, the zones seem to fill around vias as if the pad of the via wasn't there. The best way I can think to mimic this bad behaviour is to adjust the zone-to-via clearance to be 0.1mm *less* than the standard. That way the size of the pad is roughly negated. This seems to work better than I expected.
+- The manufacturing instructions table specifies "0.2mm" min. trace width, yet there are some 0.15mm traces. I've ignored that text. On the other hand, some details might be useful, but I haven't captured them anywhere:
+	- CTI: 175V
+	- Class 2
+	- E-Testing: Yes
+	- UL-Marking: Yes
 
 ### 3D
 
@@ -130,3 +140,14 @@ for p in pcb.GetFootprints():
 
 - Re-fill after temporarily deleting track at (62.9, 109.5).
 - Figure out why one of the squares in the SIM card footpart doesn't fill.
+- Figure out why custom rules not applying to `C18`.
+- Deprecate:
+
+```
+(rule Zone2Clearance0.3NetClass
+	(constraint clearance (min 0.3mm))
+	(condition "A.Type == 'Zone' && B.NetClass == 'ZoneClearance0.3'"))
+(rule Zone2NoNet
+	(constraint clearance (min 0.3mm))
+	(condition "A.Type == 'Zone' && B.NetName == ''"))
+```

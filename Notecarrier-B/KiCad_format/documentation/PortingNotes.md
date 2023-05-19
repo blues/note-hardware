@@ -74,7 +74,7 @@
 import pcbnew
 pcb = pcbnew.GetBoard()
 for t in pcb.GetTracks():
-    if t.GetLayerName() != 'B.Cu':
+    if t.GetLayerName() != 'In2.Cu':
         continue
     w = t.GetWidth()
     if w <= 20000:
@@ -95,13 +95,13 @@ for d in pcb.GetDrawings():
 - The original flood fill is strange - it follows curves as if the minimum width is exactly 0.2mm, yet has a couple of stubs that are only 0.12mm wide. I've stuck with the 0.2mm since it has the majority effect, and sacrificed the couple of small stubs.
 	- I've now reversed this decision - following the curves turns out to be a far less significant difference compared to the stubs.
 	- Still need lots of rule areas to tidy up the exceptions and limit the flood fill to match the original. The rules change from part to part, so much easier to add rule areas than try to edit clearance settings.
-- Place vias by generating a drill report (Export --> Reports --> New/Edit --> Database View = `FULL_GEOMETRY` --> Double click `DRILL_HOLE_NAME`, `DRILL_HOLE_PLATING`, `DRILL_HOLE_X` and `DRILL_HOLE_Y` --> Ok --> Generate Reports --> Save), copying the contents into a spreadsheet, sorting by name, calculating x+100 and 100-y, copying values into a text editor to create python code to generate lists, creating a via with the correct properties, duplicating it to get the right number, then running something like this:
+- Place vias by generating a drill report (Export --> Reports --> New/Edit --> Database View = `FULL_GEOMETRY` --> Double click `DRILL_HOLE_NAME`, `DRILL_HOLE_PLATING`, `DRILL_HOLE_X` and `DRILL_HOLE_Y` --> Ok --> Generate Reports --> Save), opening in a browser and copying the contents into a spreadsheet, sorting by plating and then by name, calculating x+100 and 100-y, copying values into a text editor to create python code to generate lists (eg. `p = [(x,y),...]`) for each drill size, creating a via with the correct properties, duplicating it to get the right number, then running something like this:
 
 ```python
 i=0
 for t in pcb.GetTracks():
     if t.IsSelected():
-        t.SetPosition(pcbnew.VECTOR2I(pcbnew.wxPoint(x[i]*1000000,y[i]*1000000)))
+        t.SetPosition(pcbnew.VECTOR2I(pcbnew.wxPoint(p[i][0]*1000000,p[i][1]*1000000)))
         i += 1
 ```
 
