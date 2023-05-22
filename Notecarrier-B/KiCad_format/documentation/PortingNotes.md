@@ -155,6 +155,8 @@ for t in pcb.GetFootprints():
 			1. Design_Outline
 			1. Pin/Top, Via/Top, Etch/Top
 			1. Pin/Bottom, Via/Bottom, Etch/Bottom
+			1. For any inner layers, where "Inner" is the name of the layer:
+				1. Pin/Inner, Via/Inner, Etch/Inner
 			1. Pin/Pastemask_Top, Via/Pastemask_Top, PackageGeometry/Pastemask_Top
 			1. Pin/Pastemask_Bottom, Via/Pastemask_Bottom, PackageGeometry/Pastemask_Bottom
 			1. Pin/Soldermask_Top, Via/Soldermask_Top, PackageGeometry/Soldermask_Top, BoardGeometry/Soldermask_Top
@@ -165,6 +167,7 @@ for t in pcb.GetFootprints():
 			1. Edge_Cuts
 			1. F_Cu
 			1. B_Cu
+			1. In1_Cu, In2_Cu, etc., if applicable.
 			1. F_Paste
 			1. B_Paste
 			1. F_Mask
@@ -174,6 +177,9 @@ for t in pcb.GetFootprints():
 	1. Produce Gerbers in OrCAD and KiCad using the same settings. In OrCAD, select each of the new films, offset **each** film by (100,-100) to end up in the same spot as KiCad, and click "Create Artwork".
 		1. 	Edge_Cuts also needs an "undefined line width" set (say, 0.1) so the zero width edge is not dropped.
 	1. Produce drill files using Export -> NC Drill. Parameters that must be set are the offset (same as gerbers), "Auto tool select", "Separate files for plated/non-plated holes", and "Enhanced Excellon format". But "Repeat codes" must not be set. 
+		- Looks like "Output units: English" only works with format 2.5 (it seems a 0.0254mm limit on resolution is noticeably imprecise). To use metric (to match the KiCad gerbers), format must be 3.4.
+		- On the other hand, "Absolute" vs "Incremental" is not important. Nor is zero suppresion.
+		- Unfortunately, this still doesn't capture slots. They need their own separate file, which can be produced easily in Export -> NC Route.
 	1. Open pairs of the gerbers in Gerber Viewer and flick between them to scan for differences. The contrasting colours of the layers automatically creates a useful visual diff, and is more definitive than the "diff" and "xor" views.
 
 ## Produce Outputs
