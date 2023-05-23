@@ -203,7 +203,7 @@ Now the validation method has been refined and the design has reached maturity, 
 		- Note this is not an ordering BOM. It is a raw table of all symbol fields, including non-BOM items, and is useful primarily for validation purposes.
 1. Produce testpoint report:
 	1. Open pcb in KiCad.
-	1. Run the following script and copy the output into "output/testprep.md":
+	1. Run the following script (the `if True` allows it to be copy/pasted into the pcbnew console) and copy the output into "output/testprep.md" (after running `import pcbnew` and `pcb = pcbnew.GetBoard()`):
 	
 	```
 	if True:
@@ -221,13 +221,14 @@ Now the validation method has been refined and the design has reached maturity, 
 	```
 1. Proof PCB:
 	1. Open pcb in KiCad.
+	1. Make `F.Cu` the active layer.
 	1. File --> Print
 	1. Select all layers except "User.1" through "User.9"
 	1. Set output mode to "Color", check "Print drawing sheet" and "Print background color" but uncheck "Print according to objects tab of appearance manager" and "Use a different color theme for printing". Set drill marks to "Real drill", and uncheck "Print mirrored" and "Print one page per layer".
 	1. Click print, then save as PDF to "validation/proof.pdf".
 1. Generate Gerbers:
 	1. Open pcb in KiCad.
-	1. File --> Print
+	1. File --> Plot
 	1. Set plot format to "Gerber" and output directory to "manufacturing".
 	1. Include layers "F.Cu", "B.Cu", "F.Paste", "B.Paste", "F.Silkscreen", "B.Silkscreen", "F.Mask", "B.Mask" and "Edge.Cuts".
 	1. Exclude all layers from "Plot on All Layers".
@@ -248,10 +249,10 @@ Now the validation method has been refined and the design has reached maturity, 
 	
 	```
 	set -k # turn on commenting support
-	for f in ../output/*.(gbr|drl)
+	for f in ../manufacturing/*.(gbr|drl)
 	do
 	fname=${${f:t:r}:14} # strip off path, extension, and "Notecarrier-B" prefix
-	gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B "../output/Notecarrier-B-Edge_Cuts.gbr" "$f" --export=png --dpi 1200 -o "${fname}-KiCad.png"
+	gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B "../manufacturing/Notecarrier-B-Edge_Cuts.gbr" "$f" --export=png --dpi 1200 -o "${fname}-KiCad.png"
 	convert \( ${fname}-KiCad.png -grayscale Rec709Luminance \) \
             \( ${fname}-OrCAD.png -grayscale Rec709Luminance \) \
             \( -clone 0-1 -compose darken -composite \) \

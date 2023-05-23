@@ -204,7 +204,7 @@ cd Gerber
 mkdir pngs
 for f in *.(GTL|G1|G2|GBL|GTP|GBP|GTS|GBS|GTO|GBO)
 do
-gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B n21-evt.GM4 "$f" --export=png --dpi 1200 -o "png/${f}.png"
+gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B n21-evt.GM4 "$f" --export=png --dpi 1200 -o "pngs/${f}.png"
 done
 ```
 
