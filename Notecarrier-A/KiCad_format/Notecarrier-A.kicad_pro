@@ -45,7 +45,7 @@
         "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.15
+          "min_clearance": 0.0
         }
       },
       "diff_pair_dimensions": [
@@ -56,9 +56,10 @@
         }
       ],
       "drc_exclusions": [
-        "clearance|128813450|131696400|c073107b-4ba5-4516-97c4-7f3118226a6b|9839801d-1734-4e92-a488-84009841492a",
-        "clearance|128813450|131696400|c073107b-4ba5-4516-97c4-7f3118226a6b|d3c25d1d-95a9-41dc-a08c-2eeabd398a09",
-        "clearance|56200000|131000000|c4026f40-15cc-4bdc-97e9-9d9cba462cee|4ecd6b80-20a9-4ff0-a70f-3605825db496",
+        "clearance|124522700|93194900|4a96dd12-1616-4cfa-a124-bf3bf646fb7b|4c105778-36de-46b3-a016-b3485476f8d4",
+        "clearance|124523800|93196000|5004b00e-43be-4d16-b623-4084639c17dc|4c105778-36de-46b3-a016-b3485476f8d4",
+        "clearance|124850000|93196000|7372eab5-08c2-4fbd-a7fd-cda9aa6624fe|4c105778-36de-46b3-a016-b3485476f8d4",
+        "clearance|62672351|109398498|0a7289e6-7c43-4a8a-8d9c-8521f64de09e|b0774e72-eeb9-4d96-a8dd-ddae358974a0",
         "clearance|63050000|108600000|480b1672-5193-4ee3-b55a-2439b4b7965e|b9a91cff-29d5-40a7-903d-eaa77e126aa9",
         "clearance|63200000|108400000|480b1672-5193-4ee3-b55a-2439b4b7965e|b9a91cff-29d5-40a7-903d-eaa77e126aa9",
         "clearance|63250000|108450000|480b1672-5193-4ee3-b55a-2439b4b7965e|b9a91cff-29d5-40a7-903d-eaa77e126aa9",
@@ -77,17 +78,19 @@
         "courtyards_overlap|59104201|109324801|09679433-cc58-405b-a64d-cd5c6d46f3af|eda3f4c3-c0fa-4901-9a71-5e7f27a5e977",
         "courtyards_overlap|59824801|121542399|8cd50a99-b5be-4d14-aa6f-b0ee583c1e71|fc8604d5-2dcb-4e69-905f-cb24ff9b42e4",
         "courtyards_overlap|62024799|117217401|0323e472-c9ef-42b5-a7bc-9581fffcd5bd|fc8604d5-2dcb-4e69-905f-cb24ff9b42e4",
+        "courtyards_overlap|63251501|121712501|2bd86934-17cd-4d2f-984e-66a0c7275e68|ea714ac1-3d6f-4568-943e-6c32d56ec8ef",
         "courtyards_overlap|63288501|121712501|2bd86934-17cd-4d2f-984e-66a0c7275e68|ea714ac1-3d6f-4568-943e-6c32d56ec8ef",
         "courtyards_overlap|65900001|75965131|62a264a1-56b8-4d6d-bd4e-ce76c148fece|a5536953-dfee-49e3-a72e-192d3f3cd0d5",
         "courtyards_overlap|65900001|77439999|33d69738-5172-479f-b8fd-2ff4f864d979|a5536953-dfee-49e3-a72e-192d3f3cd0d5",
         "courtyards_overlap|69222401|117743101|54d256fc-47e1-4b7c-ab8f-975be20580b0|e8a50dcc-163f-4cb6-951a-23ad89311f27",
         "courtyards_overlap|77344301|87584101|3ddfd228-6365-40a2-ac9f-b3d40914c4d2|a133dc6e-77f2-4d44-9437-ea12f7118032",
+        "courtyards_overlap|89400001|76199999|0d6683ad-882f-4b66-b969-cb2e8576dd09|62a264a1-56b8-4d6d-bd4e-ce76c148fece",
         "courtyards_overlap|89400001|76199999|62a264a1-56b8-4d6d-bd4e-ce76c148fece|0d6683ad-882f-4b66-b969-cb2e8576dd09",
         "courtyards_overlap|89400001|77439999|0d6683ad-882f-4b66-b969-cb2e8576dd09|b9b983b5-a274-4db3-afd5-3ced4630b6b3",
-        "hole_clearance|125500000|135500000|c3eba092-6a8c-4222-8320-651eecb3b234|9839801d-1734-4e92-a488-84009841492a",
-        "hole_clearance|125500000|135500000|c3eba092-6a8c-4222-8320-651eecb3b234|d3c25d1d-95a9-41dc-a08c-2eeabd398a09",
-        "hole_clearance|59500000|135500000|e493f63d-4acb-4580-b875-906e381c67a5|0f6e0bc8-580e-4591-9d3c-87d67d530a87",
-        "hole_clearance|59500000|135500000|e493f63d-4acb-4580-b875-906e381c67a5|4ecd6b80-20a9-4ff0-a70f-3605825db496",
+        "hole_clearance|125500000|135500000|f0e75b10-ee50-4a0a-8f34-98a74259e58e|0060db75-8251-4726-94a7-a2114c7bf651",
+        "hole_clearance|125500000|135500000|f0e75b10-ee50-4a0a-8f34-98a74259e58e|ba2403c4-0707-42a5-a227-9084d74ab5c0",
+        "hole_clearance|59500000|135500000|b85ca9a4-edef-4297-89c9-8b3fe04d8800|4f9d86c0-f850-4ac0-9249-e05846f8e765",
+        "hole_clearance|59500000|135500000|b85ca9a4-edef-4297-89c9-8b3fe04d8800|8040722e-672e-447e-8d2b-508606dedcab",
         "silk_over_copper|99323779|132524949|0e4dc491-28a8-41a3-b024-35c1a7928723|00000000-0000-0000-0000-000000000000"
       ],
       "meta": {
@@ -224,13 +227,7 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [
-      "pin_to_pin|1193800|2247900|7faa768b-8b1e-4d71-ab6e-edb86f9dd8bc|541bf1dc-af9d-41c8-9b3c-3be6451d2d3b|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be",
-      "pin_to_pin|1193800|2247900|7faa768b-8b1e-4d71-ab6e-edb86f9dd8bc|66cc09d5-c367-40d1-9c55-081f48bc7a08|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be",
-      "pin_to_pin|1244600|2692400|541bf1dc-af9d-41c8-9b3c-3be6451d2d3b|66cc09d5-c367-40d1-9c55-081f48bc7a08|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be",
-      "pin_to_pin|1244600|2692400|541bf1dc-af9d-41c8-9b3c-3be6451d2d3b|7faa768b-8b1e-4d71-ab6e-edb86f9dd8bc|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be",
-      "pin_to_pin|1270000|2095500|b09aea76-79d5-4d11-91a7-3764b9e35a4c|cf8ee6aa-6e00-4054-9060-4d13f3814113|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be|/5050c972-9893-4dc9-ac8b-afa1eb9e3ab8/03718417-b36a-4e5d-916f-df242c9477be"
-    ],
+    "erc_exclusions": [],
     "meta": {
       "version": 0
     },
@@ -517,6 +514,23 @@
         "via_diameter": 0.8,
         "via_drill": 0.4,
         "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "USB",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.15,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "wire_width": 6
       }
     ],
     "meta": {
@@ -527,11 +541,15 @@
     "netclass_patterns": [
       {
         "netclass": "Shield",
-        "pattern": "*Shield*"
+        "pattern": "*SHIELD*"
       },
       {
         "netclass": "LTE",
         "pattern": "*LTE_50*"
+      },
+      {
+        "netclass": "USB",
+        "pattern": "USB*"
       }
     ]
   },
@@ -571,7 +589,7 @@
     },
     "net_format_name": "",
     "page_layout_descr_file": "Notecarrier-A.kicad_wks",
-    "plot_directory": "",
+    "plot_directory": "documentation",
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
     "spice_model_current_sheet_as_root": true,

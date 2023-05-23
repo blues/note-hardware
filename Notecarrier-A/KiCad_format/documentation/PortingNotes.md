@@ -44,10 +44,12 @@ The complexity falls neatly between Notecarrier-B (single sheet) and Notecarrier
 	- Best way I've found is Export --> More --> Libraries and just export everything.
 	- Then each footprint can be opened via its `.dra` file.
 	- And each pad can be viewed via Tools --> Padstack --> Modify Design Padstack.
+- In general, if the footprint already exists in the library I've tried to use it. If that has required changes, I've documented them below. If not, I've just quietly substituted the existing footprint.
 - The `J-22-0254-FDT-H0508_EDGE` footprint uses a complicated pad stack to both add a castellated hole alongside the through-hole, and make the pad on the back side bigger. Typically in KiCad you would do complicated pad stacks piecewise by putting pads on top of pads, but still I ran into trouble because THT pads don't allow a different front/back pad. Instead of adding a 3rd pad of type SMD, I opted to use two THT pads to capture the two holes, and edit the file by hand to change the larger pad to back only so the two different pad sizes can be captured.
 	- Some discussion [here](https://forum.kicad.info/t/kicad-6-0-footprint-editor-how-to-set-pads-as-one-sided/35167).
 	- Similar for `J-5-0065-FDS-UUSB1051330001`. The different size top and bottom pad is easy to accommodate by stacking a THT pad for the smaller top pad, with a SMD pad for the larger bottom pad. Unfortunately, the THT pad also controls the inner layer size, which in the original design shares the size of the larger bottom layer pad. Since setting the THT pad to the larger size would also cover the smaller SMD pad, the best we can easily do is make the inner layers the same as the smaller outer layer pad instead. The effect is insignificant - the clearances remain the same, just that the inner two layers (which are not connected to the pads) have smaller circles of copper around the hole.
 - Can't see the difference between `J-5-0065-FOS-USB10118192-NOF` and the existing `J-5-0065-FOS-MICROUSB10118192` so am substituting the latter for now.
+	- Ah! Maybe it's "no flange"! In that case, it should only affect the 3D model.
 - `J-NANOSIM-SF72S006VBA` looks the same as the existing, except for the addition of some complex keepout voids. They don't affect the manufacturing output and are of unknown value, so I've not ported them.
 	- I later reversed this decision - they affect fills quite intricately, so I've duplicated the symbol, added a `_NO-FILL` suffix and painstakingly recreated them.
 - I used the existing `SOT666` and `J-NANOSIM-SF72S006VBA` footprints but in early validation realised some improvements. They both derived features from existing Altium footprints, which had elements on Mechanical layers 1, 5, 13, 15, 17, 18, 19, 26 and 255. Naturally this was a nightmare to convert to meaningful layers.
@@ -60,6 +62,11 @@ The complexity falls neatly between Notecarrier-B (single sheet) and Notecarrier
 - Frustratingly, even after porting all the footprints from OrCAD, the way they appear on the PCB is different. In particular, the silkscreen layer does not appear, but there are also some other minor differences.
 	- To ease porting of the PCB without throwing away the footprint option, I've opted to duplicate each of the affected footprints, suffix the copy with `_NO-SILK`, and make the changes to suit.
 	- In fact, for `ANT-NN03310-LTE` the version on the PCB is quite a bit different: no keep out and no tail on the main trace. I've made these changes in the `_NO-SILK` version too.
+- The `J-75-0050-MOS-M2-E` in this case has a smaller solder mask on the large mounting hole. While the 1.1mm hole has a 1.3mm "anti" pad and solder mask, the 1.6mm hole has a 1.8mm "anti pad and a 1.6mm solder mask!
+	- Since there's lots of fine tuning necessary to get the pad-fill clearances right, I've opted to create a dedicated footprint in the library instead of just overridding this setting in the PCB. That way the change is explicit, and will remain stable as the PCB is updated.
+- Now the `_NO-SILK` convention exists, I only had to apply it, add the ref des to the Fab layer, and correct the solder mask expansion setting to be able to use the existing `SW_CJS-1200TA` footprint.
+	- Similar for `SOT666` and `J-NANOSIM-SF72S006VBA`, although they both also had other changes documented above, and I also had to compromise on the expansion setting. Notecarrier-A requires 0.05mm for both footprints. Since Notecarrier-F overrides the 0.1mm setting in the footprint anyway, I've gone with 0.05mm so neither project needs PCB level changes.
+
 
 ### Layout
 
@@ -89,6 +96,10 @@ for p in pcb.GetFootprints():
 - Unlike Notecarrier-B, fills are not excluded from `RS-0402` footprints. Now it turns out the exclusion is board specific, it makes sense not to have it as part of the standard part. To accommodate I've duplicated the original footprints, suffixed the originals with `_NO-FILL`, and removed the fill keepout from the copy. I've then gone back to Notecarrier-B and updated the footprints to the `_NO-FILL` variants.
 	- I still can't figure out the pattern of fills flooding on to pads or not. After correcting all the `0402` footprints to allow fill into the pads, I find many other footprints exclude the fill, often to one pad only! This is true of `C13`, but also `J12` through `J14`.
 	- Since the pattern is not clear, I'm just adding lots of exceptions to the footprints on the PCB themselves.
+		- I think perhaps there must be a rule that prevents fill for pads that are `GND`, but also sets a tighter clearance. But it's complicated and inconsistent, so I didn't pursue this theory.
+		- An example, for reference: I've created a separate `SOT23_NO-FILL` (changing the "None" fill setting from every pad to the footprint as a whole) and backported it to Notecarrier-B. Then I've changed the `SOT23` to "Use Zone Settings". But because in practice this doesn't satisfy the fill requirements for Notecarrier-A, I've modified the footprints on the PCB where necessary to specify "Thermal Relief" instead.
+		- In other cases, thermal relief settings weren't quite enough, and I've resorted to specific rule areas. Eg. between the NanoSIM and the M.2 connector.
+			- Update: the thermal relief setting was a hack that happened to give the right result most of the time because it just duplicated the existing explicit thermal reliefs. I've since replaced that hack with a fill setting of "none", and set the default zone clearance to the thermal relief gap of 0.12mm. I then override the default clearance back to 0.3mm in most cases using a rule that applies to the Default netclass.
 	- This includes the M.2 connector holes. In Notecarrier-B there was a 0.35mm and 0.375mm clearance around them. In Notecarrier-F (which uses a different non-E key footprint) and Notecarrier-A there is not. No pattern established yet, so I will leave the footprint alone and remove the clearance rule in the Notecarrier-A PCB.
 	- Not only is the pattern not clear, it changes within and across components.
 		- See below for an example near the 6-pin `U5`. The outline of the zones in the original design is shown in blue. An attempt to create similar zones is shown in dark red. On `U5`, the `GND` pads have different clearances to pad 6 and to pads 3 and 5. While pad 1 of `L5` (left) has a different setting to the ground pads 1 of `R22` (bottom) and 2 of `C22` (bottom right). Meanwhile the zone itself has a different clearance from all other copper. So I've found the zone clearance sweet spot and then fixed individual pads with a combination of overriding them with "Solid" or with "Thermal Relief".
@@ -103,33 +114,75 @@ for p in pcb.GetFootprints():
 | ![Phantom curve](phantom_curve.png) | ![Result in KiCad](no_phantom_curve.png) |
 
 - The fills are absolutely legion, and OrCAD doesn't provide great tools for reverse engineering them. So my strategy is to recreate their bulk features, and add tweaks as necessary to result in similar copper, rather than trying to copy every little ineffectual feature.
-	- This required a small clearance for the fill, overridden by various netclass specific clearances, plus a custom rule for zone to zone clearance like in Notecarrier-F.
-	- This combination proved more reliable than an initial rule that provided a different clearance for fills of different nets, which was something like:
+	- This required a small clearance for the fill for the exceptional cases, overridden in most cases by various netclass specific larger clearances, plus a custom rule for zone to zone clearance like in Notecarrier-F.
+	- This combination proved more reliable than many earlier attempts, such as providing a different clearance for fills of different nets, or setting the more common larger clearance at the fill level and then creating exceptions using rules. The attempts included rules like:
 
 ```
 (rule DifferentNets
 	(constraint clearance (min 0.25mm))
 	(condition "A.Net != B.Net"))
+(rule Zone2Clearance0.3NetClass
+	(constraint clearance (min 0.3mm))
+	(condition "A.Type == 'Zone' && B.NetClass == 'ZoneClearance0.3'"))
+(rule Zone2GndPad
+	(constraint physical_clearance (min 0.35mm))
+	(condition "A.Type == 'Zone' && B.Type =='Pad' && B.NetName == 'GND' && A.Name != 'Shield'"))
 ```
 
 - Inexplicably, the fill cutouts around the antenna tracks is different on `In1.Cu` compared to `F.Cu`. I've gone ahead and made explicit cutouts to suit.
 - There's only two test points. In Notecarrier-B I just added them to the PCB. I've since come to regret that because updating the PCB from the schematic might delete them. So I'm going to add them to the schematic first. This is more in keeping with KiCad conventions. It also adheres to the porting convention I've established of introducing visual-only (ie. no manufacturing effect) changes (eg. `PWR_FLAG`'s or symbols) to the schematic, where it makes it a more maintainable KiCad project.
 - Even though they're in the original design, I'm deleting all the little stubs where a track meets a pad, which trigger a "Track has unconnected end" warning in KiCad. Since they're fully contained with the pad, they make no manufacturing difference, so making the DRC happy is better than being exact.
 - Shockingly, the zones seem to fill around vias as if the pad of the via wasn't there. The best way I can think to mimic this bad behaviour is to adjust the zone-to-via clearance to be 0.1mm *less* than the standard. That way the size of the pad is roughly negated. This seems to work better than I expected.
-- The manufacturing instructions table specifies "0.2mm" min. trace width, yet there are some 0.15mm traces. I've ignored that text. On the other hand, some details might be useful, but I haven't captured them anywhere:
-	- CTI: 175V
-	- Class 2
-	- E-Testing: Yes
-	- UL-Marking: Yes
+- The manufacturing instructions table specifies "0.2mm" min. trace width, yet there are some 0.15mm traces. I've ignored that text.
+	- On the other hand, some details might be useful, but I haven't captured them anywhere:
+		- CTI: 175V
+		- Class 2
+		- E-Testing: Yes
+		- UL-Marking: Yes
+	- Similarly, items in the BOM but not in the schematic because they don't have a designator:
+		- MGKWKB500M	: PINK ANTISTATIC ESD BAG 76X130mm MGKWKB500M
+		- : BLUES LABEL 
+- The clearance between the inner layers and the four vias on `USB_DM` and `USB_DP` have an inexplicably smaller clearance of 0.15mm instead of 0.2mm.   I've added an explicit rule because I can't see the broader logic.
+	- But I've neglected the smaller clearance around the AUX4 via on the `In1.Cu` and `B.Cu` layers because that looks like a mistake and not porting it is more conservative.
+- Some of the phantom curves I've ignored, since it results in a minor, more conservative difference. Coincidentally this the same 
+
+| F.Cu Phantom Curve Overlay | B.Cu Phantom Curve Overlay |
+| ------------------- | ------------------- |
+| ![Phantom curve 1](F-Cu_phantom_curve_overlay.png) | ![Phantom curve 2](B-Cu_phantom_curve_overlay.png) |
+
+- I never did figure out why one of the squares in the SIM card footpart doesn't fill, so I just drew a copper square there instead.
+
 
 ### 3D
 
-## Library
+- While models for `J-NANOSIM-SF72S006VBA`, `CJS-1200TA` and `SOT666` were already in the library from the Notecarrier-F port, the ones from this project seem more refined. File sizes are different (NanoSIM twice as big, CJS and SOT two-thirds as big!) and there is more detail (the card is coloured differently to slot in the NanoSIM, and the slider has some chamfering in the switch, the SOT is coloured and labelled). So I've have updated the ones in the library and used the more sensible OrCAD file name for the switch.
+- As in Notecarrier-B, the models for unpopulated components are not available, but this time there's not an older model that contains them. So no model has been ported for: `BATHLD-2464` and `J-5-0065-FDS-UUSB1051330001`.
+- As mentioned in the Layout section, the only difference detected between the existing `J-5-0065-FOS-MICROUSB10118192` and the `J-5-0065-FOS-USB10118192-NOF` in Notecarrier-A is the latter has no flange. Since this only seems to affect the model, I've avoided creating a new footprint and have just added the model as an alternative, and set it as the active model in the PCB.
 
-## Validation Method
 
-## Produce Outputs
+## Validation
 
+As per Notecarrier-B, with some ideas from Notecarrier-F.
+
+- The testpoint report generator needs to search for "TPS" because "TPS-SPEA" is not used, which results in some false matches that can then be deleted.
+- Generate PNGs from the folder of OrCAD gerbers generated using the Notecarrier-B Validation Method:
+
+```
+mkdir pngs
+for f in *.art
+do
+gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B Edge_Cuts.art "$f" --export=png --dpi 1200 -o "pngs/${f:r}-OrCAD.png"
+done
+```
+
+- Alas, again the NC Route file cannot be read by `gerbv`, so just open it in Gerber Viewer, export to pcbnew and plot a gerber file `Notecarrier-A PCB v2_1-4_plated.gbr` from there. Then produce the drill PNGs:
+
+```
+gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B --foreground=#00690B Edge_Cuts.art "Notecarrier-A PCB v2-1-4.0" "Notecarrier-A PCB v2_1-4_plated.gbr" --export=png --dpi 1200 -o "pngs/PTH-OrCAD.png"
+gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B Edge_Cuts.art "Notecarrier-A PCB v2-1-4-np.0" --export=png --dpi 1200 -o "pngs/NPTH-OrCAD.png"
+```
+
+- Then all is in order and the Notecarrier-B validation procedure works well.
 
 
 ---
@@ -138,16 +191,6 @@ for p in pcb.GetFootprints():
 
 # TODO
 
-- Re-fill after temporarily deleting track at (62.9, 109.5).
-- Figure out why one of the squares in the SIM card footpart doesn't fill.
-- Figure out why custom rules not applying to `C18`.
-- Deprecate:
-
-```
-(rule Zone2Clearance0.3NetClass
-	(constraint clearance (min 0.3mm))
-	(condition "A.Type == 'Zone' && B.NetClass == 'ZoneClearance0.3'"))
-(rule Zone2NoNet
-	(constraint clearance (min 0.3mm))
-	(condition "A.Type == 'Zone' && B.NetName == ''"))
-```
+- There's currently a potential bug in KiCad 7.0.2 that means the solder mask expansion around a NPTH is ignored. Until that's resolved, 7.0.2 will produce incorrect mask layers around, for example, the board mounting holes and the locating holes of the M.2 connector.
+	- https://forum.kicad.info/t/solder-mask-expansion-not-displayed/41827/6?u=heath_raftery
+	- Temporary workaround: set the clearance footprint wide (Fiducial) or change whole pad size (M2). Pad size fix happens to work because "no copper layers" is set.
