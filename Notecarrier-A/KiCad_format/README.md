@@ -28,10 +28,10 @@ Components in this design are sourced from the [blues-kicad-lib](https://github.
 
 | Revision |    Date    |   Author   | Description |
 |:--------:| ---------- | ---------- | ----------- |
-|     A    | 2023-XX-XX | H.Raftery  | initial port from OrCAD design files, rev XX (vX.X). |
+|     A    | 2023-05-23 | H.Raftery  | Initial port from OrCAD design files, rev 16 (v2.0). |
 
 
-### Original OrCad Design File Revision History
+### Original OrCAD Design File Revision History
 
 | Revision |    Date    |   Author   | Description |
 |:--------:| ---------- | ---------- | ----------- |
