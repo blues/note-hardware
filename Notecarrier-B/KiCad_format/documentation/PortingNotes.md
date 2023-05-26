@@ -44,12 +44,12 @@
 	2. Export to DXF (Export --> MCAD --> DXF...) with options: 
 		1. Name according to table below.
 		1. Revision: 12, units: MM, accuracy: 4.
-		2. Select the `ecad_mcad` layer conversion file from the library (if a default isn't provided), and edit it:
+		1. Select the `ecad_mcad` layer conversion file from the library (if a default isn't provided), and edit it:
 			1. Select all, then select "Use layer names generated from class and subclass names".
 			2. Click "map".
 			3. Click "OK", overwriting whatever was there because in characteristically obscure OrCAD fashion, other layers can otherwise appear in the exported file, and "just" removing layers from a DXF can be the start of a terrible nightmare.
-			3. Don't bother with polyline or fill options since I've not found a combination which actually results in directly useable polygons. PS. can you imagine how long I spent trying to understand this insane dialog?
-		4. Click Export.
+		1. Don't bother with polyline or fill options since I've not found a combination which actually results in directly useable polygons. PS. can you imagine how long I spent trying to understand this insane dialog?
+		1. Click Export.
 	3. Import graphics in KiCad putting each export on a separate User layer, placing them all at the board origin, with 0.1mm line width and millimeter units.
 	4. Trace over or convert them using native KiCad tools, to generate a high quality digital design that is physically equivalent to the original.
 - OrCAD layer to KiCad layer mapping:
@@ -65,7 +65,7 @@
 | TOP/BOT-PIN.dxf | - | No useful information. |
 
 - To convert the `ETCH.dxf` layers into tracks:
-	- Hide all other layers. Select everything. Unselect any text.
+	- Hide all other layers. Select everything. Ungroup if necessary. Unselect any text.
 	- Right click --> "Create from selection" --> "Create Tracks From Selection".
 		- If "Create Tracks From Selection" doesn't appear, something other than lines (like text) is selected somewhere.
 - To remove the flood fill outlines and correct the track widths (easier to do after creating the tracks, because scripting doesn't work well when changing the selection set or creating tracks):
@@ -74,7 +74,7 @@
 import pcbnew
 pcb = pcbnew.GetBoard()
 for t in pcb.GetTracks():
-    if t.GetLayerName() != 'In2.Cu':
+    if t.GetLayerName() != 'F.Cu':
         continue
     w = t.GetWidth()
     if w <= 20000:

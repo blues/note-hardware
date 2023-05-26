@@ -77,8 +77,9 @@ The complexity falls neatly between Notecarrier-B (single sheet) and Notecarrier
 	- To very carefully minimise confusion as much as possible I'm going to **retain** the unusual origin, treat the `PLACETOP.TXT`/`PLACEBOTTOM.TXT` files with suspicion (since at least the design files are internally consistent, and they look correct compared to the physical sample I have) and deal with whatever results from that.
 - An A3 sheet is unnecessary, so I'm sticking with A4. That makes a neat KiCad origin at `(130,140)`.
 	- Therefore to place parts, I opened the `PLACETOP.TXT` file in a spreadsheet program, added a KiCad X column as `130-X` and a KiCad Y column as `140-Y` (since the X coordinate is inverted because the strange negative/positive convention mentioned above, and the Y coordinate is inverted in KiCad).
+		- For `PLACEBOTTOM.TXT` it's `130-65+X` and `140-Y` because the x ordinate is measured from the other side of the board and in the opposite direction. Rotation also needs to be flipped, so find/replace to swap all -90 to 90 and vice-versa, and same for 0 and 180.
 	- Then added a column like `"place[""" & TRIM($A2) & """] = (" & B2 & "," & C2 & "," & D2 & ");"` to produce Python code that will create a dict entry for every component.
-	- And then type `place = {};` into `pcbnew` console, copy-paste the Python code column (might need to put it all on one line first), and finally, ran a script like this (then close and re-open PCB to refresh properly):
+	- And then type `place = {};` into `pcbnew` console, copy-paste the Python code column (might need to put it all on one line first), and finally, ran a script like this (then make an edit to something, save, close and re-open PCB to refresh properly):
 
 ```
 for p in pcb.GetFootprints():
@@ -89,7 +90,7 @@ for p in pcb.GetFootprints():
 ```
 
 - Back side and mechanical only footprints can have their positions set by hand.
-- Layers were imported as DXF as in Notecarrier-B, except this is a 4 layer board so the `GND` and `POWER` layers were imported to layers `User.8` and `User.9` respectively. The `VIA` layers they displaced were imported using the drill file technique described in Notecarrier-F instead.
+- Layers were imported as DXF as in Notecarrier-B, except this is a 4 layer board so the `GND` and `POWER` layers were imported to layers `User.8` and `User.9` respectively. The `VIA` layers they displaced were imported using the drill file technique described in Notecarrier-B instead.
 - As with Notecarrier-B, the default OrCAD "ANSI" font is used for the majority of the text on the silkscreen. In the Notecarrier-B port this was substituted with the default KiCad font, which is quite a good match. I had a look for better matches (the `O` should be rounder and `I` should have serifs) but couldn't find a free option. "Copyright Violation" (seriously, that's the name of it) is free and has very good character matching, unfortunately the kerning is far too tight. "Rational TW" and "Dress Code Regular Round" are probably better matches, but neither are free.
 	- So sticking with the KiCad default font for now.
 - To position and size text on the silkscreen, I imported the corresponding Gerber into a layer and used it to align the native text elements imported from the DXF.
