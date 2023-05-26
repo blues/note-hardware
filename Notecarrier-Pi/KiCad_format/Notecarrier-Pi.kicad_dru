@@ -1,0 +1,4 @@
+(version 1)
+(rule GndZone2GndPad
+	(constraint physical_clearance (min 0.1mm))
+	(condition "A.Type == 'Zone' && A.NetName == 'GND' && B.Type == 'Pad' && B.NetName == 'GND'"))
