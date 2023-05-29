@@ -181,6 +181,8 @@ for t in pcb.GetFootprints():
 		- On the other hand, "Absolute" vs "Incremental" is not important. Nor is zero suppresion.
 		- Unfortunately, this still doesn't capture slots. They need their own separate file, which can be produced easily in Export -> NC Route.
 	1. Open pairs of the gerbers in Gerber Viewer and flick between them to scan for differences. The contrasting colours of the layers automatically creates a useful visual diff, and is more definitive than the "diff" and "xor" views.
+	1. Validate the non-manufactured layers by selecting the "MANUFACTURING" view in OrCAD, and visually comparing with the equivalent in KiCad.
+
 
 ## Produce Outputs
 
