@@ -185,14 +185,3 @@ gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B Edge_Cuts.a
 ```
 
 - Then all is in order and the Notecarrier-B validation procedure works well.
-
-
----
-
-## References
-
-# TODO
-
-- There's currently a potential bug in KiCad 7.0.2 that means the solder mask expansion around a NPTH is ignored. Until that's resolved, 7.0.2 will produce incorrect mask layers around, for example, the board mounting holes and the locating holes of the M.2 connector.
-	- https://forum.kicad.info/t/solder-mask-expansion-not-displayed/41827/6?u=heath_raftery
-	- Temporary workaround: set the clearance footprint wide (Fiducial) or change whole pad size (M2). Pad size fix happens to work because "no copper layers" is set.
