@@ -233,3 +233,12 @@ convert \( ${fname}-KiCad.png -grayscale Rec709Luminance \) \
 done
 ```
 
+# Addendum : Rev B Notes
+
+For the most part, the existing notes are sufficient to cover the exercise of porting Rev B. Exceptions are noted here:
+
+- The included Excel BOM does not match the design files. Eg. `C1` is a X5R 25V in the design files, but a X7R 16V in the BOM. In Rev A it was different again. To ensure nothing is lost, I have included **both** part details in the BOM. The values from the design files are in fields `Design Description`, `Design Manufacturer`, `Design MPN`. `Design Supplier` and `Design Order Code`.
+- I've changed the one `N_VIO` global label on the Feather sheet to a power symbol, because the additional net created by the label causes DRC violations, is likely a mistake, and otherwise has no electrical effect.
+- There are many variations in fill behaviour around vias of the same net. In some cases it is solid, in other cases there is a small but variable clearance, and in others there is a negative clearance. These are likely not deliberate, and given they have very little physical impact, I've just lumped them into two categories, solid and not connected, and let the standard fill behaviour take place.
+- I've excluded DRC violations associated with polygons - in KiCad polygons cannot be assigned to a net. Rather than change them to zones and introduce unwanted fill behaviour, I have chosen just to exclude the warnings.
+- The stack up information that appears as text contradicts that set in the design rules. I've opted to use the former, since that is what the manufacturer will see, so I assume the latter is not used.
