@@ -242,3 +242,15 @@ For the most part, the existing notes are sufficient to cover the exercise of po
 - There are many variations in fill behaviour around vias of the same net. In some cases it is solid, in other cases there is a small but variable clearance, and in others there is a negative clearance. These are likely not deliberate, and given they have very little physical impact, I've just lumped them into two categories, solid and not connected, and let the standard fill behaviour take place.
 - I've excluded DRC violations associated with polygons - in KiCad polygons cannot be assigned to a net. Rather than change them to zones and introduce unwanted fill behaviour, I have chosen just to exclude the warnings.
 - The stack up information that appears as text contradicts that set in the design rules. I've opted to use the former, since that is what the manufacturer will see, so I assume the latter is not used.
+- Where the 3D models were either identical, or a clear subset of those from the original port, I've replaced them with the originals. In all other cases I've used the new models to avoid introducing regressions.
+	- An example of a identical model is the `SOP50P310X90-8N`, which is clearly the same as `6104714848.step` in the original port, and so I've changed the footprint to refer to the original.
+	- Examples of a clear subset are the SOT66 and nanoSIM card models, which have the same shape but lack the colouring of the original, or the `SW-CJS1200TA` model, which has the same shape but lacks detail and introduces a rotation.
+	- Using the new models means there is now another model variation in the library for some parts. For example, for an 0402 resistor there is now:
+		- `RS-0402.step` - imported with the OrCAD ports
+		- `0402 resistor.STEP` - imported with the original Notecarrier-F port
+		- `RESC1005X38N EIA 0402.step` - imported with this new Notecarrier-F port
+	- There is an obvious opportunity to rationalise these duplicates, but I'm not in a position to make choices about which variant to standardise on, so have left them all in with clear history notes.
+- I experienced frequent crashes when viewing the PCB in 3D mode, if the Notecard model is set to partially transparent. If this persists, edit the `J-75-0050-MOS-M2_Fv1.2` footprint and set the opacity of the `Notecard-V2-Telit-WiFi.step` model to 100, then update the footprint in the PCB.
+- The `DIST-WASMSIM0250_Fv1.2` footprint has no pad on inner layers. Out of the box, KiCad puts a pad on connected layers, which the inner layers are. While it looks quite different in the gerber diff, the thermal relief remains much the same (only the 4 spokes are longer in the Altium design file). Elsewhere I've concocted custom footprints to mimic this behaviour, but here I can't see that it's warranted.
+- The zones in KiCad fill into some unused space that Altium leaves empty. They're not islands and I see no meaningful impact, so I haven't bothered removing them.
+	- Eg. `F_Cu` @ (84.1, 115.6) or `B_Cu` @ (83.7, 60.4).

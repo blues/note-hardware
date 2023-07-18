@@ -3812,14 +3812,14 @@
     )
   )
 
-  (symbol (lib_id "Device:L") (at 209.55 123.19 90) (unit 1)
+  (symbol (lib_id "Device:L") (at 209.55 123.19 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c38ff54b-e8c1-465f-a85f-7d2367d58a4d)
-    (property "Reference" "L6" (at 207.01 120.65 90)
-      (effects (font (size 1.27 1.27)))
+    (property "Reference" "L6" (at 205.74 120.65 90)
+      (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "2.2µH" (at 205.74 124.46 90)
-      (effects (font (size 1.27 1.27)) (justify right))
+      (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "blues-kicad-lib:IND_XFL4020-222MEC_Fv1.2" (at 209.55 123.19 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -3890,8 +3890,8 @@
     (property "Design Supplier" "Mouser" (at 209.55 123.19 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 4019a69a-9007-48c4-b49e-70bc5e0d0fbb))
-    (pin "2" (uuid 4b3cb472-c4a7-4b32-855c-2c861b3c20fa))
+    (pin "1" (uuid abeac449-a641-48ae-a85f-2cf58b8ba206))
+    (pin "2" (uuid f79a5fc9-a7e8-4565-8fe3-081c5325a5c9))
     (instances
       (project "Notecarrier-F"
         (path "/3e57c059-f782-40ac-b9a3-c1636ed27a63/a53e192a-778c-4efc-880e-de0784c00c7e"
