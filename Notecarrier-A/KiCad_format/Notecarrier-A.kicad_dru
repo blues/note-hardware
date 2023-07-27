@@ -1,0 +1,29 @@
+(version 1)
+(rule Zone2LTE
+	(constraint clearance (min 0.45mm))
+	(condition "A.Type == 'Zone' && B.NetClass == 'LTE'"))
+(rule Zone2Default
+	(constraint clearance (min 0.3mm))
+	(condition "A.Type == 'Zone' && A.Name != 'Shield' && (B.NetClass == 'Default' || B.NetName == '')"))
+(rule Zone2Gnd
+	(constraint clearance (min 0.2mm))
+	(condition "A.Type == 'Zone' && A.Name != 'Shield' && B.NetName == 'GND' && B.Pad_Type != 'Through-hole'"))
+(rule Zone2En
+	(constraint clearance (min 0.2mm))
+	(condition "A.Type == 'Zone' && B.NetName == '/Power/EN'"))
+(rule Zone2Via
+	(constraint clearance (min 0.2mm))
+	(condition "A.Type == 'Zone' && B.Type == 'Via'"))
+(rule Zone2InnerUSBVia
+	(layer inner)
+	(constraint clearance (min 0.15mm))
+	(condition "A.Type == 'Zone' && B.Type == 'Via' && (B.NetName == 'USB_DM' || B.NetName == 'USB_DP')"))
+(rule Zone2Zone
+	(constraint clearance (min 0.3mm))
+	(condition "A.Type == 'Zone' && B.Type == 'Zone'"))
+(rule Zone2USB
+	(constraint clearance (min 0.5mm))
+	(condition "A.Type == 'Zone' && B.Type == 'Track' && (B.NetName == 'USB_DP' || B.NetName == 'USB_DM')"))
+(rule Zone2Text
+	(constraint clearance (min -0.3mm))
+	(condition "A.Type == 'Zone' && B.Type == 'Text'"))

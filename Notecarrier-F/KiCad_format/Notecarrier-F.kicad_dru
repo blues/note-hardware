@@ -1,0 +1,29 @@
+(version 1)
+(rule Zone2DifferentNet
+	(constraint clearance (min 0.2mm))
+	(condition "A.Type == 'Zone'"))
+# In the Altium source project, fills seem to pull back 0.2mm from keep outs.
+# In KiCad fills will fill up to the keep out boundary, regardless of rules.
+# So to mimic the pull back behaviour, we set these specific rules which mimic
+# each of the keep outs around the mounting holes and the board outline.
+(rule Zone2Hole2.54
+	(constraint physical_clearance (min 0.525mm))
+	(condition "A.Type == 'Zone' && B.Pad_Type == 'NPTH, mechanical' && B.Hole_Size_X == 2.54mm"))
+(rule Zone2Hole3.3
+	(constraint physical_clearance (min 0.55mm))
+	(condition "A.Type == 'Zone' && B.Pad_Type == 'NPTH, mechanical' && B.Hole_Size_X == 3.3mm"))
+(rule Zone2Hole1.1
+	(constraint physical_clearance (min 0.3mm))
+	(condition "A.Type == 'Zone' && B.Pad_Type == 'NPTH, mechanical' && B.Hole_Size_X == 1.1mm"))
+(rule Zone2Hole1.6
+	(constraint physical_clearance (min 0.3mm))
+	(condition "A.Type == 'Zone' && B.Pad_Type == 'NPTH, mechanical' && B.Hole_Size_X == 1.6mm"))
+(rule Zone2Edge
+	(constraint edge_clearance (min 0.305mm))
+	(condition "A.Type == 'Zone' && B.Layer == 'Edge.Cuts'"))
+# Exclude the DRC violations associated with polygons - in KiCad polygons
+# cannot be assigned to a net. Rather than change them to zones and introduce
+# unwanted fill behaviour, have chosen just to exclude the warnings.
+(rule Polygon2Pad
+	(constraint clearance (min 0.0mm))
+	(condition "A.Type == 'Pad' && B.Type == 'Graphic'"))
