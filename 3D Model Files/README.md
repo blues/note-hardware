@@ -7,7 +7,7 @@ Please note these enclosures are not supported by Blues directly, but offered he
 ## Contributing
 
 We welcome pull requests for new 3D model files. By participating in this
-project, you agree to abide by the Blues Inc. [code of conduct](../CODE_OF_CONDUCT.md).
+project, you agree to abide by the Blues Inc. [code of conduct](https://blues.github.io/opensource/code-of-conduct).
 
 For details on contributions we accept and the process for contributing, see our
 [contribution guide](../CONTRIBUTING.md).
