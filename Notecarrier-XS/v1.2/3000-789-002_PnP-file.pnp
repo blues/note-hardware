@@ -1,0 +1,54 @@
+PCB variant - Notecarrier XS
+Units = Metric (mm)
+RefDes    BL Part Number                  Value                           Footprint                       Layer           XPos      YPos       Rot
+==================================================================================================================================================
+SW1       2007-124                        EVP-BB2A9B000                   SW_EVP-BB2A9B000                Top           14.000    69.000       360
+!OBJ2!    6020-113                        9774025151R                     DIST-WASMSIM0250                Top           46.650    52.050         0
+!J6!      2007-460                        MDT420E01001                    J-75-0050-MOS-M2                Top            5.150    52.050        90
+J2        2002-058                        SM04B-SRSS-TB(LF)(SN)           JST_SM04B-SRSS-TB               Top            3.034    26.540        90
+R3        2001-438                        1M                              R-1206                          Top            5.350    19.100       180
+!OBJ1!    6020-113                        9774025151R                     DIST-WASMSIM0250                Top           49.390    19.050         0
+J3        2007-662                        S2B-PH-SM4-K-TB                 CONN_S2B-PH-SM4                 Top           61.236    26.040       270
+!J4!      2007-460                        MDT420E01001                    J-75-0050-MOS-M2                Top           14.650    19.050        90
+FD5       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Top           51.800    69.800         0
+FD2       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Top           58.800     1.300         0
+FD1       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Top            7.750     5.950         0
+C1        2007-449                        10n/1000V                       C-1206                          Top            5.350    21.450       180
+C2        2000-908                        100n                            C-0402                          Top            1.550    21.450       270
+P3        2008-432                        SM05B-SRSS-TB                   Conn_SM05B-SRSS-TB              Top           62.950    12.100       270
+!P4!      2008-437                        12402012E212A                   CONN_12402012E212A              Top            4.838    12.550       270
+C7        2000-908                        100n                            C-0402                          Bottom        28.150    13.650        90
+R12       2001-570                        3k                              R-0402                          Bottom        35.200    23.550       180
+R7        2001-157                        15k                             R-0402                          Bottom        11.100    16.600       180
+R2        2004-098                        5k1                             R-0402                          Bottom         4.300    11.850       180
+R1        2004-098                        5k1                             R-0402                          Bottom         4.300    12.750       360
+L1        2003-989                        MCKK1608T1R0MN                  L-0603                          Bottom        23.500    13.700       270
+C8        2006-222                        22u                             C-0805                          Bottom        25.800    11.650       180
+C6        2006-222                        22u                             C-0805                          Bottom        24.400    15.800       360
+U2        2008-206                        BQ25628ERYKR                    QFN40P300X150X80-18N            Bottom        32.400    24.600       180
+U1        2007-147                        ISL9122AIINZ-T                  BGA8N40P2X4_180x100x50          Bottom        25.600    13.700       270
+R10       2000-723                        0R0                             R-0603                          Bottom        21.100    27.550       180
+R14       2001-157                        15k                             R-0402                          Bottom        35.200    21.500       180
+R13       2004-237                        11k                             R-0402                          Bottom        35.200    22.400       180
+R9        2002-832                        10M                             R-0402                          Bottom        27.250    13.650       270
+L2        2006-846                        XFL4020-152MEC                  IND_XFL4020                     Bottom        27.800    24.550       270
+FD6       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Bottom        58.800     1.300       180
+FD4       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Bottom        51.800    69.800       180
+FD3       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Bottom         7.750     5.950       180
+C11       2000-447                        10u                             C-1206                          Bottom        28.350    28.000       180
+C16       2003-721                        4u7                             C-0603                          Bottom        35.300    25.425       270
+C15       2004-296                        100n                            C-0402                          Bottom        34.650    27.450       180
+C13       2003-721                        4u7                             C-0603                          Bottom        33.000    21.750       180
+C14       2004-293                        10u                             C-0805                          Bottom        33.550    28.700       180
+C9        2003-965                        47n/50V                         C-0402                          Bottom        32.850    27.450       180
+C10       2000-908                        100n                            C-0402                          Bottom        31.350    27.900        90
+C12       2000-447                        10u                             C-1206                          Bottom        28.350    21.000       360
+C3        2001-377                        33p                             C-0402                          Bottom        14.150    10.750       180
+C4        2001-377                        33p                             C-0402                          Bottom        14.150    15.450       180
+C5        2001-377                        33p                             C-0402                          Bottom        14.150    13.650       180
+R5        2001-170                        22R                             R-0402                          Bottom        14.150    11.850       180
+R6        2001-170                        22R                             R-0402                          Bottom        14.150    14.550       180
+R8        2001-170                        22R                             R-0402                          Bottom        14.150    12.750       180
+TVS1      2007-452                        PESD5V0L5UV,125                 SOT666                          Bottom        14.500    18.400       270
+J5        2007-458                        SF72S006VBDR2500                J-NANOSIM-SF72S006VBA           Bottom         7.375    25.012        90
+U3        2007-318                        LM66200DRLR                     SOT-583                         Bottom        39.450    27.550       360
