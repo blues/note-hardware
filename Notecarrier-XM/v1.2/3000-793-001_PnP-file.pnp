@@ -1,0 +1,23 @@
+PCB variant - Notecarrier XM
+Units = Metric (mm)
+RefDes    BL Part Number                  Value                           Footprint                       Layer           XPos      YPos       Rot
+==================================================================================================================================================
+R12       2004-098                        5k1                             R-0402                          Top            2.400    19.850       360
+R11       2004-098                        5k1                             R-0402                          Top            2.400    20.750       180
+L5        2003-989                        MCKK1608T1R0MN                  L-0603                          Top            6.050    25.300       270
+C3        2006-222                        22u                             C-0805                          Top            3.750    23.550         0
+C1        2006-222                        22u                             C-0805                          Top            5.150    27.400       180
+U1        2007-147                        ISL9122AIINZ-T                  BGA8N40P2X4_180x100x50          Top            3.950    25.300       270
+R3        2001-438                        1M                              R-1206                          Top            6.250    19.100       180
+R1        2002-832                        10M                             R-0402                          Top            2.300    25.250       270
+!OBJ1!    6020-113                        9774025151R                     DIST-WASMSIM0250                Top           49.390    19.050         0
+!J5!      2007-460                        MDT420E01001                    J-75-0050-MOS-M2                Top           14.650    19.050        90
+FD3       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Top           55.900    30.500         0
+FD2       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Top           50.700     7.300         0
+FD1       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Top            7.750     5.950         0
+C2        2007-449                        10n/1000V                       C-1206                          Top            6.250    21.450       180
+U3        2007-318                        LM66200DRLR                     SOT-583                         Top            8.150    28.600       360
+!P3!      2008-437                        12402012E212A                   CONN_12402012E212A              Top            4.838    12.550       270
+FD7       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Bottom        50.700     7.300       180
+FD6       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Bottom        55.900    30.500       180
+FD5       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Bottom         7.750     5.950       180

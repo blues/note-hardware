@@ -1,0 +1,47 @@
+PCB variant - Notecarrier XP
+Units = Metric (mm)
+RefDes    BL Part Number                  Value                           Footprint                       Layer           XPos      YPos       Rot
+==================================================================================================================================================
+TP1       N/A                             PCB_Testpoint                   PCB_Testpoint_SMD               Top            7.600    27.200         0
+!P3!      2008-437                        12402012E212A                   CONN_12402012E212A              Top            4.838    12.550       270
+R3        2001-438                        1M                              R-1206                          Top            5.350    19.100       180
+C3        2000-908                        100n                            C-0402                          Top            3.850    25.300       180
+!OBJ1!    6020-113                        9774025151R                     DIST-WASMSIM0250                Top           49.390    19.050         0
+!J1!      2007-460                        MDT420E01001                    J-75-0050-MOS-M2                Top           14.650    19.050        90
+FD5       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Top           52.800    36.800         0
+FD2       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Top           57.800     1.300         0
+FD1       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Top            8.000     5.500         0
+C1        2007-449                        10n/1000V                       C-1206                          Top            5.350    21.450       180
+C15       2006-854                        220u                            CAPMP3528X21                    Bottom        20.500    22.700       270
+R2        2004-098                        5k1                             R-0402                          Bottom         4.600    12.150       180
+C4        2001-377                        33p                             C-0402                          Bottom        14.150    10.700       180
+C5        2001-377                        33p                             C-0402                          Bottom        14.150    15.450       180
+C6        2001-377                        33p                             C-0402                          Bottom        14.150    13.650       180
+R6        2001-170                        22R                             R-0402                          Bottom        14.150    11.850       180
+R7        2001-170                        22R                             R-0402                          Bottom        14.150    14.550       180
+R9        2001-170                        22R                             R-0402                          Bottom        14.150    12.750       180
+TVS1      2007-452                        PESD5V0L5UV,125                 SOT666                          Bottom        14.500    18.400       270
+C2        2000-908                        100n                            C-0402                          Bottom        32.400    21.400       180
+L1        2003-989                        MCKK1608T1R0MN                  L-0603                          Bottom        22.600    13.250       270
+C9        2006-222                        22u                             C-0805                          Bottom        24.600    11.150       180
+C7        2006-222                        22u                             C-0805                          Bottom        23.200    15.350       360
+U1        2007-318                        LM66200DRLR                     SOT-583                         Bottom        37.450    24.600       360
+U2        2007-147                        ISL9122AIINZ-T                  BGA8N40P2X4_180x100x50          Bottom        24.650    13.250       270
+R1        2004-098                        5k1                             R-0402                          Bottom         4.600    13.050       360
+R10       2002-832                        10M                             R-0402                          Bottom        26.500    13.250       270
+FD6       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Bottom        57.800     1.300       180
+FD4       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Bottom        52.800    36.800       180
+FD3       N/A                             Fiducial_mark                   Fiducial_mark_1mm               Bottom         8.000     5.500       180
+U3        2008-326                        RT6160BWSC                      BGA15N40P3X5_230x140x60         Bottom        32.350    24.500        90
+C16       2002-072                        10u                             C-0603                          Bottom        34.700    23.900        90
+C17       2002-072                        10u                             C-0603                          Bottom        30.050    23.900        90
+C10       2006-854                        220u                            CAPMP3528X21                    Bottom        24.050    22.700       270
+J2        2007-458                        SF72S006VBDR2500                J-NANOSIM-SF72S006VBA           Bottom         7.375    25.012        90
+L2        2006-846                        XFL4020-152MEC                  IND_XFL4020                     Bottom        32.400    27.600       180
+R5        2002-832                        10M                             R-0402                          Bottom        32.400    22.300       180
+C11       2006-854                        220u                            CAPMP3528X21                    Bottom        24.500    27.950        90
+C12       2006-854                        220u                            CAPMP3528X21                    Bottom        20.950    27.950        90
+C13       2006-854                        220u                            CAPMP3528X21                    Bottom        27.600    22.700       270
+C14       2006-854                        220u                            CAPMP3528X21                    Bottom        28.050    27.950        90
+R8        2001-157                        15k                             R-0402                          Bottom        10.900    16.450       180
+C8        2000-908                        100n                            C-0402                          Bottom        27.400    13.250       270
