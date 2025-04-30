@@ -22,6 +22,7 @@ Various other resources that may be useful as you develop hardware around Noteca
 * [Notecarrier-A Series Solar JST Input](https://dev.blues.io/datasheets/application-notes/notecarrier-a-series-solar-jst-input/)
 * [Notecard Host System Design Guide](https://dev.blues.io/datasheets/application-notes/notecard-host-system-design-guide/)
 * [Low-Power Hardware Design](https://dev.blues.io/datasheets/application-notes/low-power-hardware-design/)
+* [Designing for XP Variants of the Blues Notecard](https://dev.blues.io/datasheets/application-notes/designing-for-xp-variants-of-the-blues-notecard/)
 
 ### Notecard SDKs and Libraries
 
@@ -53,7 +54,7 @@ Copyright (c) 2025 Blues Inc. Released under the MIT license. See
 
 [blues]: https://blues.com
 [notehub]: https://notehub.io
-[note-c]: https://github.com/blues/note-c
+[note-c]: https://blues.github.io/note-c/
 [note-arduino]: https://dev.blues.io/tools-and-sdks/firmware-libraries/arduino-library/
 [note-zephyr]: https://dev.blues.io/tools-and-sdks/firmware-libraries/zephyr-library/
 [note-go]: https://github.com/blues/note-go
