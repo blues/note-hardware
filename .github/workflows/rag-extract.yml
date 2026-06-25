@@ -88,7 +88,7 @@ jobs:
           fi
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5   # bundles upload-artifact@v7 (Node 24)
         with:
           path: _Tools/extract_for_rag/rag-extracted
 
@@ -101,4 +101,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5   # Node 24
