@@ -1,0 +1,1205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mojo — SCHEMATIC (v1.1)</title>
+<meta name="rag:product" content="Mojo">
+<meta name="rag:version" content="v1.1">
+<meta name="rag:doc_type" content="schematic">
+<meta name="rag:source_file" content="Mojo/v1.1/Engineering (Normal)/Schematics Mojo-v4.PDF">
+<style>body{font-family:system-ui,-apple-system,sans-serif;max-width:64rem;margin:2rem auto;padding:0 1rem;line-height:1.5;color:#111}h1{font-size:1.4rem}h2{font-size:1.15rem;margin-top:1.5rem}h3{font-size:1rem}table{border-collapse:collapse;margin:0.5rem 0}th,td{border:1px solid #ccc;padding:2px 8px;text-align:left;vertical-align:top}code{background:#f4f4f4;padding:1px 4px;border-radius:3px}.source{color:#555;font-size:0.9rem}</style>
+</head>
+<body>
+<main>
+<h1>Mojo — SCHEMATIC (v1.1)</h1>
+<p class="source">Source file: <a href="https://github.com/blues/note-hardware/blob/master/Mojo/v1.1/Engineering%20%28Normal%29/Schematics%20Mojo-v4.PDF">Mojo/v1.1/Engineering (Normal)/Schematics Mojo-v4.PDF</a></p>
+<h2>Page 1</h2>
+<h2>Cover Sheet</h2>
+<h3>Document Title</h3>
+<p>Blues Wireless<br />
+Mojo 1.1<br />
+v4</p>
+<h3>Components</h3>
+<p>No component references are visible on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>Named Nets / Signals Mentioned</h3>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Context</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I2C SDA</td>
+<td>Revision note: Add 22K I2C SDA/SCL pullups</td>
+</tr>
+<tr>
+<td>I2C SCL</td>
+<td>Revision note: Add 22K I2C SDA/SCL pullups</td>
+</tr>
+<tr>
+<td>3v3</td>
+<td>Revision note: 3v3 labeled as "VIO" in serigraphy</td>
+</tr>
+<tr>
+<td>VIO</td>
+<td>Revision note: 3v3 labeled as "VIO" in serigraphy</td>
+</tr>
+<tr>
+<td>Vbat</td>
+<td>Revision note: Reposition Vbat/Vout</td>
+</tr>
+<tr>
+<td>Vout</td>
+<td>Revision note: Reposition Vbat/Vout</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td>Revision note: Moved GPIO test point to bottom and tented</td>
+</tr>
+</tbody>
+</table>
+<h2>Version History</h2>
+<h3>Version Release Date and Comments</h3>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th style="text-align: right;">Release Date</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v1</td>
+<td style="text-align: right;">2024-03-11</td>
+<td>Initial Version</td>
+</tr>
+<tr>
+<td>v2</td>
+<td style="text-align: right;">2024-03-21</td>
+<td>Add 22K I2C SDA/SCL pullups</td>
+</tr>
+<tr>
+<td>v2</td>
+<td style="text-align: right;">2024-03-21</td>
+<td>3v3 labeled as "VIO" in serigraphy</td>
+</tr>
+<tr>
+<td>v3</td>
+<td style="text-align: right;">2024-04-15</td>
+<td>Changed sense resistor to 0R250.</td>
+</tr>
+<tr>
+<td>v3</td>
+<td style="text-align: right;">2024-04-15</td>
+<td>Reposition Vbat/Vout. Updated layout as needed.</td>
+</tr>
+<tr>
+<td>v3</td>
+<td style="text-align: right;">2024-04-15</td>
+<td>Moved GPIO test point to bottom and tented.</td>
+</tr>
+<tr>
+<td>v3</td>
+<td style="text-align: right;">2024-04-15</td>
+<td>Serigraphy changes.</td>
+</tr>
+<tr>
+<td>v3</td>
+<td style="text-align: right;">2024-04-15</td>
+<td>Updated battery connector to preferred supplier PN</td>
+</tr>
+<tr>
+<td>v4</td>
+<td style="text-align: right;">2024-06-07</td>
+<td>Made backside serigraphy bigger.</td>
+</tr>
+</tbody>
+</table>
+<h2>Variants</h2>
+<h3>Variant Configuration</h3>
+<table>
+<thead>
+<tr>
+<th>Variant Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Normal</td>
+<td>Normal product configuration</td>
+</tr>
+</tbody>
+</table>
+<h2>Project Metadata</h2>
+<h3>Project ID</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Project ID</td>
+<td>Mojo 1.1</td>
+</tr>
+</tbody>
+</table>
+<h3>Copyright Notice</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Copyright Notice</td>
+<td>Copyright © 2024 Blues Wireless</td>
+</tr>
+</tbody>
+</table>
+<h2>Title Block</h2>
+<h3>Drawing Information</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title</td>
+<td></td>
+</tr>
+<tr>
+<td>Size</td>
+<td>B</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>1.</td>
+</tr>
+<tr>
+<td>Revision</td>
+<td></td>
+</tr>
+<tr>
+<td>Date</td>
+<td>6/7/2024</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>3:59:23 PM</td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>1 of 3</td>
+</tr>
+<tr>
+<td>File</td>
+<td>Cover Sheet.SchDoc</td>
+</tr>
+</tbody>
+</table>
+<h3>Company Information</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Company</td>
+<td>ToyBuilder Labs</td>
+</tr>
+<tr>
+<td>Address</td>
+<td>1100 S. Garfield Avenue</td>
+</tr>
+<tr>
+<td>Address</td>
+<td>Alhambra, California 91801</td>
+</tr>
+<tr>
+<td>Phone</td>
+<td>+1 (626) 808-4010</td>
+</tr>
+</tbody>
+</table>
+<h2>Page 2</h2>
+<h2>Battery and Load Current Sense / LTC2959</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IC1</td>
+<td>LTC2959IDDB#TRMPBF</td>
+</tr>
+<tr>
+<td>R1</td>
+<td>250mΩ</td>
+</tr>
+<tr>
+<td>C1</td>
+<td>1uF, 0805, 10%</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>1uF, 0805, 10%</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>0.47 µF</td>
+</tr>
+<tr>
+<td>J1</td>
+<td>20404; BAT</td>
+</tr>
+<tr>
+<td>J2</td>
+<td>Header 2-Pin, 0.100 in; shown crossed out</td>
+</tr>
+<tr>
+<td>J3</td>
+<td>Header 2-Pin, 0.100 in; shown crossed out</td>
+</tr>
+<tr>
+<td>J4</td>
+<td>20404; LOAD</td>
+</tr>
+<tr>
+<td>Z1</td>
+<td>Test Point</td>
+</tr>
+</tbody>
+</table>
+<h3>IC1 Pin Mapping — LTC2959IDDB#TRMPBF</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">1</td>
+<td>VDD</td>
+<td>3V3</td>
+</tr>
+<tr>
+<td>Sense</td>
+<td style="text-align: right;">2</td>
+<td>SENSEP</td>
+<td>VBAT</td>
+</tr>
+<tr>
+<td>Filter</td>
+<td style="text-align: right;">3</td>
+<td>CFP</td>
+<td>CFP / C3</td>
+</tr>
+<tr>
+<td>Filter</td>
+<td style="text-align: right;">4</td>
+<td>CFN</td>
+<td>CFN / C3</td>
+</tr>
+<tr>
+<td>Sense</td>
+<td style="text-align: right;">5</td>
+<td>SENSEN</td>
+<td>VLOAD</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">6</td>
+<td>SCL</td>
+<td>SCL</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">7</td>
+<td>SDA</td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td style="text-align: right;">8</td>
+<td>GPIO</td>
+<td>GPIO</td>
+</tr>
+<tr>
+<td>Regulator</td>
+<td style="text-align: right;">9</td>
+<td>VREG</td>
+<td>VREG / C2</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">10</td>
+<td>GND_1</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">11</td>
+<td>GND_2</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>J1 Pin Mapping — BAT 20404</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Battery</td>
+<td style="text-align: right;">1</td>
+<td>+</td>
+<td>VBAT</td>
+</tr>
+<tr>
+<td>Battery</td>
+<td style="text-align: right;">2</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>J4 Pin Mapping — LOAD 20404</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Load</td>
+<td style="text-align: right;">1</td>
+<td>+</td>
+<td>VLOAD</td>
+</tr>
+<tr>
+<td>Load</td>
+<td style="text-align: right;">2</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>J2 Pin Mapping — Header 2-Pin, 0.100 in, Shown Crossed Out</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Header</td>
+<td>not readable</td>
+<td>not readable</td>
+<td>VBAT</td>
+</tr>
+<tr>
+<td>Header</td>
+<td>not readable</td>
+<td>not readable</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>J3 Pin Mapping — Header 2-Pin, 0.100 in, Shown Crossed Out</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Header</td>
+<td>1</td>
+<td>not readable</td>
+<td>VLOAD</td>
+</tr>
+<tr>
+<td>Header</td>
+<td>not readable</td>
+<td>not readable</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>Battery / Load Named Nets and Notes</h3>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3V3</td>
+<td>IC1 VDD supply; C1 to GND; pull-up source for R2 and R3</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Common ground; connected to IC1 GND_1 and GND_2, C1, C2, J1, J4</td>
+</tr>
+<tr>
+<td>VBAT</td>
+<td>Battery-side sense net; connected to J1 and IC1 SENSEP</td>
+</tr>
+<tr>
+<td>VLOAD</td>
+<td>Load-side sense net; connected to J4 and IC1 SENSEN</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td>IC1 GPIO output connected to Z1 Test Point</td>
+</tr>
+<tr>
+<td>VREG</td>
+<td>IC1 VREG pin with C2 to GND</td>
+</tr>
+<tr>
+<td>SDA</td>
+<td>I2C data net</td>
+</tr>
+<tr>
+<td>SCL</td>
+<td>I2C clock net</td>
+</tr>
+<tr>
+<td>CFP</td>
+<td>IC1 CFP filter pin connected to C3</td>
+</tr>
+<tr>
+<td>CFN</td>
+<td>IC1 CFN filter pin connected to C3</td>
+</tr>
+<tr>
+<td>Note</td>
+<td>I2C Address: 1100011b</td>
+</tr>
+<tr>
+<td>Note</td>
+<td>Do not solder exposed pad</td>
+</tr>
+</tbody>
+</table>
+<h2>Qwiic I2C Connectors and Pullups</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R2</td>
+<td>RC0603FR-0722KL</td>
+</tr>
+<tr>
+<td>R3</td>
+<td>RC0603FR-0722KL</td>
+</tr>
+<tr>
+<td>J5</td>
+<td>QWIIC SM04B-SRSS-TB(LF)(SN)</td>
+</tr>
+<tr>
+<td>J6</td>
+<td>QWIIC SM04B-SRSS-TB(LF)(SN)</td>
+</tr>
+</tbody>
+</table>
+<h3>J5 Pin Mapping — QWIIC SM04B-SRSS-TB(LF)(SN)</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">1</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">2</td>
+<td>3V3</td>
+<td>3V3</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">3</td>
+<td>SDA</td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">4</td>
+<td>SCL</td>
+<td>SCL</td>
+</tr>
+</tbody>
+</table>
+<h3>J6 Pin Mapping — QWIIC SM04B-SRSS-TB(LF)(SN)</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">1</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">2</td>
+<td>3V3</td>
+<td>3V3</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">3</td>
+<td>SDA</td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">4</td>
+<td>SCL</td>
+<td>SCL</td>
+</tr>
+</tbody>
+</table>
+<h3>Qwiic Named Nets and Notes</h3>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3V3</td>
+<td>Qwiic connector power and pull-up source</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Qwiic connector ground</td>
+</tr>
+<tr>
+<td>SDA</td>
+<td>I2C data net; pulled up to 3V3 by R2</td>
+</tr>
+<tr>
+<td>SCL</td>
+<td>I2C clock net; pulled up to 3V3 by R3</td>
+</tr>
+</tbody>
+</table>
+<h2>Mounting Headers</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J7</td>
+<td>Header 2-Pin, 0.100 in; shown crossed out</td>
+</tr>
+<tr>
+<td>J8</td>
+<td>Header 3-Pin, 0.100 in; shown crossed out</td>
+</tr>
+</tbody>
+</table>
+<h3>J7 Pin Mapping — Header 2-Pin, 0.100 in, Shown Crossed Out</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mounting Header</td>
+<td>not readable</td>
+<td>not readable</td>
+<td>3V3</td>
+</tr>
+<tr>
+<td>Mounting Header</td>
+<td>not readable</td>
+<td>not readable</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>J8 Pin Mapping — Header 3-Pin, 0.100 in, Shown Crossed Out</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mounting Header</td>
+<td>3</td>
+<td>not readable</td>
+<td>SCL</td>
+</tr>
+<tr>
+<td>Mounting Header</td>
+<td>not readable</td>
+<td>not readable</td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>Mounting Header</td>
+<td>not readable</td>
+<td>not readable</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>Mounting Header Named Nets</h3>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3V3</td>
+<td>Connected to crossed-out J7 mounting header</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Connected to crossed-out J7 and J8 mounting headers</td>
+</tr>
+<tr>
+<td>SDA</td>
+<td>Connected to crossed-out J8 mounting header</td>
+</tr>
+<tr>
+<td>SCL</td>
+<td>Connected to crossed-out J8 mounting header</td>
+</tr>
+</tbody>
+</table>
+<h2>Mounting Screws and Logos</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MH1</td>
+<td>M2; shown crossed out</td>
+</tr>
+<tr>
+<td>MH2</td>
+<td>M2; shown crossed out</td>
+</tr>
+<tr>
+<td>MH3</td>
+<td>M2; shown crossed out</td>
+</tr>
+<tr>
+<td>MH4</td>
+<td>M2; shown crossed out</td>
+</tr>
+<tr>
+<td>LOGO</td>
+<td>Logo</td>
+</tr>
+<tr>
+<td>LOGO-BACK</td>
+<td>Logo</td>
+</tr>
+</tbody>
+</table>
+<h2>Title Block and Sheet Notes</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Size</td>
+<td>B</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>2.</td>
+</tr>
+<tr>
+<td>Revision</td>
+<td>v4</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>6/7/2024</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>3:59:23 PM</td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>2 of 3</td>
+</tr>
+<tr>
+<td>File</td>
+<td>Mojo.SchDoc</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>Company</td>
+<td>ToyBuilder Labs</td>
+</tr>
+<tr>
+<td>Address</td>
+<td>1100 S Garfield Avenue, Alhambra, CA 91801</td>
+</tr>
+<tr>
+<td>Phone</td>
+<td>(626) 808-4010</td>
+</tr>
+</tbody>
+</table>
+<h2>Page 3</h2>
+<h2>Design Notes Page</h2>
+<h3>Components Visible on This Sheet</h3>
+<p>No component reference designators are visible on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No visible reference designator</td>
+<td>LTC2959 Sensor mentioned in notes</td>
+</tr>
+</tbody>
+</table>
+<h2>Design Planning Notes</h2>
+<ul>
+<li>Power supply voltages and currents</li>
+<li>Other design calculations</li>
+<li>Board bringup details</li>
+<li>Test points &amp; Expected waveform / measurements</li>
+</ul>
+<h2>LTC2959 Sensor Notes</h2>
+<ul>
+<li>Notes on LTC2959 Sensor</li>
+<li>Sensor has 50mV Sense Range</li>
+<li>Formula: <code>V=IR :: I(range)=V(range)/R</code></li>
+<li>Resistor / Current Sense Range note: lower range = finer resolution current sensing</li>
+<li>0.050 Ohm sensor (there are 2 pcs) is the datasheet's reference value with 533nAh LSB</li>
+<li>V(sensep) has 65V max limit, but as a practical matter, you are limited by your battery's ability to supply voltage.</li>
+</ul>
+<h3>LTC2959 Current Sense Resistor / Current Range Table</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Sense Resistor</th>
+<th style="text-align: right;">Current Sense Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LTC2959 current sense range</td>
+<td style="text-align: right;">0.500 Ohm</td>
+<td style="text-align: right;">0.1A</td>
+</tr>
+<tr>
+<td>LTC2959 current sense range</td>
+<td style="text-align: right;">0.250 Ohm</td>
+<td style="text-align: right;">0.2A</td>
+</tr>
+<tr>
+<td>LTC2959 current sense range</td>
+<td style="text-align: right;">0.100 Ohm</td>
+<td style="text-align: right;">0.5A</td>
+</tr>
+<tr>
+<td>LTC2959 current sense range</td>
+<td style="text-align: right;">0.050 Ohm</td>
+<td style="text-align: right;">1.0A</td>
+</tr>
+<tr>
+<td>LTC2959 current sense range</td>
+<td style="text-align: right;">0.050 Ohm</td>
+<td style="text-align: right;">1.0A</td>
+</tr>
+<tr>
+<td>LTC2959 current sense range</td>
+<td style="text-align: right;">0.025 Ohm</td>
+<td style="text-align: right;">2.0A</td>
+</tr>
+<tr>
+<td>LTC2959 current sense range</td>
+<td style="text-align: right;">0.010 Ohm</td>
+<td style="text-align: right;">5.0A</td>
+</tr>
+<tr>
+<td>LTC2959 current sense range</td>
+<td style="text-align: right;">0.005 Ohm</td>
+<td style="text-align: right;">10.0A</td>
+</tr>
+<tr>
+<td>LTC2959 current sense range</td>
+<td style="text-align: right;">0.025 Ohm</td>
+<td style="text-align: right;">20.0A</td>
+</tr>
+<tr>
+<td>LTC2959 current sense range</td>
+<td style="text-align: right;">0.001 Ohm</td>
+<td style="text-align: right;">50.0A</td>
+</tr>
+<tr>
+<td>LTC2959 current sense range</td>
+<td style="text-align: right;">blank</td>
+<td style="text-align: right;">blank</td>
+</tr>
+</tbody>
+</table>
+<h2>LTC2959 Power-Up Sequence</h2>
+<p>When VDD rises above a threshold of approximately 1.45V, the LTC2959 generates an internal power-on reset (POR) signal that sets all registers to their default state. In the default state, the coulomb counter is active while the multi-purpose ADC operates in sleep mode. The accumulated charge register is set to mid-scale (80000000h) and all ADC channel outputs are set to 0000h. All threshold registers and the min-max tracking registers are set to their default values. The min/max tracking registers of the ADC will update upon completion of the first ADC conversion. The GPIO pin is configured as an analog input; the ALERT and Charge Complete functionalities are not enabled at startup.</p>
+<h2>Coulomb Counter Datasheet Excerpt</h2>
+<h3>Coulomb Counter Electrical Characteristics</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Symbol</th>
+<th>Parameter</th>
+<th>Condition</th>
+<th style="text-align: right;">Value 1</th>
+<th style="text-align: right;">Value 2</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coulomb Counter</td>
+<td>VSENSE</td>
+<td>Sense Voltage Differential Input Range</td>
+<td>VSENSEP − VSENSEN</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">±50</td>
+<td>mV</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>TCE</td>
+<td>Total Charge Error (Note 4)</td>
+<td>10mV ≤ |VSENSE| ≤ 50mV Continuously</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">±1</td>
+<td>%</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>TCE</td>
+<td>Total Charge Error (Note 4)</td>
+<td>1mV ≤ |VSENSE| ≤ 10mV Continuously</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">±2</td>
+<td>%</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>TCE</td>
+<td>Total Charge Error (Note 4)</td>
+<td>10mV ≤ |VSENSE| ≤ 50mV Pulses with tPULSE &gt; 1ms</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;"></td>
+<td>%</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>VOS</td>
+<td>Offset Voltage</td>
+<td>Not shown</td>
+<td style="text-align: right;">±1</td>
+<td style="text-align: right;">±10</td>
+<td>µV</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>RIDR</td>
+<td>Differential Input Resistance Across SENSEP and SENSEN</td>
+<td>Not shown</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;"></td>
+<td>kΩ</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>QLSB</td>
+<td>Charge LSB (Note 5)</td>
+<td>RSENSE = 50mΩ</td>
+<td style="text-align: right;">533</td>
+<td style="text-align: right;"></td>
+<td>nAh</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>EDB</td>
+<td>Deadband Inaccuracy</td>
+<td>Deadband = 20µV</td>
+<td style="text-align: right;">±10</td>
+<td style="text-align: right;"></td>
+<td>%</td>
+</tr>
+</tbody>
+</table>
+<h3>Coulomb Counter Note 4</h3>
+<p>Note 4: The coulomb counter measures static signals as well as dynamic inputs (current pulses). It may take several short pulses to increment/decrement the ACR.</p>
+<h2>Named Nets / Signals Mentioned</h2>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Net/Signal</th>
+<th>Context</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LTC2959 power-up</td>
+<td>VDD</td>
+<td>Rises above approximately 1.45V threshold to generate internal POR</td>
+</tr>
+<tr>
+<td>LTC2959 power-up</td>
+<td>POR</td>
+<td>Internal power-on reset signal generated by LTC2959</td>
+</tr>
+<tr>
+<td>LTC2959 power-up</td>
+<td>GPIO</td>
+<td>Configured as an analog input at startup</td>
+</tr>
+<tr>
+<td>LTC2959 power-up</td>
+<td>ALERT</td>
+<td>ALERT functionality is not enabled at startup</td>
+</tr>
+<tr>
+<td>LTC2959 power-up</td>
+<td>Charge Complete</td>
+<td>Charge Complete functionality is not enabled at startup</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>VSENSE</td>
+<td>Sense voltage differential input range signal</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>VSENSEP</td>
+<td>Positive sense voltage input in VSENSEP − VSENSEN</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>VSENSEN</td>
+<td>Negative sense voltage input in VSENSEP − VSENSEN</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>SENSEP</td>
+<td>Sense input referenced in differential input resistance across SENSEP and SENSEN</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>SENSEN</td>
+<td>Sense input referenced in differential input resistance across SENSEP and SENSEN</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>RSENSE</td>
+<td>Sense resistor used for QLSB condition, RSENSE = 50mΩ</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>tPULSE</td>
+<td>Pulse width condition, tPULSE &gt; 1ms</td>
+</tr>
+<tr>
+<td>Coulomb Counter</td>
+<td>ACR</td>
+<td>Accumulated charge register referenced in Note 4</td>
+</tr>
+</tbody>
+</table>
+<h2>Title Block</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title block title</td>
+<td>blank</td>
+</tr>
+<tr>
+<td>Title block size</td>
+<td>B</td>
+</tr>
+<tr>
+<td>Title block number</td>
+<td>.</td>
+</tr>
+<tr>
+<td>Title block revision</td>
+<td>blank</td>
+</tr>
+<tr>
+<td>Title block date</td>
+<td>6/7/2024</td>
+</tr>
+<tr>
+<td>Title block time</td>
+<td>3:59:24 PM</td>
+</tr>
+<tr>
+<td>Title block sheet</td>
+<td>3 of 3</td>
+</tr>
+<tr>
+<td>Title block file</td>
+<td>Design Notes.SchDoc</td>
+</tr>
+<tr>
+<td>Title block company</td>
+<td>ToyBuilder Labs</td>
+</tr>
+<tr>
+<td>Title block address line 1</td>
+<td>1100 S Garfield Avenue</td>
+</tr>
+<tr>
+<td>Title block address line 2</td>
+<td>Alhambra, CA 91801</td>
+</tr>
+<tr>
+<td>Title block phone</td>
+<td>+1 (626) 808-4010</td>
+</tr>
+<tr>
+<td>Title block logo text</td>
+<td>ToyBuilder LABS</td>
+</tr>
+</tbody>
+</table>
+</main>
+</body>
+</html>

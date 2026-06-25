@@ -1,0 +1,1735 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Swan — SCHEMATIC (v3.0)</title>
+<meta name="rag:product" content="Swan">
+<meta name="rag:version" content="v3.0">
+<meta name="rag:doc_type" content="schematic">
+<meta name="rag:source_file" content="Swan/v3.0/Carrier/Swan Carrier schematic v3.0.pdf">
+<style>body{font-family:system-ui,-apple-system,sans-serif;max-width:64rem;margin:2rem auto;padding:0 1rem;line-height:1.5;color:#111}h1{font-size:1.4rem}h2{font-size:1.15rem;margin-top:1.5rem}h3{font-size:1rem}table{border-collapse:collapse;margin:0.5rem 0}th,td{border:1px solid #ccc;padding:2px 8px;text-align:left;vertical-align:top}code{background:#f4f4f4;padding:1px 4px;border-radius:3px}.source{color:#555;font-size:0.9rem}</style>
+</head>
+<body>
+<main>
+<h1>Swan — SCHEMATIC (v3.0)</h1>
+<p class="source">Source file: <a href="https://github.com/blues/note-hardware/blob/master/Swan/v3.0/Carrier/Swan%20Carrier%20schematic%20v3.0.pdf">Swan/v3.0/Carrier/Swan Carrier schematic v3.0.pdf</a></p>
+<h2>Page 1</h2>
+<h2>Revision History</h2>
+<table>
+<thead>
+<tr>
+<th>Revision</th>
+<th>Date</th>
+<th>Author</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>11/02/2020</td>
+<td>M. Gregis</td>
+<td>First Draft</td>
+</tr>
+<tr>
+<td>3</td>
+<td>26/07/2021</td>
+<td>M. Cossali</td>
+<td>Updated symbol from library; Changed J1 and J2 to NU; Changed net MOD 1 pin 53 and J2 pin 11 to TX3; Changed net MOD 1 pin 51 and J2 pin 13 to RX3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>13/09/2021</td>
+<td>G.Boschini</td>
+<td>Swap J1 pin 2 with pin4</td>
+</tr>
+<tr>
+<td>5</td>
+<td>13/09/2021</td>
+<td>M. Gregis</td>
+<td>Updated SWAN pinout</td>
+</tr>
+</tbody>
+</table>
+<h2>Components</h2>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CS1</td>
+<td>CS V5 2L 35um</td>
+</tr>
+<tr>
+<td>FID1</td>
+<td></td>
+</tr>
+<tr>
+<td>FID2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>Named Nets / Signals</h2>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TX3</td>
+</tr>
+<tr>
+<td>RX3</td>
+</tr>
+</tbody>
+</table>
+<h2>Title Block Notes</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Company</td>
+<td>FAE TECHNOLOGY</td>
+</tr>
+<tr>
+<td>Address</td>
+<td>via C. Battisti 136, 24025, Gazzaniga (Bg), Italy</td>
+</tr>
+<tr>
+<td>Mail</td>
+<td>info@fae.technology</td>
+</tr>
+<tr>
+<td>Tel</td>
+<td>+39 035738130</td>
+</tr>
+<tr>
+<td>Project</td>
+<td>SWAN</td>
+</tr>
+<tr>
+<td>Board</td>
+<td>SWAN-C</td>
+</tr>
+<tr>
+<td>Designer</td>
+<td>M.Gregis</td>
+</tr>
+<tr>
+<td>Project Code</td>
+<td>2021-0248</td>
+</tr>
+<tr>
+<td>Internal Code</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Page name</td>
+<td>00 - REVISION</td>
+</tr>
+<tr>
+<td>Approved</td>
+<td>G.Boschini</td>
+</tr>
+<tr>
+<td>Customer</td>
+<td>BLUES</td>
+</tr>
+<tr>
+<td>Code</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>Thursday, April 21, 2022</td>
+</tr>
+<tr>
+<td>Rev.</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Rev. changes</td>
+<td>See Revision Page</td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>1 / 3</td>
+</tr>
+<tr>
+<td>Copyright note</td>
+<td>Il presente progetto è tutelato dalla legge sul diritto d'autore, che vieta a terzi la riproduzione e l'utilizzo anche parziale senza il consenso di FAE Technology S.p.A.</td>
+</tr>
+</tbody>
+</table>
+<h2>Page 2</h2>
+<h2>01 - Block Diagram</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unlabeled left header</td>
+<td>16x2 HEADER</td>
+</tr>
+<tr>
+<td>Unlabeled center connector</td>
+<td>SWAN CONNECTOR</td>
+</tr>
+<tr>
+<td>Unlabeled right header</td>
+<td>16x2 HEADER</td>
+</tr>
+</tbody>
+</table>
+<h3>Unlabeled Left 16x2 HEADER Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power</td>
+<td style="text-align: right;"></td>
+<td>3V3 OUT @ 2A</td>
+<td>3V3 OUT @ 2A</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;"></td>
+<td>3V3 VIN</td>
+<td>3V3 VIN</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;"></td>
+<td>2x DAC OUT</td>
+<td>2x DAC OUT</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;"></td>
+<td>6x ADC IN (max 3.3V)</td>
+<td>6x ADC IN (max 3.3V)</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td style="text-align: right;"></td>
+<td>7x GPIO</td>
+<td>7x GPIO</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td style="text-align: right;"></td>
+<td>1x SPI</td>
+<td>1x SPI</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;"></td>
+<td>1x UART</td>
+<td>1x UART</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;"></td>
+<td>1x UART + FLOW CTRL</td>
+<td>1x UART + FLOW CTRL</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;"></td>
+<td>1x I2C</td>
+<td>1x I2C</td>
+</tr>
+<tr>
+<td>Reset</td>
+<td style="text-align: right;"></td>
+<td>RST SIGNAL</td>
+<td>RST SIGNAL</td>
+</tr>
+</tbody>
+</table>
+<h3>Unlabeled Center SWAN CONNECTOR Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power</td>
+<td style="text-align: right;"></td>
+<td>3V3 OUT @ 2A</td>
+<td>3V3 OUT @ 2A</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;"></td>
+<td>3V3 VIN</td>
+<td>3V3 VIN</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;"></td>
+<td>2x DAC OUT</td>
+<td>2x DAC OUT</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;"></td>
+<td>6x ADC IN (max 3.3V)</td>
+<td>6x ADC IN (max 3.3V)</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td style="text-align: right;"></td>
+<td>7x GPIO</td>
+<td>7x GPIO</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td style="text-align: right;"></td>
+<td>1x SPI</td>
+<td>1x SPI</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;"></td>
+<td>1x UART</td>
+<td>1x UART</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;"></td>
+<td>1x UART + FLOW CTRL</td>
+<td>1x UART + FLOW CTRL</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;"></td>
+<td>1x I2C</td>
+<td>1x I2C</td>
+</tr>
+<tr>
+<td>Reset</td>
+<td style="text-align: right;"></td>
+<td>RST SIGNAL</td>
+<td>RST SIGNAL</td>
+</tr>
+<tr>
+<td>Battery</td>
+<td style="text-align: right;"></td>
+<td>4.2V BATTERY IN/OUT (357mA CHARGE CURRENT)</td>
+<td>4.2V BATTERY IN/OUT (357mA CHARGE CURRENT)</td>
+</tr>
+<tr>
+<td>USB Power</td>
+<td style="text-align: right;"></td>
+<td>5V VUSB</td>
+<td>5V VUSB</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td style="text-align: right;"></td>
+<td>10x GPIO</td>
+<td>10x GPIO</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;"></td>
+<td>2x UART + FLOW CTRL</td>
+<td>2x UART + FLOW CTRL</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;"></td>
+<td>2x I2C</td>
+<td>2x I2C</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;"></td>
+<td>1x QSPI</td>
+<td>1x QSPI</td>
+</tr>
+<tr>
+<td>Power Enable</td>
+<td style="text-align: right;"></td>
+<td>PWR ENABLE SIGNAL</td>
+<td>PWR ENABLE SIGNAL</td>
+</tr>
+</tbody>
+</table>
+<h3>Unlabeled Right 16x2 HEADER Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Battery</td>
+<td style="text-align: right;"></td>
+<td>4.2V BATTERY IN/OUT (357mA CHARGE CURRENT)</td>
+<td>4.2V BATTERY IN/OUT (357mA CHARGE CURRENT)</td>
+</tr>
+<tr>
+<td>USB Power</td>
+<td style="text-align: right;"></td>
+<td>5V VUSB</td>
+<td>5V VUSB</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td style="text-align: right;"></td>
+<td>10x GPIO</td>
+<td>10x GPIO</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;"></td>
+<td>2x UART + FLOW CTRL</td>
+<td>2x UART + FLOW CTRL</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;"></td>
+<td>2x I2C</td>
+<td>2x I2C</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;"></td>
+<td>1x QSPI</td>
+<td>1x QSPI</td>
+</tr>
+<tr>
+<td>Power Enable</td>
+<td style="text-align: right;"></td>
+<td>PWR ENABLE SIGNAL</td>
+<td>PWR ENABLE SIGNAL</td>
+</tr>
+</tbody>
+</table>
+<h3>Named Nets / Signals</h3>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3V3 OUT @ 2A</td>
+<td>Between left 16x2 HEADER and SWAN CONNECTOR</td>
+</tr>
+<tr>
+<td>3V3 VIN</td>
+<td>Between left 16x2 HEADER and SWAN CONNECTOR</td>
+</tr>
+<tr>
+<td>2x DAC OUT</td>
+<td>Between left 16x2 HEADER and SWAN CONNECTOR</td>
+</tr>
+<tr>
+<td>6x ADC IN (max 3.3V)</td>
+<td>Between left 16x2 HEADER and SWAN CONNECTOR</td>
+</tr>
+<tr>
+<td>7x GPIO</td>
+<td>Between left 16x2 HEADER and SWAN CONNECTOR</td>
+</tr>
+<tr>
+<td>1x SPI</td>
+<td>Between left 16x2 HEADER and SWAN CONNECTOR</td>
+</tr>
+<tr>
+<td>1x UART</td>
+<td>Between left 16x2 HEADER and SWAN CONNECTOR</td>
+</tr>
+<tr>
+<td>1x UART + FLOW CTRL</td>
+<td>Between left 16x2 HEADER and SWAN CONNECTOR</td>
+</tr>
+<tr>
+<td>1x I2C</td>
+<td>Between left 16x2 HEADER and SWAN CONNECTOR</td>
+</tr>
+<tr>
+<td>RST SIGNAL</td>
+<td>Between left 16x2 HEADER and SWAN CONNECTOR</td>
+</tr>
+<tr>
+<td>4.2V BATTERY IN/OUT (357mA CHARGE CURRENT)</td>
+<td>Between SWAN CONNECTOR and right 16x2 HEADER</td>
+</tr>
+<tr>
+<td>5V VUSB</td>
+<td>Between SWAN CONNECTOR and right 16x2 HEADER</td>
+</tr>
+<tr>
+<td>10x GPIO</td>
+<td>Between SWAN CONNECTOR and right 16x2 HEADER</td>
+</tr>
+<tr>
+<td>2x UART + FLOW CTRL</td>
+<td>Between SWAN CONNECTOR and right 16x2 HEADER</td>
+</tr>
+<tr>
+<td>2x I2C</td>
+<td>Between SWAN CONNECTOR and right 16x2 HEADER</td>
+</tr>
+<tr>
+<td>1x QSPI</td>
+<td>Between SWAN CONNECTOR and right 16x2 HEADER</td>
+</tr>
+<tr>
+<td>PWR ENABLE SIGNAL</td>
+<td>Between SWAN CONNECTOR and right 16x2 HEADER</td>
+</tr>
+</tbody>
+</table>
+<h2>Title Block Notes</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Company</td>
+<td>FAE TECHNOLOGY</td>
+</tr>
+<tr>
+<td>Address</td>
+<td>via C. Battisti 136, 24025, Gazzaniga (Bg), Italy</td>
+</tr>
+<tr>
+<td>Contact</td>
+<td>Mail: info@fae.technology Tel: +39 035738130</td>
+</tr>
+<tr>
+<td>Project</td>
+<td>SWAN</td>
+</tr>
+<tr>
+<td>Board</td>
+<td>SWAN-C</td>
+</tr>
+<tr>
+<td>Designer</td>
+<td>M.Gregis</td>
+</tr>
+<tr>
+<td>Project Code</td>
+<td>2021-0248</td>
+</tr>
+<tr>
+<td>Internal Code</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Page name</td>
+<td>01 - BLOCK DIAGRAM</td>
+</tr>
+<tr>
+<td>Approved</td>
+<td>G.Boschini</td>
+</tr>
+<tr>
+<td>Customer</td>
+<td>BLUES</td>
+</tr>
+<tr>
+<td>Code</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>Thursday, February 17, 2022</td>
+</tr>
+<tr>
+<td>Rev.</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Rev. changes</td>
+<td>See Revision Page</td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>2 / 3</td>
+</tr>
+<tr>
+<td>Legal note</td>
+<td>Il presente progetto è tutelato dalla legge sul diritto d'autore, che vieta a terzi la riproduzione e l'utilizzo anche parziale senza il consenso di FAE Technology S.p.A.</td>
+</tr>
+</tbody>
+</table>
+<h2>Page 3</h2>
+<h2>Sheet Section: 02 - CONNECTORS</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J1</td>
+<td>NU</td>
+</tr>
+<tr>
+<td>J2</td>
+<td>NU</td>
+</tr>
+<tr>
+<td>MOD1</td>
+<td>NU; SWAN BOARD</td>
+</tr>
+</tbody>
+</table>
+<h2>Connector J1</h2>
+<h3>J1 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reset/Boot</td>
+<td style="text-align: right;">1</td>
+<td>RST#</td>
+<td>RST#</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">2</td>
+<td>+3V3_OUT</td>
+<td>+3V3_OUT</td>
+</tr>
+<tr>
+<td>Reset/Boot</td>
+<td style="text-align: right;">3</td>
+<td>BOOT</td>
+<td>BOOT</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">4</td>
+<td>+VIN</td>
+<td>+VIN</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">5</td>
+<td>D0</td>
+<td>D0</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">6</td>
+<td>A0</td>
+<td>A0</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">7</td>
+<td>D1</td>
+<td>D1</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">8</td>
+<td>A1</td>
+<td>A1</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">9</td>
+<td>D2</td>
+<td>D2</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">10</td>
+<td>A2</td>
+<td>A2</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">11</td>
+<td>D3</td>
+<td>D3</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">12</td>
+<td>A3</td>
+<td>A3</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">13</td>
+<td>D4</td>
+<td>D4</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">14</td>
+<td>A4</td>
+<td>A4</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">15</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">16</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td style="text-align: right;">17</td>
+<td>SCK</td>
+<td>SCK</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">18</td>
+<td>A6</td>
+<td>A6</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td style="text-align: right;">19</td>
+<td>MOSI</td>
+<td>MOSI</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">20</td>
+<td>A7</td>
+<td>A7</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td style="text-align: right;">21</td>
+<td>MISO</td>
+<td>MISO</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">22</td>
+<td>D14</td>
+<td>D14</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td style="text-align: right;">23</td>
+<td>CS</td>
+<td>CS</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">24</td>
+<td>D15</td>
+<td>D15</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">25</td>
+<td>RTS</td>
+<td>RTS</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">26</td>
+<td>RX</td>
+<td>RX</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">27</td>
+<td>CTS</td>
+<td>CTS</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">28</td>
+<td>TX</td>
+<td>TX</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">29</td>
+<td>RX0</td>
+<td>RX0</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">30</td>
+<td>SCL3</td>
+<td>SCL3</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">31</td>
+<td>TX0</td>
+<td>TX0</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">32</td>
+<td>SDA3</td>
+<td>SDA3</td>
+</tr>
+</tbody>
+</table>
+<h2>Connector J2</h2>
+<h3>J2 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">1</td>
+<td>+VUSB</td>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">2</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">3</td>
+<td>+VBAT</td>
+<td>+VBAT</td>
+</tr>
+<tr>
+<td>Control</td>
+<td style="text-align: right;">4</td>
+<td>EN</td>
+<td>EN</td>
+</tr>
+<tr>
+<td>UART2</td>
+<td style="text-align: right;">5</td>
+<td>RX2</td>
+<td>RX2</td>
+</tr>
+<tr>
+<td>UART2</td>
+<td style="text-align: right;">6</td>
+<td>TX2</td>
+<td>TX2</td>
+</tr>
+<tr>
+<td>UART2</td>
+<td style="text-align: right;">7</td>
+<td>RTS2</td>
+<td>RTS2</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">8</td>
+<td>D13</td>
+<td>D13</td>
+</tr>
+<tr>
+<td>UART2</td>
+<td style="text-align: right;">9</td>
+<td>CTS2</td>
+<td>CTS2</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">10</td>
+<td>D12</td>
+<td>D12</td>
+</tr>
+<tr>
+<td>UART3</td>
+<td style="text-align: right;">11</td>
+<td>TX3</td>
+<td>TX3</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">12</td>
+<td>D11</td>
+<td>D11</td>
+</tr>
+<tr>
+<td>UART3</td>
+<td style="text-align: right;">13</td>
+<td>RX3</td>
+<td>RX3</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">14</td>
+<td>D10</td>
+<td>D10</td>
+</tr>
+<tr>
+<td>UART3</td>
+<td style="text-align: right;">15</td>
+<td>RTS3</td>
+<td>RTS3</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">16</td>
+<td>D9</td>
+<td>D9</td>
+</tr>
+<tr>
+<td>UART3</td>
+<td style="text-align: right;">17</td>
+<td>CTS3</td>
+<td>CTS3</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">18</td>
+<td>D8</td>
+<td>D8</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">19</td>
+<td>D6</td>
+<td>D6</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">20</td>
+<td>D7</td>
+<td>D7</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">21</td>
+<td>D5</td>
+<td>D5</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">22</td>
+<td>SCL</td>
+<td>SCL</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">23</td>
+<td>SCL2</td>
+<td>SCL2</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">24</td>
+<td>SDA</td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">25</td>
+<td>SDA2</td>
+<td>SDA2</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">26</td>
+<td>QIO3</td>
+<td>QIO3</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">27</td>
+<td>QEN</td>
+<td>QEN</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">28</td>
+<td>QIO2</td>
+<td>QIO2</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">29</td>
+<td>QCS</td>
+<td>QCS</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">30</td>
+<td>QIO1</td>
+<td>QIO1</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">31</td>
+<td>QCLK</td>
+<td>QCLK</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">32</td>
+<td>QIO0</td>
+<td>QIO0</td>
+</tr>
+</tbody>
+</table>
+<h2>Module MOD1</h2>
+<h3>MOD1 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reset</td>
+<td style="text-align: right;">1</td>
+<td>RST#</td>
+<td>RST#</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">2</td>
+<td>VIN</td>
+<td>+VIN</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">3</td>
+<td>3V3_OUT</td>
+<td>+3V3_OUT</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">4</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td style="text-align: right;">5</td>
+<td>CS</td>
+<td>CS</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">6</td>
+<td>A0</td>
+<td>A0</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">7</td>
+<td>D0</td>
+<td>D0</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">8</td>
+<td>A1</td>
+<td>A1</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">9</td>
+<td>D1</td>
+<td>D1</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">10</td>
+<td>A2</td>
+<td>A2</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">11</td>
+<td>D2</td>
+<td>D2</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">12</td>
+<td>A3</td>
+<td>A3</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">13</td>
+<td>D3</td>
+<td>D3</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">14</td>
+<td>A4</td>
+<td>A4</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">15</td>
+<td>D4</td>
+<td>D4</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">16</td>
+<td>A5</td>
+<td>A5</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">17</td>
+<td>A6</td>
+<td>A6</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td style="text-align: right;">18</td>
+<td>SCK</td>
+<td>SCK</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td style="text-align: right;">19</td>
+<td>A7</td>
+<td>A7</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td style="text-align: right;">20</td>
+<td>MOSI</td>
+<td>MOSI</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">21</td>
+<td>D14</td>
+<td>D14</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td style="text-align: right;">22</td>
+<td>MISO</td>
+<td>MISO</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">23</td>
+<td>D15</td>
+<td>D15</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">24</td>
+<td>RX</td>
+<td>RX</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">25</td>
+<td>RTS</td>
+<td>RTS</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">26</td>
+<td>TX</td>
+<td>TX</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">27</td>
+<td>CTS</td>
+<td>CTS</td>
+</tr>
+<tr>
+<td>Boot</td>
+<td style="text-align: right;">28</td>
+<td>B</td>
+<td>BOOT</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">29</td>
+<td>QEN</td>
+<td>QEN</td>
+</tr>
+<tr>
+<td>UART0</td>
+<td style="text-align: right;">30</td>
+<td>TX0</td>
+<td>TX0</td>
+</tr>
+<tr>
+<td>UART0</td>
+<td style="text-align: right;">31</td>
+<td>RX0</td>
+<td>RX0</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">32</td>
+<td>SDA3</td>
+<td>SDA3</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">33</td>
+<td>SCL3</td>
+<td>SCL3</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">34</td>
+<td>QCS</td>
+<td>QCS</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">35</td>
+<td>QCLK</td>
+<td>QCLK</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">36</td>
+<td>QIO3</td>
+<td>QIO3</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">37</td>
+<td>QIO2</td>
+<td>QIO2</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">38</td>
+<td>QIO1</td>
+<td>QIO1</td>
+</tr>
+<tr>
+<td>QSPI</td>
+<td style="text-align: right;">39</td>
+<td>QIO0</td>
+<td>QIO0</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">40</td>
+<td>SDA2</td>
+<td>SDA2</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">41</td>
+<td>SDA</td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">42</td>
+<td>SCL2</td>
+<td>SCL2</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">43</td>
+<td>SCL</td>
+<td>SCL</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">44</td>
+<td>D7</td>
+<td>D7</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">45</td>
+<td>D5</td>
+<td>D5</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">46</td>
+<td>D8</td>
+<td>D8</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">47</td>
+<td>D6</td>
+<td>D6</td>
+</tr>
+<tr>
+<td>UART3</td>
+<td style="text-align: right;">48</td>
+<td>CTS3</td>
+<td>CTS3</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">49</td>
+<td>D9</td>
+<td>D9</td>
+</tr>
+<tr>
+<td>UART3</td>
+<td style="text-align: right;">50</td>
+<td>RTS3</td>
+<td>RTS3</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">51</td>
+<td>D10</td>
+<td>D10</td>
+</tr>
+<tr>
+<td>UART3</td>
+<td style="text-align: right;">52</td>
+<td>RX3</td>
+<td>RX3</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">53</td>
+<td>D11</td>
+<td>D11</td>
+</tr>
+<tr>
+<td>UART3</td>
+<td style="text-align: right;">54</td>
+<td>TX3</td>
+<td>TX3</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">55</td>
+<td>D12</td>
+<td>D12</td>
+</tr>
+<tr>
+<td>UART2</td>
+<td style="text-align: right;">56</td>
+<td>CTS2</td>
+<td>CTS2</td>
+</tr>
+<tr>
+<td>Digital</td>
+<td style="text-align: right;">57</td>
+<td>D13</td>
+<td>D13</td>
+</tr>
+<tr>
+<td>UART2</td>
+<td style="text-align: right;">58</td>
+<td>RTS2</td>
+<td>RTS2</td>
+</tr>
+<tr>
+<td>Power/USB</td>
+<td style="text-align: right;">59</td>
+<td>VUSB</td>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>UART2</td>
+<td style="text-align: right;">60</td>
+<td>TX2</td>
+<td>TX2</td>
+</tr>
+<tr>
+<td>Control</td>
+<td style="text-align: right;">61</td>
+<td>EN</td>
+<td>EN</td>
+</tr>
+<tr>
+<td>UART2</td>
+<td style="text-align: right;">62</td>
+<td>RX2</td>
+<td>RX2</td>
+</tr>
+<tr>
+<td>Power/Battery</td>
+<td style="text-align: right;">63</td>
+<td>VBAT</td>
+<td>+VBAT</td>
+</tr>
+<tr>
+<td>USB</td>
+<td style="text-align: right;">64</td>
+<td>USB_DM</td>
+<td>No-connect marker shown</td>
+</tr>
+<tr>
+<td>USB</td>
+<td style="text-align: right;">65</td>
+<td>USB_DP</td>
+<td>No-connect marker shown</td>
+</tr>
+</tbody>
+</table>
+<h2>Named Nets and Signals</h2>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+3V3_OUT</td>
+</tr>
+<tr>
+<td>+VBAT</td>
+</tr>
+<tr>
+<td>+VIN</td>
+</tr>
+<tr>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>A0</td>
+</tr>
+<tr>
+<td>A1</td>
+</tr>
+<tr>
+<td>A2</td>
+</tr>
+<tr>
+<td>A3</td>
+</tr>
+<tr>
+<td>A4</td>
+</tr>
+<tr>
+<td>A5</td>
+</tr>
+<tr>
+<td>A6</td>
+</tr>
+<tr>
+<td>A7</td>
+</tr>
+<tr>
+<td>BOOT</td>
+</tr>
+<tr>
+<td>CS</td>
+</tr>
+<tr>
+<td>CTS</td>
+</tr>
+<tr>
+<td>CTS2</td>
+</tr>
+<tr>
+<td>CTS3</td>
+</tr>
+<tr>
+<td>D0</td>
+</tr>
+<tr>
+<td>D1</td>
+</tr>
+<tr>
+<td>D2</td>
+</tr>
+<tr>
+<td>D3</td>
+</tr>
+<tr>
+<td>D4</td>
+</tr>
+<tr>
+<td>D5</td>
+</tr>
+<tr>
+<td>D6</td>
+</tr>
+<tr>
+<td>D7</td>
+</tr>
+<tr>
+<td>D8</td>
+</tr>
+<tr>
+<td>D9</td>
+</tr>
+<tr>
+<td>D10</td>
+</tr>
+<tr>
+<td>D11</td>
+</tr>
+<tr>
+<td>D12</td>
+</tr>
+<tr>
+<td>D13</td>
+</tr>
+<tr>
+<td>D14</td>
+</tr>
+<tr>
+<td>D15</td>
+</tr>
+<tr>
+<td>EN</td>
+</tr>
+<tr>
+<td>GND</td>
+</tr>
+<tr>
+<td>MISO</td>
+</tr>
+<tr>
+<td>MOSI</td>
+</tr>
+<tr>
+<td>QCLK</td>
+</tr>
+<tr>
+<td>QCS</td>
+</tr>
+<tr>
+<td>QEN</td>
+</tr>
+<tr>
+<td>QIO0</td>
+</tr>
+<tr>
+<td>QIO1</td>
+</tr>
+<tr>
+<td>QIO2</td>
+</tr>
+<tr>
+<td>QIO3</td>
+</tr>
+<tr>
+<td>RST#</td>
+</tr>
+<tr>
+<td>RTS</td>
+</tr>
+<tr>
+<td>RTS2</td>
+</tr>
+<tr>
+<td>RTS3</td>
+</tr>
+<tr>
+<td>RX</td>
+</tr>
+<tr>
+<td>RX0</td>
+</tr>
+<tr>
+<td>RX2</td>
+</tr>
+<tr>
+<td>RX3</td>
+</tr>
+<tr>
+<td>SCK</td>
+</tr>
+<tr>
+<td>SCL</td>
+</tr>
+<tr>
+<td>SCL2</td>
+</tr>
+<tr>
+<td>SCL3</td>
+</tr>
+<tr>
+<td>SDA</td>
+</tr>
+<tr>
+<td>SDA2</td>
+</tr>
+<tr>
+<td>SDA3</td>
+</tr>
+<tr>
+<td>TX</td>
+</tr>
+<tr>
+<td>TX0</td>
+</tr>
+<tr>
+<td>TX2</td>
+</tr>
+<tr>
+<td>TX3</td>
+</tr>
+<tr>
+<td>USB_DM</td>
+</tr>
+<tr>
+<td>USB_DP</td>
+</tr>
+</tbody>
+</table>
+<h2>Title Block Notes</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Company</td>
+<td>FAE TECHNOLOGY</td>
+</tr>
+<tr>
+<td>Address</td>
+<td>via C. Battisti 136, 24025, Gazzaniga (Bg), Italy</td>
+</tr>
+<tr>
+<td>Mail</td>
+<td>info@fae.technology</td>
+</tr>
+<tr>
+<td>Tel</td>
+<td>+39 035738130</td>
+</tr>
+<tr>
+<td>Project</td>
+<td>SWAN</td>
+</tr>
+<tr>
+<td>Board</td>
+<td>SWAN-C</td>
+</tr>
+<tr>
+<td>Designer</td>
+<td>M.Gregis</td>
+</tr>
+<tr>
+<td>Approved</td>
+<td>G.Boschini</td>
+</tr>
+<tr>
+<td>Project Code</td>
+<td>2021-0248</td>
+</tr>
+<tr>
+<td>Customer</td>
+<td>BLUES</td>
+</tr>
+<tr>
+<td>Internal Code</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Code</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Page name</td>
+<td>02 - CONNECTORS</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>Wednesday, March 02, 2022</td>
+</tr>
+<tr>
+<td>Rev.</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Rev. changes</td>
+<td>See Revision Page</td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>3 / 3</td>
+</tr>
+<tr>
+<td>Note</td>
+<td>Il presente progetto è tutelato dalla legge sul diritto d'autore, che vieta a terzi la riproduzione e l'utilizzo anche parziale senza il consenso di FAE Technology S.p.A.</td>
+</tr>
+</tbody>
+</table>
+</main>
+</body>
+</html>

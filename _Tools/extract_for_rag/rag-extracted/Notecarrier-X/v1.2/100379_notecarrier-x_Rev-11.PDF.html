@@ -1,0 +1,2844 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Notecarrier-X — SCHEMATIC (v1.2)</title>
+<meta name="rag:product" content="Notecarrier-X">
+<meta name="rag:version" content="v1.2">
+<meta name="rag:doc_type" content="schematic">
+<meta name="rag:source_file" content="Notecarrier-X/v1.2/100379_notecarrier-x_Rev-11.PDF">
+<style>body{font-family:system-ui,-apple-system,sans-serif;max-width:64rem;margin:2rem auto;padding:0 1rem;line-height:1.5;color:#111}h1{font-size:1.4rem}h2{font-size:1.15rem;margin-top:1.5rem}h3{font-size:1rem}table{border-collapse:collapse;margin:0.5rem 0}th,td{border:1px solid #ccc;padding:2px 8px;text-align:left;vertical-align:top}code{background:#f4f4f4;padding:1px 4px;border-radius:3px}.source{color:#555;font-size:0.9rem}</style>
+</head>
+<body>
+<main>
+<h1>Notecarrier-X — SCHEMATIC (v1.2)</h1>
+<p class="source">Source file: <a href="https://github.com/blues/note-hardware/blob/master/Notecarrier-X/v1.2/100379_notecarrier-x_Rev-11.PDF">Notecarrier-X/v1.2/100379_notecarrier-x_Rev-11.PDF</a></p>
+<h2>Page 1</h2>
+<h2>Cover Sheet</h2>
+<h3>Module Identification</h3>
+<ul>
+<li>Copyright: © 2023 Blues Inc.</li>
+<li>Module name: Notecarrier-X</li>
+</ul>
+<h3>Sheet Index</h3>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>Cover</td>
+</tr>
+<tr>
+<td>02</td>
+<td>Block Diagram</td>
+</tr>
+<tr>
+<td>03</td>
+<td>IO Connectors</td>
+</tr>
+<tr>
+<td>04</td>
+<td>Notecard Connector</td>
+</tr>
+<tr>
+<td>05</td>
+<td>Power</td>
+</tr>
+</tbody>
+</table>
+<h2>Revision Block</h2>
+<h3>Revision History</h3>
+<table>
+<thead>
+<tr>
+<th>Proto. Rev.</th>
+<th>Prod. Rev.</th>
+<th>Date</th>
+<th>Description</th>
+<th># VAR</th>
+<th># BOM</th>
+<th># ECO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>-</td>
+<td>2024-04-19</td>
+<td>Initial prototype release</td>
+<td>-</td>
+<td>3000-763-001</td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td>-</td>
+<td>2024-04-06</td>
+<td>Fixed M.2 screw location</td>
+<td>-</td>
+<td>3000-794-001</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>List of Available Variants</h3>
+<table>
+<thead>
+<tr>
+<th># VAR</th>
+<th>Variant name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>Revision Format Explanation</h3>
+<table>
+<thead>
+<tr>
+<th>Proto. Rev.</th>
+<th>Prod. Rev.</th>
+<th>Date Format</th>
+<th>Description</th>
+<th># BOM Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>202y-mm-dd</td>
+<td>Development phase, date only</td>
+<td>-</td>
+</tr>
+<tr>
+<td>10</td>
+<td>-</td>
+<td>202y-mm-dd</td>
+<td>Prototyping phase, revision numeric</td>
+<td>3000-xxx-xxx</td>
+</tr>
+<tr>
+<td>-</td>
+<td>A</td>
+<td>202y-mm-dd</td>
+<td>Production phase, revision alphanumeric</td>
+<td>3000-xxx-xxx</td>
+</tr>
+</tbody>
+</table>
+<h2>Design Considerations</h2>
+<h3>Software Config Note</h3>
+<ul>
+<li>Contains important notes for software development.</li>
+<li>Things like: pin configuration, timing requirements, IC configuration etc.</li>
+</ul>
+<h3>Design Note</h3>
+<ul>
+<li>Hardware notes.</li>
+</ul>
+<h2>Board Support</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FD1</td>
+<td></td>
+</tr>
+<tr>
+<td>FD2</td>
+<td></td>
+</tr>
+<tr>
+<td>FD3</td>
+<td></td>
+</tr>
+<tr>
+<td>FD4</td>
+<td></td>
+</tr>
+<tr>
+<td>FD5</td>
+<td></td>
+</tr>
+<tr>
+<td>FD6</td>
+<td></td>
+</tr>
+<tr>
+<td>PCB1</td>
+<td>PCB; 2200-918</td>
+</tr>
+<tr>
+<td>DOC1</td>
+<td>HW-E; 100379</td>
+</tr>
+</tbody>
+</table>
+<h3>Board Support Notes</h3>
+<ul>
+<li>FD1, FD2, FD3, FD4 are shown near the “TOP” label.</li>
+<li>FD5 and FD6 are shown near the “BOTTOM” label.</li>
+</ul>
+<h2>Title Block</h2>
+<h3>Document Metadata</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title</td>
+<td>01_COVER.SchDoc</td>
+</tr>
+<tr>
+<td>Project</td>
+<td>100379_notecarrier-x.PrjPCB</td>
+</tr>
+<tr>
+<td>Company</td>
+<td>Byte Lab Grupa d.o.o.</td>
+</tr>
+<tr>
+<td>Company Address</td>
+<td>Medarska 69/1, 10000 Zagreb, Croatia</td>
+</tr>
+<tr>
+<td>Company Website</td>
+<td>www.byte-lab.com</td>
+</tr>
+<tr>
+<td>Author</td>
+<td>M. Marsic</td>
+</tr>
+<tr>
+<td>Acceptor</td>
+<td>J. Wiedey</td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>1 of 5</td>
+</tr>
+<tr>
+<td>Rev</td>
+<td>11</td>
+</tr>
+<tr>
+<td>Format</td>
+<td>A4</td>
+</tr>
+</tbody>
+</table>
+<h2>Named Nets and Signals</h2>
+<p>No named nets or signals are visible on this page.</p>
+<h2>Page 2</h2>
+<h2>Sheet Section: Block Diagram Overview</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>USB C</td>
+<td>USB C connector</td>
+</tr>
+<tr>
+<td>BAT JST</td>
+<td>Battery JST connector</td>
+</tr>
+<tr>
+<td>LiPo Charger</td>
+<td>LiPo Charger</td>
+</tr>
+<tr>
+<td>PIN HEADER</td>
+<td>PIN HEADER</td>
+</tr>
+<tr>
+<td>Buck/Boost 3V3</td>
+<td>Buck/Boost 3V3</td>
+</tr>
+<tr>
+<td>M.2 CONNECTOR KEY E</td>
+<td>M.2 CONNECTOR KEY E</td>
+</tr>
+</tbody>
+</table>
+<h2>Functional Block: USB C Connector</h2>
+<h3>Pin Mappings: USB C</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>USB Power</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VUSB</td>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>USB Power</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VUSB to LiPo Charger</td>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>USB Power</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VUSB to PIN HEADER</td>
+<td>+VUSB</td>
+</tr>
+</tbody>
+</table>
+<h2>Functional Block: Battery JST Connector</h2>
+<h3>Pin Mappings: BAT JST</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Battery Power</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VBAT</td>
+<td>+VBAT</td>
+</tr>
+<tr>
+<td>Battery Power</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VBAT to LiPo Charger</td>
+<td>+VBAT</td>
+</tr>
+<tr>
+<td>Battery Power</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VBAT to PIN HEADER</td>
+<td>+VBAT</td>
+</tr>
+</tbody>
+</table>
+<h2>Functional Block: LiPo Charger</h2>
+<h3>Pin Mappings: LiPo Charger</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power Input</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VUSB input</td>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>Power Input</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VBAT input</td>
+<td>+VBAT</td>
+</tr>
+<tr>
+<td>Power Output</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VMAIN output</td>
+<td>+VMAIN</td>
+</tr>
+<tr>
+<td>Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>I2C</td>
+<td>I2C</td>
+</tr>
+<tr>
+<td>Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>STATUS</td>
+<td>STATUS</td>
+</tr>
+</tbody>
+</table>
+<h2>Functional Block: Buck/Boost 3V3 Regulator</h2>
+<h3>Pin Mappings: Buck/Boost 3V3</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power Input</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VMAIN input</td>
+<td>+VMAIN</td>
+</tr>
+<tr>
+<td>Power Output</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VIO output</td>
+<td>+VIO</td>
+</tr>
+</tbody>
+</table>
+<h2>Functional Block: Pin Header</h2>
+<h3>Pin Mappings: PIN HEADER</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VBAT</td>
+<td>+VBAT</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VUSB</td>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VMAIN</td>
+<td>+VMAIN</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VIO</td>
+<td>+VIO</td>
+</tr>
+<tr>
+<td>GPS Power/Control</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VACT_GPS_IN</td>
+<td>+VACT_GPS_IN</td>
+</tr>
+<tr>
+<td>GPS Power/Control</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VACT_GPS_OUT</td>
+<td>+VACT_GPS_OUT</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>I2C</td>
+<td>I2C</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>UART</td>
+<td>UART</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>AUX_UART</td>
+<td>AUX_UART</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>AUX_GPIO</td>
+<td>AUX_GPIO</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>DFU</td>
+<td>DFU</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>NRST</td>
+<td>NRST</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>ATTN</td>
+<td>ATTN</td>
+</tr>
+</tbody>
+</table>
+<h2>Functional Block: M.2 Connector Key E</h2>
+<h3>Pin Mappings: M.2 CONNECTOR KEY E</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VMODEM</td>
+<td>+VMODEM</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VIO</td>
+<td>+VIO</td>
+</tr>
+<tr>
+<td>Status</td>
+<td style="text-align: right;">Not shown</td>
+<td>STATUS</td>
+<td>STATUS</td>
+</tr>
+<tr>
+<td>GPS Power/Control</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VACT_GPS_IN</td>
+<td>+VACT_GPS_IN</td>
+</tr>
+<tr>
+<td>GPS Power/Control</td>
+<td style="text-align: right;">Not shown</td>
+<td>+VACT_GPS_OUT</td>
+<td>+VACT_GPS_OUT</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>I2C</td>
+<td>I2C</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>UART</td>
+<td>UART</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>AUX_UART</td>
+<td>AUX_UART</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>AUX_GPIO</td>
+<td>AUX_GPIO</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>DFU</td>
+<td>DFU</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>NRST</td>
+<td>NRST</td>
+</tr>
+<tr>
+<td>Digital Interface</td>
+<td style="text-align: right;">Not shown</td>
+<td>ATTN</td>
+<td>ATTN</td>
+</tr>
+</tbody>
+</table>
+<h2>Named Nets and Signals</h2>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Description from Diagram</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+VUSB</td>
+<td>USB power net from USB C; shown feeding LiPo Charger and PIN HEADER</td>
+</tr>
+<tr>
+<td>+VBAT</td>
+<td>Battery power net from BAT JST; shown feeding LiPo Charger and PIN HEADER</td>
+</tr>
+<tr>
+<td>+VMAIN</td>
+<td>Main power net from LiPo Charger; shown feeding M.2 CONNECTOR KEY E as +VMODEM, Buck/Boost 3V3, and PIN HEADER</td>
+</tr>
+<tr>
+<td>+VMODEM</td>
+<td>Modem power net into M.2 CONNECTOR KEY E</td>
+</tr>
+<tr>
+<td>+VIO</td>
+<td>I/O power net from Buck/Boost 3V3; shown feeding M.2 CONNECTOR KEY E and PIN HEADER</td>
+</tr>
+<tr>
+<td>+VACT_GPS_IN</td>
+<td>Signal/power net between PIN HEADER and M.2 CONNECTOR KEY E</td>
+</tr>
+<tr>
+<td>+VACT_GPS_OUT</td>
+<td>Signal/power net between M.2 CONNECTOR KEY E and PIN HEADER</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td>Interface shown between LiPo Charger and M.2 CONNECTOR KEY E; also listed in lower interface bus between PIN HEADER and M.2 CONNECTOR KEY E</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>Status signal shown from LiPo Charger to M.2 CONNECTOR KEY E</td>
+</tr>
+<tr>
+<td>UART</td>
+<td>Interface listed between PIN HEADER and M.2 CONNECTOR KEY E</td>
+</tr>
+<tr>
+<td>AUX_UART</td>
+<td>Interface listed between PIN HEADER and M.2 CONNECTOR KEY E</td>
+</tr>
+<tr>
+<td>AUX_GPIO</td>
+<td>Interface listed between PIN HEADER and M.2 CONNECTOR KEY E</td>
+</tr>
+<tr>
+<td>DFU</td>
+<td>Interface listed between PIN HEADER and M.2 CONNECTOR KEY E</td>
+</tr>
+<tr>
+<td>NRST</td>
+<td>Interface listed between PIN HEADER and M.2 CONNECTOR KEY E</td>
+</tr>
+<tr>
+<td>ATTN</td>
+<td>Interface listed between PIN HEADER and M.2 CONNECTOR KEY E</td>
+</tr>
+</tbody>
+</table>
+<h2>Connectivity Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Source/Block</th>
+<th>Net/Signal</th>
+<th>Destination/Block</th>
+<th>Direction as Drawn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>USB C</td>
+<td>+VUSB</td>
+<td>LiPo Charger</td>
+<td>USB C to LiPo Charger</td>
+</tr>
+<tr>
+<td>USB C</td>
+<td>+VUSB</td>
+<td>PIN HEADER</td>
+<td>USB C to PIN HEADER</td>
+</tr>
+<tr>
+<td>BAT JST</td>
+<td>+VBAT</td>
+<td>LiPo Charger</td>
+<td>BAT JST to LiPo Charger</td>
+</tr>
+<tr>
+<td>BAT JST</td>
+<td>+VBAT</td>
+<td>PIN HEADER</td>
+<td>BAT JST to PIN HEADER</td>
+</tr>
+<tr>
+<td>LiPo Charger</td>
+<td>+VMAIN</td>
+<td>M.2 CONNECTOR KEY E</td>
+<td>LiPo Charger to M.2 CONNECTOR KEY E, labeled +VMODEM at connector side</td>
+</tr>
+<tr>
+<td>LiPo Charger</td>
+<td>+VMAIN</td>
+<td>Buck/Boost 3V3</td>
+<td>LiPo Charger to Buck/Boost 3V3</td>
+</tr>
+<tr>
+<td>LiPo Charger</td>
+<td>+VMAIN</td>
+<td>PIN HEADER</td>
+<td>LiPo Charger to PIN HEADER</td>
+</tr>
+<tr>
+<td>Buck/Boost 3V3</td>
+<td>+VIO</td>
+<td>M.2 CONNECTOR KEY E</td>
+<td>Buck/Boost 3V3 to M.2 CONNECTOR KEY E</td>
+</tr>
+<tr>
+<td>Buck/Boost 3V3</td>
+<td>+VIO</td>
+<td>PIN HEADER</td>
+<td>Buck/Boost 3V3 to PIN HEADER</td>
+</tr>
+<tr>
+<td>PIN HEADER</td>
+<td>+VACT_GPS_IN</td>
+<td>M.2 CONNECTOR KEY E</td>
+<td>PIN HEADER to M.2 CONNECTOR KEY E</td>
+</tr>
+<tr>
+<td>M.2 CONNECTOR KEY E</td>
+<td>+VACT_GPS_OUT</td>
+<td>PIN HEADER</td>
+<td>M.2 CONNECTOR KEY E to PIN HEADER</td>
+</tr>
+<tr>
+<td>LiPo Charger</td>
+<td>STATUS</td>
+<td>M.2 CONNECTOR KEY E</td>
+<td>LiPo Charger to M.2 CONNECTOR KEY E</td>
+</tr>
+<tr>
+<td>M.2 CONNECTOR KEY E</td>
+<td>I2C, UART, AUX_UART, AUX_GPIO, DFU, NRST, ATTN</td>
+<td>PIN HEADER</td>
+<td>M.2 CONNECTOR KEY E to PIN HEADER</td>
+</tr>
+<tr>
+<td>M.2 CONNECTOR KEY E</td>
+<td>I2C</td>
+<td>LiPo Charger</td>
+<td>M.2 CONNECTOR KEY E to LiPo Charger</td>
+</tr>
+</tbody>
+</table>
+<h2>Title Block and Notes</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Copyright</td>
+<td>Copyright © 2023 Blues Inc.</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>02_BLOCK-DIAGRAM.SchDoc</td>
+</tr>
+<tr>
+<td>Project</td>
+<td>100379_notecarrier-x.PrjPCB</td>
+</tr>
+<tr>
+<td>Company</td>
+<td>Byte Lab Grupa d.o.o.</td>
+</tr>
+<tr>
+<td>Company Address</td>
+<td>Medarska 69/1, 10000 Zagreb, Croatia</td>
+</tr>
+<tr>
+<td>Company Website</td>
+<td>www.byte-lab.com</td>
+</tr>
+<tr>
+<td>Author</td>
+<td>M. Marsic</td>
+</tr>
+<tr>
+<td>Acceptor</td>
+<td>J. Wiedey</td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>2 of 5</td>
+</tr>
+<tr>
+<td>Rev</td>
+<td>11</td>
+</tr>
+<tr>
+<td>Format</td>
+<td>A4</td>
+</tr>
+</tbody>
+</table>
+<h2>Page 3</h2>
+<h2>Sheet Notes and Title Block</h2>
+<table>
+<thead>
+<tr>
+<th>Note Type</th>
+<th>Text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Copyright</td>
+<td>Copyright © 2023 Blues Inc.</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>03_IO-CONNECTION.SchDoc</td>
+</tr>
+<tr>
+<td>Project</td>
+<td>100379_notecarrier-x.PrjPCB</td>
+</tr>
+<tr>
+<td>Company</td>
+<td>Byte Lab Grupa d.o.o.</td>
+</tr>
+<tr>
+<td>Company Address</td>
+<td>Medarska 69/1, 10000 Zagreb, Croatia</td>
+</tr>
+<tr>
+<td>Website</td>
+<td>www.byte-lab.com</td>
+</tr>
+<tr>
+<td>Author</td>
+<td>M. Marsic</td>
+</tr>
+<tr>
+<td>Acceptor</td>
+<td>J. Wiedey</td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>3 of 5</td>
+</tr>
+<tr>
+<td>Revision</td>
+<td>11</td>
+</tr>
+<tr>
+<td>Format</td>
+<td>A4</td>
+</tr>
+</tbody>
+</table>
+<h2>Named Nets and Signals</h2>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+VBAT</td>
+</tr>
+<tr>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>+VMAIN</td>
+</tr>
+<tr>
+<td>+VIO</td>
+</tr>
+<tr>
+<td>+VACT_GPS_OUT</td>
+</tr>
+<tr>
+<td>+VACT_GPS_IN</td>
+</tr>
+<tr>
+<td>+VESLOV</td>
+</tr>
+<tr>
+<td>GND</td>
+</tr>
+<tr>
+<td>BOOT</td>
+</tr>
+<tr>
+<td>NRST</td>
+</tr>
+<tr>
+<td>AUX_NCHARGING</td>
+</tr>
+<tr>
+<td>VIO_EN</td>
+</tr>
+<tr>
+<td>ALT_DFU_IDLE</td>
+</tr>
+<tr>
+<td>ALT_DFU_NRESET</td>
+</tr>
+<tr>
+<td>ALT_DFU_BOOT</td>
+</tr>
+<tr>
+<td>ALT_DFU_TX</td>
+</tr>
+<tr>
+<td>ALT_DFU_RX</td>
+</tr>
+<tr>
+<td>AUX_TX</td>
+</tr>
+<tr>
+<td>AUX_RX</td>
+</tr>
+<tr>
+<td>AUX_EN</td>
+</tr>
+<tr>
+<td>AUX4</td>
+</tr>
+<tr>
+<td>AUX3</td>
+</tr>
+<tr>
+<td>AUX2</td>
+</tr>
+<tr>
+<td>AUX1</td>
+</tr>
+<tr>
+<td>ATTN</td>
+</tr>
+<tr>
+<td>CTX</td>
+</tr>
+<tr>
+<td>RTX</td>
+</tr>
+<tr>
+<td>TX</td>
+</tr>
+<tr>
+<td>RX</td>
+</tr>
+<tr>
+<td>SCL</td>
+</tr>
+<tr>
+<td>SDA</td>
+</tr>
+<tr>
+<td>USB_D_P</td>
+</tr>
+<tr>
+<td>USB_D_N</td>
+</tr>
+<tr>
+<td>USB_SHIELD</td>
+</tr>
+</tbody>
+</table>
+<h2>I/O Pin Headers</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td>Header 2.54mm 1x16</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>Header 2.54mm 1x16</td>
+</tr>
+</tbody>
+</table>
+<h3>P1 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">1</td>
+<td></td>
+<td>+VBAT</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">2</td>
+<td></td>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">3</td>
+<td></td>
+<td>+VMAIN</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">4</td>
+<td></td>
+<td>+VIO</td>
+</tr>
+<tr>
+<td>Boot/Reset</td>
+<td style="text-align: right;">5</td>
+<td></td>
+<td>BOOT</td>
+</tr>
+<tr>
+<td>Boot/Reset</td>
+<td style="text-align: right;">6</td>
+<td></td>
+<td>NRST</td>
+</tr>
+<tr>
+<td>AUX/Control</td>
+<td style="text-align: right;">7</td>
+<td></td>
+<td>AUX_NCHARGING</td>
+</tr>
+<tr>
+<td>AUX/Control</td>
+<td style="text-align: right;">8</td>
+<td></td>
+<td>VIO_EN</td>
+</tr>
+<tr>
+<td>GPS Power</td>
+<td style="text-align: right;">9</td>
+<td></td>
+<td>+VACT_GPS_OUT</td>
+</tr>
+<tr>
+<td>GPS Power</td>
+<td style="text-align: right;">10</td>
+<td></td>
+<td>+VACT_GPS_IN</td>
+</tr>
+<tr>
+<td>ALT DFU</td>
+<td style="text-align: right;">11</td>
+<td></td>
+<td>ALT_DFU_IDLE</td>
+</tr>
+<tr>
+<td>ALT DFU</td>
+<td style="text-align: right;">12</td>
+<td></td>
+<td>ALT_DFU_NRESET</td>
+</tr>
+<tr>
+<td>ALT DFU</td>
+<td style="text-align: right;">13</td>
+<td></td>
+<td>ALT_DFU_BOOT</td>
+</tr>
+<tr>
+<td>ALT DFU</td>
+<td style="text-align: right;">14</td>
+<td></td>
+<td>ALT_DFU_TX</td>
+</tr>
+<tr>
+<td>ALT DFU</td>
+<td style="text-align: right;">15</td>
+<td></td>
+<td>ALT_DFU_RX</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">16</td>
+<td></td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>P2 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">1</td>
+<td></td>
+<td>GND</td>
+</tr>
+<tr>
+<td>AUX</td>
+<td style="text-align: right;">2</td>
+<td></td>
+<td>AUX_TX</td>
+</tr>
+<tr>
+<td>AUX</td>
+<td style="text-align: right;">3</td>
+<td></td>
+<td>AUX_RX</td>
+</tr>
+<tr>
+<td>AUX</td>
+<td style="text-align: right;">4</td>
+<td></td>
+<td>AUX_EN</td>
+</tr>
+<tr>
+<td>AUX</td>
+<td style="text-align: right;">5</td>
+<td></td>
+<td>AUX4</td>
+</tr>
+<tr>
+<td>AUX</td>
+<td style="text-align: right;">6</td>
+<td></td>
+<td>AUX3</td>
+</tr>
+<tr>
+<td>AUX</td>
+<td style="text-align: right;">7</td>
+<td></td>
+<td>AUX2</td>
+</tr>
+<tr>
+<td>AUX</td>
+<td style="text-align: right;">8</td>
+<td></td>
+<td>AUX1</td>
+</tr>
+<tr>
+<td>Control</td>
+<td style="text-align: right;">9</td>
+<td></td>
+<td>ATTN</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">10</td>
+<td></td>
+<td>CTX</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">11</td>
+<td></td>
+<td>RTX</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">12</td>
+<td></td>
+<td>TX</td>
+</tr>
+<tr>
+<td>UART</td>
+<td style="text-align: right;">13</td>
+<td></td>
+<td>RX</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">14</td>
+<td></td>
+<td>SCL</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">15</td>
+<td></td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">16</td>
+<td></td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h2>ESLOV Connector</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P3</td>
+<td>SM05B-SRSS-TB</td>
+</tr>
+</tbody>
+</table>
+<h3>P3 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">1</td>
+<td></td>
+<td>+VESLOV</td>
+</tr>
+<tr>
+<td>Control</td>
+<td style="text-align: right;">2</td>
+<td></td>
+<td>ATTN</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">3</td>
+<td></td>
+<td>SCL</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">4</td>
+<td></td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">5</td>
+<td></td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Mounting</td>
+<td style="text-align: right;">MP1</td>
+<td>MP1</td>
+<td>No connect</td>
+</tr>
+<tr>
+<td>Mounting</td>
+<td style="text-align: right;">MP2</td>
+<td>MP2</td>
+<td>No connect</td>
+</tr>
+</tbody>
+</table>
+<h2>USB C Connector</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P4</td>
+<td>12402012E212A</td>
+</tr>
+<tr>
+<td>R1</td>
+<td>5k1</td>
+</tr>
+<tr>
+<td>R2</td>
+<td>5k1</td>
+</tr>
+<tr>
+<td>C1</td>
+<td>10n/1000V</td>
+</tr>
+<tr>
+<td>R3</td>
+<td>1M</td>
+</tr>
+</tbody>
+</table>
+<h3>P4 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>USB Power</td>
+<td>A4</td>
+<td>VBUS</td>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>USB Power</td>
+<td>A9</td>
+<td>VBUS</td>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>USB CC</td>
+<td>A5</td>
+<td>CC1</td>
+<td>Connected through R1 5k1 to GND</td>
+</tr>
+<tr>
+<td>USB Data</td>
+<td>A6</td>
+<td>D+</td>
+<td>USB_D_P</td>
+</tr>
+<tr>
+<td>USB Data</td>
+<td>A7</td>
+<td>D-</td>
+<td>USB_D_N</td>
+</tr>
+<tr>
+<td>USB SBU</td>
+<td>A8</td>
+<td>SBU1</td>
+<td>No connect</td>
+</tr>
+<tr>
+<td>USB Ground</td>
+<td>A1</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>USB Ground</td>
+<td>A12</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>USB Shield</td>
+<td>M</td>
+<td>M</td>
+<td>USB_SHIELD</td>
+</tr>
+<tr>
+<td>USB Power</td>
+<td>B4</td>
+<td>VBUS</td>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>USB Power</td>
+<td>B9</td>
+<td>VBUS</td>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>USB CC</td>
+<td>B5</td>
+<td>CC2</td>
+<td>Connected through R2 5k1 to GND</td>
+</tr>
+<tr>
+<td>USB Data</td>
+<td>B6</td>
+<td>D+</td>
+<td>USB_D_P</td>
+</tr>
+<tr>
+<td>USB Data</td>
+<td>B7</td>
+<td>D-</td>
+<td>USB_D_N</td>
+</tr>
+<tr>
+<td>USB SBU</td>
+<td>B8</td>
+<td>SBU2</td>
+<td>No connect</td>
+</tr>
+<tr>
+<td>USB Ground</td>
+<td>B1</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>USB Ground</td>
+<td>B12</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>USB Shield Network Notes</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Connection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>10n/1000V between GND and USB_SHIELD</td>
+</tr>
+<tr>
+<td>R3</td>
+<td>1M between GND and USB_SHIELD</td>
+</tr>
+</tbody>
+</table>
+<h2>QWIIC Connector</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J1</td>
+<td>SM04B-SRSS-TB(LF)(SN)</td>
+</tr>
+</tbody>
+</table>
+<h3>J1 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">1</td>
+<td></td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">2</td>
+<td></td>
+<td>+VIO</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">3</td>
+<td></td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">4</td>
+<td></td>
+<td>SCL</td>
+</tr>
+</tbody>
+</table>
+<h3>QWIIC Design Note</h3>
+<table>
+<thead>
+<tr>
+<th>Note Type</th>
+<th>Text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Design Note</td>
+<td>The I2C bus is pulled up by the Notecard</td>
+</tr>
+</tbody>
+</table>
+<h2>Battery Connector</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J2</td>
+<td>S2B-PH-SM4-K-TB</td>
+</tr>
+</tbody>
+</table>
+<h3>J2 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Battery Power</td>
+<td style="text-align: right;">1</td>
+<td></td>
+<td>+VBAT</td>
+</tr>
+<tr>
+<td>Battery Ground</td>
+<td style="text-align: right;">2</td>
+<td></td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Mounting</td>
+<td style="text-align: right;">M</td>
+<td>M</td>
+<td>No connect</td>
+</tr>
+</tbody>
+</table>
+<h3>Battery Design Note</h3>
+<table>
+<thead>
+<tr>
+<th>Note Type</th>
+<th>Text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Design Note</td>
+<td>Li-Po Battery 3.3V - 4.2V</td>
+</tr>
+</tbody>
+</table>
+<h2>Page 4</h2>
+<h2>Sheet Notes and Title Block</h2>
+<h3>Title-Block Notes</h3>
+<ul>
+<li>Copyright: Copyright © 2023 Blues Inc.</li>
+<li>Title: <code>04_NOTECARD-CONNECTION.SchDoc</code></li>
+<li>Project: <code>100379_notecarrier-x.PrjPCB</code></li>
+<li>Company: Byte Lab Grupa d.o.o.</li>
+<li>Address: Medarska 69/1, 10000 Zagreb, Croatia</li>
+<li>Website: www.byte-lab.com</li>
+<li>Author: M. Marsic</li>
+<li>Acceptor: J. Wiedey</li>
+<li>Sheet: 4 of 5</li>
+<li>Rev: 11</li>
+<li>Format: A4</li>
+</ul>
+<h3>Named Nets / Signals</h3>
+<ul>
+<li><code>+VIO</code></li>
+<li><code>GND</code></li>
+<li><code>SIM_VCC</code></li>
+<li><code>SIM_RST</code></li>
+<li><code>SIM_IO</code></li>
+<li><code>SIM_CLK</code></li>
+<li><code>SIM_NPRESENT</code></li>
+<li><code>+VACT_GPS_OUT</code></li>
+<li><code>+VACT_GPS_IN</code></li>
+<li><code>ALT_DFU_BOOT</code></li>
+<li><code>ALT_DFU_NRESET</code></li>
+<li><code>ALT_DFU_IDLE</code></li>
+<li><code>AUX_NCHARGING</code></li>
+<li><code>SCL</code></li>
+<li><code>SDA</code></li>
+<li><code>AUX1</code></li>
+<li><code>AUX2</code></li>
+<li><code>AUX3</code></li>
+<li><code>AUX4</code></li>
+<li><code>ATTN</code></li>
+<li><code>AUX_EN</code></li>
+<li><code>AUX_RX</code></li>
+<li><code>AUX_TX</code></li>
+<li><code>RX</code></li>
+<li><code>TX</code></li>
+<li><code>+VMODEM</code></li>
+<li><code>USB_D_P</code></li>
+<li><code>USB_D_N</code></li>
+<li><code>+VUSB</code></li>
+<li><code>ALT_DFU_RX</code></li>
+<li><code>ALT_DFU_TX</code></li>
+<li><code>RTX</code></li>
+<li><code>CTX</code></li>
+<li><code>BOOT</code></li>
+<li><code>NRST</code></li>
+</ul>
+<h2>Notecard Connector</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J3</td>
+<td>MDT420E01001</td>
+</tr>
+<tr>
+<td>R4</td>
+<td>0R0</td>
+</tr>
+</tbody>
+</table>
+<h3>J3 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bottom Power</td>
+<td style="text-align: right;">2</td>
+<td>VIO_P</td>
+<td>+VIO</td>
+</tr>
+<tr>
+<td>Bottom Power</td>
+<td style="text-align: right;">4</td>
+<td>VIO_P</td>
+<td>+VIO</td>
+</tr>
+<tr>
+<td>Bottom Power</td>
+<td style="text-align: right;">6</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Bottom SIM</td>
+<td style="text-align: right;">8</td>
+<td>SIM_VCC</td>
+<td>SIM_VCC</td>
+</tr>
+<tr>
+<td>Bottom SIM</td>
+<td style="text-align: right;">10</td>
+<td>SIM_RST</td>
+<td>SIM_RST</td>
+</tr>
+<tr>
+<td>Bottom SIM</td>
+<td style="text-align: right;">12</td>
+<td>SIM_IO</td>
+<td>SIM_IO</td>
+</tr>
+<tr>
+<td>Bottom SIM</td>
+<td style="text-align: right;">14</td>
+<td>SIM_CLK</td>
+<td>SIM_CLK</td>
+</tr>
+<tr>
+<td>Bottom SIM</td>
+<td style="text-align: right;">16</td>
+<td>SIM_NPRESENT</td>
+<td>SIM_NPRESENT</td>
+</tr>
+<tr>
+<td>Bottom Power</td>
+<td style="text-align: right;">18</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Bottom GPS</td>
+<td style="text-align: right;">20</td>
+<td>VACT_GPS_OUT</td>
+<td>+VACT_GPS_OUT</td>
+</tr>
+<tr>
+<td>Bottom GPS</td>
+<td style="text-align: right;">22</td>
+<td>VACT_GPS_IN</td>
+<td>+VACT_GPS_IN</td>
+</tr>
+<tr>
+<td>Bottom Alternate DFU / AUX / I2C</td>
+<td style="text-align: right;">32</td>
+<td>ALT_DFU_BOOT</td>
+<td>ALT_DFU_BOOT</td>
+</tr>
+<tr>
+<td>Bottom Alternate DFU / AUX / I2C</td>
+<td style="text-align: right;">34</td>
+<td>ALT_DFU_RESET</td>
+<td>ALT_DFU_NRESET</td>
+</tr>
+<tr>
+<td>Bottom Alternate DFU / AUX / I2C</td>
+<td style="text-align: right;">36</td>
+<td>ALT_DFU_ACTIVE</td>
+<td>ALT_DFU_IDLE</td>
+</tr>
+<tr>
+<td>Bottom Alternate DFU / AUX / I2C</td>
+<td style="text-align: right;">38</td>
+<td>AUX_CHARGING</td>
+<td>AUX_NCHARGING</td>
+</tr>
+<tr>
+<td>Bottom Alternate DFU / AUX / I2C</td>
+<td style="text-align: right;">40</td>
+<td>SCL_P</td>
+<td>SCL</td>
+</tr>
+<tr>
+<td>Bottom Alternate DFU / AUX / I2C</td>
+<td style="text-align: right;">42</td>
+<td>SDA_P</td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>Bottom No Connect</td>
+<td style="text-align: right;">44</td>
+<td>NC44</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Bottom AUX / UART</td>
+<td style="text-align: right;">46</td>
+<td>AUX1</td>
+<td>AUX1</td>
+</tr>
+<tr>
+<td>Bottom AUX / UART</td>
+<td style="text-align: right;">48</td>
+<td>AUX2</td>
+<td>AUX2</td>
+</tr>
+<tr>
+<td>Bottom AUX / UART</td>
+<td style="text-align: right;">50</td>
+<td>AUX3</td>
+<td>AUX3</td>
+</tr>
+<tr>
+<td>Bottom AUX / UART</td>
+<td style="text-align: right;">52</td>
+<td>AUX4</td>
+<td>AUX4</td>
+</tr>
+<tr>
+<td>Bottom AUX / UART</td>
+<td style="text-align: right;">54</td>
+<td>ATTN_P</td>
+<td>ATTN</td>
+</tr>
+<tr>
+<td>Bottom AUX / UART</td>
+<td style="text-align: right;">56</td>
+<td>AUX_EN_P</td>
+<td>AUX_EN</td>
+</tr>
+<tr>
+<td>Bottom AUX / UART</td>
+<td style="text-align: right;">58</td>
+<td>AUX_RX_P</td>
+<td>AUX_RX</td>
+</tr>
+<tr>
+<td>Bottom AUX / UART</td>
+<td style="text-align: right;">60</td>
+<td>AUX_TX_P</td>
+<td>AUX_TX</td>
+</tr>
+<tr>
+<td>Bottom AUX / UART</td>
+<td style="text-align: right;">62</td>
+<td>RX_P</td>
+<td>RX</td>
+</tr>
+<tr>
+<td>Bottom AUX / UART</td>
+<td style="text-align: right;">64</td>
+<td>TX_P</td>
+<td>TX</td>
+</tr>
+<tr>
+<td>Bottom No Connect</td>
+<td style="text-align: right;">66</td>
+<td>NC66</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Bottom No Connect</td>
+<td style="text-align: right;">68</td>
+<td>NC68</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Bottom Modem Power</td>
+<td style="text-align: right;">70</td>
+<td>VMODEM_P</td>
+<td>+VMODEM</td>
+</tr>
+<tr>
+<td>Bottom Modem Power</td>
+<td style="text-align: right;">72</td>
+<td>VMODEM_P</td>
+<td>+VMODEM</td>
+</tr>
+<tr>
+<td>Bottom Modem Power</td>
+<td style="text-align: right;">74</td>
+<td>VMODEM_P</td>
+<td>+VMODEM</td>
+</tr>
+<tr>
+<td>Top Control</td>
+<td style="text-align: right;">1</td>
+<td>XP_ENABLE</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top Power</td>
+<td style="text-align: right;">3</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Top Power</td>
+<td style="text-align: right;">5</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Top USB</td>
+<td style="text-align: right;">7</td>
+<td>USB_DP</td>
+<td>USB_D_P</td>
+</tr>
+<tr>
+<td>Top USB</td>
+<td style="text-align: right;">9</td>
+<td>USB_DN</td>
+<td>USB_D_N</td>
+</tr>
+<tr>
+<td>Top Power</td>
+<td style="text-align: right;">11</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Top USB Power</td>
+<td style="text-align: right;">13</td>
+<td>VUSB</td>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>Top No Connect</td>
+<td style="text-align: right;">15</td>
+<td>NC15</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top No Connect</td>
+<td style="text-align: right;">17</td>
+<td>NC17</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top No Connect</td>
+<td style="text-align: right;">19</td>
+<td>NC19</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top No Connect</td>
+<td style="text-align: right;">21</td>
+<td>NC21</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top No Connect</td>
+<td style="text-align: right;">23</td>
+<td>NC23</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top Power</td>
+<td style="text-align: right;">33</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Top No Connect</td>
+<td style="text-align: right;">35</td>
+<td>NC35</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top No Connect</td>
+<td style="text-align: right;">37</td>
+<td>NC37</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top Power</td>
+<td style="text-align: right;">39</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Top Alternate DFU</td>
+<td style="text-align: right;">41</td>
+<td>ALT_DFU_RX</td>
+<td>ALT_DFU_RX</td>
+</tr>
+<tr>
+<td>Top Alternate DFU</td>
+<td style="text-align: right;">43</td>
+<td>ALT_DFU_TX</td>
+<td>ALT_DFU_TX</td>
+</tr>
+<tr>
+<td>Top Power</td>
+<td style="text-align: right;">45</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Top UART / Modem Control</td>
+<td style="text-align: right;">47</td>
+<td>RTX</td>
+<td>RTX</td>
+</tr>
+<tr>
+<td>Top UART / Modem Control</td>
+<td style="text-align: right;">49</td>
+<td>CTX</td>
+<td>CTX</td>
+</tr>
+<tr>
+<td>Top Power</td>
+<td style="text-align: right;">51</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Top No Connect</td>
+<td style="text-align: right;">53</td>
+<td>NC53</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top No Connect</td>
+<td style="text-align: right;">55</td>
+<td>NC55</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top Power</td>
+<td style="text-align: right;">57</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Top No Connect</td>
+<td style="text-align: right;">59</td>
+<td>NC59</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top No Connect</td>
+<td style="text-align: right;">61</td>
+<td>NC61</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top No Connect</td>
+<td style="text-align: right;">63</td>
+<td>NC63</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top Boot / Reset</td>
+<td style="text-align: right;">65</td>
+<td>BOOT</td>
+<td>BOOT</td>
+</tr>
+<tr>
+<td>Top Boot / Reset</td>
+<td style="text-align: right;">67</td>
+<td>RST</td>
+<td>NRST</td>
+</tr>
+<tr>
+<td>Top No Connect</td>
+<td style="text-align: right;">69</td>
+<td>NC69</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Top Power</td>
+<td style="text-align: right;">71</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Top Power</td>
+<td style="text-align: right;">73</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Top Control</td>
+<td style="text-align: right;">75</td>
+<td>XP_MODEM_VSEL</td>
+<td>Not connected</td>
+</tr>
+</tbody>
+</table>
+<h2>SIM Card</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J4</td>
+<td>SF72S006VBDR2500</td>
+</tr>
+<tr>
+<td>R5</td>
+<td>22R</td>
+</tr>
+<tr>
+<td>R6</td>
+<td>22R</td>
+</tr>
+<tr>
+<td>R7</td>
+<td>15k</td>
+</tr>
+<tr>
+<td>R8</td>
+<td>22R</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>100n</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>33p</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>33p</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>33p</td>
+</tr>
+<tr>
+<td>TVS1</td>
+<td>PESD5V0L5UV,125</td>
+</tr>
+</tbody>
+</table>
+<h3>J4 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SIM Contacts</td>
+<td style="text-align: right;">1</td>
+<td>VCC</td>
+<td>SIM_VCC</td>
+</tr>
+<tr>
+<td>SIM Contacts</td>
+<td style="text-align: right;">2</td>
+<td>RST</td>
+<td>SIM_RST via R5 22R</td>
+</tr>
+<tr>
+<td>SIM Contacts</td>
+<td style="text-align: right;">3</td>
+<td>CLK</td>
+<td>SIM_CLK via R6 22R</td>
+</tr>
+<tr>
+<td>SIM Contacts</td>
+<td style="text-align: right;">5</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>SIM Contacts</td>
+<td style="text-align: right;">6</td>
+<td>VPP</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>SIM Contacts</td>
+<td style="text-align: right;">7</td>
+<td>IO</td>
+<td>SIM_IO via R8 22R</td>
+</tr>
+<tr>
+<td>Card Detect</td>
+<td style="text-align: right;">13</td>
+<td>DSW</td>
+<td>SIM_NPRESENT</td>
+</tr>
+<tr>
+<td>Card Detect</td>
+<td style="text-align: right;">10</td>
+<td>CSW</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Shield / Ground</td>
+<td style="text-align: right;">19</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Shield / Ground</td>
+<td style="text-align: right;">18</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Shield / Ground</td>
+<td style="text-align: right;">17</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Shield / Ground</td>
+<td style="text-align: right;">16</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Shield / Ground</td>
+<td style="text-align: right;">15</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Shield / Ground</td>
+<td style="text-align: right;">14</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Shield / Ground</td>
+<td style="text-align: right;">12</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Shield / Ground</td>
+<td style="text-align: right;">11</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Shield / Ground</td>
+<td style="text-align: right;">9</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Shield / Ground</td>
+<td style="text-align: right;">8</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h2>Notecard Support</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ASS1</td>
+<td>KNOB M2.5x4-INOX</td>
+</tr>
+<tr>
+<td>OBJ1</td>
+<td>9774025151R</td>
+</tr>
+</tbody>
+</table>
+<h3>Notecard Support Notes</h3>
+<ul>
+<li><code>OBJ1</code> is shown connected to <code>GND</code>.</li>
+<li><code>ASS1</code> is shown as a mechanical support item.</li>
+</ul>
+<h2>Page 5</h2>
+<h2>Sheet Section: Battery Charger w/ Power Path</h2>
+<h3>Battery Charger w/ Power Path Design Notes</h3>
+<ul>
+<li>Charger: Default charging voltage: 4.2V</li>
+<li>Charger: Default charging current: 320mA</li>
+<li>Charger: Default termination current: 20mA</li>
+<li>Charger: Default pre-charge current: 20mA</li>
+<li>Charger: No battery thermal protection</li>
+<li>Power Path: Input current limit: 3.5A</li>
+<li>Power Path: 26mOhm reverse blocking transistor</li>
+<li>Power Path: 15mOhm battery transistor</li>
+<li>Buck Regulator: 1.5MHz frequency</li>
+<li>Buck Regulator: Input Voltage: 5V</li>
+<li>Buck Regulator: Output Voltage: 3.3-4.2V</li>
+<li>Buck Regulator: Peak current: 2.5A</li>
+</ul>
+<h3>Battery Charger w/ Power Path Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>U2</td>
+<td>BQ25628ERYKR</td>
+</tr>
+<tr>
+<td>L2</td>
+<td>XFL4020-152MEC</td>
+</tr>
+<tr>
+<td>LD1</td>
+<td>SML-P12WTT86R</td>
+</tr>
+<tr>
+<td>R10</td>
+<td>0R0</td>
+</tr>
+<tr>
+<td>R11</td>
+<td>3k</td>
+</tr>
+<tr>
+<td>R12</td>
+<td>3k</td>
+</tr>
+<tr>
+<td>R13</td>
+<td>11k</td>
+</tr>
+<tr>
+<td>R14</td>
+<td>15k</td>
+</tr>
+<tr>
+<td>C9</td>
+<td>47n/50V</td>
+</tr>
+<tr>
+<td>C10</td>
+<td>100n</td>
+</tr>
+<tr>
+<td>C11</td>
+<td>10u</td>
+</tr>
+<tr>
+<td>C12</td>
+<td>10u</td>
+</tr>
+<tr>
+<td>C13</td>
+<td>4u7</td>
+</tr>
+<tr>
+<td>C14</td>
+<td>10u</td>
+</tr>
+<tr>
+<td>C15</td>
+<td>100n</td>
+</tr>
+<tr>
+<td>C16</td>
+<td>4u7</td>
+</tr>
+</tbody>
+</table>
+<h3>U2 Pin Mapping — BQ25628ERYKR</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power Input</td>
+<td style="text-align: right;">18</td>
+<td>VBUS</td>
+<td>+VBUS</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">12</td>
+<td>SDA</td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">13</td>
+<td>SCL</td>
+<td>SCL</td>
+</tr>
+<tr>
+<td>Interrupt</td>
+<td style="text-align: right;">11</td>
+<td>INT</td>
+<td>No connect shown</td>
+</tr>
+<tr>
+<td>Control</td>
+<td style="text-align: right;">14</td>
+<td>CE</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Status</td>
+<td style="text-align: right;">3</td>
+<td>PG</td>
+<td>No connect shown</td>
+</tr>
+<tr>
+<td>Status</td>
+<td style="text-align: right;">10</td>
+<td>STAT</td>
+<td>AUX_NCHARGING; also connected to LD1/R11 path to +VBUS</td>
+</tr>
+<tr>
+<td>Control</td>
+<td style="text-align: right;">7</td>
+<td>QON</td>
+<td>No connect shown</td>
+</tr>
+<tr>
+<td>PMID/REGN</td>
+<td style="text-align: right;">17</td>
+<td>PMID</td>
+<td>PMID decoupling node; C14 and C15 to GND</td>
+</tr>
+<tr>
+<td>PMID/REGN</td>
+<td style="text-align: right;">2</td>
+<td>REGN</td>
+<td>REGN decoupling node; C16 to GND</td>
+</tr>
+<tr>
+<td>Switching Regulator</td>
+<td style="text-align: right;">16</td>
+<td>SW</td>
+<td>SW; connected to L2 and C9</td>
+</tr>
+<tr>
+<td>Switching Regulator</td>
+<td style="text-align: right;">1</td>
+<td>BTST</td>
+<td>BTST; connected to C9</td>
+</tr>
+<tr>
+<td>System Output</td>
+<td style="text-align: right;">9</td>
+<td>SYS</td>
+<td>+VMAIN</td>
+</tr>
+<tr>
+<td>Current Limit</td>
+<td style="text-align: right;">4</td>
+<td>ILIM</td>
+<td>R12 3k to GND</td>
+</tr>
+<tr>
+<td>Battery Temperature</td>
+<td style="text-align: right;">5</td>
+<td>TS_BIAS</td>
+<td>R13 11k to TS divider node</td>
+</tr>
+<tr>
+<td>Battery Temperature</td>
+<td style="text-align: right;">6</td>
+<td>TS</td>
+<td>Divider node between R13 and R14</td>
+</tr>
+<tr>
+<td>Battery</td>
+<td style="text-align: right;">8</td>
+<td>BAT</td>
+<td>+VBAT; C13 to GND</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">15</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>Battery Charger w/ Power Path Named Nets and Signals</h3>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+VBUS</td>
+<td>Input power net to U2 VBUS; also feeds R11/LD1 charging indicator path</td>
+</tr>
+<tr>
+<td>+VMAIN</td>
+<td>Main output from charger/power path; connected to U2 SYS, L2 output side, C12, and R10</td>
+</tr>
+<tr>
+<td>+VMODEM</td>
+<td>Connected from +VMAIN through R10 0R0</td>
+</tr>
+<tr>
+<td>+VBAT</td>
+<td>Battery net connected to U2 BAT and C13</td>
+</tr>
+<tr>
+<td>AUX_NCHARGING</td>
+<td>Charge-status signal connected to U2 STAT and LD1 path</td>
+</tr>
+<tr>
+<td>SDA</td>
+<td>I2C data connected to U2 SDA</td>
+</tr>
+<tr>
+<td>SCL</td>
+<td>I2C clock connected to U2 SCL</td>
+</tr>
+<tr>
+<td>SW</td>
+<td>Switching node connected to U2 SW, L2, and C9</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Ground net</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Sheet Section: 3V3 Buck/Boost Regulator</h2>
+<h3>3V3 Buck/Boost Regulator Design Notes</h3>
+<ul>
+<li>Input Voltage: 1.8V - 5.5V</li>
+<li>Output Voltage: 3.3V</li>
+<li>Peak Output Current: 500mA</li>
+<li>Average Current: 100mA</li>
+</ul>
+<h3>3V3 Buck/Boost Regulator Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>U1</td>
+<td>ISL9122AIINZ-T</td>
+</tr>
+<tr>
+<td>L1</td>
+<td>MCKK1608T1R0MN</td>
+</tr>
+<tr>
+<td>R9</td>
+<td>10M</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>22u</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>100n</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>22u</td>
+</tr>
+</tbody>
+</table>
+<h3>U1 Pin Mapping — ISL9122AIINZ-T</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inductor</td>
+<td>B1</td>
+<td>LX1</td>
+<td>L1 side connected to LX1</td>
+</tr>
+<tr>
+<td>Inductor</td>
+<td>A2</td>
+<td>LX2</td>
+<td>L1 side connected to LX2</td>
+</tr>
+<tr>
+<td>Power Input</td>
+<td>C1</td>
+<td>VIN</td>
+<td>+VMAIN; C6 to GND</td>
+</tr>
+<tr>
+<td>Power Output</td>
+<td>B2</td>
+<td>VOUT</td>
+<td>+VIO; C8 to GND</td>
+</tr>
+<tr>
+<td>Enable</td>
+<td>C2</td>
+<td>EN</td>
+<td>VIO_EN; R9 10M to +VMAIN; C7 100n to GND</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td>A1</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td>D2</td>
+<td>SDA</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td>D1</td>
+<td>SCL</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>3V3 Buck/Boost Regulator Named Nets and Signals</h3>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+VMAIN</td>
+<td>Input supply to U1 VIN</td>
+</tr>
+<tr>
+<td>+VIO</td>
+<td>3.3V output from U1 VOUT</td>
+</tr>
+<tr>
+<td>VIO_EN</td>
+<td>Enable signal connected to U1 EN</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Ground net</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Sheet Section: VBUS ORing</h2>
+<h3>VBUS ORing Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>U3</td>
+<td>LM66200DRLR</td>
+</tr>
+</tbody>
+</table>
+<h3>U3 Pin Mapping — LM66200DRLR</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power Input</td>
+<td style="text-align: right;">3</td>
+<td>VIN1</td>
+<td>+VESLOV</td>
+</tr>
+<tr>
+<td>Power Input</td>
+<td style="text-align: right;">6</td>
+<td>VIN2</td>
+<td>+VUSB</td>
+</tr>
+<tr>
+<td>Power Output</td>
+<td style="text-align: right;">2</td>
+<td>VOUT</td>
+<td>+VBUS</td>
+</tr>
+<tr>
+<td>Power Output</td>
+<td style="text-align: right;">7</td>
+<td>VOUT</td>
+<td>+VBUS</td>
+</tr>
+<tr>
+<td>Enable</td>
+<td style="text-align: right;">4</td>
+<td>ON</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Status</td>
+<td style="text-align: right;">8</td>
+<td>STAT</td>
+<td>No connect shown</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">1</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">5</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>VBUS ORing Named Nets and Signals</h3>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+VESLOV</td>
+<td>Input to U3 VIN1</td>
+</tr>
+<tr>
+<td>+VUSB</td>
+<td>Input to U3 VIN2</td>
+</tr>
+<tr>
+<td>+VBUS</td>
+<td>ORed output from U3 VOUT pins</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Ground net</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Sheet Title Block and Document Notes</h2>
+<h3>Title Block Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Copyright</td>
+<td>Copyright © 2023 Blues Inc.</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>05_POWER.SchDoc</td>
+</tr>
+<tr>
+<td>Project</td>
+<td>100379_notecarrier-x.PrjPCB</td>
+</tr>
+<tr>
+<td>Company</td>
+<td>Byte Lab Grupa d.o.o.</td>
+</tr>
+<tr>
+<td>Company address</td>
+<td>Medarska 69/1, 10000 Zagreb, Croatia</td>
+</tr>
+<tr>
+<td>Company website</td>
+<td>www.byte-lab.com</td>
+</tr>
+<tr>
+<td>Author</td>
+<td>M. Marsic</td>
+</tr>
+<tr>
+<td>Acceptor</td>
+<td>J. Wiedey</td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>5 of 5</td>
+</tr>
+<tr>
+<td>Rev</td>
+<td>11</td>
+</tr>
+<tr>
+<td>Format</td>
+<td>A4</td>
+</tr>
+</tbody>
+</table>
+</main>
+</body>
+</html>
