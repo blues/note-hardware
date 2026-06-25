@@ -542,6 +542,7 @@ def render_page(c: Candidate, body_md: str, source_base_url: str) -> str:
         "<!doctype html>\n<html lang=\"en\">\n<head>\n"
         '<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+        '<meta name="robots" content="noindex, nofollow">\n'  # keep out of public search indexes
         f"<title>{title}</title>\n"
         f'<meta name="rag:product" content="{html.escape(c.product)}">\n'
         f'<meta name="rag:version" content="{html.escape(_vstr(c.version))}">\n'
@@ -577,6 +578,17 @@ def build_sitemap(out_dir: Path, base_url: str) -> int:
     lines.append("</urlset>")
     (out_dir / "sitemap.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
     (out_dir / ".nojekyll").touch()  # serve files as-is on GitHub Pages (no Jekyll processing)
+
+    # robots.txt: allow only ragpi's crawler, ask everyone else not to index. Note: on a *project*
+    # github.io path this is non-authoritative (crawlers read the domain-root robots.txt) — the
+    # per-page <meta name="robots" content="noindex"> is what actually keeps pages out of search
+    # there. This file becomes authoritative (and correct) if the site moves to a custom domain.
+    (out_dir / "robots.txt").write_text(
+        "User-agent: Ragpi\nAllow: /\n\n"
+        "User-agent: *\nDisallow: /\n\n"
+        f"Sitemap: {base}sitemap.xml\n",
+        encoding="utf-8",
+    )
     return len(rels)
 
 

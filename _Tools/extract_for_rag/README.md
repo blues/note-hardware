@@ -91,8 +91,12 @@ job). The workflow ignores pushes that only touch the output dir so its own comm
 retrigger it. A clean full rebuild is opt-in via `workflow_dispatch` (`full: true`).
 
 Requires (one-time): repo **Settings → Pages → Source = GitHub Actions**, the `OPENAI_API_KEY`
-secret, and a **public** repo (ragpi crawls the Pages site over plain HTTP). Optional repo
-**variables**: `RAG_VLM_MODEL`, `RAG_BASE_URL`, `RAG_SOURCE_BASE_URL`.
+**secret** (a credential — never a variable), and a **public** repo (ragpi crawls the Pages site
+over plain HTTP). Optional repo **variables**: `RAG_VLM_MODEL`, `RAG_BASE_URL`, `RAG_SOURCE_BASE_URL`.
+
+**Search indexing:** every page carries `<meta name="robots" content="noindex, nofollow">` (the
+authoritative control on a project `*.github.io` path) and a root `robots.txt` allows only the
+`Ragpi` crawler. ragpi ignores robots-meta, so it still indexes; public search engines won't.
 
 ## Out of scope
 
