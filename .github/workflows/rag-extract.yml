@@ -1,0 +1,83 @@
+name: RAG extract
+
+# Regenerate tools/extract_for_rag/rag-extracted/ markdown from Tier-1 hardware files and commit
+# it back. Runs on every merge to master (incremental by default); ignores its own commits
+# (paths-ignore on the output dir). A clean full rebuild is opt-in via workflow_dispatch.
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - 'tools/extract_for_rag/rag-extracted/**'
+  workflow_dispatch:
+    inputs:
+      full:
+        description: 'Full clean rebuild (wipe + re-extract everything, incl. all schematics)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rag-extract
+  cancel-in-progress: false
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7   # Node 24 runtime
+        with:
+          fetch-depth: 0   # full history for change detection
+
+      - uses: actions/setup-python@v6   # Node 24 runtime
+        with:
+          python-version: '3.12'
+
+      - name: Install pipeline deps
+        run: pip install -r tools/extract_for_rag/requirements.txt
+
+      - name: Compute changed source files
+        id: changed
+        run: |
+          # Incremental is the default. Only an explicit workflow_dispatch with full=true rebuilds.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.full }}" = "true" ]; then
+            echo "mode=full" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=incremental" >> "$GITHUB_OUTPUT"
+            if [ "${{ github.event_name }}" = "push" ] && \
+               [ -n "${{ github.event.before }}" ] && \
+               [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ] && \
+               git cat-file -e "${{ github.event.before }}^{commit}" 2>/dev/null; then
+              git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" > changed.txt
+              echo "Changed files:"; cat changed.txt
+            else
+              : > changed.txt   # no base (first run / new branch): reconcile regenerates anything missing
+              echo "No diff base; relying on reconcile (generate-missing + prune)."
+            fi
+          fi
+
+      - name: Run extraction
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          RAG_VLM_MODEL: ${{ vars.RAG_VLM_MODEL }}   # optional; tool defaults to gpt-5.5
+        run: |
+          cd tools/extract_for_rag
+          if [ "${{ steps.changed.outputs.mode }}" = "full" ]; then
+            python extract.py --full
+          else
+            python extract.py --changed-from "$GITHUB_WORKSPACE/changed.txt"
+          fi
+
+      - name: Commit refreshed markdown
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A tools/extract_for_rag/rag-extracted   # -A stages deletions too
+          if git diff --staged --quiet; then
+            echo "No changes to rag-extracted/."
+          else
+            git commit -m "chore(rag): refresh rag-extracted markdown [skip ci]"
+            git push
+          fi
