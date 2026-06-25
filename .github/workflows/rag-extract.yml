@@ -1,14 +1,15 @@
 name: RAG extract
 
-# Regenerate tools/extract_for_rag/rag-extracted/ markdown from Tier-1 hardware files and commit
-# it back. Runs on every merge to master (incremental by default); ignores its own commits
+# Regenerate _Tools/extract_for_rag/rag-extracted/ HTML + sitemap.xml from Tier-1 hardware files,
+# commit it back, and publish it to GitHub Pages (ragpi's sitemap connector crawls the published
+# sitemap). Runs on every merge to master (incremental by default); ignores its own commits
 # (paths-ignore on the output dir). A clean full rebuild is opt-in via workflow_dispatch.
 
 on:
   push:
     branches: [master]
     paths-ignore:
-      - 'tools/extract_for_rag/rag-extracted/**'
+      - '_Tools/extract_for_rag/rag-extracted/**'
   workflow_dispatch:
     inputs:
       full:
@@ -17,7 +18,9 @@ on:
         default: false
 
 permissions:
-  contents: write
+  contents: write   # commit refreshed output back to master
+  pages: write      # publish to GitHub Pages
+  id-token: write   # required by deploy-pages
 
 concurrency:
   group: rag-extract
@@ -36,7 +39,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install pipeline deps
-        run: pip install -r tools/extract_for_rag/requirements.txt
+        run: pip install -r _Tools/extract_for_rag/requirements.txt
 
       - name: Compute changed source files
         id: changed
@@ -61,23 +64,41 @@ jobs:
       - name: Run extraction
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          RAG_VLM_MODEL: ${{ vars.RAG_VLM_MODEL }}   # optional; tool defaults to gpt-5.5
+          RAG_VLM_MODEL: ${{ vars.RAG_VLM_MODEL }}             # optional; tool defaults to gpt-5.5
+          RAG_BASE_URL: ${{ vars.RAG_BASE_URL }}               # optional; defaults to the Pages URL
+          RAG_SOURCE_BASE_URL: ${{ vars.RAG_SOURCE_BASE_URL }} # optional; defaults to GitHub blob
         run: |
-          cd tools/extract_for_rag
+          cd _Tools/extract_for_rag
           if [ "${{ steps.changed.outputs.mode }}" = "full" ]; then
             python extract.py --full
           else
             python extract.py --changed-from "$GITHUB_WORKSPACE/changed.txt"
           fi
 
-      - name: Commit refreshed markdown
+      - name: Commit refreshed output
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A tools/extract_for_rag/rag-extracted   # -A stages deletions too
+          git add -A _Tools/extract_for_rag/rag-extracted   # -A stages deletions too
           if git diff --staged --quiet; then
             echo "No changes to rag-extracted/."
           else
-            git commit -m "chore(rag): refresh rag-extracted markdown [skip ci]"
+            git commit -m "chore(rag): refresh rag-extracted HTML [skip ci]"
             git push
           fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _Tools/extract_for_rag/rag-extracted
+
+  deploy:
+    needs: extract        # skipped if extraction failed -> never publishes broken/garbage output
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
