@@ -48,6 +48,39 @@ boards:
 
   cygnet:
     product_dir: Cygnet/v1.2
+    kicad:
+      sch: Cygnet/v1.2/KiCad_format/Cygnet.kicad_sch
+      pcb: Cygnet/v1.2/KiCad_format/Cygnet.kicad_pcb
+    bom:
+      path: Cygnet/v1.2/Cygnet v1.2 BOM.xlsx
+      header_contains: Designator
+      kicad_mpn_field: MPN
+      columns:
+        refs: Designator
+        value: Name
+        mpn: Manufacturer Part Number 1
+      refdes_map:
+        BOOT: SW1
+        RST: SW2
+        USER: SW3
+      skip_refdes: '^(TP|FID|MH|LOGO|CST)\d*$'
+    gerbers:
+      original_dir: /private/tmp/claude-501/-Users-roblauer-Documents-GitHub-blues-note-hardware/26345e84-f61c-4c64-85bd-58e534b0269f/scratchpad/cygnet-gerbers
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        In1_Cu:       { kicad: "*L2.g1", original: "*.G1" }
+        In2_Cu:       { kicad: "*L3.g2", original: "*.G2" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
 
   scoop:
     product_dir: Scoop/v1.0

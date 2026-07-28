@@ -92,12 +92,29 @@ MARGIN_IN = 0.05
 
 def render(outline, layer_file, out_png, bbox):
     x0, y0, x1, y1 = bbox
-    w = (x1 - x0) + 2 * MARGIN_IN
-    h = (y1 - y0) + 2 * MARGIN_IN
+    w = round((x1 - x0) + 2 * MARGIN_IN, 4)
+    h = round((y1 - y0) + 2 * MARGIN_IN, 4)
+    ox = round(x0 - MARGIN_IN, 4)
+    oy = round(y0 - MARGIN_IN, 4)
     cmd = [GERBV, "--background=#FFFFFF", f"--foreground={FG}", f"--foreground={FG}",
-           f"--origin={x0 - MARGIN_IN}x{y0 - MARGIN_IN}",
+           f"--origin={ox}x{oy}",
            f"--window_inch={w}x{h}",
            outline, layer_file, "--export=png", f"--dpi={DPI}", "-o", str(out_png)]
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    if r.returncode != 0 or not Path(out_png).exists():
+        raise SystemExit(f"gerbv failed for {layer_file}:\n{r.stderr[-2000:]}")
+
+
+def render_single(layer_file, out_png, bbox):
+    """Render one gerber alone in a fixed window (no outline overlay)."""
+    x0, y0, x1, y1 = bbox
+    w = round((x1 - x0) + 2 * MARGIN_IN, 4)
+    h = round((y1 - y0) + 2 * MARGIN_IN, 4)
+    ox = round(x0 - MARGIN_IN, 4)
+    oy = round(y0 - MARGIN_IN, 4)
+    cmd = [GERBV, "--background=#FFFFFF", f"--foreground={FG}",
+           f"--origin={ox}x{oy}", f"--window_inch={w}x{h}",
+           layer_file, "--export=png", f"--dpi={DPI}", "-o", str(out_png)]
     r = subprocess.run(cmd, capture_output=True, text=True)
     if r.returncode != 0 or not Path(out_png).exists():
         raise SystemExit(f"gerbv failed for {layer_file}:\n{r.stderr[-2000:]}")
@@ -132,8 +149,29 @@ def main():
         k_png = args.out / f"{layer}-KiCad.png"
         o_png = args.out / f"{layer}-{tool}.png"
         d_png = args.out / f"{layer}-diff.png"
-        render(k_outline, one(m["kicad"], args.kicad_dir), k_png, k_bbox)
-        render(o_outline, one(m["original"], orig_dir), o_png, o_bbox)
+        if m.get("negative"):
+            # Altium internal-plane layers are negative images: drawn content
+            # is where copper is ABSENT. Render each side alone, then convert
+            # the original to a positive within the board interior.
+            render_single(one(m["kicad"], args.kicad_dir), k_png, k_bbox)
+            neg = args.out / f"{layer}-{tool}-negative.png"
+            render_single(one(m["original"], orig_dir), neg, o_bbox)
+            omask = args.out / f"{layer}-mask.png"
+            render_single(o_outline, omask, o_bbox)
+            # interior mask: flood the outside black, keep interior white
+            subprocess.run([MAGICK, str(omask), "-colorspace", "Gray", "-fuzz", "40%",
+                            "-fill", "black", "-draw", "color 0,0 floodfill",
+                            "-threshold", "50%", str(omask)], check=True)
+            # positive copper (dark) = interior AND NOT drawn
+            subprocess.run([MAGICK, str(omask), "(", str(neg), "-colorspace", "Gray",
+                            "-threshold", "80%", ")", "-compose", "multiply",
+                            "-composite", "-negate", "-negate", str(o_png)], check=True)
+            # o_png now: white background outside+drawn, dark copper... invert
+            # to match the KiCad convention (copper dark on white):
+            subprocess.run([MAGICK, str(o_png), "-negate", str(o_png)], check=True)
+        else:
+            render(k_outline, one(m["kicad"], args.kicad_dir), k_png, k_bbox)
+            render(o_outline, one(m["original"], orig_dir), o_png, o_bbox)
 
         ks, os_ = size(k_png), size(o_png)
         if ks != os_:

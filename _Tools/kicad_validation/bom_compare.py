@@ -76,6 +76,7 @@ def load_shipped(cfg):
     mpn_col = col.get(cfg["columns"].get("mpn", ""), None)
     skip_re = re.compile(cfg["skip_refdes"]) if cfg.get("skip_refdes") else None
     dnp_markers = [norm(m) for m in cfg.get("dnp_markers", [])]
+    refdes_map = cfg.get("refdes_map", {})
 
     shipped = {}
     for r in rows[header_idx + 1:]:
@@ -86,6 +87,7 @@ def load_shipped(cfg):
             continue
         mpn = norm(r[mpn_col]) if mpn_col is not None and mpn_col < len(r) else ""
         for ref in split_refs(r[refs_col]):
+            ref = refdes_map.get(ref, ref)
             if skip_re and skip_re.match(ref):
                 continue
             shipped[ref] = {"value": value, "mpn": mpn}
@@ -116,7 +118,10 @@ def compare(kicad, shipped, check_mpn=True):
     diffs = []
     for ref in sorted(set(kicad) & set(shipped)):
         k, s = kicad[ref], shipped[ref]
-        if k["value"] != s["value"]:
+        # A grouped BOM line may list several equivalent value spellings
+        # ("1uF/ 16V-X5R, 1uF/ 16V-XR5, 1u/16V-X5R"); accept any of them.
+        variants = {v.strip() for v in s["value"].split(",")}
+        if k["value"] != s["value"] and k["value"] not in variants:
             diffs.append(f"  {ref}: value KiCad='{k['value']}' shipped='{s['value']}'")
         elif check_mpn and s["mpn"] and k["mpn"] and k["mpn"] != s["mpn"]:
             diffs.append(f"  {ref}: MPN KiCad='{k['mpn']}' shipped='{s['mpn']}'")
