@@ -84,6 +84,34 @@ boards:
 
   scoop:
     product_dir: Scoop/v1.0
+    kicad:
+      sch: Scoop/v1.0/KiCad_format/Scoop.kicad_sch
+      pcb: Scoop/v1.0/KiCad_format/Scoop.kicad_pcb
+    bom:
+      path: Scoop/v1.0/992-00084-A_BOM.xlsx
+      header_contains: Ref Des
+      kicad_mpn_field: MANUFACTURER PART NUMBER
+      check_value: false
+      columns:
+        refs: Ref Des
+        value: Name
+        mpn: MPN
+      skip_refdes: '^(TP|FID|FD|MH|LOGO)\d*$'
+    gerbers:
+      original_dir: /private/tmp/claude-501/-Users-roblauer-Documents-GitHub-blues-note-hardware/26345e84-f61c-4c64-85bd-58e534b0269f/scratchpad/scoop-gerbers
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM1"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
 
   notecarrier-cx:
     product_dir: Notecarrier-CX/v1.7

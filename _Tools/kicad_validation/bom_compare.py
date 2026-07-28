@@ -110,7 +110,7 @@ def load_kicad(path, skip_refdes=None):
     return out
 
 
-def compare(kicad, shipped, check_mpn=True):
+def compare(kicad, shipped, check_mpn=True, check_value=True):
     lines = [f"KiCad populated refdes:   {len(kicad)}",
              f"Shipped populated refdes: {len(shipped)}", ""]
     only_k = sorted(set(kicad) - set(shipped))
@@ -121,7 +121,7 @@ def compare(kicad, shipped, check_mpn=True):
         # A grouped BOM line may list several equivalent value spellings
         # ("1uF/ 16V-X5R, 1uF/ 16V-XR5, 1u/16V-X5R"); accept any of them.
         variants = {v.strip() for v in s["value"].split(",")}
-        if k["value"] != s["value"] and k["value"] not in variants:
+        if check_value and k["value"] != s["value"] and k["value"] not in variants:
             diffs.append(f"  {ref}: value KiCad='{k['value']}' shipped='{s['value']}'")
         elif check_mpn and s["mpn"] and k["mpn"] and k["mpn"] != s["mpn"]:
             diffs.append(f"  {ref}: MPN KiCad='{k['mpn']}' shipped='{s['mpn']}'")
@@ -149,7 +149,8 @@ def main():
     cfg = yaml.safe_load(args.config.read_text())["boards"][args.board]["bom"]
     shipped = load_shipped(cfg)
     kicad = load_kicad(args.kicad, cfg.get("skip_refdes"))
-    ok, report = compare(kicad, shipped, check_mpn=cfg.get("check_mpn", True))
+    ok, report = compare(kicad, shipped, check_mpn=cfg.get("check_mpn", True),
+                         check_value=cfg.get("check_value", True))
     print(report)
     if args.report:
         args.report.write_text(report + "\n")

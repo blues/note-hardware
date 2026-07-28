@@ -1,0 +1,210 @@
+** Drc report for Scoop.kicad_pcb **
+** Created on 2026-07-28T17:23:01-0500 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 54 DRC violations **
+[padstack]: Padstack is questionable (negative solder mask clearance is larger than pad; no solder mask will be generated)
+    Local override; warning
+    @(155.6561 mm, 98.6536 mm): PTH pad 1 [<no net>] of MH3
+[padstack]: Padstack is questionable (negative solder paste margin is larger than pad; no solder paste mask will be generated)
+    Local override; warning
+    @(159.9311 mm, 108.1786 mm): Pad FID [<no net>] of FD3 on Top Layer
+[padstack]: Padstack is questionable (negative solder paste margin is larger than pad; no solder paste mask will be generated)
+    Local override; warning
+    @(120.5611 mm, 99.9236 mm): Pad FID [<no net>] of FD2 on Top Layer
+[padstack]: Padstack is questionable (negative solder mask clearance is larger than pad; no solder mask will be generated)
+    Local override; warning
+    @(155.6561 mm, 111.3536 mm): PTH pad 1 [<no net>] of MH4
+[padstack]: Padstack is questionable (negative solder paste margin is larger than pad; no solder paste mask will be generated)
+    Local override; warning
+    @(120.5611 mm, 110.0836 mm): Pad FID [<no net>] of FD1 on Top Layer
+[padstack]: Padstack is questionable (negative solder paste margin is larger than pad; no solder paste mask will be generated)
+    Local override; warning
+    @(149.7711 mm, 99.9236 mm): Pad 1 [/3V8] of Z1 on Bottom Layer
+[padstack]: Padstack is questionable (negative solder paste margin is larger than pad; no solder paste mask will be generated)
+    Local override; warning
+    @(147.6121 mm, 97.5106 mm): Pad 1 [GND] of Z4 on Bottom Layer
+[padstack]: Padstack is questionable (negative solder paste margin is larger than pad; no solder paste mask will be generated)
+    Local override; warning
+    @(149.7711 mm, 97.2566 mm): Pad 1 [GND] of Z2 on Bottom Layer
+[padstack]: Padstack is questionable (negative solder paste margin is larger than pad; no solder paste mask will be generated)
+    Local override; warning
+    @(147.6121 mm, 101.4476 mm): Pad 1 [/VBAT] of Z3 on Bottom Layer
+[lib_footprint_mismatch]: Footprint 'MHSLOT_2_5MM_5MM_WIDTH' does not match copy in library 'Scoop-altium-import'.
+    Local override; warning
+    @(154.8511 mm, 98.0186 mm): Footprint MH3
+[lib_footprint_mismatch]: Footprint 'VINA_VPC1335_RRA' does not match copy in library 'Scoop-altium-import'.
+    Local override; warning
+    @(171.5651 mm, 105.0036 mm): Footprint C2
+[lib_footprint_mismatch]: Footprint 'FID_1mm_3mm' does not match copy in library 'Scoop-altium-import'.
+    Local override; warning
+    @(159.9311 mm, 108.1786 mm): Footprint FD3
+[lib_footprint_mismatch]: Footprint 'FID_1mm_3mm' does not match copy in library 'Scoop-altium-import'.
+    Local override; warning
+    @(120.5611 mm, 99.9236 mm): Footprint FD2
+[lib_footprint_mismatch]: Footprint 'MHSLOT_2_5MM_5MM_WIDTH' does not match copy in library 'Scoop-altium-import'.
+    Local override; warning
+    @(154.8511 mm, 111.9886 mm): Footprint MH4
+[lib_footprint_mismatch]: Footprint 'VINA_VPC1335_HOLDWIRE' does not match copy in library 'Scoop-altium-import'.
+    Local override; warning
+    @(137.7061 mm, 104.8736 mm): Footprint HoldWire
+[lib_footprint_mismatch]: Footprint 'FID_1mm_3mm' does not match copy in library 'Scoop-altium-import'.
+    Local override; warning
+    @(120.5611 mm, 110.0836 mm): Footprint FD1
+[lib_footprint_mismatch]: Footprint 'HOLE_2MM' does not match copy in library 'Scoop-altium-import'.
+    Local override; warning
+    @(130.0861 mm, 105.0036 mm): Footprint MH1
+[lib_footprint_mismatch]: Footprint 'FP-U5-2-MFG' does not match copy in library 'Scoop-altium-import'.
+    Local override; warning
+    @(141.1351 mm, 98.5266 mm): Footprint U2
+[lib_footprint_mismatch]: Footprint 'HEADER_AA_002_NO_SILK' does not match copy in library 'Scoop-altium-import'.
+    Local override; warning
+    @(133.8961 mm, 96.1136 mm): Footprint J4
+[lib_footprint_mismatch]: Footprint 'HEADER_AA_002_NO_SILK' does not match copy in library 'Scoop-altium-import'.
+    Local override; warning
+    @(171.9961 mm, 113.8936 mm): Footprint J6
+[lib_footprint_mismatch]: Footprint 'HEADER_AA_002_NO_SILK' does not match copy in library 'Scoop-altium-import'.
+    Local override; warning
+    @(171.9961 mm, 96.1136 mm): Footprint J5
+[lib_footprint_mismatch]: Footprint 'HEADER_AA_002_NO_SILK' does not match copy in library 'Scoop-altium-import'.
+    Local override; warning
+    @(133.8961 mm, 113.8936 mm): Footprint J3
+[text_thickness]: Text thickness out of range (TrueType font characters with insufficient stroke weight)
+    Rule: board setup constraints silk text thickness; warning
+    @(161.3661 mm, 112.3696 mm): PCB Text Box 'Scoop 1.0' on Bottom Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(132.8892 mm, 111.5656 mm): PCB Text Box '+' on Top Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(136.0047 mm, 97.7213 mm): PCB Text Box '-' on Top Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(136.0047 mm, 97.8483 mm): PCB Text Box '-' on Bottom Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(149.5811 mm, 110.4386 mm): Segment of C1 on Top Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(149.5811 mm, 113.5386 mm): Segment of C1 on Top Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(150.9311 mm, 110.4386 mm): Segment of C1 on Top Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(150.9311 mm, 113.5386 mm): Segment of C1 on Top Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(139.1671 mm, 110.3116 mm): Segment of C4 on Top Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(139.1671 mm, 113.4116 mm): Segment of C4 on Top Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(140.5171 mm, 110.3116 mm): Segment of C4 on Top Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(140.5171 mm, 113.4116 mm): Segment of C4 on Top Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(126.6308 mm, 108.0336 mm): Footprint text of J1 (+)
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(126.7578 mm, 97.8736 mm): Footprint text of J2 (+)
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(146.7321 mm, 99.5557 mm): Segment of C3 on Top Overlay
+    @(145.7721 mm, 99.3766 mm): Segment of U3 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(146.7321 mm, 99.5557 mm): Segment of C3 on Top Overlay
+    @(146.5721 mm, 99.3766 mm): Segment of U3 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(143.5721 mm, 99.3766 mm): Segment of U3 on Top Overlay
+    @(143.5851 mm, 99.4766 mm): Circle of U2 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(143.5721 mm, 99.3766 mm): Segment of U3 on Top Overlay
+    @(143.5851 mm, 99.4766 mm): Circle of U2 on Top Overlay
+[mirrored_text_on_front_layer]: Mirrored text on front layer
+    Local override; warning
+    @(133.3678 mm, 97.3369 mm): PCB Text Box '+' on Top Overlay
+[mirrored_text_on_front_layer]: Mirrored text on front layer
+    Local override; warning
+    @(136.0047 mm, 97.7213 mm): PCB Text Box '-' on Top Overlay
+[mirrored_text_on_front_layer]: Mirrored text on front layer
+    Local override; warning
+    @(169.0247 mm, 112.0723 mm): PCB Text Box '-' on Top Overlay
+[mirrored_text_on_front_layer]: Mirrored text on front layer
+    Local override; warning
+    @(169.2787 mm, 97.8483 mm): PCB Text Box '-' on Top Overlay
+[mirrored_text_on_front_layer]: Mirrored text on front layer
+    Local override; warning
+    @(171.6917 mm, 112.0723 mm): PCB Text Box '-' on Top Overlay
+[mirrored_text_on_front_layer]: Mirrored text on front layer
+    Local override; warning
+    @(171.8187 mm, 97.8483 mm): PCB Text Box '-' on Top Overlay
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(119.7788 mm, 108.3859 mm): PCB Text Box '+' on Bottom Overlay
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(119.9058 mm, 97.7179 mm): PCB Text Box '+' on Bottom Overlay
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(120.0027 mm, 111.4373 mm): PCB Text Box '-' on Bottom Overlay
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(120.1297 mm, 100.8963 mm): PCB Text Box '-' on Bottom Overlay
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(133.3256 mm, 111.5131 mm): PCB Text Box '+' on Bottom Overlay
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(133.4948 mm, 97.5909 mm): PCB Text Box '+' on Bottom Overlay
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(135.8777 mm, 111.8183 mm): PCB Text Box '-' on Bottom Overlay
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(136.0047 mm, 97.8483 mm): PCB Text Box '-' on Bottom Overlay
+
+** Found 0 unconnected pads **
+
+** Found 11 Footprint errors **
+[footprint_symbol_mismatch]: Footprint attributes don't match symbol: 'Do not populate' settings differ.
+    Local override; warning
+    @(133.8961 mm, 113.8936 mm): Footprint J3
+[footprint_symbol_mismatch]: Footprint attributes don't match symbol: 'Do not populate' settings differ.
+    Local override; warning
+    @(133.8961 mm, 96.1136 mm): Footprint J4
+[footprint_symbol_mismatch]: Footprint attributes don't match symbol: 'Do not populate' settings differ.
+    Local override; warning
+    @(171.9961 mm, 96.1136 mm): Footprint J5
+[footprint_symbol_mismatch]: Footprint attributes don't match symbol: 'Do not populate' settings differ.
+    Local override; warning
+    @(171.9961 mm, 113.8936 mm): Footprint J6
+[footprint_symbol_mismatch]: Footprint attributes don't match symbol: 'Exclude from bill of materials' settings differ.
+    Local override; warning
+    @(149.7711 mm, 99.9236 mm): Footprint Z1
+[footprint_symbol_mismatch]: Footprint attributes don't match symbol: 'Exclude from bill of materials' settings differ.
+    Local override; warning
+    @(149.7711 mm, 97.2566 mm): Footprint Z2
+[footprint_symbol_mismatch]: Footprint attributes don't match symbol: 'Exclude from bill of materials' settings differ.
+    Local override; warning
+    @(147.6121 mm, 101.4476 mm): Footprint Z3
+[footprint_symbol_mismatch]: Footprint attributes don't match symbol: 'Exclude from bill of materials' settings differ.
+    Local override; warning
+    @(147.6121 mm, 97.5106 mm): Footprint Z4
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(137.7061 mm, 104.8736 mm): Footprint HoldWire
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(177.4571 mm, 114.4016 mm): Footprint +PROJECTID
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(151.6761 mm, 106.2736 mm): Footprint LOGO
+
+** End of Report **
