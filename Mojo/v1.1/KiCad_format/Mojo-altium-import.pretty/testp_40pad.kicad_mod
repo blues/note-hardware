@@ -1,0 +1,68 @@
+(footprint "testp_40pad"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "Z1"
+		(at 0.15104 0.0391 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "1c66acd0-63b0-41ba-b020-55780ee0b2b3")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "Test Point"
+		(at 4.229445 1.758 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "b29f2d28-61d2-493b-9225-527ef7300689")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 180)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "1b1a5d3a-fbb0-485e-a102-32757a7f0d99")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 180)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "631031b0-0591-4839-a8a0-5d45f31032ed")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(pad "1" smd circle
+		(at 0 0)
+		(size 1.016 1.016)
+		(layers "F.Cu" "F.Paste")
+		(solder_mask_margin 0.0508)
+		(solder_paste_margin -2147.483637)
+		(thermal_bridge_angle 90)
+		(uuid "2ffdf8b2-b1a4-436a-9848-7ab8de3edf1a")
+	)
+	(embedded_fonts no)
+)
