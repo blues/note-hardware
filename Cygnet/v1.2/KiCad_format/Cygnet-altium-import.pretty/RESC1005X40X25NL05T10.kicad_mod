@@ -1,0 +1,170 @@
+(footprint "RESC1005X40X25NL05T10"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(locked yes)
+	(layer "F.Cu")
+	(property "Reference" "R20"
+		(at 2.396998 1.815525 270)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "f5b02153-1f20-41fb-8737-575895ece52d")
+		(effects
+			(font
+				(size 1.524 1.524)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Value" "5.1 k"
+		(at -2.505202 3.212075 270)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "495b616f-417c-40b8-acf0-23c18d74313b")
+		(effects
+			(font
+				(size 1.524 1.524)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "beb892eb-7ce2-4110-a688-cc0490fbf822")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "SMD Chip Resistor, 5.1 kOhm, ± 5%, 63 mW, 0402 [1005 Metric], Thick Film, General Purpose"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "1dfc3dbb-a182-405d-a764-81d68b57a10d")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_line
+		(start -0.525 -0.27499)
+		(end -0.525 0.27502)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.Fab")
+		(uuid "6423a2a6-b3d1-4bd5-a7d4-4bd23c7ada6e")
+	)
+	(fp_line
+		(start 0.52499 -0.27499)
+		(end -0.525 -0.27499)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.Fab")
+		(uuid "f9f4310e-c0d4-49a2-8155-20d402b20bb0")
+	)
+	(fp_line
+		(start 0.52499 -0.27499)
+		(end 0.52499 0.27502)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.Fab")
+		(uuid "e999c107-64aa-4cba-9d19-c878d006cd82")
+	)
+	(fp_line
+		(start 0.52499 0.27502)
+		(end -0.525 0.27502)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.Fab")
+		(uuid "dae9716f-9eb4-4290-8edd-542f4a8a254e")
+	)
+	(fp_line
+		(start -0.9 -0.44999)
+		(end -0.9 0.44998)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.13")
+		(uuid "8db87501-2b2f-4491-aaf4-cdb76835ffa9")
+	)
+	(fp_line
+		(start 0.00002 -0.27499)
+		(end 0.00002 0.27502)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.13")
+		(uuid "d016178f-0a8d-4922-9687-00357b38fe86")
+	)
+	(fp_line
+		(start 0.275 -0.00001)
+		(end -0.27501 -0.00001)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.13")
+		(uuid "35d074a2-f1b2-43cb-832b-6dcbbfd59129")
+	)
+	(fp_line
+		(start 0.89999 -0.44999)
+		(end -0.9 -0.44999)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.13")
+		(uuid "1a04a365-db69-4aaf-8646-89a4fb91708c")
+	)
+	(fp_line
+		(start 0.89999 -0.44999)
+		(end 0.89999 0.44998)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.13")
+		(uuid "7de3fb5a-5c2d-4258-8f6c-add60bd6f246")
+	)
+	(fp_line
+		(start 0.89999 0.44998)
+		(end -0.9 0.44998)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.13")
+		(uuid "b7996afe-210d-40c6-8c86-cf2dab8b4863")
+	)
+	(pad "1" smd rect
+		(at -0.42502 -0.00001 90)
+		(size 0.55 0.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "5bbd0c70-091d-4160-ada9-03fd66160fac")
+	)
+	(pad "2" smd rect
+		(at 0.42501 -0.00001 90)
+		(size 0.55 0.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "64b7be41-da96-4e19-a2d0-38e03a38ba62")
+	)
+	(embedded_fonts no)
+)

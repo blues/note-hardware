@@ -1,0 +1,547 @@
+** Drc report for Cygnet.kicad_pcb **
+** Created on 2026-07-28T16:56:10-0500 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 177 DRC violations **
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(129.2496 mm, 113.7186 mm): Track [AREF] on Top Layer, length 0.0000 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(132.3960 mm, 113.7182 mm): Track [AREF] on Top Layer, length 0.0000 mm
+[via_dangling]: Via is not connected or connected on only one layer
+    Local override; warning
+    @(149.1307 mm, 103.7453 mm): Via [D13] on Top Layer - Bottom Layer
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(154.7155 mm, 113.4154 mm): Track [A3] on Top Layer, length 0.0000 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(155.1407 mm, 113.1738 mm): Track [A2] on Top Layer, length 0.0000 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(155.5208 mm, 112.5341 mm): Track [A0] on Top Layer, length 0.0000 mm
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(123.1011 mm, 113.8936 mm): Segment on Edge.Cuts
+    @(122.3811 mm, 100.5536 mm): Segment of J1 on Top Overlay
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(123.1011 mm, 113.8936 mm): Segment on Edge.Cuts
+    @(122.3811 mm, 109.4936 mm): Segment of J1 on Top Overlay
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(129.2161 mm, 115.5626 mm): Pad 1 [NRST] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(129.2161 mm, 115.5626 mm): Pad 1 [NRST] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(131.7561 mm, 115.5626 mm): Pad 2 [+3V3_OUT] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(131.7561 mm, 115.5626 mm): Pad 2 [+3V3_OUT] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(134.2851 mm, 115.5896 mm): Pad 3 [AREF] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(134.2851 mm, 115.5896 mm): Pad 3 [AREF] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(136.8361 mm, 115.5626 mm): Pad 4 [GND] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(136.8361 mm, 115.5626 mm): Pad 4 [GND] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(139.3761 mm, 115.5626 mm): Pad 5 [A0] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(139.3761 mm, 115.5626 mm): Pad 5 [A0] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(141.9161 mm, 115.5626 mm): Pad 6 [A1] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(141.9161 mm, 115.5626 mm): Pad 6 [A1] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(144.4561 mm, 115.5626 mm): Pad 7 [A2] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(144.4561 mm, 115.5626 mm): Pad 7 [A2] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(147.0251 mm, 115.5616 mm): Pad 8 [A3] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(147.0251 mm, 115.5616 mm): Pad 8 [A3] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(149.5361 mm, 115.5626 mm): Pad 9 [A4] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(149.5361 mm, 115.5626 mm): Pad 9 [A4] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(152.0761 mm, 115.5626 mm): Pad 10 [A5] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(152.0761 mm, 115.5626 mm): Pad 10 [A5] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(154.6161 mm, 115.5626 mm): Pad 11 [SCK] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(154.6161 mm, 115.5626 mm): Pad 11 [SCK] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(157.1561 mm, 115.5626 mm): Pad 12 [MOSI] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(157.1561 mm, 115.5626 mm): Pad 12 [MOSI] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(159.7251 mm, 115.5616 mm): Pad 13 [MISO] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(159.7251 mm, 115.5616 mm): Pad 13 [MISO] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(162.2361 mm, 115.5626 mm): Pad 14 [RX] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(162.2361 mm, 115.5626 mm): Pad 14 [RX] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(164.7761 mm, 115.5626 mm): Pad 15 [TX] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(164.7761 mm, 115.5626 mm): Pad 15 [TX] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(167.3161 mm, 115.5626 mm): Pad 16 [BOOT0] of CST16 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(167.3161 mm, 115.5626 mm): Pad 16 [BOOT0] of CST16 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(139.6161 mm, 94.3566 mm): Pad 1 [+VBAT] of CST12 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(139.6161 mm, 94.3566 mm): Pad 1 [+VBAT] of CST12 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(142.1561 mm, 94.3566 mm): Pad 2 [EN] of CST12 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(142.1561 mm, 94.3566 mm): Pad 2 [EN] of CST12 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(144.6851 mm, 94.3836 mm): Pad 3 [+VUSB] of CST12 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(144.6851 mm, 94.3836 mm): Pad 3 [+VUSB] of CST12 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(147.2361 mm, 94.3566 mm): Pad 4 [D13] of CST12 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(147.2361 mm, 94.3566 mm): Pad 4 [D13] of CST12 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(149.7761 mm, 94.3566 mm): Pad 5 [D12] of CST12 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(149.7761 mm, 94.3566 mm): Pad 5 [D12] of CST12 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(152.3161 mm, 94.3566 mm): Pad 6 [D11] of CST12 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(152.3161 mm, 94.3566 mm): Pad 6 [D11] of CST12 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(154.8561 mm, 94.3566 mm): Pad 7 [D10] of CST12 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(154.8561 mm, 94.3566 mm): Pad 7 [D10] of CST12 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(157.4251 mm, 94.3556 mm): Pad 8 [D9] of CST12 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(157.4251 mm, 94.3556 mm): Pad 8 [D9] of CST12 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(159.9361 mm, 94.3566 mm): Pad 9 [D6] of CST12 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(159.9361 mm, 94.3566 mm): Pad 9 [D6] of CST12 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(162.4761 mm, 94.3566 mm): Pad 10 [D5] of CST12 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(162.4761 mm, 94.3566 mm): Pad 10 [D5] of CST12 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(165.0161 mm, 94.3566 mm): Pad 11 [SCL] of CST12 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(165.0161 mm, 94.3566 mm): Pad 11 [SCL] of CST12 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(167.5561 mm, 94.3566 mm): Pad 12 [SDA] of CST12 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(167.5561 mm, 94.3566 mm): Pad 12 [SDA] of CST12 on Bottom Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(137.5811 mm, 95.0846 mm): Pad MP1 [GND] of J6 on Top Layer
+[padstack]: Padstack is questionable ('castellated' property is for PTH pads)
+    Local override; warning
+    @(130.8811 mm, 95.0846 mm): Pad MP2 [GND] of J6 on Top Layer
+[padstack]: Padstack is questionable (negative solder paste margin is larger than pad; no solder paste mask will be generated)
+    Local override; warning
+    @(144.9061 mm, 105.1686 mm): Pad 15 [GND] of U2 on Top Layer
+[padstack]: Padstack is questionable (negative solder paste margin is larger than pad; no solder paste mask will be generated)
+    Local override; warning
+    @(139.8811 mm, 100.5091 mm): Pad 9 [GND] of U5 on Top Layer
+[lib_footprint_mismatch]: Footprint 'RESC0603X26X15NL03T05' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(163.4061 mm, 107.4936 mm): Footprint R6
+[lib_footprint_mismatch]: Footprint 'GRM033R61C104KE84J-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(166.9311 mm, 97.3936 mm): Footprint C15
+[lib_footprint_mismatch]: Footprint 'GRM033R61C104KE84J-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(158.3101 mm, 100.8186 mm): Footprint C4
+[lib_footprint_mismatch]: Footprint 'castellations 1mm_ 0.7mm-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(129.2671 mm, 116.3116 mm): Footprint CST16
+[lib_footprint_mismatch]: Footprint 'ONSC-SOD-523-2-502-01_V' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(167.0561 mm, 110.1936 mm): Footprint TVS1
+[lib_footprint_mismatch]: Footprint 'GRM033R61C104KE84J-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(125.5561 mm, 115.1936 mm): Footprint C16
+[lib_footprint_mismatch]: Footprint 'C0402B105K016T-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(150.1812 mm, 110.0437 mm): Footprint C6
+[lib_footprint_mismatch]: Footprint 'F930J107KAABE1-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(147.7061 mm, 106.5936 mm): Footprint C19
+[lib_footprint_mismatch]: Footprint 'FP-GRM18-0_15-IPC_A' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(140.7810 mm, 105.1186 mm): Footprint C17
+[lib_footprint_mismatch]: Footprint 'RESC0603X26X15NL03T05' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(162.1311 mm, 101.9936 mm): Footprint R2
+[lib_footprint_mismatch]: Footprint 'GRM033R61C104KE84J-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(150.2521 mm, 108.9936 mm): Footprint C3
+[lib_footprint_mismatch]: Footprint 'C0402B105K016T-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(132.6311 mm, 111.0936 mm): Footprint C29
+[lib_footprint_mismatch]: Footprint 'RESC0603X28X15ML05T05' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(139.6311 mm, 98.2686 mm): Footprint R18
+[lib_footprint_mismatch]: Footprint 'CAPC1005X06N' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(170.4721 mm, 97.0026 mm): Footprint SW2
+[lib_footprint_mismatch]: Footprint 'RESC0603X26X15NL03T05' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(139.0311 mm, 104.5686 mm): Footprint R14
+[lib_footprint_mismatch]: Footprint 'GRM033R61C104KE84J-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(146.3521 mm, 107.5936 mm): Footprint C21
+[lib_footprint_mismatch]: Footprint 'RESC0603X26X15NL03T05' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(167.2311 mm, 110.8686 mm): Footprint R5
+[lib_footprint_mismatch]: Footprint 'GRM033R61C104KE84J-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(151.2061 mm, 101.2936 mm): Footprint C9
+[lib_footprint_mismatch]: Footprint 'RESC0603X26X15NL03T05' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(158.8811 mm, 109.8936 mm): Footprint R3
+[lib_footprint_mismatch]: Footprint 'FP-GRM18-0_15-IPC_A' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(142.2071 mm, 105.1191 mm): Footprint C18
+[lib_footprint_mismatch]: Footprint 'C0402B105K016T-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(134.5561 mm, 112.4686 mm): Footprint C10
+[lib_footprint_mismatch]: Footprint 'FP-GRM18-0_15-IPC_A' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(139.7061 mm, 110.6686 mm): Footprint C23
+[lib_footprint_mismatch]: Footprint '12 pin castellated hole 1.6mm_ 1mm-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(139.6671 mm, 95.1056 mm): Footprint CST12
+[lib_footprint_mismatch]: Footprint 'RESC0603X26X15NL03T05' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(162.1311 mm, 102.6686 mm): Footprint R1
+[lib_footprint_mismatch]: Footprint 'C0402B105K016T-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(134.7811 mm, 106.1436 mm): Footprint C31
+[lib_footprint_mismatch]: Footprint 'AMPHENOL_12402012E212A' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(124.9811 mm, 105.0236 mm): Footprint J1
+[lib_footprint_mismatch]: Footprint 'C0402B105K016T-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(134.7811 mm, 105.5186 mm): Footprint C24
+[lib_footprint_mismatch]: Footprint '1769 - JST-PH 2-PIN SMT-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(134.2311 mm, 97.2056 mm): Footprint J6
+[lib_footprint_mismatch]: Footprint 'RESC0603X26X15NL03T05' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(158.7561 mm, 108.9936 mm): Footprint R4
+[lib_footprint_mismatch]: Footprint 'RESC0201(0603)_M' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(138.1811 mm, 112.4436 mm): Footprint R13
+[lib_footprint_mismatch]: Footprint 'FP-GRM033-0_03-MFG' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(158.5936 mm, 108.4936 mm): Footprint C11
+[lib_footprint_mismatch]: Footprint 'RESC0603X28X15ML05T05' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(150.1811 mm, 97.6686 mm): Footprint R7
+[lib_footprint_mismatch]: Footprint 'RESC1005X40X25NL05T10' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(132.4561 mm, 106.2686 mm): Footprint R21
+[lib_footprint_mismatch]: Footprint 'RESC0201(0603)_M' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(147.8061 mm, 103.7436 mm): Footprint R12
+[lib_footprint_mismatch]: Footprint 'RESC0603X26X15NL03T05' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(126.9061 mm, 115.1936 mm): Footprint R8
+[lib_footprint_mismatch]: Footprint 'RESC0603X26X15NL03T05' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(171.0311 mm, 99.6436 mm): Footprint R9
+[lib_footprint_mismatch]: Footprint 'CAPC1005X06N' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(170.7261 mm, 113.0046 mm): Footprint SW1
+[lib_footprint_mismatch]: Footprint 'FP-GRM033-0_03-MFG' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(152.0561 mm, 111.2311 mm): Footprint C13
+[lib_footprint_mismatch]: Footprint 'GRM033R61C104KE84J-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(132.6206 mm, 112.5436 mm): Footprint C30
+[lib_footprint_mismatch]: Footprint 'FP-GRM033-0_03-MFG' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(158.2976 mm, 101.2936 mm): Footprint C7
+[lib_footprint_mismatch]: Footprint 'FP-CL10-IPC_B' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(137.5811 mm, 103.5936 mm): Footprint C26
+[lib_footprint_mismatch]: Footprint 'GRM033R61C104KE84J-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(166.9311 mm, 112.5436 mm): Footprint C14
+[lib_footprint_mismatch]: Footprint 'ONSC-SOD-523-2-502-01_V' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(170.7561 mm, 100.4186 mm): Footprint TVS2
+[lib_footprint_mismatch]: Footprint 'GRM033R61C104KE84J-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(134.2771 mm, 111.9436 mm): Footprint C8
+[lib_footprint_mismatch]: Footprint 'GRM033R61C104KE84J-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(135.0561 mm, 107.1686 mm): Footprint C28
+[lib_footprint_mismatch]: Footprint 'GRM033R61C104KE84J-Footprint-1' does not match copy in library 'Cygnet-altium-import'.
+    Local override; warning
+    @(150.2427 mm, 108.5418 mm): Footprint C5
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.6350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(144.3081 mm, 98.1444 mm): PCB text 'CHG' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(128.9651 mm, 113.8524 mm): PCB text 'RST' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(131.0581 mm, 113.8524 mm): PCB text '3V3' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(133.5081 mm, 113.8524 mm): PCB text 'AREF' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(136.5081 mm, 113.8524 mm): PCB text 'GND' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(139.0331 mm, 113.8524 mm): PCB text 'A0' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(141.5081 mm, 113.8524 mm): PCB text 'A1' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(143.9081 mm, 113.8524 mm): PCB text 'A2' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(146.4081 mm, 113.8524 mm): PCB text 'A3' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(148.9581 mm, 113.8524 mm): PCB text 'A4' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(151.7581 mm, 113.8524 mm): PCB text 'A5' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(154.2581 mm, 113.8524 mm): PCB text 'CK' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(156.7581 mm, 113.8524 mm): PCB text 'MO' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(159.3581 mm, 113.8524 mm): PCB text 'MI' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(161.7331 mm, 113.8524 mm): PCB text 'RX' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(164.3581 mm, 113.8584 mm): PCB text 'TX' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(167.0331 mm, 113.8524 mm): PCB text 'B' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(140.5041 mm, 96.1599 mm): PCB text 'BAT' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(142.6791 mm, 96.1599 mm): PCB text 'EN' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(145.4780 mm, 96.1848 mm): PCB text 'USB' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(147.9541 mm, 96.1848 mm): PCB text 'D13' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(150.4791 mm, 96.1599 mm): PCB text 'D12' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(152.9291 mm, 96.1848 mm): PCB text 'D11' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(155.5791 mm, 96.1848 mm): PCB text 'D10' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(157.9041 mm, 96.1649 mm): PCB text 'D9' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(160.5041 mm, 96.1848 mm): PCB text 'D6' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(162.9541 mm, 96.1649 mm): PCB text 'D5' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(165.7541 mm, 96.1848 mm): PCB text 'SCL' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(168.1041 mm, 96.1848 mm): PCB text 'SDA' on Top Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(130.2291 mm, 113.6566 mm): PCB text 'RST' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(132.5541 mm, 113.6566 mm): PCB text '3V3' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(135.4791 mm, 113.6566 mm): PCB text 'AREF' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(138.0041 mm, 113.6566 mm): PCB text 'GND' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(140.2041 mm, 113.6566 mm): PCB text 'A0' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(142.6291 mm, 113.6566 mm): PCB text 'A1' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(145.2041 mm, 113.6566 mm): PCB text 'A2' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(147.7291 mm, 113.6566 mm): PCB text 'A3' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(150.1541 mm, 113.6816 mm): PCB text 'A4' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(152.8791 mm, 113.6566 mm): PCB text 'A5' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(155.2619 mm, 113.7139 mm): PCB text 'CK' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(158.0041 mm, 113.6316 mm): PCB text 'MO' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(160.2291 mm, 113.6566 mm): PCB text 'MI' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(162.9291 mm, 113.6566 mm): PCB text 'RX' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(165.3041 mm, 113.6566 mm): PCB text 'TX' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(167.7791 mm, 113.6566 mm): PCB text 'B' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(138.7081 mm, 96.3806 mm): PCB text 'BAT' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(141.7081 mm, 96.3806 mm): PCB text 'EN' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(143.7081 mm, 96.3556 mm): PCB text 'USB' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(146.4081 mm, 96.3556 mm): PCB text 'D13' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(149.1831 mm, 96.3806 mm): PCB text 'D12' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(151.7831 mm, 96.3556 mm): PCB text 'D11' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(154.1081 mm, 96.3806 mm): PCB text 'D10' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(156.8081 mm, 96.3556 mm): PCB text 'D9' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(159.3581 mm, 96.3806 mm): PCB text 'D6' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(161.8331 mm, 96.3806 mm): PCB text 'D5' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(164.3331 mm, 96.3806 mm): PCB text 'SCL' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7350 mm)
+    Rule: board setup constraints silk text height; warning
+    @(166.4581 mm, 96.3806 mm): PCB text 'SDA' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7500 mm)
+    Rule: board setup constraints silk text height; warning
+    @(132.5811 mm, 96.5881 mm): PCB Text Box 'CYGNET V1.2' on Bottom Overlay
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(129.7541 mm, 111.9438 mm): Reference field of SW3
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(172.4902 mm, 98.2491 mm): Reference field of SW2
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.8000 mm; actual 0.7000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(172.1353 mm, 111.3103 mm): Reference field of SW1
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(136.1351 mm, 102.0643 mm): PCB text '+' on Top Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(131.3101 mm, 102.0630 mm): PCB text '-' on Top Overlay
+
+** Found 0 unconnected pads **
+
+** Found 1 Footprint errors **
+[net_conflict]: No corresponding pin found in schematic.
+    Local override; warning
+    @(145.6961 mm, 107.3686 mm): Pad [GND] of U2 on Top Layer
+
+** End of Report **
