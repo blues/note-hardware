@@ -22,6 +22,7 @@ boards:
       path: Mojo/v1.1/Assembly Normal/BOM/BOM-Mojo-v4-Normal.xls
       sheet: BOM Simple
       header_contains: Designator
+      kicad_mpn_field: MANUFACTURER PART NUMBER
       columns:
         refs: Designator
         value: Name
@@ -31,17 +32,17 @@ boards:
       original_dir: Mojo/v1.1/Fabrication/Gerber
       original_tool: Altium
       outline:
-        kicad: "*Edge_Cuts*"
-        original: "*.GM1"
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM"
       layers:
-        F_Cu:         { kicad: "*F_Cu*",         original: "*.GTL" }
-        B_Cu:         { kicad: "*B_Cu*",         original: "*.GBL" }
-        F_Paste:      { kicad: "*F_Paste*",      original: "*.GTP" }
-        B_Paste:      { kicad: "*B_Paste*",      original: "*.GBP" }
-        F_Mask:       { kicad: "*F_Mask*",       original: "*.GTS" }
-        B_Mask:       { kicad: "*B_Mask*",       original: "*.GBS" }
-        F_Silkscreen: { kicad: "*F_Silkscreen*", original: "*.GTO" }
-        B_Silkscreen: { kicad: "*B_Silkscreen*", original: "*.GBO" }
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
 
   # --- filled in as each port is executed (see plan order) -------------------
 

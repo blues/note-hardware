@@ -48,8 +48,55 @@ def one(pattern, base):
     return hits[0]
 
 
-def render(outline, layer_file, out_png):
+def gerber_bbox_inches(path):
+    """Bounding box of all coordinates in a gerber file, in inches.
+
+    Parses the %FS format spec (integer/decimal digits) and %MO units, then
+    scans every X/Y coordinate. Good enough for board outline layers, which
+    is all we use it for (fixing a common render window)."""
+    import re
+    text = Path(path).read_text(errors="replace")
+    fs = re.search(r"%FS[LT][AI]X(\d)(\d)Y(\d)(\d)\*%", text)
+    if not fs:
+        raise SystemExit(f"no %FS spec in {path}")
+    xdec, ydec = int(fs.group(2)), int(fs.group(4))
+    scale = 25.4 if "%MOMM*%" in text else 1.0  # convert mm -> inch at the end
+    xs, ys = [], []
+    cx = cy = 0.0
+    for m in re.finditer(
+            r"(?:X(-?\d+))?(?:Y(-?\d+))?(?:I(-?\d+))?(?:J(-?\d+))?D0([123])\*", text):
+        x = int(m.group(1)) / 10**xdec if m.group(1) else cx
+        y = int(m.group(2)) / 10**ydec if m.group(2) else cy
+        xs.append(x)
+        ys.append(y)
+        if m.group(3) or m.group(4):
+            # Arc: I/J are offsets from the start point to the arc center.
+            # Conservatively include the full circle bounding box.
+            i = int(m.group(3)) / 10**xdec if m.group(3) else 0.0
+            j = int(m.group(4)) / 10**ydec if m.group(4) else 0.0
+            ax, ay = cx + i, cy + j
+            r = ((x - ax) ** 2 + (y - ay) ** 2) ** 0.5
+            xs.extend([ax - r, ax + r])
+            ys.extend([ay - r, ay + r])
+        cx, cy = x, y
+    if not xs or not ys:
+        raise SystemExit(f"no coordinates found in {path}")
+    if scale == 25.4:
+        xs = [x / 25.4 for x in xs]
+        ys = [y / 25.4 for y in ys]
+    return min(xs), min(ys), max(xs), max(ys)
+
+
+MARGIN_IN = 0.05
+
+
+def render(outline, layer_file, out_png, bbox):
+    x0, y0, x1, y1 = bbox
+    w = (x1 - x0) + 2 * MARGIN_IN
+    h = (y1 - y0) + 2 * MARGIN_IN
     cmd = [GERBV, "--background=#FFFFFF", f"--foreground={FG}", f"--foreground={FG}",
+           f"--origin={x0 - MARGIN_IN}x{y0 - MARGIN_IN}",
+           f"--window_inch={w}x{h}",
            outline, layer_file, "--export=png", f"--dpi={DPI}", "-o", str(out_png)]
     r = subprocess.run(cmd, capture_output=True, text=True)
     if r.returncode != 0 or not Path(out_png).exists():
@@ -77,25 +124,30 @@ def main():
 
     k_outline = one(cfg["outline"]["kicad"], args.kicad_dir)
     o_outline = one(cfg["outline"]["original"], orig_dir)
+    k_bbox = gerber_bbox_inches(k_outline)
+    o_bbox = gerber_bbox_inches(o_outline)
 
     problems = []
     for layer, m in cfg["layers"].items():
         k_png = args.out / f"{layer}-KiCad.png"
         o_png = args.out / f"{layer}-{tool}.png"
         d_png = args.out / f"{layer}-diff.png"
-        render(k_outline, one(m["kicad"], args.kicad_dir), k_png)
-        render(o_outline, one(m["original"], orig_dir), o_png)
+        render(k_outline, one(m["kicad"], args.kicad_dir), k_png, k_bbox)
+        render(o_outline, one(m["original"], orig_dir), o_png, o_bbox)
 
         ks, os_ = size(k_png), size(o_png)
         if ks != os_:
-            # Canvas mismatch: crop both to the smaller common size, centered
-            # (the F port notes hit the same issue and cropped).
-            w = min(int(ks.split("x")[0]), int(os_.split("x")[0]))
-            h = min(int(ks.split("x")[1]), int(os_.split("x")[1]))
+            # Sub-pixel rounding can differ by 1px; pad to the larger size.
+            w = max(int(ks.split("x")[0]), int(os_.split("x")[0]))
+            h = max(int(ks.split("x")[1]), int(os_.split("x")[1]))
+            if abs(int(ks.split("x")[0]) - int(os_.split("x")[0])) > 2 or \
+               abs(int(ks.split("x")[1]) - int(os_.split("x")[1])) > 2:
+                problems.append(f"{layer}: window size mismatch KiCad {ks} vs {tool} {os_} "
+                                f"— check board outline equivalence")
             for p in (k_png, o_png):
-                subprocess.run([MAGICK, "mogrify", "-gravity", "Center",
-                                "-crop", f"{w}x{h}+0+0", "+repage", str(p)], check=True)
-            problems.append(f"{layer}: canvas size differed (KiCad {ks} vs {tool} {os_}); center-cropped to {w}x{h}")
+                subprocess.run([MAGICK, "mogrify", "-background", "white",
+                                "-gravity", "SouthWest", "-extent", f"{w}x{h}",
+                                "+repage", str(p)], check=True)
 
         subprocess.run(
             [MAGICK, "(", str(k_png), "-grayscale", "Rec709Luminance", ")",

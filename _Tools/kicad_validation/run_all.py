@@ -63,27 +63,35 @@ class Gates:
         print(f"  {self.results[gid]}")
 
     def erc(self):
-        rpt = self.val_dir / "erc.rpt"
+        # full report (all severities) archived for human review ...
+        run([KICAD_CLI, "sch", "erc", "--severity-all",
+             "-o", self.val_dir / "erc.rpt", self.sch])
+        # ... but the hard gate is error-severity only; warnings are reviewed
+        # and documented in Porting-Notes (house convention, cf. the
+        # Notecarrier-A port's rule_severities).
         r = run([KICAD_CLI, "sch", "erc", "--exit-code-violations",
-                 "--severity-all", "-o", rpt, self.sch])
+                 "--severity-error", "-o", self.val_dir / "erc-errors.rpt",
+                 self.sch])
         return r.returncode == 0
 
     def drc(self):
         if not self.pcb:
             raise SkipGate("no pcb configured")
-        rpt = self.val_dir / "drc.rpt"
+        run([KICAD_CLI, "pcb", "drc", "--severity-all", "--schematic-parity",
+             "-o", self.val_dir / "drc.rpt", self.pcb])
         r = run([KICAD_CLI, "pcb", "drc", "--exit-code-violations",
-                 "--severity-all", "--schematic-parity", "-o", rpt, self.pcb])
+                 "--severity-error", "--schematic-parity",
+                 "-o", self.val_dir / "drc-errors.rpt", self.pcb])
         return r.returncode == 0
 
     def bom(self):
         if "bom" not in self.cfg:
             raise SkipGate("no bom config")
         kicad_csv = self.val_dir / "bom-kicad.csv"
+        mpn_field = self.cfg["bom"].get("kicad_mpn_field", "MPN")
         r = run([KICAD_CLI, "sch", "export", "bom", "-o", kicad_csv,
-                 "--fields", "Reference,Value,MPN,${DNP}",
-                 "--labels", "Reference,Value,MPN,DNP",
-                 "--group-by", "Reference", self.sch])
+                 "--fields", f"Reference,Value,{mpn_field},${{DNP}}",
+                 "--labels", "Reference,Value,MPN,DNP", self.sch])
         if r.returncode != 0:
             return False
         r = run([PY, HERE / "bom_compare.py", "--kicad", kicad_csv,

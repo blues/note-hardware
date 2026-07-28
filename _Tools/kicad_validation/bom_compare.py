@@ -32,6 +32,8 @@ def norm(s):
     """Normalize a value string for comparison."""
     if s is None:
         return ""
+    if isinstance(s, float) and s.is_integer():
+        s = int(s)  # xlrd reads numeric cells as floats ("20404.0")
     s = str(s).strip()
     s = s.replace("µ", "u").replace("μ", "u")  # micro signs -> u
     s = re.sub(r"\s+", " ", s)
@@ -51,6 +53,8 @@ def load_shipped(cfg):
     skip_refdes (regex, optional), dnp_markers (list, optional).
     """
     path = Path(cfg["path"])
+    if not path.is_absolute():
+        path = Path(__file__).resolve().parent.parent.parent / path
     if path.suffix.lower() == ".xls":
         book = xlrd.open_workbook(path)
         ws = book.sheet_by_name(cfg["sheet"]) if cfg.get("sheet") else book.sheet_by_index(0)
