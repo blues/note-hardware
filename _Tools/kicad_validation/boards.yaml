@@ -1,0 +1,74 @@
+# Per-board configuration for the KiCad port validation harness.
+#
+# All paths are relative to the repository root. A board entry is added/filled
+# in as its port is executed; run_all.py skips gates whose config is absent
+# and reports them as SKIPPED (skipped gates must be justified in the board's
+# Porting-Notes.md — see the NO-GO policy in README.md).
+#
+# Sections per board:
+#   kicad:    project paths (root sheet, pcb)
+#   bom:      shipped-BOM parsing rules (see bom_compare.py)
+#   gerbers:  layer map KiCad-export <-> shipped fab package (see gerber_diff.py)
+#   odb:      extracted ODB++ root, when the product ships one (netlist gate)
+
+boards:
+
+  mojo:
+    product_dir: Mojo/v1.1
+    kicad:
+      sch: Mojo/v1.1/KiCad_format/Mojo.kicad_sch
+      pcb: Mojo/v1.1/KiCad_format/Mojo.kicad_pcb
+    bom:
+      path: Mojo/v1.1/Assembly Normal/BOM/BOM-Mojo-v4-Normal.xls
+      sheet: BOM Simple
+      header_contains: Designator
+      columns:
+        refs: Designator
+        value: Name
+        mpn: Manufacturer Part Number 1
+      skip_refdes: '^(TP|FID|MH|LOGO)\d*$'
+    gerbers:
+      original_dir: Mojo/v1.1/Fabrication/Gerber
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts*"
+        original: "*.GM1"
+      layers:
+        F_Cu:         { kicad: "*F_Cu*",         original: "*.GTL" }
+        B_Cu:         { kicad: "*B_Cu*",         original: "*.GBL" }
+        F_Paste:      { kicad: "*F_Paste*",      original: "*.GTP" }
+        B_Paste:      { kicad: "*B_Paste*",      original: "*.GBP" }
+        F_Mask:       { kicad: "*F_Mask*",       original: "*.GTS" }
+        B_Mask:       { kicad: "*B_Mask*",       original: "*.GBS" }
+        F_Silkscreen: { kicad: "*F_Silkscreen*", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*B_Silkscreen*", original: "*.GBO" }
+
+  # --- filled in as each port is executed (see plan order) -------------------
+
+  cygnet:
+    product_dir: Cygnet/v1.2
+
+  scoop:
+    product_dir: Scoop/v1.0
+
+  notecarrier-cx:
+    product_dir: Notecarrier-CX/v1.7
+    odb:
+      # tarball at Notecarrier-CX/v1.7/FAB/ODB/ ships pre-extracted at odb/
+      root: Notecarrier-CX/v1.7/FAB/ODB/odb
+      step: pcb
+
+  notecarrier-xi:
+    product_dir: Notecarrier-XI/v1.4
+
+  notecarrier-xs:
+    product_dir: Notecarrier-XS/v1.2
+
+  notecarrier-x:
+    product_dir: Notecarrier-X/v1.2
+
+  notecarrier-xm:
+    product_dir: Notecarrier-XM/v1.2
+
+  notecarrier-xp:
+    product_dir: Notecarrier-XP/v3.1
