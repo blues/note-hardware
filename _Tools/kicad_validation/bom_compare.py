@@ -123,7 +123,8 @@ def compare(kicad, shipped, check_mpn=True, check_value=True):
         variants = {v.strip() for v in s["value"].split(",")}
         if check_value and k["value"] != s["value"] and k["value"] not in variants:
             diffs.append(f"  {ref}: value KiCad='{k['value']}' shipped='{s['value']}'")
-        elif check_mpn and s["mpn"] and k["mpn"] and k["mpn"] != s["mpn"]:
+        elif (check_mpn and s["mpn"] and k["mpn"] and k["mpn"] != s["mpn"]
+                and k["mpn"] not in {m.strip() for m in s["mpn"].split(",")}):
             diffs.append(f"  {ref}: MPN KiCad='{k['mpn']}' shipped='{s['mpn']}'")
     ok = not only_k and not only_s and not diffs
     if only_k:

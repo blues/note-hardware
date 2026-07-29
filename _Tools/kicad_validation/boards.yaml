@@ -115,10 +115,39 @@ boards:
 
   notecarrier-cx:
     product_dir: Notecarrier-CX/v1.7
+    kicad:
+      sch: Notecarrier-CX/v1.7/KiCad_format/Notecarrier-CX.kicad_sch
+      pcb: Notecarrier-CX/v1.7/KiCad_format/Notecarrier-CX.kicad_pcb
+    bom:
+      path: Notecarrier-CX/v1.7/BOM/BOM-notecarrier-cx(Production).xlsx
+      header_contains: Designator
+      kicad_mpn_field: BL PART NUMBER
+      columns:
+        refs: Designator
+        value: Name
+        mpn: BL Part Number
+      skip_refdes: '^(FD|LOGO|DOC|PCB)\d*$'
     odb:
       # tarball at Notecarrier-CX/v1.7/FAB/ODB/ ships pre-extracted at odb/
       root: Notecarrier-CX/v1.7/FAB/ODB/odb
       step: pcb
+    gerbers:
+      original_dir: Notecarrier-CX/v1.7/FAB/Gerber
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM15"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        In1_Cu:       { kicad: "*.g1", original: "*.G1" }
+        In2_Cu:       { kicad: "*.g2", original: "*.G2" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
 
   notecarrier-xi:
     product_dir: Notecarrier-XI/v1.4

@@ -64,6 +64,8 @@ def kicad_nodes(netlist_path: Path):
                 pin = next(x[1] for x in node if isinstance(x, list) and x[0] == "pin")
                 nodes.add((str(ref), str(pin)))
         if nodes:
+            if str(name) == "$NONE$":
+                continue  # ODB bucket for unassigned/unconnected pins
             nets[str(name)] = nodes
     return nets
 
@@ -102,6 +104,8 @@ def odb_nodes(odb_root: Path, step: str):
                 f = line.split()
                 net_num, pin_name = int(f[6]), f[8]
                 name = names.get(net_num, f"$NET{net_num}")
+                if name == "$NONE$":
+                    continue  # ODB bucket for unassigned/unconnected pins
                 nets[name].add((refdes, pin_name))
     return dict(nets)
 

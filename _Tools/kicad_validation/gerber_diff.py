@@ -56,7 +56,7 @@ def gerber_bbox_inches(path):
     is all we use it for (fixing a common render window)."""
     import re
     text = Path(path).read_text(errors="replace")
-    fs = re.search(r"%FS[LT][AI]X(\d)(\d)Y(\d)(\d)\*%", text)
+    fs = re.search(r"%FS[LT]?[AI]X(\d)(\d)Y(\d)(\d)\*%", text)
     if not fs:
         raise SystemExit(f"no %FS spec in {path}")
     xdec, ydec = int(fs.group(2)), int(fs.group(4))
