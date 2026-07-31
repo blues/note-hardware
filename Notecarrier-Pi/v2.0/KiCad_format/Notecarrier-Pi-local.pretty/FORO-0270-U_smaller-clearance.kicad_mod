@@ -1,0 +1,150 @@
+(footprint "FORO-0270-U_smaller-clearance"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "Mounting Hole 2.7mm, smaller clearance to suit Notecarrier-Pi, ported from OrCAD")
+	(tags "mounting hole 2.7mm")
+	(property "Reference" "REF**"
+		(at 0 -2.95 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "4b114ffd-5263-4240-9642-065b5e3ba2d9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "MountingHole"
+		(at 0 3.3 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "cb9bc38d-25b1-4d5b-bbc5-ac963e0a7c77")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" "~"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ac0c22d5-1c1b-46ae-97d8-cf69e2f84435")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "12107d4c-898e-4999-9d66-9a4bba7fdcea")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Distributor" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "dcb5ac93-41ae-482e-bf98-ee101532e64c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr exclude_from_pos_files)
+	(fp_circle
+		(center 0 0)
+		(end 2 0)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.Adhes")
+		(uuid "ed34707e-616f-4aca-9944-9ddcca749400")
+	)
+	(fp_circle
+		(center 0 0)
+		(end 2 0)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill yes)
+		(layer "B.Adhes")
+		(uuid "a1765c69-115a-419d-93f5-b4c91ec0ef72")
+	)
+	(fp_circle
+		(center 0 0)
+		(end 3 0)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "1dd2d3d0-ac6c-4abe-9144-ac4e5019966b")
+	)
+	(pad "" np_thru_hole circle
+		(at 0 0)
+		(size 2.7 2.7)
+		(drill 2.7)
+		(layers "*.Cu" "*.Mask")
+		(solder_mask_margin 0.1)
+		(clearance 0.55)
+		(uuid "5a830d2b-605c-4815-bb18-a20a9e7cb784")
+	)
+	(zone
+		(net 0)
+		(net_name "")
+		(layers "F.Cu" "B.Cu" "In1.Cu" "In2.Cu" "Dwgs.User")
+		(uuid "d536941a-84bd-4da1-a412-7be9ba792449")
+		(hatch edge 0.5)
+		(connect_pads
+			(clearance 0)
+		)
+		(min_thickness 0.25)
+		(filled_areas_thickness no)
+		(keepout
+			(tracks not_allowed)
+			(vias not_allowed)
+			(pads allowed)
+			(copperpour allowed)
+			(footprints allowed)
+		)
+		(placement
+			(enabled no)
+			(sheetname "")
+		)
+		(fill
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+		)
+		(polygon
+			(pts
+				(xy 0 -3) (xy 0.15 -3) (xy 0.55 -2.95) (xy 0.95 -2.85) (xy 1.225 -2.75) (xy 1.5 -2.6) (xy 1.8 -2.4)
+				(xy 2.15 -2.1) (xy 2.4 -1.8) (xy 2.6 -1.5) (xy 2.8 -1.1) (xy 2.9 -0.8) (xy 3 -0.3) (xy 3 0.2) (xy 2.95 0.55)
+				(xy 2.85 0.95) (xy 2.7 1.3) (xy 2.6 1.5) (xy 2.4 1.8) (xy 2.15 2.1) (xy 1.8 2.4) (xy 1.5 2.6) (xy 1.1 2.8)
+				(xy 0.8 2.9) (xy 0.25 3) (xy -0.2 3) (xy -0.6 2.95) (xy -0.95 2.85) (xy -1.4 2.65) (xy -1.65 2.5)
+				(xy -2.05 2.2) (xy -2.4 1.8) (xy -2.6 1.5) (xy -2.8 1.1) (xy -2.9 0.75) (xy -3 0.25) (xy -3 -0.2)
+				(xy -2.95 -0.55) (xy -2.8 -1.1) (xy -2.6 -1.5) (xy -2.4 -1.8) (xy -2.15 -2.1) (xy -1.8 -2.4) (xy -1.4 -2.65)
+				(xy -1.05 -2.8) (xy -0.6 -2.95) (xy -0.2 -3)
+			)
+		)
+	)
+	(embedded_fonts no)
+)

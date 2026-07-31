@@ -1,0 +1,129 @@
+** Drc report for Notecarrier-Pi.kicad_pcb **
+** Created on 2026-07-31T15:03:04-0500 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 24 DRC violations **
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.7000 mm; actual 0.4000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(116.7620 mm, 124.5600 mm): PCB text '1' on F.Silkscreen
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.7000 mm; actual 0.4000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(116.7620 mm, 133.2000 mm): PCB text '1' on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(119.9700 mm, 128.3200 mm): PCB text 'SDA' on F.Silkscreen
+    @(120.9700 mm, 128.3200 mm): PCB text 'SCL' on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(117.9700 mm, 128.3200 mm): PCB text 'GND' on F.Silkscreen
+    @(118.9700 mm, 128.3200 mm): PCB text '3V3' on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(119.9700 mm, 128.3200 mm): PCB text 'SDA' on F.Silkscreen
+    @(118.9700 mm, 128.3200 mm): PCB text '3V3' on F.Silkscreen
+[clearance]: Clearance violation (pad clearance 1.1700 mm; actual 1.1488 mm)
+    Local override; error (excluded)
+    @(67.1500 mm, 131.6000 mm): Pad 6 [Net-(J4-Shield)] of J4 on B.Cu
+    @(66.9968 mm, 134.1488 mm): Pad [<no net>] of FID1 on B.Cu
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126998 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(106.5507 mm, 120.1351 mm): Pad 2 [GND] of TVS4 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126998 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(105.6750 mm, 130.0000 mm): Pad CSW [GND] of J2 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126998 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(106.0000 mm, 137.2000 mm): Pad SH [GND] of J2 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126998 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(106.0000 mm, 132.3500 mm): Pad SH [GND] of J2 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126998 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(105.5000 mm, 128.2000 mm): Pad SH [GND] of J2 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126998 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(103.6050 mm, 125.2500 mm): Pad SH [GND] of J2 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126998 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(99.2050 mm, 125.2500 mm): Pad SH [GND] of J2 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126998 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(94.8250 mm, 137.2000 mm): Pad SH [GND] of J2 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126998 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(94.8250 mm, 132.3500 mm): Pad SH [GND] of J2 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126998 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(94.8250 mm, 127.2000 mm): Pad SH [GND] of J2 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126999 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(100.0952 mm, 123.0042 mm): Pad 2 [GND] of C6 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126998 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(97.5704 mm, 120.5254 mm): Pad 2 [GND] of C3 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126998 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(103.3954 mm, 120.6554 mm): Pad 2 [GND] of C5 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[clearance]: Clearance violation (rule 'GndZone2GndPad' clearance 0.127 mm; actual 0.126999 mm)
+    Rule: GndZone2GndPad; error (excluded)
+    @(97.4953 mm, 122.1042 mm): Pad 2 [GND] of C4 on B.Cu
+    @(108.3590 mm, 116.7850 mm): Zone [GND] on B.Cu, priority 9
+[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.9500 mm; actual 0.7232 mm)
+    Rule: board setup constraints edge; error (excluded)
+    @(109.0000 mm, 121.0000 mm): Segment on Edge.Cuts
+    @(108.0228 mm, 122.4218 mm): Via [GND] on F.Cu - B.Cu
+
+** Found 0 unconnected pads **
+
+** Found 9 Footprint errors **
+[footprint_symbol_mismatch]: Notecarrier-Pi-local:CS-C-1206 doesn't match footprint given by symbol (blues-kicad-lib:CS-C-1206).
+    Local override; warning
+    @(78.0433 mm, 128.4193 mm): Footprint C14
+[footprint_symbol_mismatch]: Notecarrier-Pi-local:CS-C-1206 doesn't match footprint given by symbol (blues-kicad-lib:CS-C-1206).
+    Local override; warning
+    @(78.1114 mm, 122.7677 mm): Footprint C16
+[footprint_symbol_mismatch]: Notecarrier-Pi-local:FORO-0270-U_tracks-allowed doesn't match footprint given by symbol (blues-kicad-lib:FORO-0270-U_smaller-clearance).
+    Local override; warning
+    @(68.5000 mm, 87.5000 mm): Footprint H1
+[footprint_symbol_mismatch]: Notecarrier-Pi-local:FORO-0270-U_smaller-clearance doesn't match footprint given by symbol (blues-kicad-lib:FORO-0270-U_smaller-clearance).
+    Local override; warning
+    @(126.5000 mm, 87.5000 mm): Footprint H2
+[footprint_symbol_mismatch]: Notecarrier-Pi-local:FORO-0270-U_smaller-clearance doesn't match footprint given by symbol (blues-kicad-lib:FORO-0270-U_smaller-clearance).
+    Local override; warning
+    @(126.5000 mm, 136.5000 mm): Footprint H3
+[footprint_symbol_mismatch]: Notecarrier-Pi-local:FORO-0270-U_smaller-clearance doesn't match footprint given by symbol (blues-kicad-lib:FORO-0270-U_smaller-clearance).
+    Local override; warning
+    @(68.5000 mm, 136.5000 mm): Footprint H4
+[footprint_symbol_mismatch]: Notecarrier-Pi-local:J-NANOSIM-SF72S006VBA_NO-FILL doesn't match footprint given by symbol (blues-kicad-lib:J-NANOSIM-SF72S006VBA_NO-FILL).
+    Local override; warning
+    @(100.4250 mm, 132.4500 mm): Footprint J2
+[footprint_symbol_mismatch]: Notecarrier-Pi-local:J-4-0100-MDS-SH doesn't match footprint given by symbol (blues-kicad-lib:J-4-0100-MDS-SH).
+    Local override; warning
+    @(117.9736 mm, 123.5636 mm): Footprint J5
+[footprint_symbol_mismatch]: Notecarrier-Pi-local:J-4-0100-MDS-SH doesn't match footprint given by symbol (blues-kicad-lib:J-4-0100-MDS-SH).
+    Local override; warning
+    @(117.9736 mm, 132.2036 mm): Footprint J6
+
+** End of Report **

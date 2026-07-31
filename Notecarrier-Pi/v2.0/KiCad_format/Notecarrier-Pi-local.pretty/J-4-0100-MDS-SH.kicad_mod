@@ -1,0 +1,213 @@
+(footprint "J-4-0100-MDS-SH"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "JST SH series connector, BM04B-SRSS-TB (http://www.jst-mfg.com/product/pdf/eng/eSH.pdf), ported from OrCAD")
+	(tags "connector JST SH top entry")
+	(property "Reference" "REF**"
+		(at 0 -4.25 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "96bef90b-42ec-4a77-9322-10bd4cfe0b14")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "BM04B-SRSS-TBT(LF)(SN)"
+		(at 0 2.6 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e4c0597b-e6e3-4d1d-9a7a-1ce9e1a1ad3b")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "1f3a81e1-defa-411e-8a73-8f07fcfa782d")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "23ffb49c-93c9-4c75-8b85-194311b98de0")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -2 -3.525)
+		(end -2 0.875)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "ca0f75c6-5549-4acf-b80f-90928954ded8")
+	)
+	(fp_line
+		(start -2 0.875)
+		(end 5 0.875)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "572d5d29-27fa-46b8-9887-3044a9b139e9")
+	)
+	(fp_line
+		(start 5 -3.525)
+		(end -2 -3.525)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "1362e8fd-9d4e-4fce-a474-2da6b941a865")
+	)
+	(fp_line
+		(start 5 0.875)
+		(end 5 -3.525)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "eec01b34-8898-4b75-b848-c6c0b1f082ff")
+	)
+	(fp_line
+		(start -1.6 -3.325)
+		(end -1.6 -0.225)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "b245ea45-a282-400e-8055-3315dcbe1f86")
+	)
+	(fp_line
+		(start -1.6 -3.325)
+		(end 4.6 -3.325)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "708be581-1d7e-47d8-8eff-37278643ae07")
+	)
+	(fp_line
+		(start -1.6 -0.225)
+		(end 4.6 -0.225)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "3c80c616-f4a1-4014-8bf9-e2f2d262207a")
+	)
+	(fp_line
+		(start 4.6 -3.325)
+		(end 4.6 -0.225)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "8dde0a95-1f0a-4ed1-9f83-34d25414f18f")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 1.55 -2 0)
+		(layer "F.Fab")
+		(uuid "1210642c-65e2-407f-9177-a957a6c203d8")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.1)
+			)
+		)
+	)
+	(fp_text user "1"
+		(at 0 -1.7 0)
+		(layer "F.Fab")
+		(uuid "5436fda5-612a-4e6d-b28c-20fb1326f8b7")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at 0 0)
+		(size 0.6 1.55)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.1)
+		(uuid "7bf5fb67-dfe7-47ed-b549-143f45b05f67")
+	)
+	(pad "2" smd rect
+		(at 1 0)
+		(size 0.6 1.55)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.1)
+		(uuid "6be52ea3-f21b-4980-b793-4343a21401e6")
+	)
+	(pad "3" smd rect
+		(at 2 0)
+		(size 0.6 1.55)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.1)
+		(uuid "102f02cb-6090-4771-8850-d0ac2db73c7d")
+	)
+	(pad "4" smd rect
+		(at 3 0)
+		(size 0.6 1.55)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.1)
+		(uuid "768c8464-b22e-4a5e-b5f8-adee950d34c6")
+	)
+	(pad "MP" smd rect
+		(at -1.3 -2.525)
+		(size 1.2 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.1)
+		(uuid "5c7c5e5b-44c1-4294-bbcf-e59ab5cde744")
+	)
+	(pad "MP" smd rect
+		(at 4.3 -2.525)
+		(size 1.2 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.1)
+		(uuid "00506376-6424-4bd4-ac41-5344764e51cf")
+	)
+	(embedded_fonts no)
+	(model "${BLUES_KICAD_LIB_DIR}/3d-models/J-4-0100-MDS-SH.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

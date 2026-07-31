@@ -303,3 +303,40 @@ boards:
   # reroutes the bottom-centre track bundle. See the X-series porting notes.
   notecarrier-xp:
     product_dir: Notecarrier-XP/v3.1
+
+  # Notecarrier-Pi v2.0 - OrCAD/Allegro-authored revision, ported as a delta
+  # from the validated v1.1 KiCad port (see the port's Porting-Notes.md).
+  # The shipped artwork films are Allegro .art with an A3 drawing frame, so
+  # the diff uses explicit render windows and the films' own outline strokes.
+  # original_dir must hold the unzipped contents of
+  # "Notecarrier-Pi/v2.0/Notecarrier-Pi Gerbers v2.zip".
+  notecarrier-pi:
+    product_dir: Notecarrier-Pi/v2.0
+    kicad:
+      sch: Notecarrier-Pi/v2.0/KiCad_format/Notecarrier-Pi.kicad_sch
+      pcb: Notecarrier-Pi/v2.0/KiCad_format/Notecarrier-Pi.kicad_pcb
+    # BOM gate: the shipped v2.0 BOM spreadsheet is internal (fae repo) and
+    # not part of note-hardware; the comparison was run during porting and
+    # its result is committed as validation/bom-compare.txt. Run with
+    # --skip BOM.
+    gerbers:
+      original_dir: /tmp/pi20-gerbers
+      original_tool: Allegro
+      original_has_outline: true
+      window:
+        original: [-2.7591, -0.0984, -0.0031, 2.2246]
+        kicad: [2.359, -5.610, 5.115, -3.287]
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "03-MANUFACTURING.art"
+      layers:
+        F_Cu: { kicad: "*.gtl", original: "04-TOP.art" }
+        B_Cu: { kicad: "*.gbl", original: "07-BOTTOM.art" }
+        In1_Cu: { kicad: "*In1_Cu.g1", original: "05-GND.art" }
+        In2_Cu: { kicad: "*In2_Cu.g2", original: "06-POWER.art" }
+        F_Paste: { kicad: "*.gtp", original: "10-PASTETOP.art" }
+        B_Paste: { kicad: "*.gbp", original: "11-PASTEBOTTOM.art" }
+        F_Mask: { kicad: "*.gts", original: "08-SOLDERTOP.art" }
+        B_Mask: { kicad: "*.gbs", original: "09-SOLDERBOTTOM.art" }
+        F_Silkscreen: { kicad: "*.gto", original: "12-SILKTOP.art" }
+        B_Silkscreen: { kicad: "*.gbo", original: "13-SILKBOTTOM.art" }

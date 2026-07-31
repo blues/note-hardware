@@ -32,6 +32,7 @@ and `documentation/Porting-Notes.md` inside each port).
 |Notecarrier-CX v1.7|KiCad 9|[Notecarrier-CX/v1.7/KiCad_format](Notecarrier-CX/v1.7/KiCad_format)|
 |Notecarrier-F v1.3|KiCad 7|[Notecarrier-F/v1.3/KiCad_format](Notecarrier-F/v1.3/KiCad_format)|
 |Notecarrier-Pi v1.1|KiCad 7|[Notecarrier-Pi/v1.1/KiCad_format](Notecarrier-Pi/v1.1/KiCad_format)|
+|Notecarrier-Pi v2.0|KiCad 9|[Notecarrier-Pi/v2.0/KiCad_format](Notecarrier-Pi/v2.0/KiCad_format)|
 |Notecarrier-XI v1.4|KiCad 9|[Notecarrier-XI/v1.4/KiCad_format](Notecarrier-XI/v1.4/KiCad_format)|
 |Notecarrier-X v1.2 †|KiCad 9|[Notecarrier-X/v1.2/KiCad_format](Notecarrier-X/v1.2/KiCad_format)|
 |Notecarrier-XS v1.2 †|KiCad 9|[Notecarrier-XS/v1.2/KiCad_format](Notecarrier-XS/v1.2/KiCad_format)|
@@ -54,9 +55,10 @@ Some products do not have a KiCad port, deliberately:
   differs electrically from the shipped board (an entire DNP subcircuit and
   a grounded presence-detect strap), so no port is published (accuracy over
   coverage).
-* **Swan v3.0 and Notecarrier-Pi v2.0** — authored in OrCAD/Allegro, for which
-  no KiCad importer exists. (The Notecarrier-Pi v1.1 KiCad port remains the
-  canonical KiCad reference for the Pi form factor.)
+* **Swan v3.0** — authored in OrCAD/Allegro, for which no KiCad importer
+  exists. (The Notecarrier-Pi v2.0 port shows that an Allegro board *can* be
+  delta-ported when a validated KiCad base and the full fab package exist;
+  Swan has no prior KiCad port to delta from.)
 * **Notecarrier-A v2.3** — a PCB-only Allegro revision; the v2.0 KiCad port
   remains the canonical KiCad reference for the A form factor.
 

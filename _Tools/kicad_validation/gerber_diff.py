@@ -141,8 +141,13 @@ def main():
 
     k_outline = one(cfg["outline"]["kicad"], args.kicad_dir)
     o_outline = one(cfg["outline"]["original"], orig_dir)
-    k_bbox = gerber_bbox_inches(k_outline)
-    o_bbox = gerber_bbox_inches(o_outline)
+    # Optional explicit render windows ([x0, y0, x1, y1] inches, gerber
+    # coordinate frame per side). Needed when the shipped films carry a
+    # drawing frame (e.g. Allegro artwork films) that breaks bbox-based
+    # auto-alignment.
+    win = cfg.get("window", {})
+    k_bbox = tuple(win["kicad"]) if "kicad" in win else gerber_bbox_inches(k_outline)
+    o_bbox = tuple(win["original"]) if "original" in win else gerber_bbox_inches(o_outline)
 
     problems = []
     for layer, m in cfg["layers"].items():
@@ -171,7 +176,12 @@ def main():
             subprocess.run([MAGICK, str(o_png), "-negate", str(o_png)], check=True)
         else:
             render(k_outline, one(m["kicad"], args.kicad_dir), k_png, k_bbox)
-            render(o_outline, one(m["original"], orig_dir), o_png, o_bbox)
+            if cfg.get("original_has_outline"):
+                # shipped films already draw the board outline (e.g. Allegro
+                # artwork films) - render them alone
+                render_single(one(m["original"], orig_dir), o_png, o_bbox)
+            else:
+                render(o_outline, one(m["original"], orig_dir), o_png, o_bbox)
 
         ks, os_ = size(k_png), size(o_png)
         if ks != os_:
