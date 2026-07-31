@@ -41,6 +41,21 @@ and `documentation/Porting-Notes.md` inside each port).
 |Mojo v1.1|KiCad 9|[Mojo/v1.1/KiCad_format](Mojo/v1.1/KiCad_format)|
 |Scoop v1.0|KiCad 9|[Scoop/v1.0/KiCad_format](Scoop/v1.0/KiCad_format)|
 
+One further port is **unfinished and not usable** — it is present only so the
+work is not lost:
+
+|Product|State|Location|
+|---|---|---|
+|Notecarrier-A v2.3|⚠️ **work in progress — do not use**|[Notecarrier-A/v2.3/KiCad_format](Notecarrier-A/v2.3/KiCad_format)|
+
+Its schematic is complete and ERC-clean, but the board's copper pours and
+silkscreen are unfinished and DRC is not clean, so it is **not** a KiCad
+equivalent of the v2.3 board. Use the complete
+[Notecarrier-A v2.0](Notecarrier-A/v2.0/KiCad_format) port as the KiCad
+reference for the A form factor. See
+[`STATUS-INCOMPLETE.md`](Notecarrier-A/v2.3/KiCad_format/STATUS-INCOMPLETE.md)
+for exactly what is verified, what remains, and what would unlock it.
+
 † The Notecarrier-X, -XS and -XM ports carry a **source-fidelity
 disclaimer**: they were made from the closest available design-house sources
 rather than the exact released v1.2 snapshots, with the differences reviewed
@@ -59,8 +74,8 @@ Some products do not have a KiCad port, deliberately:
   exists. (The Notecarrier-Pi v2.0 port shows that an Allegro board *can* be
   delta-ported when a validated KiCad base and the full fab package exist;
   Swan has no prior KiCad port to delta from.)
-* **Notecarrier-A v2.3** — a PCB-only Allegro revision; the v2.0 KiCad port
-  remains the canonical KiCad reference for the A form factor.
+(The unfinished Notecarrier-A v2.3 port above is a separate case: it is
+in progress rather than deliberately skipped.)
 
 ## More Information
 
