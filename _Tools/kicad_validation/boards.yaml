@@ -65,6 +65,8 @@ boards:
         USER: SW3
       skip_refdes: '^(TP|FID|MH|LOGO|CST)\d*$'
     gerbers:
+      # local extraction of the in-repo shipped fab package:
+      #   unzip 'Cygnet/v1.2/Cygnet Gerbers.zip' -d <original_dir>
       original_dir: /private/tmp/claude-501/-Users-roblauer-Documents-GitHub-blues-note-hardware/26345e84-f61c-4c64-85bd-58e534b0269f/scratchpad/cygnet-gerbers
       original_tool: Altium
       outline:
@@ -98,6 +100,8 @@ boards:
         mpn: MPN
       skip_refdes: '^(TP|FID|FD|MH|LOGO)\d*$'
     gerbers:
+      # local extraction of the in-repo shipped fab package:
+      #   unzip 'Scoop/v1.0/992-00084-A_Gerbers.zip' -d <original_dir>
       original_dir: /private/tmp/claude-501/-Users-roblauer-Documents-GitHub-blues-note-hardware/26345e84-f61c-4c64-85bd-58e534b0269f/scratchpad/scoop-gerbers
       original_tool: Altium
       outline:
@@ -184,6 +188,10 @@ boards:
         F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
         B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
 
+  # notecarrier-xs / notecarrier-x / notecarrier-xm: NO-GO — the byte repo's
+  # dev/ folders never captured the published v1.2 sources (dev jumped from
+  # v1.1 straight to v1.3-in-progress; silk versions and layout differ from
+  # the released fab packages). See the X-series porting notes.
   notecarrier-xs:
     product_dir: Notecarrier-XS/v1.2
 
@@ -193,5 +201,10 @@ boards:
   notecarrier-xm:
     product_dir: Notecarrier-XM/v1.2
 
+  # notecarrier-xp: NO-GO — the published v3.1 fab (2200-925, 2024-06-26) was
+  # generated from an uncommitted working state. Every committed dev/ state
+  # differs in copper: 5d577c0/907d345 add a fully-routed DNP subcircuit
+  # (Q1, R12-R15, C18/C19) absent from the fab, and 469a5f7 removes it but
+  # reroutes the bottom-centre track bundle. See the X-series porting notes.
   notecarrier-xp:
     product_dir: Notecarrier-XP/v3.1

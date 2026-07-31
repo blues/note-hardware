@@ -12,7 +12,42 @@ This repository contains open hardware designs for Notecarriers and other Noteca
 |[Cygnet](Cygnet)| STM32 in Adafruit Feather form| Full electrical and mechanical design|
 |[Swan](Swan)| STM32 in Adafruit Feather form| Full electrical and mechanical design|
 |[Airnote](Airnote)|Air quality monitor powered by Notecard|Mechanical design files|
-|[_deprecated](_deprecated)|Components and designs no longer sold| Assorted design files
+|[_Legacy Hardware](_Legacy%20Hardware)|Components and designs no longer sold| Assorted design files
+
+## KiCad Design Files
+
+The original electrical designs in this repository were authored in Altium
+Designer or OrCAD/Allegro. For a number of products a complete
+[KiCad](https://www.kicad.org/) equivalent of the latest published version is
+also provided in a `KiCad_format/` folder alongside the original design files.
+Each KiCad port was converted from the original sources and validated against
+the shipped fabrication outputs (ERC/DRC, BOM comparison, netlist/connectivity
+comparison, and per-layer gerber raster diffs — see the `validation/` folder
+and `documentation/Porting-Notes.md` inside each port).
+
+|Product|KiCad version|Location|
+|---|---|---|
+|Notecarrier-A v2.0|KiCad 7|[Notecarrier-A/v2.0/KiCad_format](Notecarrier-A/v2.0/KiCad_format)|
+|Notecarrier-B v2.1|KiCad 7|[_Legacy Hardware/Notecarrier-B/v2.1/KiCad_format](_Legacy%20Hardware/Notecarrier-B/v2.1/KiCad_format)|
+|Notecarrier-CX v1.7|KiCad 9|[Notecarrier-CX/v1.7/KiCad_format](Notecarrier-CX/v1.7/KiCad_format)|
+|Notecarrier-F v1.3|KiCad 7|[Notecarrier-F/v1.3/KiCad_format](Notecarrier-F/v1.3/KiCad_format)|
+|Notecarrier-Pi v1.1|KiCad 7|[Notecarrier-Pi/v1.1/KiCad_format](Notecarrier-Pi/v1.1/KiCad_format)|
+|Notecarrier-XI v1.4|KiCad 9|[Notecarrier-XI/v1.4/KiCad_format](Notecarrier-XI/v1.4/KiCad_format)|
+|Cygnet v1.2|KiCad 9|[Cygnet/v1.2/KiCad_format](Cygnet/v1.2/KiCad_format)|
+|Mojo v1.1|KiCad 9|[Mojo/v1.1/KiCad_format](Mojo/v1.1/KiCad_format)|
+|Scoop v1.0|KiCad 9|[Scoop/v1.0/KiCad_format](Scoop/v1.0/KiCad_format)|
+
+Some products do not have a KiCad port, deliberately:
+
+* **Notecarrier-X / -XS / -XM / -XP** — the exact Altium sources matching the
+  published fabrication packages are not available, and a conversion from a
+  near-miss source state could not be proven accurate against the shipped
+  gerbers, so no port is published (accuracy over coverage).
+* **Swan v3.0 and Notecarrier-Pi v2.0** — authored in OrCAD/Allegro, for which
+  no KiCad importer exists. (The Notecarrier-Pi v1.1 KiCad port remains the
+  canonical KiCad reference for the Pi form factor.)
+* **Notecarrier-A v2.3** — a PCB-only Allegro revision; the v2.0 KiCad port
+  remains the canonical KiCad reference for the A form factor.
 
 ## More Information
 

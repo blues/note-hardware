@@ -1,6 +1,6 @@
 # Porting Notes
 
-As per [Notecarrier-A](../../../Notecarrier-B/KiCad_format/documentation/PortingNotes.md), except:
+As per [Notecarrier-A](../../../../Notecarrier-A/v2.0/KiCad_format/documentation/PortingNotes.md), except:
 
 ## Project
 

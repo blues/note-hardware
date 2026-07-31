@@ -1,6 +1,6 @@
 # Porting Notes - Notecarrier-F
 
-As per [Notecarrier-B](../../../Notecarrier-B/KiCad_format/documentation/PortingNotes.md), except:
+As per [Notecarrier-B](../../../../_Legacy%20Hardware/Notecarrier-B/v2.1/KiCad_format/documentation/PortingNotes.md), except:
 
 ## Schematic
 
