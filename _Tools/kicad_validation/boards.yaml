@@ -151,6 +151,38 @@ boards:
 
   notecarrier-xi:
     product_dir: Notecarrier-XI/v1.4
+    kicad:
+      sch: Notecarrier-XI/v1.4/KiCad_format/Notecarrier-XI.kicad_sch
+      pcb: Notecarrier-XI/v1.4/KiCad_format/Notecarrier-XI.kicad_pcb
+    bom:
+      path: Notecarrier-XI/v1.4/SCH + BOM/BOM/BOM-ActiveBOM.xlsx
+      header_contains: Designator
+      kicad_mpn_field: MANUFACTURER PART NUMBER
+      columns:
+        refs: Designator
+        value: Name
+        mpn: MPN
+      skip_refdes: '^(FD|LOGO|DOC|PCB)\d*$'
+    odb:
+      root: Notecarrier-XI/v1.4/PCB + 3D + 2D/FAB/ODB/odb
+      step: pcb
+    gerbers:
+      original_dir: Notecarrier-XI/v1.4/PCB + 3D + 2D/FAB/Gerber
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM15"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        In1_Cu:       { kicad: "*.g1", original: "*.G1" }
+        In2_Cu:       { kicad: "*.g2", original: "*.G2" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
 
   notecarrier-xs:
     product_dir: Notecarrier-XS/v1.2
