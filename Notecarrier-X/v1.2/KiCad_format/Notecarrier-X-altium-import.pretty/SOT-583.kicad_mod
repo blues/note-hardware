@@ -1,0 +1,231 @@
+(footprint "SOT-583"
+(version 20241229)
+(generator "pcbnew")
+(generator_version "9.0")
+	(layer "B.Cu")
+	(uuid "576855eb-58fe-4f56-bd1e-00c2b9038e25")
+	(property "Reference" "U3"
+		(at 0.8902 -1.6913 0)
+		(unlocked yes)
+		(layer "B.SilkS")
+		(hide yes)
+		(uuid "b12fa9fb-1e77-488d-8612-2bb661973a43")
+		(effects
+			(font
+				(size 1.524 1.524)
+				(thickness 0.254)
+			)
+			(justify left bottom mirror)
+		)
+	)
+	(property "Value" "LM66200DRLR"
+		(at 3.30001 0.3735 0)
+		(unlocked yes)
+		(layer "User.12")
+		(uuid "326f3582-bdb5-42bc-bc67-d0d2e06daee3")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+			(justify left bottom mirror)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f2f1cdf5-9a4d-46f5-acb0-9f8e81ccc37b")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "58b30ca5-a745-4bc4-ade2-f8122b25f59b")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(sheetname "05_POWER")
+	(sheetfile "05_POWER.kicad_sch")
+	(fp_line
+		(start -1.1 0.6)
+		(end -1.1 -0.5)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "0407712a-5872-4740-a3b1-3c890f9f1502")
+	)
+	(fp_line
+		(start 1.1 0.6)
+		(end 1.1 -0.6)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "af39b607-8b84-4e5b-8ca1-f2e89cc1453a")
+	)
+	(fp_circle
+		(center -1.2 -0.8)
+		(end -1.2 -0.87)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(fill no)
+		(layer "B.SilkS")
+		(uuid "e3f7b3bd-4225-4b1e-8ac6-48f96aae18b8")
+	)
+	(fp_line
+		(start -1.05 -0.8)
+		(end 1.05 -0.8)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "edc2d2b1-872e-423e-8f9c-f567d023f2d2")
+	)
+	(fp_line
+		(start -1.05 0.8)
+		(end -1.05 -0.8)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "b154a010-5f10-4a56-b80d-59c2343e870a")
+	)
+	(fp_line
+		(start -1.05 0.8)
+		(end 1.05 0.8)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "acc1ca8e-c91d-450f-9168-c73f0921eab1")
+	)
+	(fp_line
+		(start 1.05 0.8)
+		(end 1.05 -0.8)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "d44e6b16-4bf5-4afe-a38d-769afb5ab419")
+	)
+	(fp_poly
+		(pts
+			(xy -1.05 -0.8) (xy -0.34995 -0.79995) (xy -1.04995 -0.09995)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill yes)
+		(layer "User.14")
+		(uuid "2f3f70a5-d9ef-4c25-85bd-db21958ad8cf")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0.5 0.4235 0)
+		(unlocked yes)
+		(layer "User.14")
+		(uuid "329b7a8e-c0da-4aec-b790-ed9de3b9f5d8")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+			(justify left bottom mirror)
+		)
+	)
+	(pad "1" smd rect
+		(at -0.74999 -0.725 180)
+		(size 0.3 0.7)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(solder_mask_margin 0.05)
+		(uuid "b78717c1-1985-426a-983e-0f69072f49af")
+	)
+	(pad "2" smd rect
+		(at -0.25 -0.725 180)
+		(size 0.3 0.7)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(solder_mask_margin 0.05)
+		(uuid "452d82b4-1cca-45b0-ab91-29616a5b331a")
+	)
+	(pad "3" smd rect
+		(at 0.25 -0.725 180)
+		(size 0.3 0.7)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(solder_mask_margin 0.05)
+		(uuid "ad836b91-d843-4f70-ab41-3ce12183f9a8")
+	)
+	(pad "4" smd rect
+		(at 0.75001 -0.725 180)
+		(size 0.3 0.7)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(solder_mask_margin 0.05)
+		(uuid "920620ea-2ce3-4314-9ee8-da0ce8910bb2")
+	)
+	(pad "5" smd rect
+		(at 0.75001 0.725 180)
+		(size 0.3 0.7)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(solder_mask_margin 0.05)
+		(uuid "40c7c086-b7cc-4a5a-9098-763a14cddb8a")
+	)
+	(pad "6" smd rect
+		(at 0.25 0.725 180)
+		(size 0.3 0.7)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(solder_mask_margin 0.05)
+		(uuid "59736477-4838-4f45-a0a6-dda8c24db53e")
+	)
+	(pad "7" smd rect
+		(at -0.25 0.725 180)
+		(size 0.3 0.7)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(solder_mask_margin 0.05)
+		(uuid "80b79b50-479d-49a4-ab6f-e3f744ca7a28")
+	)
+	(pad "8" smd rect
+		(at -0.74999 0.725 180)
+		(size 0.3 0.7)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(solder_mask_margin 0.05)
+		(uuid "2b1b4ddf-b060-4349-90bb-f9ae50c45108")
+	)
+	(embedded_fonts no)
+	(embedded_files
+		(file
+			(name "DRL0008A.stp")
+			(type other)
+			(checksum "C19CE266C6F485C1613C466F85F6CA0F")
+		)
+	)
+	(model "kicad-embed://DRL0008A.stp"
+		(offset
+			(xyz 0.00006 0.0001 0.05)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 0 -90)
+		)
+	)
+)

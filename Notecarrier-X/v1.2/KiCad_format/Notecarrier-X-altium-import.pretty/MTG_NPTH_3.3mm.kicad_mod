@@ -1,0 +1,61 @@
+(footprint "MTG_NPTH_3.3mm"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" ""
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(uuid "9736216a-41bc-4bb4-864b-601866bc6b56")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "f6350df6-2d36-4b56-b0c8-d81f3925b98f")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "5b618039-6d72-4bd1-a61e-7fdbb33d26d2")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "76b922ff-eaa5-47b8-a05f-1c55b0b78fcb")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "" np_thru_hole circle
+		(at 0 0)
+		(size 0.001 0.001)
+		(drill 3.3)
+		(layers "*.Cu" "*.Mask")
+		(thermal_bridge_angle 90)
+		(uuid "4ffe6ffc-ae45-4d36-bbdf-3a29ec257561")
+	)
+	(embedded_fonts no)
+)

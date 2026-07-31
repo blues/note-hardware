@@ -1,0 +1,101 @@
+(footprint "Fiducial mark 1mm"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "FD1"
+		(at 3.3042 -0.80079 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "64690f4c-7793-42cc-8cca-5abf50aaad52")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(property "Value" "Fiducial mark"
+		(at -3.5956 0.37571 0)
+		(unlocked yes)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "56269a7c-58b6-41bb-ac19-48c93b8f8558")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d7d98961-f304-43c8-972c-e3d2c89eb23d")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c1d5381f-e6a4-42ab-a576-bd90301c2650")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd circle
+		(at 0 0 270)
+		(size 1 1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.6)
+		(solder_paste_margin 0)
+		(thermal_bridge_angle 90)
+		(uuid "9e918568-e875-4b5c-b1a1-541bd245b2e8")
+	)
+	(zone
+		(net 0)
+		(net_name "")
+		(layer "F.Cu")
+		(uuid "69712691-1ba3-4fae-b32d-e636db893cb0")
+		(hatch edge 0.5)
+		(connect_pads
+			(clearance 0)
+		)
+		(min_thickness 0.25)
+		(filled_areas_thickness no)
+		(keepout
+			(tracks allowed)
+			(vias allowed)
+			(pads allowed)
+			(copperpour not_allowed)
+			(footprints allowed)
+		)
+		(placement
+			(enabled no)
+			(sheetname "")
+		)
+		(fill
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+		)
+		(polygon
+			(pts
+				(xy 121.943595 117.6036) (xy 122.693605 116.8536) (xy 123.693595 116.8536) (xy 124.443595 117.6036)
+				(xy 124.443595 118.6036) (xy 123.693595 119.3536) (xy 122.693605 119.3536) (xy 121.943595 118.6036)
+			)
+		)
+	)
+	(embedded_fonts no)
+)

@@ -1,0 +1,147 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "31eb37c9-db49-4a5f-93f5-997bc76acfa7")
+	(paper "A4")
+	(title_block
+		(title "Notecarrier-X")
+		(date "2026-07-31")
+		(rev "v1.2")
+		(comment 1 "Blues Inc")
+		(comment 2 "Ported from Altium Designer sources (100379_notecarrier-x)")
+	)
+	(lib_symbols)
+	(sheet
+		(at 25.4 25.4)
+		(size 44.45 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "2773f3ae-2663-43d0-92b3-5fac531aa389")
+		(property "Sheetname" "IO Connection"
+			(at 25.4 24.6884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Notecarrier-X_IO-Connection.kicad_sch"
+			(at 25.4 38.6846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Notecarrier-X"
+				(path "/31eb37c9-db49-4a5f-93f5-997bc76acfa7"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25.4 50.8)
+		(size 44.45 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "cc73d789-75f3-4b8c-9b47-00b0d3a86393")
+		(property "Sheetname" "Notecard Connection"
+			(at 25.4 50.0884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Notecarrier-X_Notecard-Connection.kicad_sch"
+			(at 25.4 64.0846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Notecarrier-X"
+				(path "/31eb37c9-db49-4a5f-93f5-997bc76acfa7"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25.4 76.19999999999999)
+		(size 44.45 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "38dd9067-d9a3-4579-b419-59d9007ec0fa")
+		(property "Sheetname" "Power"
+			(at 25.4 75.4884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Notecarrier-X_Power.kicad_sch"
+			(at 25.4 89.4846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Notecarrier-X"
+				(path "/31eb37c9-db49-4a5f-93f5-997bc76acfa7"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

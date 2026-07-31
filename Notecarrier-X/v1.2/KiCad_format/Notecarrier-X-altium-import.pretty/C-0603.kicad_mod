@@ -1,0 +1,206 @@
+(footprint "C-0603"
+(version 20241229)
+(generator "pcbnew")
+(generator_version "9.0")
+	(layer "B.Cu")
+	(uuid "59553a90-a98e-4752-86a1-608c89895bde")
+	(property "Reference" "C16"
+		(at 1.8162 17.58681 0)
+		(unlocked yes)
+		(layer "B.SilkS")
+		(hide yes)
+		(uuid "b32d9cc0-c2b1-48f9-9d7b-40c565867ce7")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.15)
+			)
+			(justify left bottom mirror)
+		)
+	)
+	(property "Value" "4u7"
+		(at 0.80841 0.38052 270)
+		(unlocked yes)
+		(layer "User.12")
+		(uuid "9344f036-d629-40d6-bd00-2cc9f5d49cb0")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+			(justify left bottom mirror)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6755bedb-3350-4d06-b7a6-3f903b4fa09b")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fced024e-790a-42e3-a81d-2f37d8279ca3")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(sheetname "05_POWER")
+	(sheetfile "05_POWER.kicad_sch")
+	(fp_line
+		(start -1.3 0.7)
+		(end -1.3 -0.7)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "670c8929-19cb-446a-b94c-114a0afbdcb1")
+	)
+	(fp_line
+		(start 1.3 0.7)
+		(end -1.3 0.7)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "a2f19e3a-7748-4d2e-a1dc-35fdbe7528be")
+	)
+	(fp_line
+		(start 1.3 0.7)
+		(end 1.3 -0.7)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "75997771-5868-4efa-8091-84e72ca531fb")
+	)
+	(fp_line
+		(start -0.1 0.4)
+		(end -0.1 -0.4)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "505407e4-d955-4ab8-8fb1-d379900869db")
+	)
+	(fp_line
+		(start 0.1 0.4)
+		(end 0.1 -0.4)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "cd5c85bc-6690-4bb7-81ed-ea42a6649196")
+	)
+	(fp_line
+		(start 1.3 -0.7)
+		(end -1.3 -0.7)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "fb6bbdd0-cede-4373-b397-691d3b54a9f7")
+	)
+	(fp_line
+		(start -1.3 0.7)
+		(end -1.3 -0.7)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "24a01cac-b9da-4062-9c40-4ed0539063a5")
+	)
+	(fp_line
+		(start 1.3 0.7)
+		(end -1.3 0.7)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "4216c5b6-e85c-4479-b3fa-74a2afcb0a1c")
+	)
+	(fp_line
+		(start 1.3 0.7)
+		(end 1.3 -0.7)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "fde8461d-68ae-4221-897a-4bb5a8702ac2")
+	)
+	(fp_line
+		(start 1.3 -0.7)
+		(end -1.3 -0.7)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "c8fdf92f-e914-4bf0-95c2-91adfb999550")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0.50001 0.32351 270)
+		(unlocked yes)
+		(layer "User.14")
+		(uuid "4184a2be-3f3b-4678-96e8-9ae0ce50d4ed")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+			(justify left bottom mirror)
+		)
+	)
+	(pad "1" smd rect
+		(at -0.725 0 180)
+		(size 0.8 0.75)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(solder_paste_margin -0.025)
+		(uuid "a8e113a5-1aec-4546-9c48-a7179ee90427")
+	)
+	(pad "2" smd rect
+		(at 0.725 0 180)
+		(size 0.8 0.75)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(solder_paste_margin -0.025)
+		(uuid "fd2a5393-aa1b-4c95-a0a3-f0af99ac2019")
+	)
+	(embedded_fonts no)
+	(embedded_files
+		(file
+			(name "C-0603.step")
+			(type other)
+			(checksum "05595ECAEB8DABC3C0EF86206E2DCC2C")
+		)
+	)
+	(model "kicad-embed://C-0603.step"
+		(offset
+			(xyz -0.00003 -0.47504 0.4)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 0)
+		)
+	)
+)
