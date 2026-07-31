@@ -188,12 +188,47 @@ boards:
         F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
         B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
 
-  # notecarrier-xs / notecarrier-x / notecarrier-xm: NO-GO — the byte repo's
-  # dev/ folders never captured the published v1.2 sources (dev jumped from
-  # v1.1 straight to v1.3-in-progress; silk versions and layout differ from
-  # the released fab packages). See the X-series porting notes.
+  # notecarrier-x / notecarrier-xm: NO-GO — the byte repo's dev/ folders never
+  # captured the published v1.2 sources (dev jumped from v1.1 straight to
+  # v1.3-in-progress; silk versions and layout differ from the released fab
+  # packages). See the X-series porting notes.
+  #
+  # notecarrier-xs is ported from the closest available source (the post-v1.2
+  # design-house dev state) and published WITH A DOCUMENTED DISCLAIMER — its
+  # gerber diff vs the published v1.2 fab shows known, documented deviations
+  # (see Notecarrier-XS/v1.2/KiCad_format/documentation/Porting-Notes.md).
   notecarrier-xs:
     product_dir: Notecarrier-XS/v1.2
+    kicad:
+      sch: Notecarrier-XS/v1.2/KiCad_format/Notecarrier-XS.kicad_sch
+      pcb: Notecarrier-XS/v1.2/KiCad_format/Notecarrier-XS.kicad_pcb
+    bom:
+      path: Notecarrier-XS/v1.2/BOM-3000-789-002.xlsx
+      header_contains: Reference
+      kicad_mpn_field: BL PART NUMBER
+      check_value: false
+      columns:
+        refs: Reference
+        value: Item Name
+        mpn: BL Part Number
+      skip_refdes: '^(TP|FID|FD|MH|LOGO|DOC|PCB|ASS)\d*$'
+    gerbers:
+      # local extraction of the in-repo shipped fab package:
+      #   unzip 'Notecarrier-XS/v1.2/2200-914__2024-06-06.zip' -d <original_dir>
+      original_dir: /private/tmp/claude-501/-Users-roblauer-Documents-GitHub-blues-note-hardware/26345e84-f61c-4c64-85bd-58e534b0269f/scratchpad/xs-gerbers
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM15"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
 
   notecarrier-x:
     product_dir: Notecarrier-X/v1.2

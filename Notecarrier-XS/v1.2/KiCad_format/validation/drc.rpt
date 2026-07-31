@@ -1,0 +1,820 @@
+** Drc report for Notecarrier-XS.kicad_pcb **
+** Created on 2026-07-31T10:07:13-0500 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 162 DRC violations **
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(147.6686 mm, 114.3286 mm): Track [/Power/SW] on Bottom Layer, length 0.2750 mm
+[via_dangling]: Via is not connected or connected on only one layer
+    Local override; warning
+    @(135.0936 mm, 124.3786 mm): Via [GND] on Top Layer - Bottom Layer
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(146.7436 mm, 118.4286 mm): Track [+VMAIN] on Bottom Layer, length 0.1500 mm
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(181.5586 mm, 73.0886 mm): Segment on Edge.Cuts
+    @(176.1436 mm, 119.8786 mm): PCB Text Box 'LIPO' on Top Overlay
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(115.4436 mm, 136.9186 mm): Segment on Edge.Cuts
+    @(115.3436 mm, 121.5286 mm): Polygon of J5 on Bottom Overlay
+[padstack]: Padstack is questionable (PTH pad hole leaves no copper)
+    Local override; warning
+    @(164.8244 mm, 121.6786 mm): PTH pad 1 [GND] of OBJ1
+[padstack]: Padstack is questionable (negative solder paste margin is larger than pad; no solder paste mask will be generated)
+    Local override; warning
+    @(164.8436 mm, 121.6786 mm): Pad 1 [GND] of OBJ1 on Top Layer
+[padstack]: Padstack is questionable (PTH pad hole leaves no copper)
+    Local override; warning
+    @(162.0936 mm, 88.6786 mm): PTH pad 1 [GND] of OBJ2
+[padstack]: Padstack is questionable (negative solder paste margin is larger than pad; no solder paste mask will be generated)
+    Local override; warning
+    @(162.0936 mm, 88.6786 mm): Pad 1 [GND] of OBJ2 on Top Layer
+[lib_footprint_mismatch]: Footprint 'Fiducial mark 1mm' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(167.2436 mm, 70.9287 mm): Footprint FD5
+[lib_footprint_mismatch]: Footprint 'SW_EVP-BB2A9B000' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(129.4436 mm, 71.7286 mm): Footprint SW1
+[lib_footprint_mismatch]: Footprint 'DIST-WASMSIM0250' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(164.8436 mm, 121.6786 mm): Footprint OBJ1
+[lib_footprint_mismatch]: Footprint 'Fiducial mark 1mm' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(123.1936 mm, 134.7786 mm): Footprint FD1
+[lib_footprint_mismatch]: Footprint 'DIST-WASMSIM0250' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(162.0936 mm, 88.6786 mm): Footprint OBJ2
+[lib_footprint_mismatch]: Footprint 'Fiducial mark 1mm' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(174.2436 mm, 139.4286 mm): Footprint FD2
+[lib_footprint_mismatch]: Footprint 'R-0402' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(153.6436 mm, 116.5786 mm): Footprint R11
+[lib_footprint_mismatch]: Footprint 'C-0603' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(150.7436 mm, 115.3036 mm): Footprint C16
+[lib_footprint_mismatch]: Footprint 'QFN40P300X150X80-18N' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(147.8436 mm, 116.1286 mm): Footprint U2
+[lib_footprint_mismatch]: Footprint 'Fiducial mark 1mm' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(174.2436 mm, 139.4286 mm): Footprint FD6
+[lib_footprint_mismatch]: Footprint 'C-0603' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(148.4436 mm, 118.9786 mm): Footprint C13
+[lib_footprint_mismatch]: Footprint 'R-0402' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(129.5936 mm, 126.1786 mm): Footprint R6
+[lib_footprint_mismatch]: Footprint 'Fiducial mark 1mm' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(167.2436 mm, 70.9287 mm): Footprint FD4
+[lib_footprint_mismatch]: Footprint 'R-0402' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(129.5936 mm, 128.8786 mm): Footprint R5
+[lib_footprint_mismatch]: Footprint 'Fiducial mark 1mm' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(123.1936 mm, 134.7786 mm): Footprint FD3
+[lib_footprint_mismatch]: Footprint 'R-0402' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(142.6936 mm, 127.0786 mm): Footprint R9
+[lib_footprint_mismatch]: Footprint 'R-0402' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(119.7436 mm, 127.9786 mm): Footprint R1
+[lib_footprint_mismatch]: Footprint 'IND_XFL4020' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(143.2436 mm, 116.1786 mm): Footprint L2
+[lib_footprint_mismatch]: Footprint 'R-0402' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(150.6436 mm, 119.2286 mm): Footprint R14
+[lib_footprint_mismatch]: Footprint 'C-1206' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(143.7936 mm, 119.7286 mm): Footprint C12
+[lib_footprint_mismatch]: Footprint 'R-0402' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(150.6436 mm, 118.3286 mm): Footprint R13
+[lib_footprint_mismatch]: Footprint 'BGA8N40P2X4_180x100x50' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(141.0436 mm, 127.0286 mm): Footprint U1
+[lib_footprint_mismatch]: Footprint 'R-0402' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(126.5436 mm, 124.1286 mm): Footprint R7
+[lib_footprint_mismatch]: Footprint 'SOT666' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(129.9436 mm, 122.3286 mm): Footprint TVS1
+[lib_footprint_mismatch]: Footprint 'R-0603' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(136.5436 mm, 113.1786 mm): Footprint R10
+[lib_footprint_mismatch]: Footprint 'J-NANOSIM-SF72S006VBA' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(122.1936 mm, 115.7286 mm): Footprint J5
+[lib_footprint_mismatch]: Footprint 'R-0402' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(150.6436 mm, 117.1786 mm): Footprint R12
+[lib_footprint_mismatch]: Footprint 'R-0603' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(142.1437 mm, 134.6786 mm): Footprint R4
+[lib_footprint_mismatch]: Footprint 'R-0402' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(129.5936 mm, 127.9786 mm): Footprint R8
+[lib_footprint_mismatch]: Footprint 'R-0402' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(119.7436 mm, 128.8786 mm): Footprint R2
+[lib_footprint_mismatch]: Footprint 'L-0603' does not match copy in library 'Notecarrier-XS-altium-import'.
+    Local override; warning
+    @(138.9436 mm, 127.0286 mm): Footprint L1
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(116.6936 mm, 120.9286 mm): Polygon on Bottom Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(124.0436 mm, 116.1286 mm): Polygon on Bottom Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(124.0436 mm, 118.5786 mm): Polygon on Bottom Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(127.4936 mm, 116.4786 mm): Polygon on Bottom Overlay
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(176.1436 mm, 119.8786 mm): PCB Text Box 'LIPO' on Top Overlay
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; warning
+    @(122.8161 mm, 127.9286 mm): Pad A6 [USB_D_P] of P4 on Top Layer
+    @(122.8161 mm, 128.4286 mm): Pad A7 [USB_D_N] of P4 on Top Layer
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(156.7385 mm, 110.8667 mm): PCB Text Box 'NOTECARRIER-XS' on Top Overlay
+    @(155.5856 mm, 107.3686 mm): PCB text 'AUX_EN' on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(140.4885 mm, 110.9167 mm): PCB Text Box 'NOTECARD' on Top Overlay
+    @(140.0956 mm, 130.7224 mm): PCB text 'VGPS_IN' on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(156.7385 mm, 110.8667 mm): PCB Text Box 'NOTECARRIER-XS' on Top Overlay
+    @(152.9841 mm, 119.7951 mm): PCB Text Box 'V1.3' on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(175.4436 mm, 119.7736 mm): Segment of LD1 on Top Overlay
+    @(176.1436 mm, 119.8786 mm): PCB Text Box 'LIPO' on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(176.1436 mm, 119.6736 mm): Segment of LD1 on Top Overlay
+    @(176.1436 mm, 119.8786 mm): PCB Text Box 'LIPO' on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(176.1436 mm, 119.8786 mm): PCB Text Box 'LIPO' on Top Overlay
+    @(176.2936 mm, 121.6786 mm): Segment of LD1 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(176.1436 mm, 119.8786 mm): PCB Text Box 'LIPO' on Top Overlay
+    @(175.3936 mm, 119.8786 mm): Segment of LD1 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(140.4885 mm, 110.9167 mm): PCB Text Box 'NOTECARD' on Top Overlay
+    @(131.9936 mm, 132.6286 mm): Polygon on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(124.3136 mm, 139.4586 mm): Segment of P1 on Top Overlay
+    @(124.3136 mm, 136.8986 mm): Segment on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(124.3136 mm, 136.8986 mm): Segment on Top Overlay
+    @(124.3136 mm, 136.9186 mm): Segment of P1 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(164.9536 mm, 139.4586 mm): Segment of P1 on Top Overlay
+    @(124.3136 mm, 136.8986 mm): Segment on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(124.3236 mm, 106.4686 mm): Segment on Top Overlay
+    @(124.3236 mm, 106.4486 mm): Segment of P2 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(124.3236 mm, 106.4486 mm): Segment of P2 on Top Overlay
+    @(124.3236 mm, 106.4686 mm): Segment on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(164.9636 mm, 106.4486 mm): Segment of P2 on Top Overlay
+    @(124.3236 mm, 106.4686 mm): Segment on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6936 mm, 125.7286 mm): Segment of C4 on Bottom Overlay
+    @(128.6937 mm, 125.7287 mm): Segment of R6 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6936 mm, 125.7286 mm): Segment of C4 on Bottom Overlay
+    @(128.6937 mm, 126.6287 mm): Segment of R6 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6937 mm, 125.7287 mm): Segment of R6 on Bottom Overlay
+    @(128.6936 mm, 125.7286 mm): Segment of C4 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6937 mm, 126.6287 mm): Segment of R6 on Bottom Overlay
+    @(128.6936 mm, 125.7286 mm): Segment of C4 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(130.4937 mm, 126.6287 mm): Segment of R6 on Bottom Overlay
+    @(128.6936 mm, 125.7286 mm): Segment of C4 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(130.4936 mm, 125.7286 mm): Segment of C4 on Bottom Overlay
+    @(128.6937 mm, 125.7287 mm): Segment of R6 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(130.4936 mm, 125.7286 mm): Segment of C4 on Bottom Overlay
+    @(130.4937 mm, 126.6287 mm): Segment of R6 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(129.9436 mm, 123.0286 mm): Segment of TVS1 on Bottom Overlay
+    @(125.2936 mm, 121.5286 mm): Polygon of J5 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6936 mm, 126.6286 mm): Segment of C5 on Bottom Overlay
+    @(128.6937 mm, 126.6287 mm): Segment of R6 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6937 mm, 126.6287 mm): Segment of R6 on Bottom Overlay
+    @(128.6936 mm, 127.5286 mm): Segment of C5 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6936 mm, 126.6286 mm): Segment of C5 on Bottom Overlay
+    @(128.6937 mm, 126.6287 mm): Segment of R6 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6936 mm, 127.5286 mm): Segment of C5 on Bottom Overlay
+    @(128.6937 mm, 126.6287 mm): Segment of R6 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(130.4936 mm, 127.5286 mm): Segment of C5 on Bottom Overlay
+    @(128.6937 mm, 126.6287 mm): Segment of R6 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6936 mm, 126.6286 mm): Segment of C5 on Bottom Overlay
+    @(130.4937 mm, 126.6287 mm): Segment of R6 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(130.4937 mm, 126.6287 mm): Segment of R6 on Bottom Overlay
+    @(130.4936 mm, 127.5286 mm): Segment of C5 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6937 mm, 127.5287 mm): Segment of R8 on Bottom Overlay
+    @(128.6936 mm, 127.5286 mm): Segment of C5 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6937 mm, 128.4287 mm): Segment of R8 on Bottom Overlay
+    @(128.6936 mm, 127.5286 mm): Segment of C5 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6937 mm, 127.5287 mm): Segment of R8 on Bottom Overlay
+    @(128.6936 mm, 127.5286 mm): Segment of C5 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6937 mm, 128.4287 mm): Segment of R8 on Bottom Overlay
+    @(128.6936 mm, 127.5286 mm): Segment of C5 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6936 mm, 127.5286 mm): Segment of C5 on Bottom Overlay
+    @(130.4937 mm, 128.4287 mm): Segment of R8 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6937 mm, 127.5287 mm): Segment of R8 on Bottom Overlay
+    @(130.4936 mm, 127.5286 mm): Segment of C5 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(130.4936 mm, 127.5286 mm): Segment of C5 on Bottom Overlay
+    @(130.4937 mm, 128.4287 mm): Segment of R8 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6937 mm, 128.4287 mm): Segment of R5 on Bottom Overlay
+    @(128.6937 mm, 128.4287 mm): Segment of R8 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6937 mm, 128.4287 mm): Segment of R5 on Bottom Overlay
+    @(128.6937 mm, 128.4287 mm): Segment of R8 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6937 mm, 128.4287 mm): Segment of R5 on Bottom Overlay
+    @(130.4937 mm, 128.4287 mm): Segment of R8 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(130.4937 mm, 129.3287 mm): Segment of R5 on Bottom Overlay
+    @(128.6937 mm, 128.4287 mm): Segment of R8 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(130.4937 mm, 129.3287 mm): Segment of R5 on Bottom Overlay
+    @(130.4937 mm, 128.4287 mm): Segment of R8 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6937 mm, 128.4287 mm): Segment of R8 on Bottom Overlay
+    @(128.6937 mm, 129.3287 mm): Segment of R5 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.6937 mm, 128.4287 mm): Segment of R8 on Bottom Overlay
+    @(128.6937 mm, 129.3287 mm): Segment of R5 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(118.8435 mm, 128.4285 mm): Segment of R1 on Bottom Overlay
+    @(118.8437 mm, 128.4287 mm): Segment of R2 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(118.8435 mm, 128.4285 mm): Segment of R1 on Bottom Overlay
+    @(118.8437 mm, 129.3287 mm): Segment of R2 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(118.8435 mm, 128.4285 mm): Segment of R1 on Bottom Overlay
+    @(118.8437 mm, 128.4287 mm): Segment of R2 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(118.8437 mm, 129.3287 mm): Segment of R2 on Bottom Overlay
+    @(118.8435 mm, 128.4285 mm): Segment of R1 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(118.8435 mm, 128.4285 mm): Segment of R1 on Bottom Overlay
+    @(120.6437 mm, 129.3287 mm): Segment of R2 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(120.6435 mm, 128.4285 mm): Segment of R1 on Bottom Overlay
+    @(118.8437 mm, 128.4287 mm): Segment of R2 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(120.6435 mm, 128.4285 mm): Segment of R1 on Bottom Overlay
+    @(120.6437 mm, 129.3287 mm): Segment of R2 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(138.2437 mm, 125.7285 mm): Segment of L1 on Bottom Overlay
+    @(138.2436 mm, 125.7286 mm): Segment of C6 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(138.2437 mm, 128.3285 mm): Segment of L1 on Bottom Overlay
+    @(138.2436 mm, 125.7286 mm): Segment of C6 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(130.0936 mm, 116.4786 mm): Polygon on Bottom Overlay
+    @(125.2936 mm, 121.5286 mm): Polygon of J5 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(142.2437 mm, 127.9785 mm): Segment of R9 on Bottom Overlay
+    @(143.1436 mm, 127.9786 mm): Segment of C7 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(143.1436 mm, 127.9786 mm): Segment of C7 on Bottom Overlay
+    @(143.1437 mm, 127.9785 mm): Segment of R9 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(139.6436 mm, 128.2786 mm): Segment of C8 on Bottom Overlay
+    @(138.2437 mm, 128.3285 mm): Segment of L1 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(139.6437 mm, 128.3285 mm): Segment of L1 on Bottom Overlay
+    @(139.6436 mm, 128.2786 mm): Segment of C8 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(139.6436 mm, 129.8786 mm): Segment of C8 on Bottom Overlay
+    @(138.2437 mm, 128.3285 mm): Segment of L1 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(139.6437 mm, 128.3285 mm): Segment of L1 on Bottom Overlay
+    @(139.6436 mm, 129.8786 mm): Segment of C8 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(142.2437 mm, 127.9785 mm): Segment of R9 on Bottom Overlay
+    @(143.1436 mm, 127.9786 mm): Segment of C7 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(143.1437 mm, 127.9785 mm): Segment of R9 on Bottom Overlay
+    @(143.1436 mm, 126.1786 mm): Segment of C7 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(143.1436 mm, 127.9786 mm): Segment of C7 on Bottom Overlay
+    @(143.1437 mm, 127.9785 mm): Segment of R9 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(142.2437 mm, 126.1785 mm): Segment of R9 on Bottom Overlay
+    @(143.1436 mm, 126.1786 mm): Segment of C7 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(143.1436 mm, 127.9786 mm): Segment of C7 on Bottom Overlay
+    @(142.2437 mm, 126.1785 mm): Segment of R9 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(147.3936 mm, 112.8286 mm): Segment of C14 on Bottom Overlay
+    @(149.1936 mm, 112.8286 mm): Segment of C15 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.1936 mm, 112.8286 mm): Segment of C15 on Bottom Overlay
+    @(150.5936 mm, 112.8286 mm): Segment of C14 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(147.3936 mm, 112.8286 mm): Segment of C9 on Bottom Overlay
+    @(149.1936 mm, 112.8286 mm): Segment of C15 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.1936 mm, 113.7286 mm): Segment of C9 on Bottom Overlay
+    @(149.1936 mm, 112.8286 mm): Segment of C15 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.1936 mm, 113.7286 mm): Segment of C15 on Bottom Overlay
+    @(147.3936 mm, 112.8286 mm): Segment of C14 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.1936 mm, 113.7286 mm): Segment of C15 on Bottom Overlay
+    @(147.3936 mm, 112.8286 mm): Segment of C9 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.1936 mm, 113.7286 mm): Segment of C15 on Bottom Overlay
+    @(147.3936 mm, 113.7286 mm): Segment of C9 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.1936 mm, 113.7286 mm): Segment of C15 on Bottom Overlay
+    @(149.1936 mm, 113.7286 mm): Segment of C9 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(147.3936 mm, 112.8286 mm): Segment of C9 on Bottom Overlay
+    @(147.3936 mm, 112.8286 mm): Segment of C14 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(147.3936 mm, 113.7286 mm): Segment of C9 on Bottom Overlay
+    @(147.3936 mm, 112.8286 mm): Segment of C14 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(147.3936 mm, 112.8286 mm): Segment of C9 on Bottom Overlay
+    @(147.3936 mm, 112.8286 mm): Segment of C14 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(147.3936 mm, 112.8286 mm): Segment of C14 on Bottom Overlay
+    @(147.3936 mm, 113.7286 mm): Segment of C9 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.1936 mm, 113.7286 mm): Segment of C9 on Bottom Overlay
+    @(147.3936 mm, 112.8286 mm): Segment of C14 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(151.5437 mm, 119.6787 mm): Segment of R14 on Bottom Overlay
+    @(149.7437 mm, 118.7787 mm): Segment of R13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(151.5437 mm, 119.6787 mm): Segment of R14 on Bottom Overlay
+    @(151.5437 mm, 118.7787 mm): Segment of R13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(147.1436 mm, 118.2786 mm): Segment of C13 on Bottom Overlay
+    @(149.7437 mm, 118.7787 mm): Segment of R13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.7437 mm, 119.6787 mm): Segment of R14 on Bottom Overlay
+    @(147.1436 mm, 119.6786 mm): Segment of C13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.7437 mm, 119.6787 mm): Segment of R14 on Bottom Overlay
+    @(147.1436 mm, 119.6786 mm): Segment of C13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.7437 mm, 119.6787 mm): Segment of R14 on Bottom Overlay
+    @(149.7436 mm, 119.6786 mm): Segment of C13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.7437 mm, 118.7787 mm): Segment of R14 on Bottom Overlay
+    @(149.7436 mm, 119.6786 mm): Segment of C13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.7437 mm, 119.6787 mm): Segment of R14 on Bottom Overlay
+    @(149.7436 mm, 119.6786 mm): Segment of C13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.7436 mm, 119.6786 mm): Segment of C13 on Bottom Overlay
+    @(149.7437 mm, 118.7787 mm): Segment of R13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.7436 mm, 119.6786 mm): Segment of C13 on Bottom Overlay
+    @(149.7437 mm, 118.7787 mm): Segment of R13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.7437 mm, 119.6787 mm): Segment of R14 on Bottom Overlay
+    @(149.7437 mm, 118.7787 mm): Segment of R13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.7437 mm, 119.6787 mm): Segment of R14 on Bottom Overlay
+    @(149.7437 mm, 118.7787 mm): Segment of R13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.7437 mm, 118.7787 mm): Segment of R14 on Bottom Overlay
+    @(149.7437 mm, 118.7787 mm): Segment of R13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.7437 mm, 118.7787 mm): Segment of R14 on Bottom Overlay
+    @(149.7437 mm, 118.7787 mm): Segment of R13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.7437 mm, 118.7787 mm): Segment of R14 on Bottom Overlay
+    @(151.5437 mm, 118.7787 mm): Segment of R13 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(147.3936 mm, 113.7286 mm): Segment of C9 on Bottom Overlay
+    @(149.1936 mm, 113.7286 mm): Segment of C15 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(149.1936 mm, 113.7286 mm): Segment of C9 on Bottom Overlay
+    @(149.1936 mm, 113.7286 mm): Segment of C15 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(138.2436 mm, 125.7286 mm): Segment of C6 on Bottom Overlay
+    @(138.2437 mm, 125.7285 mm): Segment of L1 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(138.2436 mm, 125.7286 mm): Segment of C6 on Bottom Overlay
+    @(138.2437 mm, 128.3285 mm): Segment of L1 on Bottom Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(139.6437 mm, 128.3285 mm): Segment of L1 on Bottom Overlay
+    @(138.2436 mm, 125.7286 mm): Segment of C6 on Bottom Overlay
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(249.0886 mm, 206.6586 mm): PCB text 'BOM NO.:' on M13 Assy Top Comm
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(125.7436 mm, 145.2153 mm): PCB text 'Mount pin headers on bottom!' on M13 Assy Top Comm
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(262.4686 mm, 207.7753 mm): PCB text '3000-789-002' on M13 Assy Top Comm
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(262.9686 mm, 195.9253 mm): PCB text 'Assembly drawing comments - TOP' on M13 Assy Top Comm
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(112.4514 mm, 114.5683 mm): Value field of J2 (SM04B-SRSS-TB(LF)(SN))
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(142.2424 mm, 72.5601 mm): Value field of J1 (Header 2.54mm 1x4)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(116.7936 mm, 89.0021 mm): Value field of J6 (MDT420E01001)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(139.2632 mm, 105.5793 mm): Value field of P2 (Header 2.54mm 1x16)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(161.7350 mm, 122.0533 mm): Value field of OBJ1 (9774025151R)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(173.1936 mm, 128.9021 mm): Value field of P3 (SM05B-SRSS-TB)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(176.2171 mm, 121.6286 mm): Value field of LD1 (SML-P12WTT86R)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(118.3012 mm, 119.6459 mm): Value field of C1 (10n/1000V)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(172.3032 mm, 115.0683 mm): Value field of J3 (S2B-PH-SM4-K-TB)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(115.8936 mm, 128.4021 mm): Value field of P4 (12402012E212A)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(158.7436 mm, 89.0521 mm): Value field of OBJ2 (9774025151R)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(120.3332 mm, 122.0077 mm): Value field of R3 (1M)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(126.7370 mm, 122.0533 mm): Value field of J4 (MDT420E01001)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(117.3671 mm, 120.3286 mm): Value field of C2 (100n)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(139.2632 mm, 138.5993 mm): Value field of P1 (Header 2.54mm 1x16)
+
+** Found 1 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error (excluded)
+    @(128.1186 mm, 72.1036 mm): Pad 1 [Net-(J6-~{RST})] of SW1 on Top Layer
+    @(128.1186 mm, 71.3536 mm): Pad 1 [Net-(J6-~{RST})] of SW1 on Top Layer
+
+** Found 72 Footprint errors **
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(119.2536 mm, 136.9186 mm): Footprint <no reference designator>
+    @(177.7486 mm, 106.4386 mm): Footprint <no reference designator>
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(119.2536 mm, 106.4386 mm): Footprint <no reference designator>
+    @(177.7486 mm, 106.4386 mm): Footprint <no reference designator>
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(177.7486 mm, 73.0886 mm): Footprint <no reference designator>
+    @(177.7486 mm, 106.4386 mm): Footprint <no reference designator>
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(177.7486 mm, 136.9186 mm): Footprint <no reference designator>
+    @(177.7486 mm, 106.4386 mm): Footprint <no reference designator>
+[duplicate_footprints]: Duplicate footprints
+    Local override; warning
+    @(119.2536 mm, 73.0887 mm): Footprint <no reference designator>
+    @(177.7486 mm, 106.4386 mm): Footprint <no reference designator>
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-1206 doesn't match footprint given by symbol (C-1206).
+    Local override; warning
+    @(120.7936 mm, 119.2786 mm): Footprint C1
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:Header 2.54mm 1X4 doesn't match footprint given by symbol (BL_Mechanical.PcbLib:Header 2.54mm 1X4).
+    Local override; warning
+    @(150.9936 mm, 72.2187 mm): Footprint J1
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:JST SM04B-SRSS-TB doesn't match footprint given by symbol (JST SM04B-SRSS-TB).
+    Local override; warning
+    @(118.2486 mm, 114.1886 mm): Footprint J2
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:CONN S2B-PH-SM4 doesn't match footprint given by symbol (BL_Mechanical.PcbLib:Conn S2B-PH-SM4).
+    Local override; warning
+    @(176.6486 mm, 114.6886 mm): Footprint J3
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:Header 2.54mm 1X16 doesn't match footprint given by symbol (BL_Mechanical.PcbLib:Header 2.54mm 1X16).
+    Local override; warning
+    @(163.6836 mm, 138.1886 mm): Footprint P1
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:Header 2.54mm 1X16 doesn't match footprint given by symbol (BL_Mechanical.PcbLib:Header 2.54mm 1X16).
+    Local override; warning
+    @(163.6936 mm, 105.1786 mm): Footprint P2
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:Conn_SM05B-SRSS-TB doesn't match footprint given by symbol (Conn_SM05B-SRSS-TB).
+    Local override; warning
+    @(178.3436 mm, 128.6286 mm): Footprint P3
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:CONN_12402012E212A doesn't match footprint given by symbol (CONN_12402012E212A).
+    Local override; warning
+    @(120.4436 mm, 128.1786 mm): Footprint P4
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-0402 doesn't match footprint given by symbol (BL_Passive.PcbLib:R-0402).
+    Local override; warning
+    @(119.7436 mm, 127.9786 mm): Footprint R1
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-0402 doesn't match footprint given by symbol (BL_Passive.PcbLib:R-0402).
+    Local override; warning
+    @(119.7436 mm, 128.8786 mm): Footprint R2
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-1206 doesn't match footprint given by symbol (R-1206).
+    Local override; warning
+    @(120.7936 mm, 121.6286 mm): Footprint R3
+[missing_footprint]: Missing footprint ASS1 (KNOB M2.5x4-INOX)
+    Local override; warning
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-0402 doesn't match footprint given by symbol (C-0402).
+    Local override; warning
+    @(116.9936 mm, 119.2786 mm): Footprint C2
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-0402 doesn't match footprint given by symbol (C-0402).
+    Local override; warning
+    @(129.5936 mm, 129.9786 mm): Footprint C3
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-0402 doesn't match footprint given by symbol (C-0402).
+    Local override; warning
+    @(129.5936 mm, 125.2786 mm): Footprint C4
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-0402 doesn't match footprint given by symbol (C-0402).
+    Local override; warning
+    @(129.5936 mm, 127.0786 mm): Footprint C5
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:J-75-0050-MOS-M2 doesn't match footprint given by symbol (J-75-0050-MOS-M2).
+    Local override; warning
+    @(130.0936 mm, 121.6786 mm): Footprint J4
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:J-NANOSIM-SF72S006VBA doesn't match footprint given by symbol (J-NANOSIM-SF72S006VBA).
+    Local override; warning
+    @(122.1936 mm, 115.7286 mm): Footprint J5
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:DIST-WASMSIM0250 doesn't match footprint given by symbol (DIST-WASMSIM0250).
+    Local override; warning
+    @(164.8436 mm, 121.6786 mm): Footprint OBJ1
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-0603 doesn't match footprint given by symbol (R-0603).
+    Local override; warning
+    @(142.1437 mm, 134.6786 mm): Footprint R4
+[footprint_symbol_mismatch]: Footprint attributes don't match symbol: 'Do not populate' settings differ.
+    Local override; warning
+    @(142.1437 mm, 134.6786 mm): Footprint R4
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-0402 doesn't match footprint given by symbol (BL_Passive.PcbLib:R-0402).
+    Local override; warning
+    @(129.5936 mm, 128.8786 mm): Footprint R5
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-0402 doesn't match footprint given by symbol (BL_Passive.PcbLib:R-0402).
+    Local override; warning
+    @(129.5936 mm, 126.1786 mm): Footprint R6
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-0402 doesn't match footprint given by symbol (BL_Passive.PcbLib:R-0402).
+    Local override; warning
+    @(126.5436 mm, 124.1286 mm): Footprint R7
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-0402 doesn't match footprint given by symbol (BL_Passive.PcbLib:R-0402).
+    Local override; warning
+    @(129.5936 mm, 127.9786 mm): Footprint R8
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:SOT666 doesn't match footprint given by symbol (SOT666).
+    Local override; warning
+    @(129.9436 mm, 122.3286 mm): Footprint TVS1
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-0805 doesn't match footprint given by symbol (C-0805).
+    Local override; warning
+    @(139.8436 mm, 124.9286 mm): Footprint C6
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-0402 doesn't match footprint given by symbol (C-0402).
+    Local override; warning
+    @(143.5936 mm, 127.0786 mm): Footprint C7
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-0805 doesn't match footprint given by symbol (C-0805).
+    Local override; warning
+    @(141.2436 mm, 129.0786 mm): Footprint C8
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-0402 doesn't match footprint given by symbol (BL_Passive.PcbLib:C-0402).
+    Local override; warning
+    @(148.2936 mm, 113.2786 mm): Footprint C9
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-0402 doesn't match footprint given by symbol (C-0402).
+    Local override; warning
+    @(146.7936 mm, 112.8286 mm): Footprint C10
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-1206 doesn't match footprint given by symbol (BL_Passive.PcbLib:C-1206).
+    Local override; warning
+    @(143.7936 mm, 112.7286 mm): Footprint C11
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-1206 doesn't match footprint given by symbol (BL_Passive.PcbLib:C-1206).
+    Local override; warning
+    @(143.7936 mm, 119.7286 mm): Footprint C12
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-0603 doesn't match footprint given by symbol (C-0603).
+    Local override; warning
+    @(148.4436 mm, 118.9786 mm): Footprint C13
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-0805 doesn't match footprint given by symbol (BL_Passive.PcbLib:C-0805).
+    Local override; warning
+    @(148.9936 mm, 112.0286 mm): Footprint C14
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-0402 doesn't match footprint given by symbol (C-0402).
+    Local override; warning
+    @(150.0936 mm, 113.2786 mm): Footprint C15
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:C-0603 doesn't match footprint given by symbol (C-0603).
+    Local override; warning
+    @(150.7436 mm, 115.3036 mm): Footprint C16
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:L-0603 doesn't match footprint given by symbol (BL_Passive.PcbLib:L-0603).
+    Local override; warning
+    @(138.9436 mm, 127.0286 mm): Footprint L1
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:IND_XFL4020 doesn't match footprint given by symbol (IND_XFL4020).
+    Local override; warning
+    @(143.2436 mm, 116.1786 mm): Footprint L2
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:LED-0402 doesn't match footprint given by symbol (LED-0402).
+    Local override; warning
+    @(175.8436 mm, 120.7786 mm): Footprint LD1
+[footprint_symbol_mismatch]: Footprint attributes don't match symbol: 'Do not populate' settings differ.
+    Local override; warning
+    @(175.8436 mm, 120.7786 mm): Footprint LD1
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-0402 doesn't match footprint given by symbol (BL_Passive.PcbLib:R-0402).
+    Local override; warning
+    @(142.6936 mm, 127.0786 mm): Footprint R9
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-0603 doesn't match footprint given by symbol (R-0603).
+    Local override; warning
+    @(136.5436 mm, 113.1786 mm): Footprint R10
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-0402 doesn't match footprint given by symbol (BL_Passive.PcbLib:R-0402).
+    Local override; warning
+    @(153.6436 mm, 116.5786 mm): Footprint R11
+[footprint_symbol_mismatch]: Footprint attributes don't match symbol: 'Do not populate' settings differ.
+    Local override; warning
+    @(153.6436 mm, 116.5786 mm): Footprint R11
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-0402 doesn't match footprint given by symbol (BL_Passive.PcbLib:R-0402).
+    Local override; warning
+    @(150.6436 mm, 117.1786 mm): Footprint R12
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-0402 doesn't match footprint given by symbol (R-0402).
+    Local override; warning
+    @(150.6436 mm, 118.3286 mm): Footprint R13
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:R-0402 doesn't match footprint given by symbol (BL_Passive.PcbLib:R-0402).
+    Local override; warning
+    @(150.6436 mm, 119.2286 mm): Footprint R14
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:BGA8N40P2X4_180x100x50 doesn't match footprint given by symbol (BL_Components.PcbLib:BGA8N40P2X4_180x100x50).
+    Local override; warning
+    @(141.0436 mm, 127.0286 mm): Footprint U1
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:QFN40P300X150X80-18N doesn't match footprint given by symbol (BL_Components.PcbLib:QFN40P300X150X80-18N).
+    Local override; warning
+    @(147.8436 mm, 116.1286 mm): Footprint U2
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:SOT-583 doesn't match footprint given by symbol (SOT-583).
+    Local override; warning
+    @(154.8936 mm, 113.1786 mm): Footprint U3
+[missing_footprint]: Missing footprint ASS2 (KNOB M2.5x4-INOX)
+    Local override; warning
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:J-75-0050-MOS-M2 doesn't match footprint given by symbol (J-75-0050-MOS-M2).
+    Local override; warning
+    @(120.5936 mm, 88.6786 mm): Footprint J6
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:DIST-WASMSIM0250 doesn't match footprint given by symbol (DIST-WASMSIM0250).
+    Local override; warning
+    @(162.0936 mm, 88.6786 mm): Footprint OBJ2
+[footprint_symbol_mismatch]: Notecarrier-XS-altium-import:SW_EVP-BB2A9B000 doesn't match footprint given by symbol (BL_Mechanical.PcbLib:SW_EVP-BB2A9B000).
+    Local override; warning
+    @(129.4436 mm, 71.7286 mm): Footprint SW1
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(167.2436 mm, 70.9287 mm): Footprint FD5
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(177.7486 mm, 106.4386 mm): Footprint <no reference designator>
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(119.2536 mm, 136.9186 mm): Footprint <no reference designator>
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(123.1936 mm, 134.7786 mm): Footprint FD1
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(119.2536 mm, 106.4386 mm): Footprint <no reference designator>
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(177.7486 mm, 73.0886 mm): Footprint <no reference designator>
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(177.7486 mm, 136.9186 mm): Footprint <no reference designator>
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(119.2536 mm, 73.0887 mm): Footprint <no reference designator>
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(174.2436 mm, 139.4286 mm): Footprint FD2
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(174.2436 mm, 139.4286 mm): Footprint FD6
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(167.2436 mm, 70.9287 mm): Footprint FD4
+[extra_footprint]: Extra footprint
+    Local override; warning
+    @(123.1936 mm, 134.7786 mm): Footprint FD3
+
+** End of Report **

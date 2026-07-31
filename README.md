@@ -33,13 +33,20 @@ and `documentation/Porting-Notes.md` inside each port).
 |Notecarrier-F v1.3|KiCad 7|[Notecarrier-F/v1.3/KiCad_format](Notecarrier-F/v1.3/KiCad_format)|
 |Notecarrier-Pi v1.1|KiCad 7|[Notecarrier-Pi/v1.1/KiCad_format](Notecarrier-Pi/v1.1/KiCad_format)|
 |Notecarrier-XI v1.4|KiCad 9|[Notecarrier-XI/v1.4/KiCad_format](Notecarrier-XI/v1.4/KiCad_format)|
+|Notecarrier-XS v1.2 †|KiCad 9|[Notecarrier-XS/v1.2/KiCad_format](Notecarrier-XS/v1.2/KiCad_format)|
 |Cygnet v1.2|KiCad 9|[Cygnet/v1.2/KiCad_format](Cygnet/v1.2/KiCad_format)|
 |Mojo v1.1|KiCad 9|[Mojo/v1.1/KiCad_format](Mojo/v1.1/KiCad_format)|
 |Scoop v1.0|KiCad 9|[Scoop/v1.0/KiCad_format](Scoop/v1.0/KiCad_format)|
 
+† The Notecarrier-XS port carries a **source-fidelity disclaimer**: it was
+made from the closest available design-house source rather than the exact
+released v1.2 snapshot, with the differences (silk version text, the
+production-DNP jumper R4 on the opposite side) reviewed and documented in its
+[Porting-Notes](Notecarrier-XS/v1.2/KiCad_format/documentation/Porting-Notes.md).
+
 Some products do not have a KiCad port, deliberately:
 
-* **Notecarrier-X / -XS / -XM / -XP** — the exact Altium sources matching the
+* **Notecarrier-X / -XM / -XP** — the exact Altium sources matching the
   published fabrication packages are not available, and a conversion from a
   near-miss source state could not be proven accurate against the shipped
   gerbers, so no port is published (accuracy over coverage).

@@ -1,0 +1,218 @@
+(footprint "IND_XFL4020"
+(version 20241229)
+(generator "pcbnew")
+(generator_version "9.0")
+	(layer "B.Cu")
+	(uuid "8dfdc7f1-20f3-41ff-9d14-f6bbfd2ea240")
+	(property "Reference" "L2"
+		(at -3.1172 1.39641 0)
+		(unlocked yes)
+		(layer "B.SilkS")
+		(hide yes)
+		(uuid "14dbbe4a-e308-4115-8ec5-fe6c04cc22aa")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.15)
+			)
+			(justify left bottom mirror)
+		)
+	)
+	(property "Value" "XFL4020-152MEC"
+		(at 2.801972 -2.348028 315)
+		(unlocked yes)
+		(layer "User.12")
+		(uuid "a1182adc-c139-48aa-945c-6679e6d8919e")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+			(justify left bottom mirror)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6b623098-c2fd-4e02-8747-10f266db01bb")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "4342716c-a0a7-4764-b14b-baa3d865cad8")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(sheetname "05_POWER")
+	(sheetfile "05_POWER.kicad_sch")
+	(fp_line
+		(start -2.15 2.15)
+		(end -2.15 -2.15)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "4834cd49-f5b7-4473-ae49-8f20d9f94404")
+	)
+	(fp_line
+		(start 2.15 2.15)
+		(end -2.15 2.15)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "a91c504b-d569-4b6f-858c-65fb64e959fc")
+	)
+	(fp_line
+		(start 2.15 2.15)
+		(end 2.15 -2.15)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "bdf9b096-5c1c-4b7a-9b89-8f68d41485fb")
+	)
+	(fp_line
+		(start 2.15 -2.15)
+		(end -2.15 -2.15)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "5a9c6f77-3b49-4ec5-ba83-e92530e0143c")
+	)
+	(fp_line
+		(start -2.15 2.15)
+		(end -2.15 -2.15)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "fc9e9438-f45b-4aed-80c8-b2c8c7da5a77")
+	)
+	(fp_line
+		(start 2.15 2.15)
+		(end -2.15 2.15)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "f1b3d614-d618-45d4-a8b8-1041e0de033d")
+	)
+	(fp_line
+		(start 2.15 2.15)
+		(end 2.15 -2.15)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "45d5da47-f723-4e1a-aa67-adcfcd5d76c5")
+	)
+	(fp_line
+		(start 2.15 -2.15)
+		(end -2.15 -2.15)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "406a940f-bfd7-42e4-af09-b98651407d3d")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0.88375 -1.25 0)
+		(unlocked yes)
+		(layer "User.14")
+		(uuid "2814889b-53f8-4705-bfdb-e347683e8580")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom mirror)
+		)
+	)
+	(pad "1" smd rect
+		(at -1.185 0 90)
+		(size 0.98 3.4)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(solder_mask_margin 0.05)
+		(uuid "2a3375f6-248c-4df3-a1ff-a96b3c7a392f")
+	)
+	(pad "2" smd rect
+		(at 1.185 0 90)
+		(size 0.98 3.4)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(solder_mask_margin 0.05)
+		(uuid "48a5479b-446f-4107-be76-6ed854207ac2")
+	)
+	(zone
+		(net 0)
+		(net_name "")
+		(layer "B.Cu")
+		(uuid "b4fdf523-6fad-437b-bb48-320dd5e4c402")
+		(hatch edge 0.5)
+		(connect_pads
+			(clearance 0)
+		)
+		(min_thickness 0.25)
+		(filled_areas_thickness no)
+		(keepout
+			(tracks allowed)
+			(vias allowed)
+			(pads allowed)
+			(copperpour not_allowed)
+			(footprints allowed)
+		)
+		(placement
+			(enabled no)
+			(sheetname "")
+		)
+		(fill
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+		)
+		(polygon
+			(pts
+				(xy 144.943595 115.4786) (xy 144.943595 116.8786) (xy 141.543595 116.8786) (xy 141.543595 115.4786)
+			)
+		)
+	)
+	(embedded_fonts no)
+	(embedded_files
+		(file
+			(name "Coilcraft-XFL4020.STEP")
+			(type other)
+			(checksum "9C6D049F1693A01E9AA93066221DF934")
+		)
+	)
+	(model "kicad-embed://Coilcraft-XFL4020.STEP"
+		(offset
+			(xyz -0.00006 0.00008 0.1127)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 0 -180)
+		)
+	)
+)
