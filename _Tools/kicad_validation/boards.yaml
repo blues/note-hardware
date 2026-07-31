@@ -232,9 +232,69 @@ boards:
 
   notecarrier-x:
     product_dir: Notecarrier-X/v1.2
+    kicad:
+      sch: Notecarrier-X/v1.2/KiCad_format/Notecarrier-X.kicad_sch
+      pcb: Notecarrier-X/v1.2/KiCad_format/Notecarrier-X.kicad_pcb
+    bom:
+      path: Notecarrier-X/v1.2/BOM-3000-794-001.xlsx
+      header_contains: Reference
+      kicad_mpn_field: BL PART NUMBER
+      check_value: false
+      columns:
+        refs: Reference
+        value: Item Name
+        mpn: BL Part Number
+      skip_refdes: '^(TP|FID|FD|MH|LOGO|DOC|PCB|ASS)\d*$'
+    gerbers:
+      # local extraction of the in-repo shipped fab package:
+      #   unzip 'Notecarrier-X/v1.2/2200-918__2024-06-06.zip' -d <original_dir>
+      original_dir: /private/tmp/claude-501/-Users-roblauer-Documents-GitHub-blues-note-hardware/26345e84-f61c-4c64-85bd-58e534b0269f/scratchpad/x-gerbers
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM15"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
 
   notecarrier-xm:
     product_dir: Notecarrier-XM/v1.2
+    kicad:
+      sch: Notecarrier-XM/v1.2/KiCad_format/Notecarrier-XM.kicad_sch
+      pcb: Notecarrier-XM/v1.2/KiCad_format/Notecarrier-XM.kicad_pcb
+    bom:
+      path: Notecarrier-XM/v1.2/BOM-3000-793-001.xlsx
+      header_contains: Reference
+      kicad_mpn_field: BL PART NUMBER
+      check_value: false
+      columns:
+        refs: Reference
+        value: Item Name
+        mpn: BL Part Number
+      skip_refdes: '^(TP|FID|FD|MH|LOGO|DOC|PCB|ASS)\d*$'
+    gerbers:
+      # local extraction of the in-repo shipped fab package:
+      #   unzip 'Notecarrier-XM/v1.2/2200-917__2024-06-12.zip' -d <original_dir>
+      original_dir: /private/tmp/claude-501/-Users-roblauer-Documents-GitHub-blues-note-hardware/26345e84-f61c-4c64-85bd-58e534b0269f/scratchpad/xm-gerbers
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM15"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
 
   # notecarrier-xp: NO-GO — the published v3.1 fab (2200-925, 2024-06-26) was
   # generated from an uncommitted working state. Every committed dev/ state

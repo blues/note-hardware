@@ -33,23 +33,27 @@ and `documentation/Porting-Notes.md` inside each port).
 |Notecarrier-F v1.3|KiCad 7|[Notecarrier-F/v1.3/KiCad_format](Notecarrier-F/v1.3/KiCad_format)|
 |Notecarrier-Pi v1.1|KiCad 7|[Notecarrier-Pi/v1.1/KiCad_format](Notecarrier-Pi/v1.1/KiCad_format)|
 |Notecarrier-XI v1.4|KiCad 9|[Notecarrier-XI/v1.4/KiCad_format](Notecarrier-XI/v1.4/KiCad_format)|
+|Notecarrier-X v1.2 †|KiCad 9|[Notecarrier-X/v1.2/KiCad_format](Notecarrier-X/v1.2/KiCad_format)|
 |Notecarrier-XS v1.2 †|KiCad 9|[Notecarrier-XS/v1.2/KiCad_format](Notecarrier-XS/v1.2/KiCad_format)|
+|Notecarrier-XM v1.2 †|KiCad 9|[Notecarrier-XM/v1.2/KiCad_format](Notecarrier-XM/v1.2/KiCad_format)|
 |Cygnet v1.2|KiCad 9|[Cygnet/v1.2/KiCad_format](Cygnet/v1.2/KiCad_format)|
 |Mojo v1.1|KiCad 9|[Mojo/v1.1/KiCad_format](Mojo/v1.1/KiCad_format)|
 |Scoop v1.0|KiCad 9|[Scoop/v1.0/KiCad_format](Scoop/v1.0/KiCad_format)|
 
-† The Notecarrier-XS port carries a **source-fidelity disclaimer**: it was
-made from the closest available design-house source rather than the exact
-released v1.2 snapshot, with the differences (silk version text, the
-production-DNP jumper R4 on the opposite side) reviewed and documented in its
-[Porting-Notes](Notecarrier-XS/v1.2/KiCad_format/documentation/Porting-Notes.md).
+† The Notecarrier-X, -XS and -XM ports carry a **source-fidelity
+disclaimer**: they were made from the closest available design-house sources
+rather than the exact released v1.2 snapshots, with the differences reviewed
+and documented in each port's `documentation/Porting-Notes.md` (silk version
+text on all three; the production-DNP GPS jumper on the opposite side on
+X/XS; several rerouted signals on XM).
 
 Some products do not have a KiCad port, deliberately:
 
-* **Notecarrier-X / -XM / -XP** — the exact Altium sources matching the
-  published fabrication packages are not available, and a conversion from a
-  near-miss source state could not be proven accurate against the shipped
-  gerbers, so no port is published (accuracy over coverage).
+* **Notecarrier-XP** — the exact Altium sources matching the published
+  fabrication package are not available, and the nearest source state
+  differs electrically from the shipped board (an entire DNP subcircuit and
+  a grounded presence-detect strap), so no port is published (accuracy over
+  coverage).
 * **Swan v3.0 and Notecarrier-Pi v2.0** — authored in OrCAD/Allegro, for which
   no KiCad importer exists. (The Notecarrier-Pi v1.1 KiCad port remains the
   canonical KiCad reference for the Pi form factor.)
