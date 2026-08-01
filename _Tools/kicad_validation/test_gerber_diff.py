@@ -48,14 +48,15 @@ def run_gate(board, cfg_gerbers, kicad_dir, baseline=None):
         if baseline:
             cmd += ["--baseline", str(baseline)]
         r = subprocess.run(cmd, capture_output=True, text=True)
-        problems = []
+        problems, measured = [], {}
         if jsonp.exists():
-            problems = json.loads(jsonp.read_text())["problems"]
+            d = json.loads(jsonp.read_text())
+            problems, measured = d["problems"], d.get("measured", {})
         elif r.returncode != 0:
             # the gate died before writing a summary - that is itself a failure
             problems = [{"layer": None, "kind": "gate-crashed",
                          "message": (r.stderr or r.stdout).strip()[:200]}]
-        return r.returncode, r.stdout + r.stderr, problems
+        return r.returncode, r.stdout + r.stderr, problems, measured
 
 
 def blank_layer(path):
@@ -83,8 +84,8 @@ def all_boards_clean():
             g.mkdir()
             export_gerbers(REPO / c["kicad"]["pcb"], g)
             val = REPO / Path(c["kicad"]["pcb"]).parent / "validation"
-            rc, out, problems = run_gate(b, c["gerbers"], g,
-                                         baseline=val / "gerber-baseline.yaml")
+            rc, out, problems, measured = run_gate(
+                b, c["gerbers"], g, baseline=val / "gerber-baseline.yaml")
         # Every problem the gate reported, by (layer, kind) - taken from the
         # gate's own output rather than inferred from message text, so a failure
         # kind this suite has never seen still counts.
@@ -94,7 +95,7 @@ def all_boards_clean():
             f"{l or '*'}/{k}" for l, k in found)
         print(f"    {b:16s} {status}")
         if rc != 0 or found:
-            bad.append((b, found))
+            bad.append((b, found, measured))
     return bad
 
 
@@ -113,16 +114,21 @@ def main():
     if args.all_boards:
         print("[0] every configured board, unmodified:")
         bad = all_boards_clean()
-        got = dict(bad)
+        got = {b: (layers, measured) for b, layers, measured in bad}
 
         # Cygnet is expected to fail, but on EXACTLY one layer: In1_Cu, whose ~50
         # extra annular rings are an unresolved defect deliberately kept out of
         # its baseline. Accepting "cygnet failed somehow" would let a genuine new
         # regression on any other Cygnet layer hide behind the known one.
+        # Layer and kind are not enough: any damage to In1_Cu produces
+        # In1_Cu/threshold, so replacing that layer wholesale (difference 0.932)
+        # would read as the known 0.105 defect. Pin the magnitude as well.
         EXPECTED = {"cygnet": [("In1_Cu", "threshold")]}
+        EXPECTED_MEASURED = {("cygnet", "In1_Cu"): 0.105}
+        MEASURED_TOL = 0.02
 
         problems = []
-        for b, layers in sorted(got.items(), key=lambda kv: kv[0]):
+        for b, (layers, measured) in sorted(got.items(), key=lambda kv: kv[0]):
             want = EXPECTED.get(b)
             if want is None:
                 problems.append(f"{b} regressed against its baseline on {layers}")
@@ -133,6 +139,21 @@ def main():
                     f"{b} was expected to fail on exactly {want} but reported "
                     f"{layers}" + (f"; unexpected: {extra}" if extra else "")
                     + (f"; no longer failing: {missing}" if missing else ""))
+            else:
+                # Same layer, same kind - but is it the same defect?
+                for (eb, elayer), evalue in EXPECTED_MEASURED.items():
+                    if eb != b:
+                        continue
+                    actual = measured.get(elayer)
+                    if actual is None:
+                        problems.append(
+                            f"{b}/{elayer}: the gate reported no measurement, so "
+                            f"the known {evalue} defect cannot be confirmed")
+                    elif abs(actual - evalue) > MEASURED_TOL:
+                        problems.append(
+                            f"{b}/{elayer}: differs by {actual} but the reviewed "
+                            f"defect is {evalue} (tolerance {MEASURED_TOL}) - this "
+                            f"is not the same defect, it is additional damage")
         for b, want in EXPECTED.items():
             if b not in got:
                 problems.append(
@@ -163,7 +184,7 @@ def main():
         export_gerbers(REPO / cfg["kicad"]["pcb"], base)
 
         # 1. the unmodified port must pass, or the rest proves nothing
-        rc, out, _ = run_gate(args.board, gcfg, base, baseline=bl)
+        rc, out, _, _m = run_gate(args.board, gcfg, base, baseline=bl)
         print(f"[1] unmodified port                  -> rc={rc}")
         if rc != 0:
             failures.append("the unmodified port does not pass; "
@@ -198,7 +219,7 @@ def main():
                 failures.append(f"could not find the {layer} gerber to blank")
                 continue
             blank_layer(hits[0])
-            rc, out, _ = run_gate(args.board, gcfg, trial, baseline=bl)
+            rc, out, _, _m = run_gate(args.board, gcfg, trial, baseline=bl)
             caught = "draws NOTHING" in out or rc != 0
             print(f"[2] {layer} emptied{'':<{max(0, 21 - len(layer))}}-> rc={rc} {'CAUGHT' if caught else 'MISSED'}")
             if not caught:
@@ -214,7 +235,7 @@ def main():
             b = glob.glob(str(trial / gcfg["layers"]["B_Cu"]["kicad"]))
             if f and b:
                 Path(f[0]).write_text(Path(b[0]).read_text(errors="replace"))
-                rc, out, _ = run_gate(args.board, gcfg, trial, baseline=bl)
+                rc, out, _, _m = run_gate(args.board, gcfg, trial, baseline=bl)
                 print(f"[3] F_Cu replaced by B_Cu           -> rc={rc} "
                       f"{'CAUGHT' if rc != 0 else 'MISSED'}")
                 if rc == 0:
