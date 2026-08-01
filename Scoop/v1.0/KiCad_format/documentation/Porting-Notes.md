@@ -55,7 +55,9 @@ severity baseline from the Notecarrier-A port.
 | ERC / DRC (error severity, incl. schematic parity) | **0 / 0** |
 | Netlist vs Altium PcbDoc (fresh headless import) | **7/7 nets exact** (D1 compile-masked part excluded) |
 | BOM vs `992-00084-A_BOM.xlsx` | exact — 12 populated refdes, MPN-compared (BOM "Name" column holds descriptions, not values) |
+| Placement vs the released PnP file (inside `992-00084-A_Gerbers.zip`) | **16/16** — side, rotation and position all explained by the body-centre prediction, no baseline exceptions needed |
 | Gerber raster diff vs `scoop v4.*` | PASS (copper/mask/paste; silk shows the usual TrueType metric offsets) — **but see the correction below: the original run of this gate was not a valid comparison** |
+| KiCanvas / RAG extract | render + parse clean |
 
 ### Correction: the first gerber diff on this board proved nothing
 
@@ -86,4 +88,3 @@ recur silently: it now compares the two outline extents before rendering,
 measures the ink in each render and fails on a blank one, computes a mean
 per-pixel difference against a threshold, and — unlike before — exits non-zero
 when any of those checks fail.
-| KiCanvas / RAG extract | render + parse clean |

@@ -101,7 +101,13 @@ boards:
     # gate as a failure unless it is declared here.
     skip_gates:
       NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
-      PNP: "no pick-and-place file is published for this board, so there is no released-build placement data to compare against"
+    pnp:
+      # the released pick-and-place file ships inside the committed fab archive
+      zip: "Scoop/v1.0/992-00084-A_Gerbers.zip"
+      member: "*Pick Place/PNP-scoop-v4-*.txt"
+      # +PROJECTID is a "Standard (No BOM)" documentation marker parked off the
+      # board in the released file, not a fitted component
+      skip_refdes: "^(TP|FID|FD|MH|LOGO|DOC|PCB)\\d*$|^\\+PROJECTID$"
     kicad:
       sch: Scoop/v1.0/KiCad_format/Scoop.kicad_sch
       pcb: Scoop/v1.0/KiCad_format/Scoop.kicad_pcb
@@ -224,15 +230,13 @@ boards:
         F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
         B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
 
-  # notecarrier-x / notecarrier-xm: NO-GO — the byte repo's dev/ folders never
-  # captured the published v1.2 sources (dev jumped from v1.1 straight to
-  # v1.3-in-progress; silk versions and layout differ from the released fab
-  # packages). See the X-series porting notes.
-  #
-  # notecarrier-xs is ported from the closest available source (the post-v1.2
-  # design-house dev state) and published WITH A DOCUMENTED DISCLAIMER — its
-  # gerber diff vs the published v1.2 fab shows known, documented deviations
-  # (see Notecarrier-XS/v1.2/KiCad_format/documentation/Porting-Notes.md).
+  # notecarrier-xs / notecarrier-x / notecarrier-xm: the byte repo's dev/
+  # folders never captured the published v1.2 sources (dev jumped from v1.1
+  # straight to v1.3-in-progress), so all three are ported from the closest
+  # available source (the post-v1.2 design-house dev state) and published
+  # WITH A DOCUMENTED DISCLAIMER — each gerber diff vs the published v1.2 fab
+  # shows known, documented deviations (see each port's
+  # KiCad_format/documentation/Porting-Notes.md).
   notecarrier-xs:
     product_dir: Notecarrier-XS/v1.2
     # Gates this board cannot run, and why. run_all.py treats a skipped
@@ -372,8 +376,8 @@ boards:
     # Gates this board cannot run, and why. run_all.py treats a skipped
     # gate as a failure unless it is declared here.
     skip_gates:
-      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
-      PNP: "no pick-and-place file is published for this board, so there is no released-build placement data to compare against"
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the fab-connectivity trace committed as validation/fabnet-compare.txt, the schematic-parity check inside DRC, and the per-layer film diff"
+      PNP: "the shipped package carries Allegro PLACETOP/PLACEBOTTOM data in a board-local, per-side-mirrored frame that pnp_compare's parsers do not consume; placement was verified during the delta port via the calibrated film transform and the numeric pad-vs-flash check recorded in documentation/Porting-Notes.md"
       BOM: "the shipped v2.0 BOM spreadsheet lives in the internal fae repo and is not part of note-hardware; the comparison was run during porting and its output is committed as validation/bom-compare.txt"
     kicad:
       sch: Notecarrier-Pi/v2.0/KiCad_format/Notecarrier-Pi.kicad_sch
