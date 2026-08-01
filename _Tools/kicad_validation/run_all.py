@@ -194,7 +194,8 @@ def main():
     ap.add_argument("--repo", type=Path,
                     default=HERE.parent.parent)
     ap.add_argument("--skip", nargs="*", default=[],
-                    help="gate ids to skip (must be justified in Porting-Notes)")
+                    help="gate ids to skip; each must carry a reason under "
+                         "skip_gates.<GATE> in boards.yaml or the run fails")
     args = ap.parse_args()
 
     cfg = yaml.safe_load((HERE / "boards.yaml").read_text())["boards"][args.board]

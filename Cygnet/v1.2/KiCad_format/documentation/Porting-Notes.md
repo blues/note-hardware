@@ -55,7 +55,27 @@ handling).
 - **Unused inner-layer annular rings**: Altium suppresses annular rings of
   through pads/vias on layers where nothing connects; the equivalent KiCad
   option (*remove unused layers*, keep start/end) is enabled on all PTH pads
-  and vias — inner-layer copper then matches the shipped gerbers.
+  and vias (202 of them).
+
+  > **⚠️ This did not fully work, and the original note here claimed it did.**
+  > `In1_Cu` still carries roughly fifty annular rings that the shipped
+  > `*.G1` does not: KiCad draws 0.0322 ink against Altium's 0.0288, and
+  > **10.5 % of the drawn area differs**. `In2_Cu` matches at 0.1 %, as do both
+  > outer copper layers, so this is specific to inner layer 1.
+  >
+  > This was always visible in the committed `validation/In1_Cu-diff.png` — the
+  > scattered green dots are exactly these rings — but the gerber gate passed it,
+  > because it compared an absolute mean difference over the whole canvas and
+  > fifty small pads are a rounding error at that scale. The rebuilt gate
+  > normalises against the drawn area and now fails the board.
+  >
+  > **Unresolved.** The tracks themselves match exactly, so this is not a routing
+  > difference; it is whether unconnected inner-layer pads are plotted. Whoever
+  > picks this up should establish whether `kicad-cli pcb export gerbers`
+  > honours *remove unused layers* without recomputed connectivity, and if not,
+  > whether the GUI export matches the fab. Until then Cygnet's fabrication
+  > equivalence on `In1_Cu` is **not proven**, and the board's GERBER-DIFF gate
+  > is expected to fail rather than being tuned to pass.
 - **Two ~5 µm track-end near-misses** (net A4 and SWCLK on L3) — physically
   connected on the manufactured board but below KiCad's connectivity
   tolerance — were closed by snapping the track ends to the via centres.

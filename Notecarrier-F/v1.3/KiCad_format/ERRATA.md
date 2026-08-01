@@ -109,12 +109,13 @@ reason v1.3 exists.** `U9` is not an isolated addition: v1.3 moves the
 Feather-side reference rail of both level shifters off the raw battery and onto
 the new regulated 3.3 V.
 
-In v1.2 (these files today) *both* `TXS0102DCUR` level shifters take their
-Feather-side supply from `F_BAT`, which is unregulated battery voltage. v1.3
-introduces `F_VIO` from `U9` and moves exactly six nodes onto it. Read off
-pages 4 and 7 of `../100275_NOTECARRIER-F_Rev-11.PDF`:
+In v1.2 *both* `TXS0102DCUR` level shifters took their Feather-side supply from
+`F_BAT`, which is unregulated battery voltage. v1.3 introduces `F_VIO` from `U9`
+and moves exactly six nodes onto it. Read off pages 4 and 7 of
+`../100275_NOTECARRIER-F_Rev-11.PDF`. **The schematic sheets now describe the
+v1.3 column**; the v1.2 column is what they used to say:
 
-| Node | v1.2 net (this port) | v1.3 net |
+| Node | v1.2 net (was) | v1.3 net (now) |
 |---|---|---|
 | `U4` pin 7 `VCCB` | `F_BAT` | **`F_VIO`** |
 | `C14` pin 1 (100 n, `U4` `VCCB` decoupling) | `F_BAT` | **`F_VIO`** |
@@ -276,10 +277,11 @@ The board's 54 net-less 0.6 mm copper patches (footprint
 `GND` net they belong to. DRC went from 171 errors to 0 with no change to any
 copper geometry.
 
-## While this errata stands
+## RAG indexing
 
-The port's KiCad pages are excluded from the RAG extract
-(`_Tools/extract_for_rag/extract.py`, `EXCLUDE_PATH`) so that v1.2 component
-data is not served as v1.3. Its BOM and schematic-PDF pages come from the
-published documents and are still indexed. Remove that exclusion once the delta
-is applied.
+The port's KiCad pages **are** indexed again. They were excluded from the RAG
+extract (`_Tools/extract_for_rag/extract.py`, `EXCLUDE_PATH`) while the
+schematic still described v1.2; that exclusion was removed once the schematic
+delta landed. The extractor only ever reads `.kicad_sch` and never the board, so
+the pages it produces describe the shipped v1.3 design even though the PCB in
+this folder is still v1.2.

@@ -1,9 +1,9 @@
 # Per-board configuration for the KiCad port validation harness.
 #
 # All paths are relative to the repository root. A board entry is added/filled
-# in as its port is executed; run_all.py skips gates whose config is absent
-# and reports them as SKIPPED (skipped gates must be justified in the board's
-# Porting-Notes.md — see the NO-GO policy in README.md).
+# in as its port is executed. A gate whose config is absent is a FAILURE unless
+# the board records why under skip_gates.<GATE> below; only then is it reported
+# as SKIPPED (see the NO-GO policy in README.md).
 #
 # Sections per board:
 #   kicad:    project paths (root sheet, pcb)

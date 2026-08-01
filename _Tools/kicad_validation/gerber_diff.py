@@ -29,7 +29,9 @@ Exit 0 = all layers rendered and sizes match; 1 = structural problem.
 
 import argparse
 import glob
+import os
 import subprocess
+import tempfile
 import sys
 from pathlib import Path
 
@@ -139,6 +141,37 @@ def ink_fraction(png):
         return 0.0
 
 
+def pad_to_match(a, b):
+    """Pad two renders to a common canvas. Returns a warning string if they
+    differ by more than sub-pixel rounding, else None."""
+    sa, sb = size(a), size(b)
+    if sa == sb:
+        return None
+    wa, ha = (int(v) for v in sa.split("x"))
+    wb, hb = (int(v) for v in sb.split("x"))
+    w, h = max(wa, wb), max(ha, hb)
+    for p in (a, b):
+        subprocess.run([MAGICK, "mogrify", "-background", "white",
+                        "-gravity", "SouthWest", "-extent", f"{w}x{h}",
+                        "+repage", str(p)], check=True)
+    if abs(wa - wb) > 2 or abs(ha - hb) > 2:
+        return f"{sa} vs {sb}"
+    return None
+
+
+def union_ink(a, b):
+    """Ink fraction of the two renders combined - the area either side draws."""
+    import tempfile as _tf
+    with _tf.NamedTemporaryFile(suffix=".png", delete=False) as fh:
+        out = fh.name
+    subprocess.run([MAGICK, str(a), "-colorspace", "Gray", str(b), "-colorspace",
+                    "Gray", "-compose", "darken", "-composite", out], check=True)
+    try:
+        return ink_fraction(out)
+    finally:
+        os.unlink(out)
+
+
 def mean_difference(a, b):
     """Mean per-pixel difference between two renders, 0.0 = identical."""
     r = subprocess.run([MAGICK, str(a), str(b), "-compose", "difference",
@@ -208,10 +241,20 @@ def main():
         thr_cfg = {"default": float(thr_cfg)}
 
     def threshold(layer):
+        """Fraction of the *drawn* area that may differ, by layer class.
+
+        Calibrated against boards whose ports are already proven: matching
+        copper lands at 0.000-0.003, mask at 0.014-0.040. Silkscreen is the
+        outlier at 0.33-0.79 because Altium and KiCad stroke text with
+        different font metrics, so on silk the meaningful checks are the
+        emptiness test and human review of the diff image, not this number.
+        """
         if layer in thr_cfg:
             return float(thr_cfg[layer])
         if "Silkscreen" in layer or "Overlay" in layer:
-            return float(thr_cfg.get("silkscreen", 0.06))
+            return float(thr_cfg.get("silkscreen", 0.90))
+        if "Mask" in layer:
+            return float(thr_cfg.get("mask", 0.08))
         return float(thr_cfg.get("default", 0.02))
 
     problems = []
@@ -230,6 +273,8 @@ def main():
             f"artwork; set an explicit `window:` for this board, or point "
             f"`outline.original` at a layer that carries only the board edge.")
 
+    solo_tmp = tempfile.TemporaryDirectory()
+    solo_dir = solo_tmp.name
     for layer, m in cfg["layers"].items():
         k_png = args.out / f"{layer}-KiCad.png"
         o_png = args.out / f"{layer}-{tool}.png"
@@ -263,19 +308,10 @@ def main():
             else:
                 render(o_outline, one(m["original"], orig_dir), o_png, o_bbox)
 
-        ks, os_ = size(k_png), size(o_png)
-        if ks != os_:
-            # Sub-pixel rounding can differ by 1px; pad to the larger size.
-            w = max(int(ks.split("x")[0]), int(os_.split("x")[0]))
-            h = max(int(ks.split("x")[1]), int(os_.split("x")[1]))
-            if abs(int(ks.split("x")[0]) - int(os_.split("x")[0])) > 2 or \
-               abs(int(ks.split("x")[1]) - int(os_.split("x")[1])) > 2:
-                problems.append(f"{layer}: window size mismatch KiCad {ks} vs {tool} {os_} "
-                                f"— check board outline equivalence")
-            for p in (k_png, o_png):
-                subprocess.run([MAGICK, "mogrify", "-background", "white",
-                                "-gravity", "SouthWest", "-extent", f"{w}x{h}",
-                                "+repage", str(p)], check=True)
+        mismatch = pad_to_match(k_png, o_png)
+        if mismatch:
+            problems.append(f"{layer}: window size mismatch KiCad/{tool} {mismatch} "
+                            f"— check board outline equivalence")
 
         subprocess.run(
             [MAGICK, "(", str(k_png), "-grayscale", "Rec709Luminance", ")",
@@ -283,22 +319,54 @@ def main():
              "(", "-clone", "0-1", "-compose", "darken", "-composite", ")",
              "-channel", "RGB", "-combine", str(d_png)], check=True)
 
-        k_ink, o_ink = ink_fraction(k_png), ink_fraction(o_png)
-        for who, frac, png in (("KiCad", k_ink, k_png), (tool, o_ink, o_png)):
-            if frac < 1e-5:
-                problems.append(f"{layer}: the {who} render {png.name} is blank "
-                                f"- nothing was drawn, so the comparison is empty")
-        diff = mean_difference(k_png, o_png)
+        # Emptiness and difference are measured on renders WITHOUT the board
+        # outline. The committed *-KiCad/-<tool>/-diff PNGs keep the outline
+        # because it helps a human review them, but compositing it into the
+        # measured image means an entirely absent fabrication layer still shows
+        # ink - which let a missing stencil layer pass this gate.
+        if m.get("negative"):
+            k_solo, o_solo = k_png, o_png          # that branch renders solo already
+            solo_note = ""
+        else:
+            k_solo = Path(solo_dir) / f"{layer}-k.png"
+            render_single(one(m["kicad"], args.kicad_dir), k_solo, k_bbox)
+            if cfg.get("original_has_outline"):
+                # the shipped film draws the outline itself and cannot be
+                # separated from it, so its ink figure includes the edge
+                o_solo, solo_note = o_png, " [shipped film includes the outline]"
+            else:
+                o_solo = Path(solo_dir) / f"{layer}-o.png"
+                render_single(one(m["original"], orig_dir), o_solo, o_bbox)
+                solo_note = ""
+            pad_to_match(k_solo, o_solo)
+
+        k_ink, o_ink = ink_fraction(k_solo), ink_fraction(o_solo)
+        EMPTY = 1e-6
+        if k_ink < EMPTY and o_ink >= EMPTY:
+            problems.append(f"{layer}: the KiCad export draws NOTHING on this "
+                            f"layer while {tool} draws {o_ink:.4f} - the layer is "
+                            f"missing from the port")
+        elif o_ink < EMPTY and k_ink >= EMPTY:
+            problems.append(f"{layer}: {tool} draws NOTHING on this layer while "
+                            f"KiCad draws {k_ink:.4f}")
+
+        # Normalised against how much either side actually draws, so a sparse
+        # layer is judged on its own content rather than on canvas area: an
+        # absent paste layer is ~1% of the canvas but 100% of the paste.
+        u = union_ink(k_solo, o_solo)
+        raw = mean_difference(k_solo, o_solo)
+        diff = raw / u if u > 1e-9 else 0.0
         max_diff = threshold(layer)
         flag = ""
         if diff > max_diff:
-            problems.append(f"{layer}: mean per-pixel difference {diff:.4f} "
-                            f"exceeds the {max_diff} threshold - the two renders "
-                            f"do not describe the same artwork")
+            problems.append(f"{layer}: {diff:.3f} of the drawn area differs "
+                            f"(raw {raw:.4f} over union ink {u:.4f}), above the "
+                            f"{max_diff} threshold - the two renders do not "
+                            f"describe the same artwork")
             flag = "   <-- OVER THRESHOLD"
-        print(f"  {layer}: rendered -> {d_png.name}  "
+        print(f"  {layer}: rendered -> {d_png.name}{solo_note}  "
               f"(ink KiCad {k_ink:.4f} / {tool} {o_ink:.4f}, "
-              f"mean diff {diff:.4f}){flag}")
+              f"differing {diff:.3f} of drawn area){flag}")
 
     if problems:
         print("\nNotes (review these first):")
