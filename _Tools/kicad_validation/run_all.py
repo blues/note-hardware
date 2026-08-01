@@ -113,6 +113,7 @@ class Gates:
             return False
         r = run([PY, HERE / "bom_compare.py", "--kicad", kicad_csv,
                  "--board", self.name, "--config", HERE / "boards.yaml",
+                 "--repo", self.repo,
                  "--json", self.val_dir / "bom-compare.json",
                  "--report", self.val_dir / "bom-compare.txt"])
         return r.returncode == 0
@@ -125,6 +126,13 @@ class Gates:
                  "--format", "kicadsexpr", "-o", net, self.sch])
         if r.returncode != 0:
             return False
+        # The exporter records absolute schematic paths in the design header's
+        # (source ...) entries. This artifact is committed, so make it
+        # machine-independent.
+        text = net.read_text()
+        rewritten = text.replace(str(self.repo) + "/", "")
+        if rewritten != text:
+            net.write_text(rewritten)
         r = run([PY, HERE / "netlist_compare.py", "--kicad", net,
                  "--odb", self.repo / self.cfg["odb"]["root"],
                  "--step", self.cfg["odb"].get("step", "pcb"),
@@ -148,6 +156,7 @@ class Gates:
             r = run([PY, HERE / "gerber_diff.py", "--board", self.name,
                      "--config", tmp_cfg, "--kicad-dir", td,
                      "--baseline", self.val_dir / "gerber-baseline.yaml",
+                     "--json", self.val_dir / "gerber-diff.json",
                      "--repo", self.repo, "--out", self.val_dir])
             return r.returncode == 0
 
@@ -202,11 +211,26 @@ def main():
     args = ap.parse_args()
 
     cfg = yaml.safe_load((HERE / "boards.yaml").read_text())["boards"][args.board]
+    if not cfg or "kicad" not in cfg:
+        # NO-GO stub (e.g. notecarrier-xp): the entry exists to record the
+        # decision, not to be run. Say so instead of dying in a stack trace.
+        sys.exit(f"{args.board} has no kicad: section in boards.yaml - it is a "
+                 f"NO-GO/stub entry with nothing to validate (see the comments "
+                 f"above it in boards.yaml)")
     g = Gates(args.repo.resolve(), args.board, cfg)
 
-    for gid, fn in [("ERC", g.erc), ("DRC", g.drc), ("BOM", g.bom),
-                    ("NETLIST", g.netlist), ("GERBER-DIFF", g.gerber),
-                    ("PNP", g.pnp), ("KICANVAS", g.kicanvas), ("RAG", g.rag)]:
+    gates = [("ERC", g.erc), ("DRC", g.drc), ("BOM", g.bom),
+             ("NETLIST", g.netlist), ("GERBER-DIFF", g.gerber),
+             ("PNP", g.pnp), ("KICANVAS", g.kicanvas), ("RAG", g.rag)]
+    unknown = [s for s in args.skip if s not in {gid for gid, _ in gates}]
+    if unknown:
+        # A misspelled --skip would otherwise be dropped on the floor; the gate
+        # would still run (safe direction), but the operator's intent deserves
+        # a loud answer rather than silence.
+        sys.exit(f"unknown gate id(s) in --skip: {unknown}; "
+                 f"valid ids: {[gid for gid, _ in gates]}")
+
+    for gid, fn in gates:
         if gid in args.skip:
             why = (cfg.get("skip_gates") or {}).get(gid)
             if not why:

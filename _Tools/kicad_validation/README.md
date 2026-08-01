@@ -44,8 +44,18 @@ remembering the right command line.
 | BOM | `bom_compare.py` | 100% refdes/value/MPN match vs the shipped BOM spreadsheet |
 | NETLIST | `netlist_compare.py` | connectivity partition identical to the shipped ODB++ netlist (boards that ship ODB++) |
 | GERBER-DIFF | `gerber_diff.py` | per-layer raster diff vs the shipped fab package (human-reviewed; also proves the source revision matches the published release) |
+| PNP | `pnp_compare.py` | side/rotation/position match vs the shipped pick-and-place file — the only gate that checks against the *released build* rather than the design sources |
 | KICANVAS | `kicanvas_check/render_check.py` | every sheet + board parses and paints in KiCanvas, headless Chromium, zero console errors |
 | RAG | `_Tools/extract_for_rag/extract.py` | the new `.kicad_sch` files parse in the RAG pipeline that runs in CI |
+
+**What a gerber baseline does and does not promise.** A board's committed
+`validation/gerber-baseline.yaml` freezes each layer's reviewed difference; the
+gate allows that value + 0.01, so *growth* past the reviewed magnitude fails.
+Within that bound it is only a drift detector: on a layer whose frozen value is
+well above the class default (e.g. a disclaimed X-series copper layer), a new
+defect smaller than the reviewed one would not trip the number on its own.
+That is why every baseline entry must be reviewed against its diff image when
+frozen, and why the images stay committed for re-review.
 
 ## Setup
 

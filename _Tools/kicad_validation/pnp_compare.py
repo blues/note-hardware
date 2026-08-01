@@ -18,6 +18,10 @@ Two shipped formats are understood:
 * Altium's "Pick and Place Locations" text export (``Designator ... Layer ...
   Center-X ... Center-Y ... Rotation``), in mm or mil.
 
+The file is named by ``pnp.path`` in boards.yaml, or - when the released file
+ships inside a committed fab archive - by ``pnp.zip`` plus a ``pnp.member``
+glob that must match exactly one archive member.
+
 The placement origin used by the assembly file is not KiCad's board origin, so
 the comparison solves the constant offset (and a possible y-axis flip) from the
 median over all matched parts, then reports the residuals. Rotation and side are
@@ -38,8 +42,6 @@ from statistics import median
 import yaml
 
 MIL = 0.0254
-# residuals above this are called out in the report for review
-GROSS = 5.0
 
 
 def read_pnp_fixed(path):
@@ -56,43 +58,54 @@ def read_pnp_fixed(path):
         rows[ref.strip("!")] = {
             "side": m.group(5), "x": float(m.group(6)),
             "y": float(m.group(7)), "rot": float(m.group(8)) % 360,
-            "hand_placed": ref.startswith("!"),
         }
     return rows
 
 
 def read_pnp_altium(path):
-    """Altium 'Pick and Place Locations' export (mm or mil)."""
+    """Altium 'Pick and Place Locations' export (mm or mil).
+
+    Column order varies between Altium versions/templates (Designator-first
+    with a Footprint column, or Layer-first without one), so the header line's
+    own label positions define the fixed-width slices."""
     text = Path(path).read_text(errors="replace").splitlines()
     unit = MIL if any("Units used: mil" in ln for ln in text[:40]) else 1.0
     hdr_i = next((i for i, ln in enumerate(text)
-                  if ln.startswith("Designator") and "Center-X" in ln), None)
+                  if "Designator" in ln and "Center-X" in ln
+                  and "Rotation" in ln), None)
     if hdr_i is None:
         return {}
     hdr = text[hdr_i]
-    # fixed-width columns: take each field's start from the header
-    names = ["Designator", "Comment", "Layer", "Footprint",
-             "Center-X", "Center-Y", "Rotation"]
-    starts = [hdr.find(n) for n in names]
-    if any(i < 0 for i in starts):
+    tokens = [(m.start(), m.group(0)) for m in re.finditer(r"\S+", hdr)]
+    col_idx = {}
+    for idx, (_, tok) in enumerate(tokens):
+        for n in ("Designator", "Layer", "Center-X", "Center-Y", "Rotation"):
+            if tok.startswith(n) and n not in col_idx:
+                col_idx[n] = idx
+    if len(col_idx) < 5:
         return {}
-    # the Rotation column ends where the next header label begins, otherwise the
-    # trailing Description text is swept into the rotation value
-    nxt = hdr.find("Description", starts[-1])
-    starts.append(nxt if nxt > 0 else len(hdr) + 400)
+
+    def cell(ln, name):
+        i = col_idx[name]
+        a = tokens[i][0]
+        b = tokens[i + 1][0] if i + 1 < len(tokens) else len(ln)
+        return ln[a:b].strip()
+
     rows = {}
     for ln in text[hdr_i + 1:]:
         if not ln.strip():
             continue
         try:
-            f = [ln[starts[i]:starts[i + 1]].strip() for i in range(len(names))]
-            ref, _, layer, _, cx, cy, rot = f
+            ref = cell(ln, "Designator")
+            cx = cell(ln, "Center-X")
             if not ref or not cx:
                 continue
             rows[ref] = {
-                "side": "Bottom" if layer.lower().startswith("bottom") else "Top",
-                "x": float(cx) * unit, "y": float(cy) * unit,
-                "rot": float(rot) % 360, "hand_placed": False,
+                "side": ("Bottom" if cell(ln, "Layer").lower().startswith("bottom")
+                         else "Top"),
+                "x": float(cx) * unit,
+                "y": float(cell(ln, "Center-Y")) * unit,
+                "rot": float(cell(ln, "Rotation")) % 360,
             }
         except (ValueError, IndexError):
             continue
@@ -118,7 +131,7 @@ def read_pnp_csv(path):
                 "side": "Bottom" if layer.lower().startswith("bottom") else "Top",
                 "x": float(rec[keys["Center-X"]]) * unit,
                 "y": float(rec[keys["Center-Y"]]) * unit,
-                "rot": float(rec[keys["Rotation"]]) % 360, "hand_placed": False,
+                "rot": float(rec[keys["Rotation"]]) % 360,
             }
         except (KeyError, ValueError, TypeError):
             continue
@@ -149,10 +162,20 @@ def read_board_footprints(path):
         while j < len(text):
             c = text[j]
             if c == '"':
-                k = text.find('"', j + 1)
-                if k < 0:
+                # Skip the string, honouring \" escapes: a property value like
+                # "0.024\" (0.60mm)" otherwise ends the string early, and the
+                # parens inside it desync the depth count - which silently
+                # merged footprint blocks and polluted their pad bounding boxes.
+                j += 1
+                while j < len(text):
+                    if text[j] == "\\":
+                        j += 2
+                        continue
+                    if text[j] == '"':
+                        break
+                    j += 1
+                if j >= len(text):
                     break
-                j = k
             elif c == "(":
                 depth += 1
             elif c == ")":
@@ -234,22 +257,65 @@ def main():
     if "pnp" not in cfg:
         print("no pnp config for this board", file=sys.stderr)
         return 2
-    pnp_path = Path(cfg["pnp"]["path"])
-    if not pnp_path.is_absolute():
-        root = args.repo or args.config.resolve().parent.parent.parent
-        pnp_path = root / pnp_path
+
+    def bail(kind, message):
+        """Fail before any comparison could run. The JSON summary is still
+        written: without it a caller sees a non-zero exit next to a *stale*
+        pnp-compare.json from the last passing run."""
+        print(message, file=sys.stderr)
+        if args.json:
+            import json
+            args.json.write_text(json.dumps({
+                "board": args.board, "result": "FAIL",
+                "problems": [{"kind": kind, "ref": None, "message": message}],
+            }, indent=1, sort_keys=True))
+        return 1
+
+    root = args.repo or args.config.resolve().parent.parent.parent
+    if cfg["pnp"].get("zip"):
+        # The shipped pick-and-place file lives inside a committed fab archive
+        # (e.g. Scoop's gerber zip). Extract just that member to a temp file.
+        import fnmatch
+        import tempfile
+        import zipfile
+        zpath = Path(cfg["pnp"]["zip"])
+        if not zpath.is_absolute():
+            zpath = root / zpath
+        member_glob = cfg["pnp"]["member"]
+        with zipfile.ZipFile(zpath) as z:
+            members = [n for n in z.namelist()
+                       if fnmatch.fnmatch(n, member_glob)]
+            if len(members) != 1:
+                return bail("pnp-zip-member",
+                            f"expected exactly 1 member matching "
+                            f"{member_glob!r} in {zpath.name}, got {members}")
+            data = z.read(members[0])
+        tf = tempfile.NamedTemporaryFile(
+            suffix=Path(members[0]).suffix, delete=False)
+        tf.write(data)
+        tf.close()
+        import atexit
+        import os
+        atexit.register(lambda p=tf.name: os.path.exists(p) and os.unlink(p))
+        pnp_path = Path(tf.name)
+        pnp_name = f"{zpath.name}!{members[0]}"
+    else:
+        pnp_path = Path(cfg["pnp"]["path"])
+        if not pnp_path.is_absolute():
+            pnp_path = root / pnp_path
+        pnp_name = pnp_path.name
     skip = re.compile(cfg["pnp"].get("skip_refdes", r"^$"))
 
     fps = read_board_footprints(args.kicad)
     rows = {r: v for r, v in read_pnp(pnp_path).items() if not skip.match(r)}
     if not rows:
-        print(f"could not parse any placements from {pnp_path}", file=sys.stderr)
-        return 1
+        return bail("pnp-unparseable",
+                    f"could not parse any placements from {pnp_name}")
 
     common = sorted(set(rows) & set(fps))
     if not common:
-        print("no refdes in common", file=sys.stderr)
-        return 1
+        return bail("pnp-no-common-refdes",
+                    f"no refdes in common with {pnp_name}")
 
     # Solve the placement-origin offset. Each part's expected body-centre offset
     # is predicted from its own pad geometry, so what is left over is real
@@ -337,7 +403,7 @@ def main():
     lines = [
         "Placement comparison vs the shipped pick-and-place file",
         f"  board:      {args.board}",
-        f"  pnp file:   {pnp_path.name}",
+        f"  pnp file:   {pnp_name}",
         f"  placements: {len(rows)} in the file, {len(common)} matched in the port",
         f"  fitted origin offset ({dx:.3f}, {dy:.3f}) mm, y-flip={flip}",
         "",

@@ -74,8 +74,16 @@ def footprint_blocks(text):
         while j < len(text):
             c = text[j]
             if c == '"':
-                j = text.find('"', j + 1)
-                if j < 0:
+                # honour \" escapes (see pnp_compare.read_board_footprints)
+                j += 1
+                while j < len(text):
+                    if text[j] == "\\":
+                        j += 2
+                        continue
+                    if text[j] == '"':
+                        break
+                    j += 1
+                if j >= len(text):
                     return
             elif c == "(":
                 depth += 1

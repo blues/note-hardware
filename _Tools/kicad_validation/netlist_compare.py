@@ -153,12 +153,11 @@ def compare(kicad, odb, ignore_re):
                 lines.append(f"  Closest ODB net '{only_o[best]}':")
                 lines.append(f"    only in KiCad: {sorted(s - best)}")
                 lines.append(f"    only in ODB:   {sorted(best - s)}")
-        claimed = set()
         for s, name in sorted(only_o.items(), key=lambda x: x[1]):
             best = max(only_k, key=lambda t: len(s & t), default=None)
             if best and len(s & best) == 0:
                 best = None
-            if best is None and s not in claimed:
+            if best is None:
                 lines.append(f"\nODB net '{name}' ({len(s)} nodes) has no overlapping KiCad net: {sorted(s)}")
     return ok, "\n".join(lines)
 

@@ -45,16 +45,18 @@ def split_refs(cell):
     return [r for r in re.split(r"[,\s]+", str(cell).strip()) if r]
 
 
-def load_shipped(cfg):
+def load_shipped(cfg, repo=None):
     """Return {refdes: row-dict} from the shipped spreadsheet per board config.
 
-    cfg keys: path, sheet (optional), header_contains (cell text that marks the
-    header row, default 'Designator'), columns: {refs, value, mpn (optional)},
-    skip_refdes (regex, optional), dnp_markers (list, optional).
+    cfg keys: path, sheet (optional), header_contains (cell text that must
+    EQUAL a cell on the header row, default 'Designator'), columns:
+    {refs, value, mpn (optional)}, skip_refdes (regex, optional),
+    dnp_markers (list, optional).
     """
     path = Path(cfg["path"])
     if not path.is_absolute():
-        path = Path(__file__).resolve().parent.parent.parent / path
+        path = Path(repo) if repo else Path(__file__).resolve().parent.parent.parent
+        path = path / cfg["path"]
     if path.suffix.lower() == ".xls":
         book = xlrd.open_workbook(path)
         ws = book.sheet_by_name(cfg["sheet"]) if cfg.get("sheet") else book.sheet_by_index(0)
@@ -66,14 +68,26 @@ def load_shipped(cfg):
         rows = list(ws.iter_rows(values_only=True))
 
     marker = cfg.get("header_contains", "Designator")
-    header_idx = next(i for i, r in enumerate(rows)
-                      if any(marker == str(c).strip() for c in r if c is not None))
+    header_idx = next((i for i, r in enumerate(rows)
+                       if any(marker == str(c).strip() for c in r if c is not None)),
+                      None)
+    if header_idx is None:
+        raise SystemExit(f"no header row in {path.name}: no cell equals "
+                         f"{marker!r} (header_contains must match a header "
+                         f"cell exactly)")
     header = [str(c).strip() if c is not None else "" for c in rows[header_idx]]
     col = {name: header.index(name) for name in header if name}
 
     refs_col = col[cfg["columns"]["refs"]]
     value_col = col[cfg["columns"]["value"]]
-    mpn_col = col.get(cfg["columns"].get("mpn", ""), None)
+    mpn_name = cfg["columns"].get("mpn", "")
+    if mpn_name and mpn_name not in col:
+        # A typo here must not quietly disable the MPN half of the gate: with
+        # mpn_col=None every shipped MPN reads as "" and compare() never checks
+        # one - the exact silent-degrade this tool was rebuilt to remove.
+        raise SystemExit(f"configured mpn column {mpn_name!r} is not in the "
+                         f"header of {path.name}: {[h for h in header if h]}")
+    mpn_col = col.get(mpn_name, None)
     skip_re = re.compile(cfg["skip_refdes"]) if cfg.get("skip_refdes") else None
     dnp_markers = [norm(m) for m in cfg.get("dnp_markers", [])]
     refdes_map = cfg.get("refdes_map", {})
@@ -172,14 +186,36 @@ def main():
     ap.add_argument("--kicad", required=True, type=Path)
     ap.add_argument("--board", required=True)
     ap.add_argument("--config", required=True, type=Path)
+    ap.add_argument("--repo", type=Path,
+                    help="repo root for relative shipped-BOM paths "
+                         "(default: this script's checkout)")
     ap.add_argument("--report", type=Path)
     ap.add_argument("--json", type=Path,
                     help="write a machine-readable result summary here")
     args = ap.parse_args()
 
     cfg = yaml.safe_load(args.config.read_text())["boards"][args.board]["bom"]
-    shipped = load_shipped(cfg)
-    kicad = load_kicad(args.kicad, cfg.get("skip_refdes"))
+    try:
+        shipped = load_shipped(cfg, repo=args.repo)
+        kicad = load_kicad(args.kicad, cfg.get("skip_refdes"))
+        # An empty side means the parse went wrong (over-broad skip_refdes,
+        # wrong sheet/columns), and {} == {} must not read as a matching BOM.
+        if not shipped:
+            raise SystemExit("parsed 0 shipped BOM rows - check sheet/columns/"
+                             "skip_refdes in boards.yaml")
+        if not kicad:
+            raise SystemExit(f"parsed 0 KiCad BOM rows from {args.kicad}")
+    except SystemExit as e:
+        # Still write the JSON summary: a caller must not see a non-zero exit
+        # next to a stale bom-compare.json from the last passing run.
+        if args.json:
+            import json
+            args.json.write_text(json.dumps({
+                "board": args.board, "result": "FAIL",
+                "problems": [{"kind": "config-error", "ref": None,
+                              "message": str(e)}],
+            }, indent=1, sort_keys=True))
+        raise
     ok, report, problems = compare(
         kicad, shipped, check_mpn=cfg.get("check_mpn", True),
         check_value=cfg.get("check_value", True))

@@ -152,7 +152,11 @@ def ink_fraction(png):
     try:
         return float(r.stdout.strip())
     except ValueError:
-        return 0.0
+        # A measurement that fails must not read as "no ink": 0.0 here flows
+        # into both the emptiness check and the union normaliser and turns a
+        # broken ImageMagick invocation into a silent PASS.
+        raise SystemExit(f"magick could not measure {png}: "
+                         f"{(r.stderr or r.stdout).strip()[:500]}")
 
 
 def pad_to_match(a, b):
@@ -218,10 +222,17 @@ def main():
     # Prefer the committed archive: a bare original_dir pointing at somebody's
     # scratch directory cannot be reproduced in CI or another checkout.
     if cfg.get("original_zip"):
+        import shutil
         import zipfile
         zpath = args.repo / cfg["original_zip"]
         orig_dir = args.out / "_shipped"
-        orig_dir.mkdir(parents=True, exist_ok=True)
+        # Extract into a clean directory: leftovers from a previous package
+        # could otherwise satisfy a glob and be diffed as if they were current.
+        # (_shipped/ is gitignored; it exists so a reviewer can inspect exactly
+        # what was compared.)
+        if orig_dir.exists():
+            shutil.rmtree(orig_dir)
+        orig_dir.mkdir(parents=True)
         with zipfile.ZipFile(zpath) as z:
             z.extractall(orig_dir)
         # Packages vary: some put the gerbers at the root, others under a
@@ -309,10 +320,15 @@ def main():
             f"artwork; set an explicit `window:` for this board, or point "
             f"`outline.original` at a layer that carries only the board edge.")
 
+    if not cfg.get("layers"):
+        # An empty layer map would make the loop below a no-op and the gate a
+        # guaranteed PASS that compared nothing.
+        fail(None, "no-layers", "the board's gerbers config maps no layers")
+
     measured = {}
     solo_tmp = tempfile.TemporaryDirectory()
     solo_dir = solo_tmp.name
-    for layer, m in cfg["layers"].items():
+    for layer, m in (cfg.get("layers") or {}).items():
         k_png = args.out / f"{layer}-KiCad.png"
         o_png = args.out / f"{layer}-{tool}.png"
         d_png = args.out / f"{layer}-diff.png"
@@ -440,7 +456,8 @@ def main():
         }, indent=1, sort_keys=True))
 
     print(f"\nRESULT: {'FAIL' if problems else 'PASS'} - "
-          f"{len(cfg['layers'])} layers rendered, {len(problems)} structural problem(s)")
+          f"{len(cfg.get('layers') or {})} layers rendered, "
+          f"{len(problems)} structural problem(s)")
     sys.exit(1 if problems else 0)
 
 
