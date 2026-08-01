@@ -113,6 +113,7 @@ class Gates:
             return False
         r = run([PY, HERE / "bom_compare.py", "--kicad", kicad_csv,
                  "--board", self.name, "--config", HERE / "boards.yaml",
+                 "--json", self.val_dir / "bom-compare.json",
                  "--report", self.val_dir / "bom-compare.txt"])
         return r.returncode == 0
 
@@ -157,6 +158,7 @@ class Gates:
                  "--board", self.name, "--config", HERE / "boards.yaml",
                  "--repo", self.repo,
                  "--baseline", self.val_dir / "placement-baseline.yaml",
+                 "--json", self.val_dir / "pnp-compare.json",
                  "--report", self.val_dir / "pnp-compare.txt"])
         return r.returncode == 0
 

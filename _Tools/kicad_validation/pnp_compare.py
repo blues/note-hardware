@@ -215,6 +215,8 @@ def main():
     ap.add_argument("--config", required=True, type=Path)
     ap.add_argument("--repo", type=Path, help="repo root for relative pnp paths")
     ap.add_argument("--report", type=Path)
+    ap.add_argument("--json", type=Path,
+                    help="write a machine-readable result summary here")
     ap.add_argument("--tolerance", type=float, default=0.05,
                     help="position tolerance in mm (default 0.05)")
     ap.add_argument("--position-tolerance", type=float, default=0.3,
@@ -275,12 +277,21 @@ def main():
     if baseline_path and baseline_path.exists():
         baseline = yaml.safe_load(baseline_path.read_text()) or {}
 
+    structured = []
+
+    def fail(kind, ref, message):
+        """Record a hard failure in machine-readable form; see bom_compare for
+        why callers must not have to parse the prose report."""
+        structured.append({"kind": kind, "ref": ref, "message": message})
+
     side_bad, rot_bad = [], []
     explained, accepted, unexplained, measured = [], [], [], {}
     for r in common:
         fp, want = fps[r], rows[r]
         if fp["side"] != want["side"]:
-            side_bad.append(f"{r}: port {fp['side']}, released build {want['side']}")
+            msg = f"{r}: port {fp['side']}, released build {want['side']}"
+            side_bad.append(msg)
+            fail("side", r, msg)
         px, py = (lambda v: (pred_sign * v[0], pred_sign * v[1]))(
             predict(fp, rot_sign) or (0.0, 0.0))
         ex = fp["x"] - want["x"] - px - dx
@@ -297,14 +308,21 @@ def main():
         else:
             was = (f", baseline says ({baseline[r][0]:+.3f}, {baseline[r][1]:+.3f})"
                    if r in baseline else ", not in the baseline")
-            unexplained.append(f"{r}: ({ex:+.3f}, {ey:+.3f}) mm from the body "
-                               f"centre predicted by {fp['fp']}{was}")
+            msg = (f"{r}: ({ex:+.3f}, {ey:+.3f}) mm from the body "
+                   f"centre predicted by {fp['fp']}{was}")
+            unexplained.append(msg)
+            fail("displaced", r, msg)
         dr = (fp["rot"] - want["rot"]) % 360
         if min(dr, 360 - dr) > 0.5:
-            rot_bad.append(f"{r}: port {fp['rot']:g} deg, "
-                           f"released build {want['rot']:g} deg")
+            msg = (f"{r}: port {fp['rot']:g} deg, "
+                   f"released build {want['rot']:g} deg")
+            rot_bad.append(msg)
+            fail("rotation", r, msg)
 
     only_pnp = sorted(set(rows) - set(fps))
+    for r in only_pnp:
+        fail("missing-refdes", r,
+             f"{r} is placed in the released build but absent from the port")
 
     if args.update_baseline and baseline_path:
         keep = {r: measured[r] for r in common
@@ -357,6 +375,16 @@ def main():
     print(out)
     if args.report:
         args.report.write_text(out + "\n")
+    if args.json:
+        import json
+        args.json.write_text(json.dumps({
+            "board": args.board,
+            "result": "PASS" if ok else "FAIL",
+            "problems": structured,
+            "summary": {"placements": len(rows), "matched": len(common),
+                        "explained": len(explained), "accepted": len(accepted)},
+            "measured": measured,
+        }, indent=1, sort_keys=True))
     return 0 if ok else 1
 
 

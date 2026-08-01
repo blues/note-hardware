@@ -198,6 +198,9 @@ boards:
       columns:
         refs: Designator
         value: Name
+        # This ActiveBOM export fills MPN for only 1 of its 66 lines, so the MPN
+        # half of the comparison is nearly vacuous here - refdes and part name
+        # carry the gate. The mapping is right; the source data is thin.
         mpn: MPN
       skip_refdes: '^(FD|LOGO|DOC|PCB)\d*$'
     odb:

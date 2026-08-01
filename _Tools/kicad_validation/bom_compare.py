@@ -111,29 +111,50 @@ def load_kicad(path, skip_refdes=None):
 
 
 def compare(kicad, shipped, check_mpn=True, check_value=True):
+    """Return (ok, prose_report, problems).
+
+    `problems` is a list of {kind, ref, message}. Callers that need to act on the
+    result - the runner, the regression suite - read that rather than parsing the
+    prose, so a failure kind they have not enumerated still reaches them.
+    """
     lines = [f"KiCad populated refdes:   {len(kicad)}",
              f"Shipped populated refdes: {len(shipped)}", ""]
     only_k = sorted(set(kicad) - set(shipped))
     only_s = sorted(set(shipped) - set(kicad))
     diffs = []
+    problems = []
+
+    def fail(kind, ref, message):
+        problems.append({"kind": kind, "ref": ref, "message": message})
+
     for ref in sorted(set(kicad) & set(shipped)):
         k, s = kicad[ref], shipped[ref]
         # A grouped BOM line may list several equivalent value spellings
         # ("1uF/ 16V-X5R, 1uF/ 16V-XR5, 1u/16V-X5R"); accept any of them.
         variants = {v.strip() for v in s["value"].split(",")}
         if check_value and k["value"] != s["value"] and k["value"] not in variants:
-            diffs.append(f"  {ref}: value KiCad='{k['value']}' shipped='{s['value']}'")
+            msg = f"{ref}: value KiCad='{k['value']}' shipped='{s['value']}'"
+            diffs.append("  " + msg)
+            fail("value-mismatch", ref, msg)
         # Value and MPN are checked independently: an `elif` here would hide an
         # MPN mismatch behind a value mismatch on the same refdes.
         if check_mpn and s["mpn"]:
             if not k["mpn"]:
                 # A blank KiCad MPN is missing data, not agreement. Treating it
                 # as a match let real part numbers silently drop out of a port.
-                diffs.append(f"  {ref}: MPN missing in KiCad, shipped='{s['mpn']}'")
+                msg = f"{ref}: MPN missing in KiCad, shipped='{s['mpn']}'"
+                diffs.append("  " + msg)
+                fail("mpn-missing", ref, msg)
             elif (k["mpn"] != s["mpn"]
                     and k["mpn"] not in {m.strip() for m in s["mpn"].split(",")}):
-                diffs.append(f"  {ref}: MPN KiCad='{k['mpn']}' shipped='{s['mpn']}'")
-    ok = not only_k and not only_s and not diffs
+                msg = f"{ref}: MPN KiCad='{k['mpn']}' shipped='{s['mpn']}'"
+                diffs.append("  " + msg)
+                fail("mpn-mismatch", ref, msg)
+    for r in only_k:
+        fail("only-in-kicad", r, f"{r} is fitted in KiCad but absent from the shipped BOM")
+    for r in only_s:
+        fail("only-in-shipped", r, f"{r} is in the shipped BOM but not fitted in KiCad")
+    ok = not problems
     if only_k:
         lines.append(f"Only in KiCad ({len(only_k)}): {only_k}")
     if only_s:
@@ -143,7 +164,7 @@ def compare(kicad, shipped, check_mpn=True, check_value=True):
         lines.extend(diffs)
     lines.append("")
     lines.append("RESULT: PASS - BOM matches exactly." if ok else "RESULT: FAIL")
-    return ok, "\n".join(lines)
+    return ok, "\n".join(lines), problems
 
 
 def main():
@@ -152,16 +173,27 @@ def main():
     ap.add_argument("--board", required=True)
     ap.add_argument("--config", required=True, type=Path)
     ap.add_argument("--report", type=Path)
+    ap.add_argument("--json", type=Path,
+                    help="write a machine-readable result summary here")
     args = ap.parse_args()
 
     cfg = yaml.safe_load(args.config.read_text())["boards"][args.board]["bom"]
     shipped = load_shipped(cfg)
     kicad = load_kicad(args.kicad, cfg.get("skip_refdes"))
-    ok, report = compare(kicad, shipped, check_mpn=cfg.get("check_mpn", True),
-                         check_value=cfg.get("check_value", True))
+    ok, report, problems = compare(
+        kicad, shipped, check_mpn=cfg.get("check_mpn", True),
+        check_value=cfg.get("check_value", True))
     print(report)
     if args.report:
         args.report.write_text(report + "\n")
+    if args.json:
+        import json
+        args.json.write_text(json.dumps({
+            "board": args.board,
+            "result": "PASS" if ok else "FAIL",
+            "problems": problems,
+            "summary": {"kicad_refdes": len(kicad), "shipped_refdes": len(shipped)},
+        }, indent=1, sort_keys=True))
     sys.exit(0 if ok else 1)
 
 

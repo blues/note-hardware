@@ -95,6 +95,6 @@ Clearance 0.1499 mm (the board routes with 0.15 mm spacing), track
 | ERC / DRC (error severity, incl. schematic parity) | **0 / 0** (6 documented DRC exclusions, see above) |
 | Netlist vs Altium PcbDoc (fresh headless import) | **85/85 nets exact** (schematic *and* board side) |
 | Netlist vs shipped ODB++ (`PCB + 3D + 2D/FAB/ODB`) | **85/85 partitions** |
-| BOM vs `BOM-ActiveBOM.xlsx` | exact |
+| BOM vs `BOM-ActiveBOM.xlsx` | exact on refdes and part name. **MPNs are effectively unverified on this board**: the shipped ActiveBOM fills its `MPN` column for only 1 of 66 lines (`J9`), so there is nothing to compare the remaining parts against. The column mapping is correct — the source data simply does not carry them. |
 | Gerber raster diff vs `PCB + 3D + 2D/FAB/Gerber` | pads/tracks/planes match; deviations limited to the documented classes above |
 | KiCanvas / RAG extract | render + parse clean (after FAE-logo removal) |

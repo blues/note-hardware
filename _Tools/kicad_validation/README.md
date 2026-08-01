@@ -14,6 +14,23 @@ passes or the failure is explicitly justified in the board's
 `documentation/Porting-Notes.md`. A board that cannot be proven against its
 original fab outputs is dropped, not shipped.
 
+**A gate must be able to fail.** Three of these gates once computed the right
+thing and then did not act on it — the BOM comparison treated a missing MPN as
+agreement, the placement gate left residuals out of its verdict, and the gerber
+diff collected structural problems and exited 0 regardless. Each is now covered
+by a regression suite that injects the specific defect and asserts a non-zero
+exit:
+
+    .venv/bin/python test_gerber_diff.py --board scoop     # one board's gerber gate
+    .venv/bin/python test_gerber_diff.py --all-boards      # every board vs its baseline
+    .venv/bin/python test_gates.py --board mojo            # BOM + placement gates
+
+Those suites read each gate's `--json` summary rather than its printed report.
+That matters: earlier versions classified failures by matching message text and
+so ignored whole categories they had not enumerated, and one checked only a
+failure's label and accepted arbitrary damage as a known defect. Anything acting
+on a gate result should use the JSON.
+
 **A gate that does not run has not passed.** `run_all.py` fails any gate that is
 missing configuration or is requested via `--skip`, unless the board records the
 reason under `skip_gates.<GATE>` in `boards.yaml`. That keeps every omission
