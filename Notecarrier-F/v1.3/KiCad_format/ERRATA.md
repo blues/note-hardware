@@ -62,16 +62,97 @@ move from a 2-pin symbol to the 3-pin `FSV1045V`, so the anode net must reach
 **both** pins 1 and 2 and the cathode net pin 3 — the same arrangement the
 Notecarrier-Pi v2.0 port uses for its `TO277-3` diodes.
 
+**The symbol swap is purely additive — no net changes.** `blues-kicad-lib:FSV1045V`
+(*not* the mirrored `Notecarrier-Pi-local` variant) puts cathode pin 3 at local
+(−3.81, 0) and anodes 1/2 at (+3.81, ±1.27). The existing
+`D_Schottky_Filled_Swapped` puts its cathode pin 2 at local (−3.81, 0) and anode
+pin 1 at (+3.81, 0). The cathode therefore lands on exactly the coordinate it
+already occupies, so **every existing wire survives untouched**; each diode needs
+only two short anode stubs plus a junction where the old anode wire meets them:
+
+| Ref | Sheet | Placement | Anode stub (vertical) | Junction |
+|---|---|---|---|---|
+| `DS1` | Power-Input | (199.39, 58.42) rot 0 | x = 203.20, y 57.15 → 59.69 | (203.20, 58.42) |
+| `DS2` | Power-Input | (182.88, 44.45) rot 180 | x = 179.07, y 43.18 → 45.72 | (179.07, 44.45) |
+| `DS4` | Power-Input | (36.83, 55.88) rot 180 | x = 33.02, y 54.61 → 57.15 | (33.02, 55.88) |
+| `DS5` | Power-Rails | (207.01, 49.53) rot 180 | x = 203.20, y 48.26 → 50.80 | (203.20, 49.53) |
+
+Draw each stub as **two** wires meeting at the junction rather than one wire with
+a junction at its midpoint — a mid-wire junction can stop a pin at the wire's
+endpoint from binding (the failure diagnosed on Notecarrier-A v2.3).
+
+Cathode orientation was confirmed against the port's own netlist rather than
+assumed: `DS1` pin 2 = `VMAIN`, `DS2` pin 2 = `VMAIN`, `DS4` pin 2 = `VSOLAR`,
+`DS5` pin 2 = `F_BAT` — all cathodes, and page 7 of the released schematic shows
+`DS5` pin 3 → `F_BAT`, matching. `DS3` and `DS6` keep their 2-pin symbol, so
+their pin-to-net mapping is untouched and needs no polarity analysis.
+
 The library footprints are already the right geometry: `TO277-3` has copper pads
 1.45 × 1.15 mm and a 4.15 × 4.65 mm tab against the shipped paste apertures of
 1.4 × 1.1 and 4.1 × 4.6 (the usual ~0.05 mm paste shrink), and `SMB_Fv1.2` is
 2.3 × 2.3 against 2.25 × 2.25 paste.
 
-### 4. Remove, rename
+### 3a. The `F_VIO` rail migration — the real substance of this revision
 
-* Remove `R11` and `R12` (10 k on `F_BAT`) — v1.2 parts that v1.3 drops.
-* `J11` (`CES-102-01-S-S`) is unfitted in both revisions; confirm and keep the
-  DNP flag or drop it with `R11`/`R12`.
+**This is the part an earlier draft of this errata missed entirely, and it is the
+reason v1.3 exists.** `U9` is not an isolated addition: v1.3 moves the
+Feather-side reference rail of both level shifters off the raw battery and onto
+the new regulated 3.3 V.
+
+In v1.2 (these files today) *both* `TXS0102DCUR` level shifters take their
+Feather-side supply from `F_BAT`, which is unregulated battery voltage. v1.3
+introduces `F_VIO` from `U9` and moves exactly six nodes onto it. Read off
+pages 4 and 7 of `../100275_NOTECARRIER-F_Rev-11.PDF`:
+
+| Node | v1.2 net (this port) | v1.3 net |
+|---|---|---|
+| `U4` pin 7 `VCCB` | `F_BAT` | **`F_VIO`** |
+| `C14` pin 1 (100 n, `U4` `VCCB` decoupling) | `F_BAT` | **`F_VIO`** |
+| `U1` pin 3 `VCCA` | `F_BAT` | **`F_VIO`** |
+| `C11` pin 1 (100 n, `U1` `VCCA` decoupling) | `F_BAT` | **`F_VIO`** |
+| `R11` pin 2 (`F_SDA` pull-up) | `F_BAT` | **`F_VIO`** |
+| `R12` pin 2 (`F_SCL` pull-up) | `F_BAT` | **`F_VIO`** |
+
+Everything else on `F_BAT` stays: `DS5` pin 3 (cathode) and `MOD1R` pin 1 (the
+Feather `BAT` pin). Unchanged and worth stating so they are not disturbed:
+`U1` pin 7 `VCCB`, `U1` pin 6 `OE` and `R16` pin 1 remain on `F_3V3`; `U4`
+pin 3 `VCCA` remains on `N_VIO`.
+
+`F_VIO` is drawn in the released schematic with the same double-chevron
+off-sheet-connector glyph as `F_BAT` and `N_VIO`. This port renders that glyph
+as a **power symbol**, so `F_VIO` needs a `power_F_VIO` symbol —
+`blues-kicad-lib` has `power_F_BAT`, `power_F_3V3` and `power_N_VIO` but **no
+`power_F_VIO`**, so it must be added (modelled on `power_F_BAT`).
+
+#### Where the cut has to be made
+
+The Feather sheet's `F_BAT` connectivity was probed by renaming each naming
+object in turn and re-exporting the netlist. It is **not** one node — it is four
+separate wire nodes that the power symbols unify by name:
+
+| Feather `power_F_BAT` instance | Nodes it feeds | v1.3 action |
+|---|---|---|
+| (137.16, 92.71) | `R11.2` | retarget to `F_VIO` |
+| (144.78, 92.71) | `R12.2` | retarget to `F_VIO` |
+| (151.13, 116.84) | `C11.1`, `U1.3` | retarget to `F_VIO` |
+| (245.11, 102.87) | `C14.1`, `U4.7`, `MOD1R.1` (+ `DS5.2` through the hierarchy) | **mixed — needs wire surgery** |
+
+So three of the four are a one-line retarget each. Only the fourth is real work:
+`C14.1` and `U4.7` must be cut away from `MOD1R.1`/`DS5.2` and given their own
+`F_VIO` connection. The `F_BAT` hierarchical labels on the Feather sheet sit at
+(154.94, 160.02), (231.14, 105.41) and (30.48, 132.08), and on Power-Rails at
+(248.92, 49.53).
+
+### 4. Unfit, rename
+
+* `R11` and `R12` (10 k) are **struck through with a red X** on page 4 of the
+  released v1.3 schematic and appear in neither `BOM-3000-653-002.xlsx` nor
+  `PNP-3000-653-002.pnp`. So v1.3 does **not** delete them — it leaves them on
+  the drawing as unfitted. The faithful representation is therefore `(dnp yes)`
+  plus exclude-from-BOM, exactly how this port already handles `J11` — *not*
+  deletion, which an earlier draft of this errata wrongly called for. Their
+  pull-up net still moves to `F_VIO` per the table above.
+* `J11` (`CES-102-01-S-S`) is unfitted in both revisions; keep it DNP.
 * Rename `MODL1` → `MOD1L` and `MODR1` → `MOD1R` to match the released BOM and
   pick-and-place.
 
@@ -86,11 +167,32 @@ against the shipped fab.
 For this board the frames coincide conveniently:
 `film_x = pnp_x`, `film_y = pnp_y`, and `board_kicad = (pnp_x + 50, 153 − pnp_y)`.
 
-### 6. Only two things have to be built from scratch
+### 6. Parts that had to be built from scratch — DONE
 
-An `AP2139AK-3.3TRG1` symbol (5 pins: VIN, GND, CE, NC, VOUT) and a SOT-23-5
-footprint taken from the shipped geometry (five 0.6 × 1.5 mm copper pads,
-0.55 × 1.45 paste). Everything else already exists in `blues-kicad-lib`.
+Built and registered in project-local libraries (`Notecarrier-F-local.kicad_sym`,
+`Notecarrier-F-local.pretty`, both added to `sym-lib-table`/`fp-lib-table`):
+
+* **`SOT-23-5_Fv1.3` footprint** — five 0.6 × 1.5 mm rectangular SMD pads at
+  (−0.95, −1.175), (0, −1.175), (+0.95, −1.175), (+0.95, +1.175),
+  (−0.95, +1.175), taken from the shipped copper with the usual paste shrink
+  (0.55 × 1.45 apertures).
+* **`AP2139AK-3.3TRG1` symbol** — VIN 1, GND 2, CE 3, NC 4, VOUT 5.
+
+`U9`'s pin numbering was **derived from the shipped fab, not assumed**: the pad at
+local (−0.95, −1.175) routes via (15.15, 13.45) → (15.15, 14.62) to the left pad
+of `C34` (the `F_VIO` cap), which fixes that pad as pin 5 / `VOUT`; pins 1 and 3
+both route upward together, consistent with `VIN` and `CE` being tied; pin 2
+routes to a `GND` via at (16.5, 18.3). This matches page 7 of the released
+schematic exactly.
+
+Still to build: **`power_F_VIO`** (see §3a) — a power symbol modelled on
+`blues-kicad-lib:power_F_BAT`.
+
+The three re-used footprints were verified against the shipped geometry rather
+than trusted: `TO277-3` pads 1/2 at (±0.985, 2.75) 1.45 × 1.15 plus the
+4.15 × 4.65 tab at (0, −1); `SMB_Fv1.2` pads at (±2.25, 0) 2.3 × 2.3 — and
+`DS7`'s shipped copper is exactly (±2.250, 0) at 2.3 × 2.3; `C-0603_Fv1.2` pads
+at (±0.725, 0) 0.8 × 0.75 rotated 270°.
 
 ### 7. Validation
 
