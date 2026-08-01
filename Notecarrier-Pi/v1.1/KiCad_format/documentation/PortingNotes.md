@@ -103,3 +103,27 @@ As per Notecarrier-A.
 	- The slot itself is validated in the PTH gerber diff.
 - The DXF export necked tracks from 0.3mm to 0.25mm and 0.2mm at the wrong segment. Both the design files and the gerber archive agree this is wrong. Odd, but no rhyme or reason apparent, and easy to spot in the diffs, so I've just corrected them manually.
 
+## KiCad 9 update (2026-07-31)
+
+This port was originally authored in KiCad 7 and has been upgraded in place to
+**KiCad 9** (board format 20221018 → 20241229, schematics → 20250114). The
+upgrade was verified to be lossless:
+
+* every fabrication layer — copper, mask, paste, silkscreen and Edge.Cuts —
+  is geometrically identical before and after (raster comparison at 600 dpi),
+  and the drill file is textually identical;
+* the schematic netlist is unchanged: same component set and the same net
+  partitions.
+
+**Do not refill the zones.** These ports depend on the fills preserved from the
+original import; regenerating them changes the copper. The upgrade path used
+here (load and save) does not refill.
+
+### DRC exclusions no longer suppress anything
+
+The exclusions recorded in the project file were written by KiCad 7 and its
+marker keys no longer match, so KiCad 9 re-reports the violations that were
+reviewed and accepted when this port was made. They are left in place as the
+author's record. Current state under KiCad 9: **3 ERC** (`power_pin_not_driven` on three hidden power pins) and **4 DRC errors, 0 unconnected**.
+
+All four are `clearance` reports where the design's actual spacing is 0.198 mm against the project's custom `Zone2Default` rule of 0.3 mm — i.e. the transcribed rule is stricter than the board it describes.

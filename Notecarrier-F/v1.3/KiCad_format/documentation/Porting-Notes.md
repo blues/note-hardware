@@ -257,3 +257,28 @@ For the most part, the existing notes are sufficient to cover the exercise of po
 - Note that after assessing the `Notecarier-F_Panel.PcbDoc` file, I've determined that it is not a good candidate for porting and is therefore not included in the port at this stage.
 	- It is both non-novel, and specific. That is, the panelisation is a standard panel of 5x2 boards, with rails on all sides that contain fiducials, so nothing that you wouldn't see in a standard panelisation. Then it also has specific text in the silkscreen ("2200-783 Notecarrier-F Panel"), quite specific fiducial size, shape and placement, and some specific instructions associated with the stencil to ensure the fiducials are etched correctly.
 	- Since the standard parts should be done in KiCad through the use of automation, not porting, and the specific parts are closely tied to the manufacturer's requirements, my initial assessment is that the panel is not a good candidate for porting. The panel should be recreated in KiCad using a panelisation tool, and the manufacturer specific elements applied consciously.
+
+## KiCad 9 update (2026-07-31)
+
+This port was originally authored in KiCad 7 and has been upgraded in place to
+**KiCad 9** (board format 20221018 → 20241229, schematics → 20250114). The
+upgrade was verified to be lossless:
+
+* every fabrication layer — copper, mask, paste, silkscreen and Edge.Cuts —
+  is geometrically identical before and after (raster comparison at 600 dpi),
+  and the drill file is textually identical;
+* the schematic netlist is unchanged: same component set and the same net
+  partitions.
+
+**Do not refill the zones.** These ports depend on the fills preserved from the
+original import; regenerating them changes the copper. The upgrade path used
+here (load and save) does not refill.
+
+### DRC exclusions no longer suppress anything
+
+The exclusions recorded in the project file were written by KiCad 7 and its
+marker keys no longer match, so KiCad 9 re-reports the violations that were
+reviewed and accepted when this port was made. They are left in place as the
+author's record. Current state under KiCad 9: **1 ERC** (`hier_label_mismatch` on `F_NRST`) and **0 DRC errors, 0 unconnected**.
+
+DRC previously reported 171 errors. 163 of them came from 54 net-less 0.6 mm copper patches (footprint `weird-no-fill-via_Fv1.2`) that sit inside `GND` copper; they have been assigned the `GND` net they belong to, which cleared the reports without changing any copper geometry.\n\n> **⚠️ See [`../ERRATA.md`](../ERRATA.md).** The power section of this port does not match the shipped v1.3 board: a whole regulator circuit (`U9`, `C33`, `C34`) and `DS7` are missing, and all six diodes carry the wrong part number and package.

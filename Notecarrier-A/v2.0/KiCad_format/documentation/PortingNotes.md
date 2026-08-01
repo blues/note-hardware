@@ -185,3 +185,28 @@ gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B Edge_Cuts.a
 ```
 
 - Then all is in order and the Notecarrier-B validation procedure works well.
+
+## KiCad 9 update (2026-07-31)
+
+This port was originally authored in KiCad 7 and has been upgraded in place to
+**KiCad 9** (board format 20221018 → 20241229, schematics → 20250114). The
+upgrade was verified to be lossless:
+
+* every fabrication layer — copper, mask, paste, silkscreen and Edge.Cuts —
+  is geometrically identical before and after (raster comparison at 600 dpi),
+  and the drill file is textually identical;
+* the schematic netlist is unchanged: same component set and the same net
+  partitions.
+
+**Do not refill the zones.** These ports depend on the fills preserved from the
+original import; regenerating them changes the copper. The upgrade path used
+here (load and save) does not refill.
+
+### DRC exclusions no longer suppress anything
+
+The exclusions recorded in the project file were written by KiCad 7 and its
+marker keys no longer match, so KiCad 9 re-reports the violations that were
+reviewed and accepted when this port was made. They are left in place as the
+author's record. Current state under KiCad 9: **3 ERC** (power-output pins tied together — the house convention for this design) and **39 DRC errors, 0 unconnected**.
+
+Of the 39, 24 are `clearance` reports at 0.0000 mm between `J9`'s through-hole pads and inner-layer zones of other nets, and 10 are `courtyards_overlap`. These are artifacts of how the preserved fills are modelled, not shorts: the port's `In1.Cu` plane was re-compared against the shipped `GND.art` film during the upgrade and matches it to within 0.9 % of lit area, so the plane's anti-pads around `J9` are present and correct.

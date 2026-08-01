@@ -28,11 +28,11 @@ pick-and-place file — a placement comparison against the released build; see t
 
 |Product|KiCad version|Location|
 |---|---|---|
-|Notecarrier-A v2.0|KiCad 7|[Notecarrier-A/v2.0/KiCad_format](Notecarrier-A/v2.0/KiCad_format)|
-|Notecarrier-B v2.1|KiCad 7|[_Legacy Hardware/Notecarrier-B/v2.1/KiCad_format](_Legacy%20Hardware/Notecarrier-B/v2.1/KiCad_format)|
+|Notecarrier-A v2.0|KiCad 9|[Notecarrier-A/v2.0/KiCad_format](Notecarrier-A/v2.0/KiCad_format)|
+|Notecarrier-B v2.1|KiCad 9|[_Legacy Hardware/Notecarrier-B/v2.1/KiCad_format](_Legacy%20Hardware/Notecarrier-B/v2.1/KiCad_format)|
 |Notecarrier-CX v1.7|KiCad 9|[Notecarrier-CX/v1.7/KiCad_format](Notecarrier-CX/v1.7/KiCad_format)|
-|Notecarrier-F v1.3|KiCad 7|[Notecarrier-F/v1.3/KiCad_format](Notecarrier-F/v1.3/KiCad_format)|
-|Notecarrier-Pi v1.1|KiCad 7|[Notecarrier-Pi/v1.1/KiCad_format](Notecarrier-Pi/v1.1/KiCad_format)|
+|Notecarrier-F v1.3 ‡|KiCad 9|[Notecarrier-F/v1.3/KiCad_format](Notecarrier-F/v1.3/KiCad_format)|
+|Notecarrier-Pi v1.1|KiCad 9|[Notecarrier-Pi/v1.1/KiCad_format](Notecarrier-Pi/v1.1/KiCad_format)|
 |Notecarrier-Pi v2.0|KiCad 9|[Notecarrier-Pi/v2.0/KiCad_format](Notecarrier-Pi/v2.0/KiCad_format)|
 |Notecarrier-XI v1.4|KiCad 9|[Notecarrier-XI/v1.4/KiCad_format](Notecarrier-XI/v1.4/KiCad_format)|
 |Notecarrier-X v1.2 †|KiCad 9|[Notecarrier-X/v1.2/KiCad_format](Notecarrier-X/v1.2/KiCad_format)|
@@ -56,6 +56,13 @@ equivalent of the v2.3 board. Use the complete
 reference for the A form factor. See
 [`STATUS-INCOMPLETE.md`](Notecarrier-A/v2.3/KiCad_format/STATUS-INCOMPLETE.md)
 for exactly what is verified, what remains, and what would unlock it.
+
+‡ The Notecarrier-F v1.3 port has **errata**: its power section does not match
+the shipped board — a 3.3 V regulator circuit (`U9`, `C33`, `C34`) and the USB
+input diode `DS7` are missing, and all six diodes carry the wrong part number
+and package. The rest of the port is unaffected. Details and the fix required
+are in
+[`Notecarrier-F/v1.3/KiCad_format/ERRATA.md`](Notecarrier-F/v1.3/KiCad_format/ERRATA.md).
 
 † The Notecarrier-X, -XS and -XM ports carry a **source-fidelity
 disclaimer**: they were made from the closest available design-house sources
