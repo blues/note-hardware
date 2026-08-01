@@ -127,6 +127,12 @@ def ipc356_nodes(path: Path):
     """
     nets = defaultdict(set)
     for line in Path(path).read_text(errors="replace").splitlines():
+        if line[:3] in ("017", "027"):
+            # continuation records extend the preceding 317/327 record; no
+            # shipped file here uses them, and dropping one silently would
+            # lose nodes from the comparison.
+            raise SystemExit(f"{path}: IPC-356 continuation records (017/027) "
+                             f"are not supported by this parser")
         if line[:3] not in ("317", "327"):
             continue
         net = line[3:17].strip()
@@ -155,7 +161,7 @@ def partitions(nets, ignore_re=None, min_nodes=2):
     return parts
 
 
-def compare(kicad, odb, ignore_re, label="ODB"):
+def compare(kicad, odb, ignore_re, label="ODB++"):
     k = partitions(kicad, ignore_re)
     o = partitions(odb, ignore_re)
     matched = set(k) & set(o)
@@ -164,7 +170,7 @@ def compare(kicad, odb, ignore_re, label="ODB"):
 
     lines = [
         f"KiCad nets (>=2 nodes): {len(k)}",
-        f"{label} nets (>=2 nodes):  {len(o)}",
+        f"{label} nets (>=2 nodes): {len(o)}",
         f"Matched partitions:     {len(matched)}",
         "",
     ]
@@ -205,7 +211,7 @@ def main():
     ignore_re = re.compile(args.ignore_refdes) if args.ignore_refdes else None
     shipped = (odb_nodes(args.odb, args.step) if args.odb
                else ipc356_nodes(args.ipc356))
-    label = "ODB" if args.odb else "IPC-356"
+    label = "ODB++" if args.odb else "IPC-356"
     ok, report = compare(kicad_nodes(args.kicad), shipped, ignore_re, label)
     print(report)
     if args.report:
