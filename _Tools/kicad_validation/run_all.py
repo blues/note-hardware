@@ -146,6 +146,7 @@ class Gates:
             # against --repo, so nothing here depends on a local scratch dir.
             r = run([PY, HERE / "gerber_diff.py", "--board", self.name,
                      "--config", tmp_cfg, "--kicad-dir", td,
+                     "--baseline", self.val_dir / "gerber-baseline.yaml",
                      "--repo", self.repo, "--out", self.val_dir])
             return r.returncode == 0
 

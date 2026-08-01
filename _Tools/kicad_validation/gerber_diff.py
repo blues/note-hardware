@@ -10,8 +10,22 @@ Notecarrier-F/v1.3/KiCad_format/documentation/Porting-Notes.md:
 
 Outputs <Layer>-KiCad.png / <Layer>-<OriginalTool>.png / <Layer>-diff.png into
 the given output directory, mirroring the existing ports' validation/ folders.
-Human review of the diffs is the actual gate; this script only generates them
-and flags gross mismatches (image size differences, empty renders).
+Human review of the diff images is still valuable, but this script is a real
+gate in its own right: it FAILS on any of
+
+  - outline extents that disagree, so the two sides are not framing the same
+    board and no pixel comparison below would mean anything;
+  - a layer that one side draws and the other does not (measured on renders of
+    the layer alone - compositing the outline in would mask an absent layer);
+  - a normalised difference above the layer's threshold, measured as differing
+    ink over union ink so a sparse paste layer is judged on its own content
+    rather than on how little of the board it covers.
+
+Thresholds come from the board's committed validation/gerber-baseline.yaml
+(reviewed value + 0.01) where one exists, otherwise from the per-class defaults
+below. Silkscreen is loose by design: Altium and KiCad stroke text with
+different font metrics, so on silk the emptiness check and human review are the
+meaningful tests, not the number.
 
 Layer mapping lives in boards.yaml per board:
   gerbers:
@@ -24,7 +38,7 @@ Layer mapping lives in boards.yaml per board:
 
 Usage: gerber_diff.py --board <name> --config boards.yaml
                       --kicad-dir <dir> --out <dir>
-Exit 0 = all layers rendered and sizes match; 1 = structural problem.
+Exit 0 = every layer passed; 1 = at least one of the failures above.
 """
 
 import argparse
@@ -190,6 +204,10 @@ def main():
     ap.add_argument("--config", required=True, type=Path)
     ap.add_argument("--kicad-dir", required=True, type=Path, help="dir with KiCad-exported gerbers")
     ap.add_argument("--out", required=True, type=Path)
+    ap.add_argument("--baseline", type=Path,
+                    help="committed YAML of reviewed per-layer differences")
+    ap.add_argument("--update-baseline", action="store_true",
+                    help="rewrite the baseline file (review every entry)")
     ap.add_argument("--repo", type=Path, default=Path("."),
                     help="repo root, for resolving original_zip / original_dir")
     args = ap.parse_args()
@@ -240,6 +258,11 @@ def main():
     if not isinstance(thr_cfg, dict):
         thr_cfg = {"default": float(thr_cfg)}
 
+    baseline = {}
+    if args.baseline and args.baseline.exists():
+        baseline = yaml.safe_load(args.baseline.read_text()) or {}
+    MARGIN = 0.01
+
     def threshold(layer):
         """Fraction of the *drawn* area that may differ, by layer class.
 
@@ -249,6 +272,10 @@ def main():
         different font metrics, so on silk the meaningful checks are the
         emptiness test and human review of the diff image, not this number.
         """
+        if layer in baseline:
+            # A reviewed, committed value for this board and layer. The margin
+            # is what makes it a drift detector rather than a blanket excuse.
+            return float(baseline[layer]) + MARGIN
         if layer in thr_cfg:
             return float(thr_cfg[layer])
         if "Silkscreen" in layer or "Overlay" in layer:
@@ -273,6 +300,7 @@ def main():
             f"artwork; set an explicit `window:` for this board, or point "
             f"`outline.original` at a layer that carries only the board edge.")
 
+    measured = {}
     solo_tmp = tempfile.TemporaryDirectory()
     solo_dir = solo_tmp.name
     for layer, m in cfg["layers"].items():
@@ -369,6 +397,7 @@ def main():
                             f"{max_diff} threshold - the two renders do not "
                             f"describe the same artwork")
             flag = "   <-- OVER THRESHOLD"
+        measured[layer] = round(diff, 3)
         print(f"  {layer}: rendered -> {d_png.name}{solo_note}  "
               f"(ink KiCad {k_ink:.4f} / {tool} {o_ink:.4f}, "
               f"differing {diff:.3f} of drawn area){flag}")
@@ -379,6 +408,15 @@ def main():
             print(f"  - {p}")
     print(f"\nDone. Review the *-diff.png files in {args.out} — KiCad-only content "
           f"appears in one color channel, {tool}-only in another.")
+    if args.update_baseline and args.baseline:
+        args.baseline.write_text(
+            "# Per-layer normalised difference (differing ink / union ink) measured\n"
+            "# against the shipped fab package, frozen after review. The gate allows\n"
+            "# each value + 0.01, so this catches drift rather than excusing it.\n"
+            "# Regenerate only with --update-baseline, and re-review every entry.\n"
+            + yaml.safe_dump(measured, sort_keys=True))
+        print(f"wrote {len(measured)} baseline entries to {args.baseline}")
+
     print(f"\nRESULT: {'FAIL' if problems else 'PASS'} - "
           f"{len(cfg['layers'])} layers rendered, {len(problems)} structural problem(s)")
     sys.exit(1 if problems else 0)

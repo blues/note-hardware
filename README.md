@@ -38,7 +38,7 @@ pick-and-place file — a placement comparison against the released build; see t
 |Notecarrier-X v1.2 †|KiCad 9|[Notecarrier-X/v1.2/KiCad_format](Notecarrier-X/v1.2/KiCad_format)|
 |Notecarrier-XS v1.2 †|KiCad 9|[Notecarrier-XS/v1.2/KiCad_format](Notecarrier-XS/v1.2/KiCad_format)|
 |Notecarrier-XM v1.2 †|KiCad 9|[Notecarrier-XM/v1.2/KiCad_format](Notecarrier-XM/v1.2/KiCad_format)|
-|Cygnet v1.2|KiCad 9|[Cygnet/v1.2/KiCad_format](Cygnet/v1.2/KiCad_format)|
+|Cygnet v1.2 §|KiCad 9|[Cygnet/v1.2/KiCad_format](Cygnet/v1.2/KiCad_format)|
 |Mojo v1.1|KiCad 9|[Mojo/v1.1/KiCad_format](Mojo/v1.1/KiCad_format)|
 |Scoop v1.0|KiCad 9|[Scoop/v1.0/KiCad_format](Scoop/v1.0/KiCad_format)|
 
@@ -69,6 +69,15 @@ pick-and-place files: 86/86 parts matched v1.2, while 4 were missing against
 v1.3. What has been applied so far, what remains, and why the board must not be
 updated from the schematic automatically are all set out in
 [`Notecarrier-F/v1.3/KiCad_format/ERRATA.md`](Notecarrier-F/v1.3/KiCad_format/ERRATA.md).
+
+§ The Cygnet KiCad port has **one unproven layer**. Inner layer 1 (`In1_Cu`)
+carries roughly fifty annular rings that the shipped Gerbers do not — 10.5 % of
+the drawn area — so its fabrication equivalence on that layer is not proven and
+its gerber gate fails. Every other layer matches, and the schematic, netlist and
+BOM are exact, so the port is usable as an electrical reference; treat the inner
+copper as unverified until
+[the porting notes](Cygnet/v1.2/KiCad_format/documentation/Porting-Notes.md)
+say otherwise.
 
 † The Notecarrier-X, -XS and -XM ports carry a **source-fidelity
 disclaimer**: they were made from the closest available design-house sources

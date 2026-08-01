@@ -1,0 +1,14 @@
+# Per-layer normalised difference (differing ink / union ink) measured
+# against the shipped fab package, frozen after review. The gate allows
+# each value + 0.01, so this catches drift rather than excusing it.
+# Regenerate only with --update-baseline, and re-review every entry.
+B_Cu: 0.003
+B_Mask: 0.012
+B_Paste: 0.005
+B_Silkscreen: 0.575
+F_Cu: 0.004
+F_Mask: 0.017
+F_Paste: 0.004
+F_Silkscreen: 0.677
+In1_Cu: 0.01
+In2_Cu: 0.05

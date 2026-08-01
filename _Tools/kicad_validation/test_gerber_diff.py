@@ -33,14 +33,16 @@ def export_gerbers(pcb, out):
                    capture_output=True, check=True)
 
 
-def run_gate(board, cfg_gerbers, kicad_dir):
+def run_gate(board, cfg_gerbers, kicad_dir, baseline=None):
     with tempfile.TemporaryDirectory() as td:
         cfgp = Path(td) / "b.yaml"
         cfgp.write_text(yaml.safe_dump({"boards": {board: {"gerbers": cfg_gerbers}}}))
-        r = subprocess.run([PY, HERE / "gerber_diff.py", "--board", board,
-                            "--config", str(cfgp), "--kicad-dir", str(kicad_dir),
-                            "--repo", str(REPO), "--out", td + "/out"],
-                           capture_output=True, text=True)
+        cmd = [PY, HERE / "gerber_diff.py", "--board", board,
+               "--config", str(cfgp), "--kicad-dir", str(kicad_dir),
+               "--repo", str(REPO), "--out", td + "/out"]
+        if baseline:
+            cmd += ["--baseline", str(baseline)]
+        r = subprocess.run(cmd, capture_output=True, text=True)
         return r.returncode, r.stdout + r.stderr
 
 
@@ -52,13 +54,64 @@ def blank_layer(path):
     Path(path).write_text("\n".join(kept) + "\n")
 
 
+def all_boards_clean():
+    """Every configured board's unmodified export must pass its own baseline.
+
+    Without this, tightening a threshold can silently break ports that were
+    already reviewed and accepted - which is exactly what happened when the
+    normalised metric replaced the absolute one.
+    """
+    cfg = yaml.safe_load((HERE / "boards.yaml").read_text())["boards"]
+    bad = []
+    for b, c in cfg.items():
+        if not isinstance(c, dict) or "gerbers" not in c:
+            continue
+        with tempfile.TemporaryDirectory() as td:
+            g = Path(td) / "g"
+            g.mkdir()
+            export_gerbers(REPO / c["kicad"]["pcb"], g)
+            val = REPO / Path(c["kicad"]["pcb"]).parent / "validation"
+            rc, out = run_gate(b, c["gerbers"], g,
+                               baseline=val / "gerber-baseline.yaml")
+        over = [l.strip() for l in out.splitlines() if "OVER THRESHOLD" in l]
+        status = "PASS" if rc == 0 else "FAIL"
+        print(f"    {b:16s} {status}")
+        for o in over:
+            print(f"        {o[:100]}")
+        if rc != 0:
+            bad.append((b, over))
+    return bad
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--board", default="scoop")
+    ap.add_argument("--all-boards", action="store_true",
+                    help="check every configured board's unmodified baseline")
     args = ap.parse_args()
+
+    if args.all_boards:
+        print("[0] every configured board, unmodified:")
+        bad = all_boards_clean()
+        # Cygnet is expected to fail on In1_Cu: its ~50 extra annular rings are
+        # an unresolved defect, deliberately not written into its baseline.
+        unexpected = [b for b, _ in bad if b != "cygnet"]
+        if "cygnet" not in [b for b, _ in bad]:
+            print("\nRESULT: FAIL - cygnet was expected to fail on In1_Cu but passed; "
+                  "either it was fixed (update this test) or the defect got baselined")
+            return 1
+        if unexpected:
+            print(f"\nRESULT: FAIL - {unexpected} regressed against their baselines")
+            return 1
+        print("\nRESULT: PASS - all boards match their baselines; "
+              "cygnet fails on In1_Cu as documented")
+        return 0
 
     cfg = yaml.safe_load((HERE / "boards.yaml").read_text())["boards"][args.board]
     gcfg = cfg["gerbers"]
+    # Use the board's committed baseline, so these tests exercise the same
+    # configuration run_all.py uses rather than a stricter stand-in.
+    bl = REPO / Path(cfg["kicad"]["pcb"]).parent / "validation" / "gerber-baseline.yaml"
     failures = []
 
     with tempfile.TemporaryDirectory() as work:
@@ -67,7 +120,7 @@ def main():
         export_gerbers(REPO / cfg["kicad"]["pcb"], base)
 
         # 1. the unmodified port must pass, or the rest proves nothing
-        rc, out = run_gate(args.board, gcfg, base)
+        rc, out = run_gate(args.board, gcfg, base, baseline=bl)
         print(f"[1] unmodified port                  -> rc={rc}")
         if rc != 0:
             failures.append("the unmodified port does not pass; "
@@ -102,7 +155,7 @@ def main():
                 failures.append(f"could not find the {layer} gerber to blank")
                 continue
             blank_layer(hits[0])
-            rc, out = run_gate(args.board, gcfg, trial)
+            rc, out = run_gate(args.board, gcfg, trial, baseline=bl)
             caught = "draws NOTHING" in out or rc != 0
             print(f"[2] {layer} emptied{'':<{max(0, 21 - len(layer))}}-> rc={rc} {'CAUGHT' if caught else 'MISSED'}")
             if not caught:
@@ -118,7 +171,7 @@ def main():
             b = glob.glob(str(trial / gcfg["layers"]["B_Cu"]["kicad"]))
             if f and b:
                 Path(f[0]).write_text(Path(b[0]).read_text(errors="replace"))
-                rc, out = run_gate(args.board, gcfg, trial)
+                rc, out = run_gate(args.board, gcfg, trial, baseline=bl)
                 print(f"[3] F_Cu replaced by B_Cu           -> rc={rc} "
                       f"{'CAUGHT' if rc != 0 else 'MISSED'}")
                 if rc == 0:

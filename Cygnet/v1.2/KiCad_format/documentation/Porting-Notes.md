@@ -103,5 +103,5 @@ handling).
 | ERC / DRC (error severity, incl. schematic parity) | **0 / 0** |
 | Netlist vs Altium PcbDoc | **59/59 exact** |
 | BOM vs `Cygnet v1.2 BOM.xlsx` | exact (78 refdes; BOM lines listing several equivalent value spellings accepted) |
-| Gerber raster diff (10 layers incl. L2/L3) | copper/paste/mask essentially exact (mean channel diff ≤0.7%); silk text shows the usual TrueType metric offsets |
+| Gerber raster diff (10 layers incl. L2/L3) | **`In1_Cu` FAILS** — 10.5 % of the drawn area differs (see the annular-ring note above). Every other layer matches: outer copper 0.1–0.2 %, `In2_Cu` 0.1 %, paste ≤0.1 %, mask 2.3–4.0 %; silk text shows the usual TrueType metric offsets. The "≤0.7 % mean channel diff" originally recorded here was an absolute figure over the whole canvas, which is why fifty missing pads did not register. |
 | KiCanvas / RAG extract | render + parse clean |
