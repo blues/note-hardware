@@ -140,6 +140,7 @@ class Gates:
         r = run([PY, HERE / "pnp_compare.py", "--kicad", self.pcb,
                  "--board", self.name, "--config", HERE / "boards.yaml",
                  "--repo", self.repo,
+                 "--baseline", self.val_dir / "placement-baseline.yaml",
                  "--report", self.val_dir / "pnp-compare.txt"])
         return r.returncode == 0
 

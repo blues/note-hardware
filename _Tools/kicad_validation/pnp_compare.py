@@ -29,6 +29,7 @@ Usage:
 """
 
 import argparse
+import math
 import re
 import sys
 from pathlib import Path
@@ -167,12 +168,43 @@ def read_board_footprints(path):
         m_lay = re.search(r'\(layer "([^"]+)"\)', blk)
         if not (m_ref and m_at and m_lay):
             continue
+        m_fp = re.search(r'\(footprint "([^"]+)"', blk)
+        # Pad extent, measured in the footprint's own frame. This bounds how far
+        # the footprint origin can legitimately sit from the body centre that a
+        # pick-and-place file reports: the origin is a point on the part, so it
+        # cannot be further from the centre than the part's own half-size.
+        xs, ys = [], []
+        for px, py, pw, ph in re.findall(
+                r'\(pad\s+"[^"]*"\s+\S+\s+\S+\s*\(at\s+([-\d.]+)\s+([-\d.]+)'
+                r'(?:\s+[-\d.]+)?\)\s*\(size\s+([-\d.]+)\s+([-\d.]+)\)', blk):
+            px, py, pw, ph = float(px), float(py), float(pw), float(ph)
+            xs += [px - pw / 2, px + pw / 2]
+            ys += [py - ph / 2, py + ph / 2]
         out[m_ref.group(1)] = {
             "x": float(m_at.group(1)), "y": float(m_at.group(2)),
             "rot": float(m_at.group(3) or 0) % 360,
             "side": "Bottom" if m_lay.group(1).startswith("B.") else "Top",
+            "fp": m_fp.group(1) if m_fp else "?",
+            # Centre of the pad bounding box, in the footprint's own frame. A
+            # pick-and-place file reports the body centre while KiCad measures
+            # from the footprint origin, so this is the offset between them -
+            # which makes each part's expected residual predictable instead of
+            # merely "some fixed per-footprint value we cannot check".
+            "cx": (min(xs) + max(xs)) / 2 if xs else None,
+            "cy": (min(ys) + max(ys)) / 2 if ys else None,
         }
     return out
+
+
+def predict(fp, rot_sign=1):
+    """Where the body centre sits relative to the footprint origin, in board
+    coordinates, for a footprint placed at its recorded rotation."""
+    if fp["cx"] is None:
+        return None
+    th = math.radians(fp["rot"] * rot_sign)
+    cx, cy = fp["cx"], fp["cy"]
+    return (cx * math.cos(th) - cy * math.sin(th),
+            cx * math.sin(th) + cy * math.cos(th))
 
 
 def main():
@@ -185,6 +217,15 @@ def main():
     ap.add_argument("--report", type=Path)
     ap.add_argument("--tolerance", type=float, default=0.05,
                     help="position tolerance in mm (default 0.05)")
+    ap.add_argument("--position-tolerance", type=float, default=0.3,
+                    help="how far a part may sit from its predicted body "
+                         "centre before it counts as displaced (default 0.3mm; "
+                         "the pad bounding box only approximates the body)")
+    ap.add_argument("--baseline", type=Path,
+                    help="committed YAML of reviewed residuals the "
+                         "body-centre prediction cannot explain")
+    ap.add_argument("--update-baseline", action="store_true",
+                    help="rewrite the baseline file (review every entry)")
     args = ap.parse_args()
 
     cfg = yaml.safe_load(args.config.read_text())["boards"][args.board]
@@ -208,39 +249,72 @@ def main():
         print("no refdes in common", file=sys.stderr)
         return 1
 
-    # solve the placement-origin offset; try both y-axis senses
+    # Solve the placement-origin offset. Each part's expected body-centre offset
+    # is predicted from its own pad geometry, so what is left over is real
+    # displacement rather than an unexplained per-footprint constant.
     best = None
     for flip in (False, True):
-        dx = median(fps[r]["x"] - rows[r]["x"] for r in common)
-        dy = median(fps[r]["y"] -
-                    (-rows[r]["y"] if flip else rows[r]["y"]) for r in common)
-        res = [max(abs(fps[r]["x"] - rows[r]["x"] - dx),
-                   abs(fps[r]["y"] -
-                       (-rows[r]["y"] if flip else rows[r]["y"]) - dy))
-               for r in common]
-        agree = sum(1 for e in res if e < args.tolerance)
-        if best is None or agree > best[0]:
-            best = (agree, flip, dx, dy)
-    _, flip, dx, dy = best
+        for sign in (1, -1):
+          for psign in (1, -1):
+            pred = {r: tuple(psign * v for v in (predict(fps[r], sign) or (0.0, 0.0)))
+                    for r in common}
+            dx = median(fps[r]["x"] - rows[r]["x"] - pred[r][0] for r in common)
+            dy = median(fps[r]["y"] - (-rows[r]["y"] if flip else rows[r]["y"])
+                        - pred[r][1] for r in common)
+            res = [math.hypot(
+                fps[r]["x"] - rows[r]["x"] - pred[r][0] - dx,
+                fps[r]["y"] - (-rows[r]["y"] if flip else rows[r]["y"])
+                - pred[r][1] - dy) for r in common]
+            agree = sum(1 for e in res if e < args.tolerance)
+            if best is None or agree > best[0]:
+                best = (agree, flip, sign, psign, dx, dy)
+    _, flip, rot_sign, pred_sign, dx, dy = best
 
-    side_bad, pos_bad, rot_bad = [], [], []
+    baseline_path = Path(args.baseline) if args.baseline else None
+    baseline = {}
+    if baseline_path and baseline_path.exists():
+        baseline = yaml.safe_load(baseline_path.read_text()) or {}
+
+    side_bad, rot_bad = [], []
+    explained, accepted, unexplained, measured = [], [], [], {}
     for r in common:
         fp, want = fps[r], rows[r]
-        side = fp["side"]
-        if side != want["side"]:
-            side_bad.append(f"{r}: port {side}, released build {want['side']}")
-        ex = fp["x"] - want["x"] - dx
-        ey = fp["y"] - (-want["y"] if flip else want["y"]) - dy
-        if max(abs(ex), abs(ey)) >= args.tolerance:
-            pos_bad.append(f"{r}: residual ({ex:+.3f}, {ey:+.3f}) mm")
+        if fp["side"] != want["side"]:
+            side_bad.append(f"{r}: port {fp['side']}, released build {want['side']}")
+        px, py = (lambda v: (pred_sign * v[0], pred_sign * v[1]))(
+            predict(fp, rot_sign) or (0.0, 0.0))
+        ex = fp["x"] - want["x"] - px - dx
+        ey = fp["y"] - (-want["y"] if flip else want["y"]) - py - dy
+        err = math.hypot(ex, ey)
+        measured[r] = [round(ex, 3), round(ey, 3)]
+        if err < args.position_tolerance:
+            explained.append(r)
+        elif r in baseline and math.hypot(ex - baseline[r][0],
+                                          ey - baseline[r][1]) < args.position_tolerance:
+            # A reviewed, committed exception. It is frozen, so any future drift
+            # in this part's placement fails the gate.
+            accepted.append(f"{r}: ({ex:+.3f}, {ey:+.3f}) mm, matches baseline")
+        else:
+            was = (f", baseline says ({baseline[r][0]:+.3f}, {baseline[r][1]:+.3f})"
+                   if r in baseline else ", not in the baseline")
+            unexplained.append(f"{r}: ({ex:+.3f}, {ey:+.3f}) mm from the body "
+                               f"centre predicted by {fp['fp']}{was}")
         dr = (fp["rot"] - want["rot"]) % 360
         if min(dr, 360 - dr) > 0.5:
             rot_bad.append(f"{r}: port {fp['rot']:g} deg, "
                            f"released build {want['rot']:g} deg")
 
     only_pnp = sorted(set(rows) - set(fps))
-    gross = [x for x in pos_bad if float(re.search(r"\(([-+\d.]+),", x).group(1)) ** 2 +
-             float(re.search(r", ([-+\d.]+)\)", x).group(1)) ** 2 > GROSS ** 2]
+
+    if args.update_baseline and baseline_path:
+        keep = {r: measured[r] for r in common
+                if math.hypot(*measured[r]) >= args.position_tolerance}
+        baseline_path.write_text(
+            "# Placement residuals that the body-centre prediction does not\n"
+            "# explain, frozen after review. Regenerate only with\n"
+            "# --update-baseline, and re-review every entry when you do.\n"
+            + yaml.safe_dump(keep, sort_keys=True))
+        print(f"wrote {len(keep)} baseline entries to {baseline_path}")
 
     lines = [
         "Placement comparison vs the shipped pick-and-place file",
@@ -257,29 +331,28 @@ def main():
         f"  rotation mismatches:   {len(rot_bad)}",
         *(f"    {t}" for t in rot_bad),
         "",
-        "Position residuals (informational): the pick-and-place file references each",
-        "part's body centre, while KiCad measures from the footprint origin, so",
-        "connectors and other asymmetric parts carry a fixed per-footprint offset -",
-        "it even changes sign when the part is rotated 180 degrees. Copper geometry is",
-        f"proven exactly by the gerber diff instead. Residuals over {args.tolerance} mm:",
-        f"  {len(pos_bad)} of {len(common)}",
-        *(f"    {t}" for t in pos_bad),
-        f"  largest residuals (>{GROSS} mm) are exact pin-pitch multiples, i.e. the",
-        f"  origin sits on a pin rather than the body centre: {len(gross)}",
-        *(f"    {t}" for t in gross),
+        "",
+        "Position (gated). Each part's expected residual is predicted from its own",
+        "pad bounding box, because the assembly file references the body centre",
+        "while KiCad measures from the footprint origin. What is left after that",
+        "prediction is real displacement, not a per-footprint constant.",
+        f"  explained by the body-centre prediction: {len(explained)} of {len(common)}",
+        f"  accepted against the committed baseline:  {len(accepted)}",
+        *(f"    {t}" for t in accepted),
+        f"  UNEXPLAINED:                              {len(unexplained)}",
+        *(f"    {t}" for t in unexplained),
         "",
         "This report is committed, so any future change to these residuals shows up",
         "as a diff for review - the same convention the gerber-diff gate uses.",
     ]
 
-    # The hard gate is what the assembly file states unambiguously: every placed
-    # part present, on the right side, at the right rotation. Position is reported
-    # rather than gated, because the file's body-centre reference cannot be
-    # compared to KiCad's footprint origin without per-footprint knowledge.
-    ok = not only_pnp and not side_bad and not rot_bad
+    # Every placed part present, on the right side, at the right rotation, and
+    # not displaced beyond what a footprint-origin difference can explain.
+    ok = not only_pnp and not side_bad and not rot_bad and not unexplained
     lines += ["", f"RESULT: {'PASS' if ok else 'FAIL'} - {len(common)} placements checked; "
                   f"side and rotation match the released build for "
-                  f"{len(common) - len(side_bad) - len(rot_bad)}/{len(common)}"]
+                  f"{len(common) - len(side_bad) - len(rot_bad)}/{len(common)}; "
+                  f"{len(unexplained)} unexplained displacement(s)"]
     out = "\n".join(lines)
     print(out)
     if args.report:

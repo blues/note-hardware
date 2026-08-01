@@ -9,33 +9,20 @@ Hard checks (unambiguous in the assembly file):
   board-side mismatches: 0
   rotation mismatches:   0
 
-Position residuals (informational): the pick-and-place file references each
-part's body centre, while KiCad measures from the footprint origin, so
-connectors and other asymmetric parts carry a fixed per-footprint offset -
-it even changes sign when the part is rotated 180 degrees. Copper geometry is
-proven exactly by the gerber diff instead. Residuals over 0.05 mm:
-  14 of 97
-    C14: residual (-2.500, -0.000) mm
-    C21: residual (-2.500, -0.000) mm
-    D2: residual (-0.000, +0.965) mm
-    D3: residual (+0.000, +0.338) mm
-    D4: residual (+0.000, +0.338) mm
-    J1: residual (+3.810, -0.000) mm
-    J2: residual (-0.266, -0.000) mm
-    J3: residual (+0.156, +0.000) mm
-    J5: residual (-0.650, +0.012) mm
-    J7: residual (+0.000, +0.763) mm
-    J8: residual (-1.151, -0.000) mm
-    J9: residual (+5.080, -1.270) mm
-    P1: residual (+19.050, -0.000) mm
-    P2: residual (+19.050, +0.000) mm
-  largest residuals (>5.0 mm) are exact pin-pitch multiples, i.e. the
-  origin sits on a pin rather than the body centre: 3
-    J9: residual (+5.080, -1.270) mm
-    P1: residual (+19.050, -0.000) mm
-    P2: residual (+19.050, +0.000) mm
+
+Position (gated). Each part's expected residual is predicted from its own
+pad bounding box, because the assembly file references the body centre
+while KiCad measures from the footprint origin. What is left after that
+prediction is real displacement, not a per-footprint constant.
+  explained by the body-centre prediction: 93 of 97
+  accepted against the committed baseline:  4
+    D2: (-0.000, +0.699) mm, matches baseline
+    D3: (+0.000, +0.338) mm, matches baseline
+    D4: (+0.000, +0.338) mm, matches baseline
+    J8: (+0.603, -0.000) mm, matches baseline
+  UNEXPLAINED:                              0
 
 This report is committed, so any future change to these residuals shows up
 as a diff for review - the same convention the gerber-diff gate uses.
 
-RESULT: PASS - 97 placements checked; side and rotation match the released build for 97/97
+RESULT: PASS - 97 placements checked; side and rotation match the released build for 97/97; 0 unexplained displacement(s)

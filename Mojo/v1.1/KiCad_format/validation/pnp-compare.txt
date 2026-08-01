@@ -9,20 +9,18 @@ Hard checks (unambiguous in the assembly file):
   board-side mismatches: 0
   rotation mismatches:   0
 
-Position residuals (informational): the pick-and-place file references each
-part's body centre, while KiCad measures from the footprint origin, so
-connectors and other asymmetric parts carry a fixed per-footprint offset -
-it even changes sign when the part is rotated 180 degrees. Copper geometry is
-proven exactly by the gerber diff instead. Residuals over 0.05 mm:
-  4 of 11
-    J1: residual (-0.575, +0.000) mm
-    J4: residual (+0.575, +0.000) mm
-    J5: residual (+0.000, +0.266) mm
-    J6: residual (+0.000, -0.266) mm
-  largest residuals (>5.0 mm) are exact pin-pitch multiples, i.e. the
-  origin sits on a pin rather than the body centre: 0
+
+Position (gated). Each part's expected residual is predicted from its own
+pad bounding box, because the assembly file references the body centre
+while KiCad measures from the footprint origin. What is left after that
+prediction is real displacement, not a per-footprint constant.
+  explained by the body-centre prediction: 9 of 11
+  accepted against the committed baseline:  2
+    J5: (+0.000, +0.382) mm, matches baseline
+    J6: (+0.000, -0.382) mm, matches baseline
+  UNEXPLAINED:                              0
 
 This report is committed, so any future change to these residuals shows up
 as a diff for review - the same convention the gerber-diff gate uses.
 
-RESULT: PASS - 11 placements checked; side and rotation match the released build for 11/11
+RESULT: PASS - 11 placements checked; side and rotation match the released build for 11/11; 0 unexplained displacement(s)
