@@ -326,21 +326,26 @@ def main():
         # ink - which let a missing stencil layer pass this gate.
         if m.get("negative"):
             k_solo, o_solo = k_png, o_png          # that branch renders solo already
-            solo_note = ""
+            diff_pair, solo_note = (k_png, o_png), ""
         else:
             k_solo = Path(solo_dir) / f"{layer}-k.png"
             render_single(one(m["kicad"], args.kicad_dir), k_solo, k_bbox)
             if cfg.get("original_has_outline"):
-                # the shipped film draws the outline itself and cannot be
-                # separated from it, so its ink figure includes the edge
-                o_solo, solo_note = o_png, " [shipped film includes the outline]"
+                # The shipped film draws the board outline itself and cannot be
+                # separated from it, so comparing it against an outline-free
+                # KiCad render would report the outline as a difference. Judge
+                # the difference on the with-outline pair, which is like for
+                # like, while still measuring KiCad's emptiness on its solo
+                # render - that is what detects a layer missing from the port.
+                diff_pair = (k_png, o_png)
+                o_solo, solo_note = o_png, " [film includes the outline]"
             else:
                 o_solo = Path(solo_dir) / f"{layer}-o.png"
                 render_single(one(m["original"], orig_dir), o_solo, o_bbox)
-                solo_note = ""
-            pad_to_match(k_solo, o_solo)
+                pad_to_match(k_solo, o_solo)
+                diff_pair, solo_note = (k_solo, o_solo), ""
 
-        k_ink, o_ink = ink_fraction(k_solo), ink_fraction(o_solo)
+        k_ink, o_ink = ink_fraction(k_solo), ink_fraction(o_solo)  # k_solo never has the outline
         EMPTY = 1e-6
         if k_ink < EMPTY and o_ink >= EMPTY:
             problems.append(f"{layer}: the KiCad export draws NOTHING on this "
@@ -353,8 +358,8 @@ def main():
         # Normalised against how much either side actually draws, so a sparse
         # layer is judged on its own content rather than on canvas area: an
         # absent paste layer is ~1% of the canvas but 100% of the paste.
-        u = union_ink(k_solo, o_solo)
-        raw = mean_difference(k_solo, o_solo)
+        u = union_ink(*diff_pair)
+        raw = mean_difference(*diff_pair)
         diff = raw / u if u > 1e-9 else 0.0
         max_diff = threshold(layer)
         flag = ""

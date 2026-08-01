@@ -383,6 +383,19 @@ boards:
       original_zip: "Notecarrier-Pi/v2.0/Notecarrier-Pi Gerbers v2.zip"
       original_tool: Allegro
       original_has_outline: true
+      # Per-layer baselines, not tolerances. The shipped Allegro artwork films
+      # draw the board outline themselves and use different aperture rendering
+      # from KiCad, so the normalised difference sits higher here than on the
+      # Altium boards (which land at 0.000-0.003 on copper). These are the values
+      # measured against the port as validated, plus a small margin, so future
+      # drift trips the gate even though the absolute numbers are not comparable
+      # to another board's.
+      max_mean_difference:
+        default:      0.10
+        F_Paste:      0.30
+        B_Paste:      0.16
+        mask:         0.11
+        silkscreen:   0.90
       window:
         original: [-2.7591, -0.0984, -0.0031, 2.2246]
         kicad: [2.359, -5.610, 5.115, -3.287]
