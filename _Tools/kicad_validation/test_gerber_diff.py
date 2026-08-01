@@ -73,13 +73,16 @@ def all_boards_clean():
             val = REPO / Path(c["kicad"]["pcb"]).parent / "validation"
             rc, out = run_gate(b, c["gerbers"], g,
                                baseline=val / "gerber-baseline.yaml")
-        over = [l.strip() for l in out.splitlines() if "OVER THRESHOLD" in l]
-        status = "PASS" if rc == 0 else "FAIL"
+        # Collect the specific layers the gate objected to, so an expected
+        # failure cannot stand in for an unexpected one.
+        layers = sorted({m.group(1) for m in
+                         (re.match(r"\s*(\w+): ", l) for l in out.splitlines()
+                          if "OVER THRESHOLD" in l or "draws NOTHING" in l)
+                         if m})
+        status = "PASS" if rc == 0 else f"FAIL on {layers or '?'}"
         print(f"    {b:16s} {status}")
-        for o in over:
-            print(f"        {o[:100]}")
         if rc != 0:
-            bad.append((b, over))
+            bad.append((b, layers))
     return bad
 
 
@@ -93,18 +96,41 @@ def main():
     if args.all_boards:
         print("[0] every configured board, unmodified:")
         bad = all_boards_clean()
-        # Cygnet is expected to fail on In1_Cu: its ~50 extra annular rings are
-        # an unresolved defect, deliberately not written into its baseline.
-        unexpected = [b for b, _ in bad if b != "cygnet"]
-        if "cygnet" not in [b for b, _ in bad]:
-            print("\nRESULT: FAIL - cygnet was expected to fail on In1_Cu but passed; "
-                  "either it was fixed (update this test) or the defect got baselined")
+        got = dict(bad)
+
+        # Cygnet is expected to fail, but on EXACTLY one layer: In1_Cu, whose ~50
+        # extra annular rings are an unresolved defect deliberately kept out of
+        # its baseline. Accepting "cygnet failed somehow" would let a genuine new
+        # regression on any other Cygnet layer hide behind the known one.
+        EXPECTED = {"cygnet": ["In1_Cu"]}
+
+        problems = []
+        for b, layers in sorted(got.items()):
+            want = EXPECTED.get(b)
+            if want is None:
+                problems.append(f"{b} regressed against its baseline on {layers}")
+            elif layers != want:
+                extra = [l for l in layers if l not in want]
+                missing = [l for l in want if l not in layers]
+                problems.append(
+                    f"{b} was expected to fail on exactly {want} but failed on "
+                    f"{layers}" + (f"; unexpected: {extra}" if extra else "")
+                    + (f"; no longer failing: {missing}" if missing else ""))
+        for b, want in EXPECTED.items():
+            if b not in got:
+                problems.append(
+                    f"{b} was expected to fail on {want} but passed - either the "
+                    f"defect was fixed (update EXPECTED) or it was written into "
+                    f"the board's gerber-baseline.yaml, which would bury it")
+
+        print()
+        if problems:
+            print(f"RESULT: FAIL - {len(problems)} unexpected outcome(s)")
+            for p_ in problems:
+                print("  - " + p_)
             return 1
-        if unexpected:
-            print(f"\nRESULT: FAIL - {unexpected} regressed against their baselines")
-            return 1
-        print("\nRESULT: PASS - all boards match their baselines; "
-              "cygnet fails on In1_Cu as documented")
+        print("RESULT: PASS - every board matches its baseline except cygnet, "
+              "which fails on exactly In1_Cu as documented")
         return 0
 
     cfg = yaml.safe_load((HERE / "boards.yaml").read_text())["boards"][args.board]
