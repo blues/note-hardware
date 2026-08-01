@@ -42,7 +42,7 @@ remembering the right command line.
 | ERC | `kicad-cli sch erc --exit-code-violations` | schematic is electrically well-formed |
 | DRC | `kicad-cli pcb drc --exit-code-violations --schematic-parity` | board passes rules and matches its schematic |
 | BOM | `bom_compare.py` | 100% refdes/value/MPN match vs the shipped BOM spreadsheet |
-| NETLIST | `netlist_compare.py` | connectivity partition identical to the shipped ODB++ netlist (boards that ship ODB++) |
+| NETLIST | `netlist_compare.py` | connectivity partition identical to the shipped ODB++ or IPC-D-356 netlist (boards that ship one) |
 | GERBER-DIFF | `gerber_diff.py` | per-layer raster diff vs the shipped fab package (human-reviewed; also proves the source revision matches the published release) |
 | PNP | `pnp_compare.py` | side/rotation/position match vs the shipped pick-and-place file — the only gate that checks against the *released build* rather than the design sources |
 | KICANVAS | `kicanvas_check/render_check.py` | every sheet + board parses and paints in KiCanvas, headless Chromium, zero console errors |

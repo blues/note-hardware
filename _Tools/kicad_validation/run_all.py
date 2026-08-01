@@ -10,7 +10,8 @@ machine-readable and reviewable instead of relying on someone remembering a
   1. ERC          kicad-cli sch erc --exit-code-violations
   2. DRC          kicad-cli pcb drc --exit-code-violations
   3. BOM          bom_compare.py vs shipped spreadsheet
-  4. NETLIST      netlist_compare.py vs shipped ODB++ (when the board has one)
+  4. NETLIST      netlist_compare.py vs shipped ODB++ or IPC-D-356 netlist
+                  (when the board ships one)
   5. GERBER-DIFF  gerber_diff.py vs shipped fab package (human reviews PNGs)
   5b. PNP         pnp_compare.py vs the shipped pick-and-place file - the only
                   gate that checks the port against the *released build* rather
@@ -119,8 +120,8 @@ class Gates:
         return r.returncode == 0
 
     def netlist(self):
-        if "odb" not in self.cfg:
-            raise SkipGate("no shipped ODB++ for this board")
+        if "odb" not in self.cfg and "ipc356" not in self.cfg:
+            raise SkipGate("no shipped ODB++ or IPC-356 netlist for this board")
         net = self.val_dir / "netlist-kicad.net"
         r = run([KICAD_CLI, "sch", "export", "netlist",
                  "--format", "kicadsexpr", "-o", net, self.sch])
@@ -133,9 +134,12 @@ class Gates:
         rewritten = text.replace(str(self.repo) + "/", "")
         if rewritten != text:
             net.write_text(rewritten)
-        r = run([PY, HERE / "netlist_compare.py", "--kicad", net,
-                 "--odb", self.repo / self.cfg["odb"]["root"],
-                 "--step", self.cfg["odb"].get("step", "pcb"),
+        if "odb" in self.cfg:
+            shipped = ["--odb", self.repo / self.cfg["odb"]["root"],
+                       "--step", self.cfg["odb"].get("step", "pcb")]
+        else:
+            shipped = ["--ipc356", self.repo / self.cfg["ipc356"]["path"]]
+        r = run([PY, HERE / "netlist_compare.py", "--kicad", net, *shipped,
                  "--report", self.val_dir / "netlist-compare.txt"])
         return r.returncode == 0
 
@@ -210,7 +214,11 @@ def main():
                          "skip_gates.<GATE> in boards.yaml or the run fails")
     args = ap.parse_args()
 
-    cfg = yaml.safe_load((HERE / "boards.yaml").read_text())["boards"][args.board]
+    boards = yaml.safe_load((HERE / "boards.yaml").read_text())["boards"]
+    if args.board not in boards:
+        sys.exit(f"unknown board {args.board!r}; configured boards: "
+                 f"{', '.join(sorted(boards))}")
+    cfg = boards[args.board]
     if not cfg or "kicad" not in cfg:
         # NO-GO stub (e.g. notecarrier-xp): the entry exists to record the
         # decision, not to be run. Say so instead of dying in a stack trace.

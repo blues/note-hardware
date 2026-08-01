@@ -92,6 +92,7 @@ Zone fills are the ones saved at import; they were **not** refilled
 | ERC (errors) | **0** — full-severity report archived as `erc.rpt` |
 | DRC (errors, incl. schematic parity) | **0** — full report `drc.rpt`; remaining warnings are silk-over-pad/edge cosmetics also present in the source design |
 | BOM vs `BOM-Mojo-v4-Normal.xls` | exact match (11 populated refdes; DNP + BOM-excluded parts handled as above) |
+| Netlist vs `Fabrication/Test Points/Testpoint Mojo-v4.ipc` (shipped IPC-D-356A) | **10/10 connectivity partitions identical** — the file lives under Test Points/ but its 317/327 records cover every component pad |
 | Gerber raster diff vs `Fabrication/Gerber/` | copper/paste/mask: no differences beyond anti-aliasing; silk: same content, sub-mm glyph metric/anchor offsets from TrueType rendering engine differences (Altium vs KiCad), matching the accepted class in the Notecarrier-F port |
 | Drill | 36 holes in the KiCad Excellon files, matching the design drill table (12+11+9+4) |
 | KiCanvas | every `.kicad_sch`/`.kicad_pcb` renders headless with zero console errors (screenshots in `validation/kicanvas/`) |

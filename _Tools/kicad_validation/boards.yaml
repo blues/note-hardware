@@ -15,10 +15,10 @@ boards:
 
   mojo:
     product_dir: Mojo/v1.1
-    # Gates this board cannot run, and why. run_all.py treats a skipped
-    # gate as a failure unless it is declared here.
-    skip_gates:
-      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
+    ipc356:
+      # shipped IPC-D-356A netlist (lives under Test Points/, but its 317/327
+      # records cover every component pad, not just probe targets)
+      path: "Mojo/v1.1/Fabrication/Test Points/Testpoint Mojo-v4.ipc"
     pnp:
       path: "Mojo/v1.1/Assembly Normal/Pick Place/PNP-Mojo-v4-Normal.csv"
       skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
@@ -154,7 +154,7 @@ boards:
     # Gates this board cannot run, and why. run_all.py treats a skipped
     # gate as a failure unless it is declared here.
     skip_gates:
-      PNP: "no pick-and-place file is published for this board, so there is no released-build placement data to compare against"
+      PNP: "no pick-and-place file is published for this board; the shipped ODB++ does carry top-side component centroids (CMP records), which pnp_compare's parsers do not consume - placement is covered by the 89/89 connectivity match against that same ODB++ (NETLIST gate) and the copper-exact gerber diff"
     kicad:
       sch: Notecarrier-CX/v1.7/KiCad_format/Notecarrier-CX.kicad_sch
       pcb: Notecarrier-CX/v1.7/KiCad_format/Notecarrier-CX.kicad_pcb

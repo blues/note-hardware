@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare a KiCad schematic netlist against an ODB++ netlist (ground truth).
+"""Compare a KiCad schematic netlist against a shipped fab netlist (ground truth).
 
 The comparison is by connectivity *partition*, not by net name: two netlists
 are equivalent when they group the same set of (refdes, pin) nodes into the
@@ -9,9 +9,13 @@ KiCad side:   kicad-cli sch export netlist --format kicadsexpr <sch> -o out.net
 ODB++ side:   the `steps/<step>/layers/comp_+_top|bot/components` files map
               refdes+pin -> net number; `steps/<step>/netlists/cadnet/netlist`
               maps net number -> net name.
+IPC-D-356 side: fixed-column 317/327 records map net name -> refdes-pin nodes
+              (VIA records carry no refdes-pin and the N/C bucket groups
+              genuinely unconnected points, so both are skipped).
 
 Usage:
-    netlist_compare.py --kicad out.net --odb <extracted-odb-root> [--step pcb]
+    netlist_compare.py --kicad out.net (--odb <extracted-odb-root> [--step pcb]
+                       | --ipc356 <file.ipc>)
                        [--ignore-refdes REGEX] [--report report.txt]
 
 Exit code 0 = partitions match (after documented normalizations), 1 = mismatch.
@@ -110,6 +114,30 @@ def odb_nodes(odb_root: Path, step: str):
     return dict(nets)
 
 
+# -------------------------------------------------------------------- IPC-356
+
+def ipc356_nodes(path: Path):
+    """Return {net_name: set((refdes, pin))} from an IPC-D-356(A) netlist.
+
+    317/327 records are fixed-column: net name at [3:17], refdes at [20:26],
+    pin at [27:31]. Records for vias (refdes "VIA", no pin) are dropped, and
+    so is the "N/C" net - IPC files bucket every genuinely unconnected point
+    under that one name, which would otherwise read as a real net joining
+    them all together.
+    """
+    nets = defaultdict(set)
+    for line in Path(path).read_text(errors="replace").splitlines():
+        if line[:3] not in ("317", "327"):
+            continue
+        net = line[3:17].strip()
+        ref = line[20:26].strip()
+        pin = line[27:31].strip()
+        if net in ("", "N/C") or ref in ("", "VIA"):
+            continue
+        nets[net].add((ref, pin))
+    return dict(nets)
+
+
 # ----------------------------------------------------------------- comparison
 
 def partitions(nets, ignore_re=None, min_nodes=2):
@@ -127,7 +155,7 @@ def partitions(nets, ignore_re=None, min_nodes=2):
     return parts
 
 
-def compare(kicad, odb, ignore_re):
+def compare(kicad, odb, ignore_re, label="ODB"):
     k = partitions(kicad, ignore_re)
     o = partitions(odb, ignore_re)
     matched = set(k) & set(o)
@@ -136,7 +164,7 @@ def compare(kicad, odb, ignore_re):
 
     lines = [
         f"KiCad nets (>=2 nodes): {len(k)}",
-        f"ODB++ nets (>=2 nodes): {len(o)}",
+        f"{label} nets (>=2 nodes):  {len(o)}",
         f"Matched partitions:     {len(matched)}",
         "",
     ]
@@ -148,24 +176,26 @@ def compare(kicad, odb, ignore_re):
         # Pair up near-misses by best node overlap for a readable report.
         for s, name in sorted(only_k.items(), key=lambda x: x[1]):
             best = max(only_o, key=lambda t: len(s & t), default=None)
-            lines.append(f"\nKiCad net '{name}' ({len(s)} nodes) has no exact ODB match.")
+            lines.append(f"\nKiCad net '{name}' ({len(s)} nodes) has no exact {label} match.")
             if best and s & best:
-                lines.append(f"  Closest ODB net '{only_o[best]}':")
+                lines.append(f"  Closest {label} net '{only_o[best]}':")
                 lines.append(f"    only in KiCad: {sorted(s - best)}")
-                lines.append(f"    only in ODB:   {sorted(best - s)}")
+                lines.append(f"    only in {label}:   {sorted(best - s)}")
         for s, name in sorted(only_o.items(), key=lambda x: x[1]):
             best = max(only_k, key=lambda t: len(s & t), default=None)
             if best and len(s & best) == 0:
                 best = None
             if best is None:
-                lines.append(f"\nODB net '{name}' ({len(s)} nodes) has no overlapping KiCad net: {sorted(s)}")
+                lines.append(f"\n{label} net '{name}' ({len(s)} nodes) has no overlapping KiCad net: {sorted(s)}")
     return ok, "\n".join(lines)
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--kicad", required=True, type=Path, help="kicadsexpr netlist file")
-    ap.add_argument("--odb", required=True, type=Path, help="extracted ODB++ root (dir containing steps/)")
+    src = ap.add_mutually_exclusive_group(required=True)
+    src.add_argument("--odb", type=Path, help="extracted ODB++ root (dir containing steps/)")
+    src.add_argument("--ipc356", type=Path, help="shipped IPC-D-356(A) netlist file")
     ap.add_argument("--step", default="pcb", help="ODB step name (default: pcb)")
     ap.add_argument("--ignore-refdes", default=r"^(TP|FID|MH|LOGO|H)\d*$",
                     help="regex of refdes to ignore on both sides")
@@ -173,7 +203,10 @@ def main():
     args = ap.parse_args()
 
     ignore_re = re.compile(args.ignore_refdes) if args.ignore_refdes else None
-    ok, report = compare(kicad_nodes(args.kicad), odb_nodes(args.odb, args.step), ignore_re)
+    shipped = (odb_nodes(args.odb, args.step) if args.odb
+               else ipc356_nodes(args.ipc356))
+    label = "ODB" if args.odb else "IPC-356"
+    ok, report = compare(kicad_nodes(args.kicad), shipped, ignore_re, label)
     print(report)
     if args.report:
         args.report.write_text(report + "\n")

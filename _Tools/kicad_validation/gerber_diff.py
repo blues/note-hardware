@@ -199,7 +199,11 @@ def mean_difference(a, b):
     try:
         return float(r.stdout.strip())
     except ValueError:
-        return 1.0
+        # Same policy as ink_fraction: a failed measurement is a crash, not a
+        # number. (The old 1.0 fallback failed in the safe direction but
+        # misreported a tooling fault as a real 100% artwork difference.)
+        raise SystemExit(f"magick could not diff {a} vs {b}: "
+                         f"{(r.stderr or r.stdout).strip()[:500]}")
 
 
 def main():
@@ -461,5 +465,25 @@ def main():
     sys.exit(1 if problems else 0)
 
 
+def cli():
+    try:
+        main()
+    except SystemExit as e:
+        # A crash before the summary was written (bad glob, missing %FS,
+        # gerbv/magick failure) must not leave a stale PASS json from an
+        # earlier run sitting next to a failing gate. sys.exit(<str>) is the
+        # crash convention here; the final verdict exits with an int.
+        if isinstance(e.code, str) and "--json" in sys.argv:
+            import json
+            jp = Path(sys.argv[sys.argv.index("--json") + 1])
+            jp.write_text(json.dumps({
+                "result": "FAIL",
+                "problems": [{"layer": None, "kind": "gate-crashed",
+                              "message": str(e.code)[:500]}],
+                "measured": {},
+            }, indent=1, sort_keys=True))
+        raise
+
+
 if __name__ == "__main__":
-    main()
+    cli()
