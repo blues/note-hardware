@@ -1,7 +1,7 @@
 (export (version "E")
   (design
     (source "/Users/roblauer/Documents/GitHub/blues/note-hardware/Notecarrier-XI/v1.4/KiCad_format/Notecarrier-XI.kicad_sch")
-    (date "2026-07-30T22:31:07-0500")
+    (date "2026-08-01T15:20:01-0500")
     (tool "Eeschema 9.0.9")
     (textvar (name "SHEETTOTAL") "5")
     (sheet (number "1") (name "/") (tstamps "/")
@@ -2630,6 +2630,7 @@
       (footprint "J-5X2-0254-MDT")
       (description "STRIP 2P M/D DOPPIA FILA P=2.54 DORATO CH81802V100")
       (fields
+        (field (name "MANUFACTURER PART NUMBER") "tsw-105-07-f-d")
         (field (name "MPN") "TSW-105-07-F-D")
         (field (name "VERIFIED"))
         (field (name "TEMP RANGE"))
@@ -2649,6 +2650,7 @@
         (field (name "Datasheet"))
         (field (name "Description") "STRIP 2P M/D DOPPIA FILA P=2.54 DORATO CH81802V100"))
       (libsource (lib "CONNETTORI - FAE_Library") (part "root_0_STRIP-J-5X2-0254-MDT_CONNETTORI - FAE_Library.SchLib") (description "STRIP 2P M/D DOPPIA FILA P=2.54 DORATO CH81802V100"))
+      (property (name "MANUFACTURER PART NUMBER") (value "tsw-105-07-f-d"))
       (property (name "MPN") (value "TSW-105-07-F-D"))
       (property (name "VERIFIED") (value ""))
       (property (name "TEMP RANGE") (value ""))
