@@ -35,9 +35,14 @@ def export_gerbers(pcb, out):
 
 
 def run_gate(board, cfg_gerbers, kicad_dir, baseline=None):
-    """Run the gate and return (rc, text, problems) where problems is the gate's
-    OWN structured list. Scraping stdout for known message shapes is how this
-    suite previously ignored whole classes of failure it had not thought of."""
+    """Run the gate and return (rc, text, problems, measured).
+
+    `problems` and `measured` are the gate's OWN structured output, read from its
+    --json summary: a list of {layer, kind, message} and a {layer: difference}
+    map. Scraping stdout for known message shapes is how this suite previously
+    ignored whole classes of failure it had not thought of, and checking only a
+    problem's label is how it accepted arbitrary damage as a known defect - so
+    both the classification and the magnitude come from the gate itself."""
     with tempfile.TemporaryDirectory() as td:
         cfgp = Path(td) / "b.yaml"
         cfgp.write_text(yaml.safe_dump({"boards": {board: {"gerbers": cfg_gerbers}}}))
