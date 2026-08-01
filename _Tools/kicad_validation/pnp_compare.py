@@ -139,18 +139,19 @@ def read_board_footprints(path):
     gate runnable in the harness venv, with no KiCad install needed."""
     text = Path(path).read_text(errors="replace")
     out = {}
-    i = 0
-    while True:
-        i = text.find("\n\t(footprint ", i)
-        if i < 0:
-            break
+    # KiCad 9 indents footprints with a tab, KiCad 7 with two spaces
+    starts = [m.start() for m in re.finditer(r"\n[\t ]+\(footprint ", text)]
+    for i in starts:
         # walk to the end of this footprint block
         depth, j = 0, text.index("(", i)
         start = j
         while j < len(text):
             c = text[j]
             if c == '"':
-                j = text.index('"', j + 1)
+                k = text.find('"', j + 1)
+                if k < 0:
+                    break
+                j = k
             elif c == "(":
                 depth += 1
             elif c == ")":
@@ -159,8 +160,9 @@ def read_board_footprints(path):
                     break
             j += 1
         blk = text[start:j + 1]
-        i = j
-        m_ref = re.search(r'\(property "Reference" "([^"]+)"', blk)
+        # KiCad 9 stores the reference as a property, KiCad 7 as fp_text
+        m_ref = (re.search(r'\(property "Reference" "([^"]+)"', blk)
+                 or re.search(r'\(fp_text reference "([^"]+)"', blk))
         m_at = re.search(r'\(at ([-\d.]+) ([-\d.]+)(?: ([-\d.]+))?\)', blk)
         m_lay = re.search(r'\(layer "([^"]+)"\)', blk)
         if not (m_ref and m_at and m_lay):
