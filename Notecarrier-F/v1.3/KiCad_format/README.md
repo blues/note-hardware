@@ -4,8 +4,10 @@ This folder contains the design files for the Blues Wireless Notcarrier-F, in Ki
 
 Components in this design are sourced from the [blues-kicad-lib](https://github.com/blues/blues-kicad-lib) library. However, with the exception of 3D models, KiCad produces self-contained project files. Thus this project can still be used without access to the library.
 
-> **⚠️ Errata:** the power section of this port does not match the shipped
-> board — see [`ERRATA.md`](ERRATA.md). The rest of the port is unaffected.
+> **⚠️ Errata:** these files are a faithful port of **Notecarrier-F v1.2**
+> filed in the v1.3 directory, so they do not describe the shipped v1.3 board.
+> See [`ERRATA.md`](ERRATA.md) for the evidence and the v1.2 → v1.3 delta needed
+> to bring them up to the published revision.
 
 ## Contents
 
