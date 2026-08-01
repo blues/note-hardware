@@ -73,4 +73,63 @@
 		)
 		(embedded_fonts no)
 	)
+
+	(symbol "power_F_VIO"
+		(power)
+		(pin_names (offset 0))
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(property "Reference" "#PWR"
+			(at 0 -3.81 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "F_VIO"
+			(at 0 3.81 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "Power symbol creates a global label with name \"F_VIO\""
+			(at 0 0 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "ki_keywords" "global power"
+			(at 0 0 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(symbol "power_F_VIO_0_1"
+			(polyline
+				(pts (xy -0.762 1.27) (xy 0 2.54))
+				(stroke (width 0) (type default))
+				(fill (type none))
+			)
+			(polyline
+				(pts (xy 0 2.54) (xy 0.762 1.27))
+				(stroke (width 0) (type default))
+				(fill (type none))
+			)
+			(polyline
+				(pts (xy 0 0) (xy 0 2.54))
+				(stroke (width 0) (type default))
+				(fill (type none))
+			)
+		)
+		(symbol "power_F_VIO_1_1"
+			(pin power_in line
+				(at 0 0 90)
+				(length 0)
+				(hide yes)
+				(name "F_VIO" (effects (font (size 1.27 1.27))))
+				(number "1" (effects (font (size 1.27 1.27))))
+			)
+		)
+		(embedded_fonts no)
+	)
 )

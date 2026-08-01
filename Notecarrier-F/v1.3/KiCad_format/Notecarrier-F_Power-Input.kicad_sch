@@ -1210,6 +1210,85 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "blues-kicad-lib:FSV1045V"
+			(pin_numbers (hide yes))
+			(pin_names (offset 1.016) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "FSV1045V"
+				(at 0 -2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" "blues-kicad-lib:TO277-3"
+				(at 0 -4.445 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "https://www.onsemi.com/pdf/datasheet/fsv1045v-d.pdf"
+				(at 1.27 -7.62 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "schottky"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_description" "45V, 10A,Schottky Diode, TO-277-3"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "FSV1045V_0_1"
+				(polyline
+					(pts (xy 1.27 0) (xy -1.27 0))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 2.54 -1.27) (xy 2.54 0))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.27 0) (xy 2.54 0) (xy 2.54 1.27))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -1.905 0.635) (xy -1.905 1.27) (xy -1.27 1.27) (xy -1.27 -1.27) (xy -0.635 -1.27) (xy -0.635 -0.635))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "FSV1045V_1_1"
+				(polyline
+					(pts (xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27))
+					(stroke (width 0.254) (type default))
+					(fill (type outline))
+				)
+				(pin passive line
+					(at 3.81 1.27 180)
+					(length 1.27)
+					(name "A1" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 3.81 -1.27 180)
+					(length 1.27)
+					(name "A2" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "C" (effects (font (size 1.27 1.27))))
+					(number "3" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "blues-kicad-lib:D_Schottky_Filled_Swapped"
 			(pin_numbers
 				(hide yes)
@@ -4149,6 +4228,453 @@
 		)
 		(uuid "f1b393c4-6457-4c23-9820-329b9353f391")
 	)
+	(wire
+		(pts
+			(xy 203.20 57.15) (xy 203.20 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e98bebaf-51c5-4613-bf5d-9e5fbf62abbf")
+	)
+	(wire
+		(pts
+			(xy 203.20 58.42) (xy 203.20 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc281f5e-94c5-4f70-a3c9-60ca5cd7e455")
+	)
+	(junction
+		(at 203.20 58.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f5f8cee3-683c-4d7a-a859-864156c93abd")
+	)
+	(wire
+		(pts
+			(xy 179.07 43.18) (xy 179.07 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d8fcb364-9658-40d5-807a-79c62f5bc385")
+	)
+	(wire
+		(pts
+			(xy 179.07 44.45) (xy 179.07 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0c6d149f-ae50-4768-9203-4d6d1cdef7fb")
+	)
+	(junction
+		(at 179.07 44.45)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cea5b5be-21c1-4f22-8937-e418244dd4b4")
+	)
+	(wire
+		(pts
+			(xy 33.02 54.61) (xy 33.02 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d8a59d14-103c-458c-913a-79c43ebbc311")
+	)
+	(wire
+		(pts
+			(xy 33.02 55.88) (xy 33.02 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e4e32812-b284-4ffd-bd4d-690378819acd")
+	)
+	(junction
+		(at 33.02 55.88)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5894517b-1371-4d7c-a554-09f3d7cee168")
+	)
+	(symbol
+		(lib_id "blues-kicad-lib:D_Schottky_Filled_Swapped")
+		(at 167.64 180.34 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "51b1d35f-354c-4497-bccf-0e13be097da0")
+		(property "Reference" "DS7"
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "STPS3H100U"
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "blues-kicad-lib:SMB_Fv1.2"
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/stps3h100u.pdf"
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Diode Schottky, 100V, 3A"
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet 2" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet 3" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet 4" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "STPS3H100U"
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN 2" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN 3" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN 4" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer 2" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer 3" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer 4" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Mfr Description" "Rectifier Diode, Schottky, 1 Phase, 1 Element, 3A, 100V V(RRM), Silicon, SMB"
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Mfr Description 2" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Mfr Description 3" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Mfr Description 4" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "STMicroelectronics"
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Design Description" "Schottky Diode STPS3H100U 100V/3A"
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Design MPN" "STPS3H100U"
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Design Manufacturer" "STMicroelectronics"
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Design Order Code" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Design Supplier" ""
+			(at 167.64 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1b49a6b6-14cc-42cc-9ec2-2e48201b2844")
+		)
+		(pin "2"
+			(uuid "bcf4ac40-7f0a-425e-b6c6-4887c8b6a943")
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/3e57c059-f782-40ac-b9a3-c1636ed27a63/a53e192a-778c-4efc-880e-de0784c00c7e"
+					(reference "DS7")
+					(unit 1)
+				)
+			)
+		)
+	)	(symbol
+		(lib_id "blues-kicad-lib:power_VUSB")
+		(at 163.83 180.34 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(uuid "895da7eb-f4b5-49af-98c9-9289d4cbecae")
+		(property "Reference" "#PWR077"
+			(at 163.83 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Value" "VUSB"
+			(at 163.83 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 163.83 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 163.83 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 163.83 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "48bb7003-a6ae-4fb7-a2f2-d068c5137ec9")
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/3e57c059-f782-40ac-b9a3-c1636ed27a63/a53e192a-778c-4efc-880e-de0784c00c7e"
+					(reference "#PWR077")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "blues-kicad-lib:power_VMAIN")
+		(at 171.45 180.34 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(uuid "54a39631-9e23-4303-aa3c-e7ef94bd1dd8")
+		(property "Reference" "#PWR078"
+			(at 171.45 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Value" "VMAIN"
+			(at 171.45 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 171.45 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 171.45 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 171.45 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e7ece062-5049-447b-819b-630d80a40179")
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/3e57c059-f782-40ac-b9a3-c1636ed27a63/a53e192a-778c-4efc-880e-de0784c00c7e"
+					(reference "#PWR078")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(symbol
 		(lib_id "blues-kicad-lib:D_Schottky_Filled_Swapped")
 		(at 199.39 129.54 0)
@@ -4167,7 +4693,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "B360A-13-F"
+		(property "Value" "STPS3H100U"
 			(at 201.93 132.08 0)
 			(effects
 				(font
@@ -4175,7 +4701,7 @@
 				)
 			)
 		)
-		(property "Footprint" "blues-kicad-lib:DO-214AC SMA_Fv1.2"
+		(property "Footprint" "blues-kicad-lib:SMB_Fv1.2"
 			(at 199.39 129.54 0)
 			(effects
 				(font
@@ -4184,7 +4710,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://datasheet.octopart.com/B360A-13-F-Diodes-Inc.-datasheet-8329522.pdf"
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/stps3h100u.pdf"
 			(at 199.39 129.54 0)
 			(effects
 				(font
@@ -4193,7 +4719,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "DIODE SCHOTTKY 60V 3A SMT DO-214AC-2/SMA"
+		(property "Description" "Diode Schottky, 100V, 3A"
 			(at 199.39 129.54 0)
 			(effects
 				(font
@@ -4229,7 +4755,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "B360A-13-F"
+		(property "MPN" "STPS3H100U"
 			(at 199.39 129.54 0)
 			(effects
 				(font
@@ -4292,7 +4818,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mfr Description" "Rectifier Diode, Schottky, 1 Phase, 1 Element, 3A, 60V V(RRM), Silicon, DO-214AC"
+		(property "Mfr Description" "Rectifier Diode, Schottky, 1 Phase, 1 Element, 3A, 100V V(RRM), Silicon, SMB"
 			(at 199.39 129.54 0)
 			(effects
 				(font
@@ -4328,7 +4854,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "Diodes Inc."
+		(property "Manufacturer" "STMicroelectronics"
 			(at 199.39 129.54 0)
 			(effects
 				(font
@@ -4337,7 +4863,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Description" "Schottky Diode B360-13-F 60V/3A"
+		(property "Design Description" "Schottky Diode STPS3H100U 100V/3A"
 			(at 199.39 129.54 0)
 			(effects
 				(font
@@ -4346,7 +4872,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design MPN" "B360A-13-F"
+		(property "Design MPN" "STPS3H100U"
 			(at 199.39 129.54 0)
 			(effects
 				(font
@@ -4355,7 +4881,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Manufacturer" "Diodes Inc"
+		(property "Design Manufacturer" "STMicroelectronics"
 			(at 199.39 129.54 0)
 			(effects
 				(font
@@ -4364,7 +4890,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Order Code" "B360A-FDICT-ND"
+		(property "Design Order Code" ""
 			(at 199.39 129.54 0)
 			(effects
 				(font
@@ -4373,7 +4899,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Supplier" "Digi-Key"
+		(property "Design Supplier" ""
 			(at 199.39 129.54 0)
 			(effects
 				(font
@@ -4825,7 +5351,7 @@
 		)
 	)
 	(symbol
-		(lib_id "blues-kicad-lib:D_Schottky_Filled_Swapped")
+		(lib_id "blues-kicad-lib:FSV1045V")
 		(at 199.39 58.42 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4842,7 +5368,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "B360A-13-F"
+		(property "Value" "FSV1045V"
 			(at 201.93 60.96 0)
 			(effects
 				(font
@@ -4850,7 +5376,7 @@
 				)
 			)
 		)
-		(property "Footprint" "blues-kicad-lib:DO-214AC SMA_Fv1.2"
+		(property "Footprint" "blues-kicad-lib:TO277-3"
 			(at 199.39 58.42 0)
 			(effects
 				(font
@@ -4859,7 +5385,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://datasheet.octopart.com/B360A-13-F-Diodes-Inc.-datasheet-8329522.pdf"
+		(property "Datasheet" "https://www.onsemi.com/pdf/datasheet/fsv1045v-d.pdf"
 			(at 199.39 58.42 0)
 			(effects
 				(font
@@ -4868,7 +5394,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "DIODE SCHOTTKY 60V 3A SMT DO-214AC-2/SMA"
+		(property "Description" "Diode Schottky, 45V, 10A"
 			(at 199.39 58.42 0)
 			(effects
 				(font
@@ -4904,7 +5430,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "B360A-13-F"
+		(property "MPN" "FSV1045V"
 			(at 199.39 58.42 0)
 			(effects
 				(font
@@ -4967,7 +5493,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mfr Description" "Rectifier Diode, Schottky, 1 Phase, 1 Element, 3A, 60V V(RRM), Silicon, DO-214AC"
+		(property "Mfr Description" "Rectifier Diode, Schottky, 1 Phase, 1 Element, 10A, 45V V(RRM), Silicon, TO-277-3"
 			(at 199.39 58.42 0)
 			(effects
 				(font
@@ -5003,7 +5529,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "Diodes Inc."
+		(property "Manufacturer" "onsemi"
 			(at 199.39 58.42 0)
 			(effects
 				(font
@@ -5012,7 +5538,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Description" "Schottky Diode B360-13-F 60V/3A"
+		(property "Design Description" "Schottky Diode FSV1045V 45V/10A"
 			(at 199.39 58.42 0)
 			(effects
 				(font
@@ -5021,7 +5547,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design MPN" "B360A-13-F"
+		(property "Design MPN" "FSV1045V"
 			(at 199.39 58.42 0)
 			(effects
 				(font
@@ -5030,7 +5556,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Manufacturer" "Diodes Inc"
+		(property "Design Manufacturer" "onsemi"
 			(at 199.39 58.42 0)
 			(effects
 				(font
@@ -5039,7 +5565,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Order Code" "B360A-FDICT-ND"
+		(property "Design Order Code" ""
 			(at 199.39 58.42 0)
 			(effects
 				(font
@@ -5048,7 +5574,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Supplier" "Digi-Key"
+		(property "Design Supplier" ""
 			(at 199.39 58.42 0)
 			(effects
 				(font
@@ -5062,6 +5588,9 @@
 		)
 		(pin "2"
 			(uuid "62ade304-1c92-4922-a5a7-2c04f3134150")
+		)
+		(pin "3"
+			(uuid "deadc59d-c5ff-4456-bf15-b49d689d04fb")
 		)
 		(instances
 			(project "Notecarrier-F"
@@ -5894,7 +6423,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "B360A-13-F"
+		(property "Value" "STPS3H100U"
 			(at 78.74 44.45 90)
 			(effects
 				(font
@@ -5902,7 +6431,7 @@
 				)
 			)
 		)
-		(property "Footprint" "blues-kicad-lib:DO-214AC SMA_Fv1.2"
+		(property "Footprint" "blues-kicad-lib:SMB_Fv1.2"
 			(at 69.85 43.18 0)
 			(effects
 				(font
@@ -5911,7 +6440,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://datasheet.octopart.com/B360A-13-F-Diodes-Inc.-datasheet-8329522.pdf"
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/stps3h100u.pdf"
 			(at 69.85 43.18 0)
 			(effects
 				(font
@@ -5920,7 +6449,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "DIODE SCHOTTKY 60V 3A SMT DO-214AC-2/SMA"
+		(property "Description" "Diode Schottky, 100V, 3A"
 			(at 69.85 43.18 0)
 			(effects
 				(font
@@ -5956,7 +6485,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "B360A-13-F"
+		(property "MPN" "STPS3H100U"
 			(at 69.85 43.18 0)
 			(effects
 				(font
@@ -6019,7 +6548,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mfr Description" "Rectifier Diode, Schottky, 1 Phase, 1 Element, 3A, 60V V(RRM), Silicon, DO-214AC"
+		(property "Mfr Description" "Rectifier Diode, Schottky, 1 Phase, 1 Element, 3A, 100V V(RRM), Silicon, SMB"
 			(at 69.85 43.18 0)
 			(effects
 				(font
@@ -6055,7 +6584,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "Diodes Inc."
+		(property "Manufacturer" "STMicroelectronics"
 			(at 69.85 43.18 0)
 			(effects
 				(font
@@ -6064,7 +6593,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Description" "Schottky Diode B360-13-F 60V/3A"
+		(property "Design Description" "Schottky Diode STPS3H100U 100V/3A"
 			(at 69.85 43.18 0)
 			(effects
 				(font
@@ -6073,7 +6602,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design MPN" "B360A-13-F"
+		(property "Design MPN" "STPS3H100U"
 			(at 69.85 43.18 0)
 			(effects
 				(font
@@ -6082,7 +6611,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Manufacturer" "Diodes Inc"
+		(property "Design Manufacturer" "STMicroelectronics"
 			(at 69.85 43.18 0)
 			(effects
 				(font
@@ -6091,7 +6620,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Order Code" "B360A-FDICT-ND"
+		(property "Design Order Code" ""
 			(at 69.85 43.18 0)
 			(effects
 				(font
@@ -6100,7 +6629,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Supplier" "Digi-Key"
+		(property "Design Supplier" ""
 			(at 69.85 43.18 0)
 			(effects
 				(font
@@ -9025,7 +9554,7 @@
 		)
 	)
 	(symbol
-		(lib_id "blues-kicad-lib:D_Schottky_Filled_Swapped")
+		(lib_id "blues-kicad-lib:FSV1045V")
 		(at 36.83 55.88 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9042,7 +9571,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "B360A-13-F"
+		(property "Value" "FSV1045V"
 			(at 45.72 54.61 0)
 			(effects
 				(font
@@ -9050,7 +9579,7 @@
 				)
 			)
 		)
-		(property "Footprint" "blues-kicad-lib:DO-214AC SMA_Fv1.2"
+		(property "Footprint" "blues-kicad-lib:TO277-3"
 			(at 36.83 55.88 0)
 			(effects
 				(font
@@ -9059,7 +9588,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://datasheet.octopart.com/B360A-13-F-Diodes-Inc.-datasheet-8329522.pdf"
+		(property "Datasheet" "https://www.onsemi.com/pdf/datasheet/fsv1045v-d.pdf"
 			(at 36.83 55.88 0)
 			(effects
 				(font
@@ -9068,7 +9597,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "DIODE SCHOTTKY 60V 3A SMT DO-214AC-2/SMA"
+		(property "Description" "Diode Schottky, 45V, 10A"
 			(at 36.83 55.88 0)
 			(effects
 				(font
@@ -9104,7 +9633,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "B360A-13-F"
+		(property "MPN" "FSV1045V"
 			(at 36.83 55.88 0)
 			(effects
 				(font
@@ -9167,7 +9696,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mfr Description" "Rectifier Diode, Schottky, 1 Phase, 1 Element, 3A, 60V V(RRM), Silicon, DO-214AC"
+		(property "Mfr Description" "Rectifier Diode, Schottky, 1 Phase, 1 Element, 10A, 45V V(RRM), Silicon, TO-277-3"
 			(at 36.83 55.88 0)
 			(effects
 				(font
@@ -9203,7 +9732,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "Diodes Inc."
+		(property "Manufacturer" "onsemi"
 			(at 36.83 55.88 0)
 			(effects
 				(font
@@ -9212,7 +9741,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Description" "Schottky Diode B360-13-F 60V/3A"
+		(property "Design Description" "Schottky Diode FSV1045V 45V/10A"
 			(at 36.83 55.88 0)
 			(effects
 				(font
@@ -9221,7 +9750,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design MPN" "B360A-13-F"
+		(property "Design MPN" "FSV1045V"
 			(at 36.83 55.88 0)
 			(effects
 				(font
@@ -9230,7 +9759,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Manufacturer" "Diodes Inc"
+		(property "Design Manufacturer" "onsemi"
 			(at 36.83 55.88 0)
 			(effects
 				(font
@@ -9239,7 +9768,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Order Code" "B360A-FDICT-ND"
+		(property "Design Order Code" ""
 			(at 36.83 55.88 0)
 			(effects
 				(font
@@ -9248,7 +9777,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Supplier" "Digi-Key"
+		(property "Design Supplier" ""
 			(at 36.83 55.88 0)
 			(effects
 				(font
@@ -9262,6 +9791,9 @@
 		)
 		(pin "2"
 			(uuid "bbf899d0-a1ca-4ec4-a384-613432e489ea")
+		)
+		(pin "3"
+			(uuid "02ec7df1-c321-4186-8c7c-64d1184a3389")
 		)
 		(instances
 			(project "Notecarrier-F"
@@ -9884,8 +10416,7 @@
 		)
 	)
 	(symbol
-		(lib_name "D_Schottky_Filled_Swapped_1")
-		(lib_id "blues-kicad-lib:D_Schottky_Filled_Swapped")
+		(lib_id "blues-kicad-lib:FSV1045V")
 		(at 182.88 44.45 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9902,7 +10433,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "B360A-13-F"
+		(property "Value" "FSV1045V"
 			(at 185.42 46.99 0)
 			(effects
 				(font
@@ -9910,7 +10441,7 @@
 				)
 			)
 		)
-		(property "Footprint" "blues-kicad-lib:DO-214AC SMA_Fv1.2"
+		(property "Footprint" "blues-kicad-lib:TO277-3"
 			(at 182.88 44.45 0)
 			(effects
 				(font
@@ -9919,7 +10450,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://datasheet.octopart.com/B360A-13-F-Diodes-Inc.-datasheet-8329522.pdf"
+		(property "Datasheet" "https://www.onsemi.com/pdf/datasheet/fsv1045v-d.pdf"
 			(at 182.88 44.45 0)
 			(effects
 				(font
@@ -9928,7 +10459,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "DIODE SCHOTTKY 60V 3A SMT DO-214AC-2/SMA"
+		(property "Description" "Diode Schottky, 45V, 10A"
 			(at 182.88 44.45 0)
 			(effects
 				(font
@@ -9964,7 +10495,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "B360A-13-F"
+		(property "MPN" "FSV1045V"
 			(at 182.88 44.45 0)
 			(effects
 				(font
@@ -10027,7 +10558,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mfr Description" "Rectifier Diode, Schottky, 1 Phase, 1 Element, 3A, 60V V(RRM), Silicon, DO-214AC"
+		(property "Mfr Description" "Rectifier Diode, Schottky, 1 Phase, 1 Element, 10A, 45V V(RRM), Silicon, TO-277-3"
 			(at 182.88 44.45 0)
 			(effects
 				(font
@@ -10063,7 +10594,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "Diodes Inc."
+		(property "Manufacturer" "onsemi"
 			(at 182.88 44.45 0)
 			(effects
 				(font
@@ -10072,7 +10603,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Description" "Schottky Diode B360-13-F 60V/3A"
+		(property "Design Description" "Schottky Diode FSV1045V 45V/10A"
 			(at 182.88 44.45 0)
 			(effects
 				(font
@@ -10081,7 +10612,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design MPN" "B360A-13-F"
+		(property "Design MPN" "FSV1045V"
 			(at 182.88 44.45 0)
 			(effects
 				(font
@@ -10090,7 +10621,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Manufacturer" "Diodes Inc"
+		(property "Design Manufacturer" "onsemi"
 			(at 182.88 44.45 0)
 			(effects
 				(font
@@ -10099,7 +10630,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Order Code" "B360A-FDICT-ND"
+		(property "Design Order Code" ""
 			(at 182.88 44.45 0)
 			(effects
 				(font
@@ -10108,7 +10639,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Supplier" "Digi-Key"
+		(property "Design Supplier" ""
 			(at 182.88 44.45 0)
 			(effects
 				(font
@@ -10122,6 +10653,9 @@
 		)
 		(pin "2"
 			(uuid "34aed270-3fe1-4ca9-a247-61d60b01e4bc")
+		)
+		(pin "3"
+			(uuid "79df8a99-329e-4dc6-af77-272288e7e368")
 		)
 		(instances
 			(project "Notecarrier-F"

@@ -12,6 +12,135 @@
 		(comment 2 "Heath Raftery")
 	)
 	(lib_symbols
+			(symbol "Notecarrier-F-local:AP2139AK-3.3TRG1"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -5.08 5.08 0)
+				(effects (font (size 1.27 1.27)) (justify left))
+			)
+			(property "Value" "AP2139AK-3.3TRG1"
+				(at -5.08 -6.35 0)
+				(effects (font (size 1.27 1.27)) (justify left))
+			)
+			(property "Footprint" "Notecarrier-F-local:SOT-23-5_Fv1.3"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "IC REG LINEAR 3.3V 0.25A SOT-23-5"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "MPN" "AP2139AK-3.3TRG1"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "AP2139AK-3.3TRG1_0_1"
+				(rectangle
+					(start -5.08 3.81)
+					(end 5.08 -3.81)
+					(stroke (width 0.254) (type default))
+					(fill (type background))
+				)
+			)
+			(symbol "AP2139AK-3.3TRG1_1_1"
+				(pin power_in line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "VIN" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin input line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "CE" (effects (font (size 1.27 1.27))))
+					(number "3" (effects (font (size 1.27 1.27))))
+				)
+				(pin power_in line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "GND" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+				(pin power_out line
+					(at 7.62 2.54 180)
+					(length 2.54)
+					(name "VOUT" (effects (font (size 1.27 1.27))))
+					(number "5" (effects (font (size 1.27 1.27))))
+				)
+				(pin no_connect line
+					(at 7.62 -2.54 180)
+					(length 2.54)
+					(name "NC" (effects (font (size 1.27 1.27))))
+					(number "4" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+			(symbol "Notecarrier-F-local:power_F_VIO"
+			(power)
+			(pin_names (offset 0))
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board no)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Value" "F_VIO"
+				(at 0 3.81 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Power symbol creates a global label with name \"F_VIO\""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "power_F_VIO_0_1"
+				(polyline
+					(pts (xy -0.762 1.27) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 2.54) (xy 0.762 1.27))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 0) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "power_F_VIO_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(hide yes)
+					(name "F_VIO" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:C"
 			(pin_numbers
 				(hide yes)
@@ -433,6 +562,85 @@
 							)
 						)
 					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "blues-kicad-lib:FSV1045V"
+			(pin_numbers (hide yes))
+			(pin_names (offset 1.016) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "FSV1045V"
+				(at 0 -2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" "blues-kicad-lib:TO277-3"
+				(at 0 -4.445 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "https://www.onsemi.com/pdf/datasheet/fsv1045v-d.pdf"
+				(at 1.27 -7.62 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "schottky"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_description" "45V, 10A,Schottky Diode, TO-277-3"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "FSV1045V_0_1"
+				(polyline
+					(pts (xy 1.27 0) (xy -1.27 0))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 2.54 -1.27) (xy 2.54 0))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.27 0) (xy 2.54 0) (xy 2.54 1.27))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -1.905 0.635) (xy -1.905 1.27) (xy -1.27 1.27) (xy -1.27 -1.27) (xy -0.635 -1.27) (xy -0.635 -0.635))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "FSV1045V_1_1"
+				(polyline
+					(pts (xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27))
+					(stroke (width 0.254) (type default))
+					(fill (type outline))
+				)
+				(pin passive line
+					(at 3.81 1.27 180)
+					(length 1.27)
+					(name "A1" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 3.81 -1.27 180)
+					(length 1.27)
+					(name "A2" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "C" (effects (font (size 1.27 1.27))))
+					(number "3" (effects (font (size 1.27 1.27))))
 				)
 			)
 			(embedded_fonts no)
@@ -3809,6 +4017,587 @@
 		)
 		(uuid "d64ec1d6-8032-49ea-878b-d30c912cbdbd")
 	)
+	(wire
+		(pts
+			(xy 203.20 48.26) (xy 203.20 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "db0ab48e-8e8a-4ee5-8561-49a4657519c4")
+	)
+	(wire
+		(pts
+			(xy 203.20 49.53) (xy 203.20 50.80)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2013c01e-9e40-4a61-9da8-548c12a0be03")
+	)
+	(junction
+		(at 203.20 49.53)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d434893e-275e-4b49-9f81-e37225aeb4df")
+	)
+	(symbol
+		(lib_id "Notecarrier-F-local:AP2139AK-3.3TRG1")
+		(at 213.36 26.67 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "55119487-80a6-462c-84be-45769ab3dffe")
+		(property "Reference" "U9"
+			(at 213.36 22.860000000000003 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AP2139AK-3.3TRG1"
+			(at 213.36 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Notecarrier-F-local:SOT-23-5_Fv1.3"
+			(at 213.36 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP2139.pdf"
+			(at 213.36 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Description" "IC REG LINEAR 3.3V 0.25A"
+			(at 213.36 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "MPN" "AP2139AK-3.3TRG1"
+			(at 213.36 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "Diodes Incorporated"
+			(at 213.36 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1106884f-0443-4de2-a297-7594a7c98c62")
+		)
+		(pin "2"
+			(uuid "a3b35fc6-301c-432d-b411-d6a7bf080173")
+		)
+		(pin "3"
+			(uuid "1a2157ca-6def-4ad3-b701-6a515552d4cb")
+		)
+		(pin "4"
+			(uuid "3a7df716-587d-49a2-b103-821d91f96b47")
+		)
+		(pin "5"
+			(uuid "b7e9f81f-919d-4cb3-951c-5d3273123e4d")
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/3e57c059-f782-40ac-b9a3-c1636ed27a63/88418874-7972-4492-bdff-7ad1935acea6"
+					(reference "U9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 203.2 33.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b1535ffc-8f3c-4fa8-b449-470a96861d4f")
+		(property "Reference" "C33"
+			(at 203.2 29.210000000000004 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1µF"
+			(at 203.2 36.830000000000005 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "blues-kicad-lib:C-0603_Fv1.2"
+			(at 203.2 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 203.2 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c4ce83c1-ad6e-4885-930d-9dfabaddd626")
+		)
+		(pin "2"
+			(uuid "0af34f32-e84e-4bd7-a954-351820f78312")
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/3e57c059-f782-40ac-b9a3-c1636ed27a63/88418874-7972-4492-bdff-7ad1935acea6"
+					(reference "C33")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 226.06 33.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e94c403e-e244-4e8a-98e4-a9281c9e490a")
+		(property "Reference" "C34"
+			(at 226.06 29.210000000000004 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1µF"
+			(at 226.06 36.830000000000005 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "blues-kicad-lib:C-0603_Fv1.2"
+			(at 226.06 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 226.06 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 226.06 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4e753bdc-28b3-438b-8871-a787ad0d4306")
+		)
+		(pin "2"
+			(uuid "564d7294-4a02-4609-b77a-a410e30c43ba")
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/3e57c059-f782-40ac-b9a3-c1636ed27a63/88418874-7972-4492-bdff-7ad1935acea6"
+					(reference "C34")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 205.74 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(uuid "32e1ecde-2047-4906-9a9b-8450d230e659")
+		(property "Reference" "#PWR073"
+			(at 205.74 25.400000000000002 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 205.74 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 205.74 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 205.74 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 205.74 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b3eb33ef-0750-43ac-906e-9dc2cde95a0f")
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/3e57c059-f782-40ac-b9a3-c1636ed27a63/88418874-7972-4492-bdff-7ad1935acea6"
+					(reference "#PWR073")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 203.2 36.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(uuid "6bcc5dc0-3301-41ab-b776-59fc2829f623")
+		(property "Reference" "#PWR074"
+			(at 203.2 33.019999999999996 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 203.2 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 203.2 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 203.2 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9cf23da5-1c32-4d7c-934a-a07cc8e2a16f")
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/3e57c059-f782-40ac-b9a3-c1636ed27a63/88418874-7972-4492-bdff-7ad1935acea6"
+					(reference "#PWR074")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 226.06 36.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(uuid "fe0635f6-471d-4640-b1aa-c1d54e74b641")
+		(property "Reference" "#PWR075"
+			(at 226.06 33.019999999999996 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 226.06 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 226.06 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 226.06 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 226.06 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "15e54cca-797e-41a5-b78d-2f48af339c2a")
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/3e57c059-f782-40ac-b9a3-c1636ed27a63/88418874-7972-4492-bdff-7ad1935acea6"
+					(reference "#PWR075")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Notecarrier-F-local:power_F_VIO")
+		(at 226.06 24.13 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(uuid "66030870-78dd-405a-bba2-30359c7edf69")
+		(property "Reference" "#PWR076"
+			(at 226.06 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Value" "F_VIO"
+			(at 226.06 27.939999999999998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 226.06 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 226.06 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 226.06 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				) (hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6e2bf78f-2578-4399-a60a-d6c601973f4a")
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/3e57c059-f782-40ac-b9a3-c1636ed27a63/88418874-7972-4492-bdff-7ad1935acea6"
+					(reference "#PWR076")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 205.74 24.13) (xy 203.20 24.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b4f854cc-b03e-4aa9-af4d-54084e3495d4")
+	)
+	(wire
+		(pts
+			(xy 205.74 26.67) (xy 203.20 26.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f89bd416-a8fe-4636-aff3-094c7c3635dc")
+	)
+	(wire
+		(pts
+			(xy 203.20 24.13) (xy 203.20 26.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d984a79e-3bbf-4de5-ac00-6980bb7d1f9d")
+	)
+	(wire
+		(pts
+			(xy 203.20 26.67) (xy 203.20 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "df53baa6-b025-4734-9b1c-7f6747af7326")
+	)
+	(wire
+		(pts
+			(xy 203.20 29.21) (xy 203.20 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1c57db61-1df4-4823-80cf-bcc335f365d5")
+	)
+	(wire
+		(pts
+			(xy 220.98 24.13) (xy 226.06 24.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "40e297f6-59ad-49f6-b968-8f6deb0921f7")
+	)
+	(wire
+		(pts
+			(xy 226.06 24.13) (xy 226.06 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c6d36001-de79-4670-9dbf-428434bc260d")
+	)
+	(junction
+		(at 203.20 26.67)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dfc30b1a-041e-429e-9c7c-63e4cdd923e4")
+	)
+	(junction
+		(at 203.20 29.21)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "552e1c76-c426-4792-a45c-253bcab9fbb4")
+	)
+	(junction
+		(at 226.06 24.13)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3ffbc5a6-6687-429c-aef7-3b9ddbff4f36")
+	)
+	(no_connect
+		(at 220.98 29.21)
+		(uuid "9ebf834e-3648-4ba2-b14c-db5fe536c5c7")
+	)
 	(symbol
 		(lib_id "blues-kicad-lib:MAX17225ELT_NoLabel")
 		(at 213.36 134.62 0)
@@ -4570,7 +5359,7 @@
 		)
 	)
 	(symbol
-		(lib_id "blues-kicad-lib:D_Schottky_Filled_Swapped")
+		(lib_id "blues-kicad-lib:FSV1045V")
 		(at 207.01 49.53 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4587,7 +5376,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "B360A-13-F"
+		(property "Value" "FSV1045V"
 			(at 209.55 52.07 0)
 			(effects
 				(font
@@ -4595,7 +5384,7 @@
 				)
 			)
 		)
-		(property "Footprint" "blues-kicad-lib:DO-214AC SMA_Fv1.2"
+		(property "Footprint" "blues-kicad-lib:TO277-3"
 			(at 207.01 49.53 0)
 			(effects
 				(font
@@ -4604,7 +5393,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://datasheet.octopart.com/B360A-13-F-Diodes-Inc.-datasheet-8329522.pdf"
+		(property "Datasheet" "https://www.onsemi.com/pdf/datasheet/fsv1045v-d.pdf"
 			(at 207.01 49.53 0)
 			(effects
 				(font
@@ -4613,7 +5402,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "DIODE SCHOTTKY 60V 3A SMT DO-214AC-2/SMA"
+		(property "Description" "Diode Schottky, 45V, 10A"
 			(at 207.01 49.53 0)
 			(effects
 				(font
@@ -4649,7 +5438,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "B360A-13-F"
+		(property "MPN" "FSV1045V"
 			(at 207.01 49.53 0)
 			(effects
 				(font
@@ -4712,7 +5501,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mfr Description" "Rectifier Diode, Schottky, 1 Phase, 1 Element, 3A, 60V V(RRM), Silicon, DO-214AC"
+		(property "Mfr Description" "Rectifier Diode, Schottky, 1 Phase, 1 Element, 10A, 45V V(RRM), Silicon, TO-277-3"
 			(at 207.01 49.53 0)
 			(effects
 				(font
@@ -4748,7 +5537,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "Diodes Inc."
+		(property "Manufacturer" "onsemi"
 			(at 207.01 49.53 0)
 			(effects
 				(font
@@ -4757,7 +5546,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Description" "Schottky Diode B360-13-F 60V/3A"
+		(property "Design Description" "Schottky Diode FSV1045V 45V/10A"
 			(at 207.01 49.53 0)
 			(effects
 				(font
@@ -4766,7 +5555,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design MPN" "B360A-13-F"
+		(property "Design MPN" "FSV1045V"
 			(at 207.01 49.53 0)
 			(effects
 				(font
@@ -4775,7 +5564,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Manufacturer" "Diodes Inc"
+		(property "Design Manufacturer" "onsemi"
 			(at 207.01 49.53 0)
 			(effects
 				(font
@@ -4784,7 +5573,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Order Code" "B360A-FDICT-ND"
+		(property "Design Order Code" ""
 			(at 207.01 49.53 0)
 			(effects
 				(font
@@ -4793,7 +5582,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Supplier" "Digi-Key"
+		(property "Design Supplier" ""
 			(at 207.01 49.53 0)
 			(effects
 				(font
@@ -4807,6 +5596,9 @@
 		)
 		(pin "2"
 			(uuid "ba4a593b-2651-4fce-a3ec-ccc44dafd99f")
+		)
+		(pin "3"
+			(uuid "b6dd0e87-04c0-409d-9a74-a7b6e42faf0a")
 		)
 		(instances
 			(project "Notecarrier-F"

@@ -153,8 +153,19 @@ So three of the four are a one-line retarget each. Only the fourth is real work:
   deletion, which an earlier draft of this errata wrongly called for. Their
   pull-up net still moves to `F_VIO` per the table above.
 * `J11` (`CES-102-01-S-S`) is unfitted in both revisions; keep it DNP.
-* Rename `MODL1` → `MOD1L` and `MODR1` → `MOD1R` to match the released BOM and
-  pick-and-place.
+* **`MODL1`/`MODR1` cannot be renamed to the released `MOD1L`/`MOD1R`.** This was
+  tried and reverted. KiCad derives a symbol's annotation number from the
+  *trailing digits* of its reference, so `MOD1L` — which ends in a letter — is
+  treated as unannotated: every netlist export then prints
+  `Warning: schematic has annotation errors`, and `kicad-cli sch export bom`
+  emits the designators literally as `MOD1L?` and `MOD1R?`. That is worse than a
+  naming difference, so the KiCad files keep `MODL1`/`MODR1` and the mapping to
+  the released BOM is recorded here:
+
+  | This KiCad project | Released BOM `3000-653-002` | Part |
+  |---|---|---|
+  | `MODL1` | `MOD1L` | `CES-116-01-L-S`, 1×16 Feather header |
+  | `MODR1` | `MOD1R` | `CES-112-01-L-S`, 1×12 Feather header |
 
 ### 5. Board work
 
@@ -201,6 +212,45 @@ diff against `../2200-814__2023-07-10.zip`, BOM against
 `../BOM-3000-653-002.xlsx` (**not** the older `992-00063-B` used when this port
 was made, which is why the v1.3 additions were never noticed), and the
 placement gate against `../PNP-3000-653-002.pnp`. Then run the full battery.
+
+## Progress: the schematic delta is DONE and verified; the board delta is not
+
+Everything in §1–§4 and §6 above has been applied to the schematic sheets and
+verified by re-exporting the netlist and BOM after every step. Verified state:
+
+| Check | Result |
+|---|---|
+| `U9` | pin 1 `VIN` **and** pin 3 `CE` on `Net-(DS5-A1)`, pin 2 `GND` on `GND`, pin 5 `VOUT` on `F_VIO`, pin 4 `NC` open with a no-connect marker |
+| `C33` / `C34` | `Net-(DS5-A1)` → `GND` / `F_VIO` → `GND` |
+| `DS7` | pin 1 (cathode) `VMAIN`, pin 2 (anode) `VUSB` |
+| `DS1`, `DS2`, `DS4`, `DS5` | 3-pin `FSV1045V`; both anode pins on the original anode net, pin 3 on the original cathode net, all four confirmed individually |
+| `DS3`, `DS6` | `STPS3H100U` / `SMB_Fv1.2`, pin-to-net mapping untouched |
+| `F_VIO` | `C11.1 C14.1 C34.1 R11.2 R12.2 U1.3 U4.7 U9.5` — exactly the intended set |
+| `F_BAT` | `DS5.2 MOD1R.1` only |
+| BOM refdes | 92 fitted symbols against 96 released designators; the only differences are `MODL1`/`MODR1` vs `MOD1L`/`MOD1R` (see §4), the non-electrical `DOC1`/`PCB1` rows, and `J9`/`J10` (below) |
+| ERC | no new violation *class* versus the v1.2 baseline; the count rises only by the same pre-existing "configuration does not include the symbol library 'Device'/'power'" artifact that every other symbol already produces in a CLI environment |
+| Annotation | clean — netlist export emits no warning |
+
+**The board has not been touched yet, so these files are still not a usable
+v1.3 deliverable.** The schematic now describes v1.3 while `Notecarrier-F.kicad_pcb`
+still describes v1.2, which means the two are deliberately out of step until §5
+is done. Do not run "Update PCB from Schematic" as a shortcut — it would place
+the new parts at arbitrary positions and rip up the preserved zone fills.
+
+### Two pre-existing discrepancies found along the way (not part of this delta)
+
+Both predate the delta and are recorded here rather than silently changed:
+
+* **`J9` and `J10` are DNP in this port but appear in the released BOM.** They are
+  through-hole headers and absent from the pick-and-place, so the placement gate
+  cannot arbitrate. Needs a decision from whoever owns the build.
+* **56 MPN differences** between the port and `BOM-3000-653-002.xlsx`, spread
+  across the whole board rather than concentrated in the delta — e.g. `C10`
+  carries `CC0402KRX7R7BB104` where the released BOM buys
+  `GCM155R71C104KA55D`. These are design-MPN-versus-purchasing-MPN divergences
+  inherited from the Altium sources; the released BOM is authoritative for what
+  was actually built. Reconciling them is a separate task from this revision
+  delta and should not be folded into it.
 
 ## Already fixed
 

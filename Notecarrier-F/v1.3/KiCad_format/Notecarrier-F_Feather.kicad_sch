@@ -3682,6 +3682,64 @@
 			)
 			(embedded_fonts no)
 		)
+			(symbol "Notecarrier-F-local:power_F_VIO"
+			(power)
+			(pin_names (offset 0))
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board no)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Value" "F_VIO"
+				(at 0 3.81 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Power symbol creates a global label with name \"F_VIO\""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "power_F_VIO_0_1"
+				(polyline
+					(pts (xy -0.762 1.27) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 2.54) (xy 0.762 1.27))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 0) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "power_F_VIO_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(hide yes)
+					(name "F_VIO" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "blues-kicad-lib:power_F_BAT"
 			(power)
 			(pin_names
@@ -6540,7 +6598,7 @@
 		)
 		(uuid "61c10e48-46da-4a39-ae34-19e6b9860298")
 	)
-	(label "F_BAT"
+	(label "F_VIO"
 		(at 74.93 119.38 0)
 		(effects
 			(font
@@ -7333,17 +7391,7 @@
 		)
 		(uuid "94882b54-0c7e-4a70-b423-72f3cba25edf")
 	)
-	(hierarchical_label "F_BAT"
-		(shape input)
-		(at 30.48 132.08 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "99c86c16-ebd2-4018-97c8-1306c09723f2")
-	)
+
 	(hierarchical_label "F_EN"
 		(shape input)
 		(at 30.48 109.22 180)
@@ -7563,6 +7611,70 @@
 			(justify left)
 		)
 		(uuid "eb23b0be-ab29-48e8-914c-138a0d59d86a")
+	)
+	(symbol
+		(lib_id "Notecarrier-F-local:power_F_VIO")
+		(at 30.48 132.08 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(uuid "5c1f0a41-9b7e-4d02-8f36-1a4d90c7e001")
+		(property "Reference" "#PWR072"
+			(at 30.48 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "F_VIO"
+			(at 30.48 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 30.48 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 30.48 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 30.48 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5c1f0a41-9b7e-4d02-8f36-1a4d90c7e002")
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/3e57c059-f782-40ac-b9a3-c1636ed27a63/fb5887cf-5e51-4ae9-9749-dbe8e6b41d9d"
+					(reference "#PWR072")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -8802,7 +8914,7 @@
 		)
 	)
 	(symbol
-		(lib_id "blues-kicad-lib:power_F_BAT")
+		(lib_id "Notecarrier-F-local:power_F_VIO")
 		(at 144.78 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -8819,7 +8931,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "F_BAT"
+		(property "Value" "F_VIO"
 			(at 144.78 88.9 0)
 			(effects
 				(font
@@ -11391,7 +11503,7 @@
 		)
 	)
 	(symbol
-		(lib_id "blues-kicad-lib:power_F_BAT")
+		(lib_id "Notecarrier-F-local:power_F_VIO")
 		(at 137.16 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11408,7 +11520,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "F_BAT"
+		(property "Value" "F_VIO"
 			(at 137.16 88.9 0)
 			(effects
 				(font
@@ -12080,7 +12192,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "977dff35-4480-428f-b97c-d208addf1390")
 		(property "Reference" "R12"
 			(at 149.86 96.52 0)
@@ -13337,7 +13449,7 @@
 		)
 	)
 	(symbol
-		(lib_id "blues-kicad-lib:power_F_BAT")
+		(lib_id "Notecarrier-F-local:power_F_VIO")
 		(at 151.13 116.84 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13354,7 +13466,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "F_BAT"
+		(property "Value" "F_VIO"
 			(at 151.13 113.03 0)
 			(effects
 				(font
@@ -14848,7 +14960,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "fdfcb0b1-57d4-4186-a79f-55166ffa3d4c")
 		(property "Reference" "R11"
 			(at 142.24 96.52 0)
