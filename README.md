@@ -57,13 +57,17 @@ reference for the A form factor. See
 [`STATUS-INCOMPLETE.md`](Notecarrier-A/v2.3/KiCad_format/STATUS-INCOMPLETE.md)
 for exactly what is verified, what remains, and what would unlock it.
 
-‡ The Notecarrier-F KiCad port has **errata**: it is a faithful port of
-**v1.2** filed in the v1.3 directory, so it does not describe the shipped v1.3
-board — v1.3 adds a 3.3 V regulator circuit (`U9`, `C33`, `C34`) and the USB
-input diode `DS7`, and changes all six diodes to different parts and packages.
-Proven by comparing it against both revisions' pick-and-place files: 86/86 parts
-match v1.2, while 4 are missing against v1.3. The v1.2 → v1.3 delta needed to
-bring it up to the published revision is set out in
+‡ The Notecarrier-F KiCad port has **errata**: it is part-way through a
+v1.2 → v1.3 delta port, so it currently holds a **v1.3 schematic and a v1.2
+PCB**. The schematic now carries the v1.3 changes — the 3.3 V regulator circuit
+(`U9`, `C33`, `C34`), the USB input diode `DS7`, the six re-parted diodes, and
+the `F_VIO` rail that moves both level shifters off raw battery voltage — and
+each was verified against the released schematic and BOM. The board has not been
+updated yet, so the two are deliberately out of step.
+The original diagnosis came from comparing the port against both revisions'
+pick-and-place files: 86/86 parts matched v1.2, while 4 were missing against
+v1.3. What has been applied so far, what remains, and why the board must not be
+updated from the schematic automatically are all set out in
 [`Notecarrier-F/v1.3/KiCad_format/ERRATA.md`](Notecarrier-F/v1.3/KiCad_format/ERRATA.md).
 
 † The Notecarrier-X, -XS and -XM ports carry a **source-fidelity

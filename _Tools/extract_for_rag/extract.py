@@ -85,19 +85,20 @@ BOM, KICAD, SCHEMATIC = "bom", "kicad", "schematic"
 # KiCad_format/validation/ holds QA port-comparison artifacts (Gerber-diff PNGs and BOMs
 # exported from both OrCAD/Altium and KiCad) that are ~90-93% replicants of the canonical BOM.
 #
-# The two KiCad_format exclusions below keep known-inaccurate component data out of the index.
-# Both are deliberate and should be removed when the underlying port is fixed:
+# The KiCad_format exclusion below keeps known-inaccurate component data out of the index.
+# It is deliberate and should be removed when the underlying port is fixed:
 #
 #   Notecarrier-A/v2.3 - an unfinished port (see its STATUS-INCOMPLETE.md). Because only the
 #     highest version per product is indexed, leaving it in would silently displace the
 #     validated v2.0 port as the sole KiCad source for Notecarrier-A.
-#   Notecarrier-F/v1.3 - its power sheets state the wrong part number and package for all six
-#     diodes and omit U9/C33/C34/DS7 entirely (see that port's ERRATA.md). Its BOM and
-#     schematic-PDF pages come from the published documents and are still indexed.
+#
+# Notecarrier-F/v1.3 was excluded here while its schematic still described v1.2. That delta
+# has since been applied and verified, and this extractor only ever reads .kicad_sch - never
+# the board - so the pages it produces for F now describe the shipped v1.3 design. The port's
+# PCB is still mid-port (see its ERRATA.md), which does not affect what is indexed.
 EXCLUDE_PATH = (
     "kicad_format/validation/",
     "notecarrier-a/v2.3/kicad_format/",
-    "notecarrier-f/v1.3/kicad_format/",
 )
 
 # A reference designator like C12, R5, U3, J2. Used for BOM dedup.

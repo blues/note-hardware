@@ -1,9 +1,19 @@
-# ⚠️ Notecarrier-F — this port represents **v1.2**, not v1.3
+# ⚠️ Notecarrier-F — **v1.3 schematic, v1.2 PCB**
 
-**These KiCad files are a faithful port of Notecarrier-F v1.2, filed in the
-v1.3 directory.** The port itself is sound; the problem is that it is labelled
-as a revision it does not describe. Do not use it as the reference for the
-shipped v1.3 board until the v1.2 → v1.3 delta below has been applied.
+**These files are currently half-way through a v1.2 → v1.3 delta port.** The
+schematic sheets have been brought to v1.3 and verified; `Notecarrier-F.kicad_pcb`
+still describes v1.2. Schematic and board are therefore deliberately out of step,
+and this is **not yet a usable v1.3 deliverable**.
+
+Do not run "Update PCB from Schematic" as a shortcut to close the gap — it would
+drop the new parts at arbitrary positions and rip up the preserved zone fills
+this port depends on. The remaining work is §5 and §7 below.
+
+> **History.** This directory originally held a faithful port of Notecarrier-F
+> **v1.2** filed under v1.3. The porting work was sound; only the revision label
+> was wrong. The evidence for that finding is kept below because it is what
+> defines the delta, but the sections describing work "still to do" have been
+> updated to say what was actually done.
 
 ## Evidence
 
@@ -19,7 +29,7 @@ So every discrepancy against v1.3 is simply a v1.2 → v1.3 design change. An
 earlier version of this file attributed them to porting mistakes; that was
 wrong, and this correction supersedes it.
 
-## The v1.2 → v1.3 delta that still needs applying
+## The v1.2 → v1.3 delta (schematic parts APPLIED, board parts NOT)
 
 Agreed approach: delta-port these files in place so they describe v1.3, which is
 the revision this repository publishes.
@@ -113,7 +123,7 @@ pages 4 and 7 of `../100275_NOTECARRIER-F_Rev-11.PDF`:
 | `R11` pin 2 (`F_SDA` pull-up) | `F_BAT` | **`F_VIO`** |
 | `R12` pin 2 (`F_SCL` pull-up) | `F_BAT` | **`F_VIO`** |
 
-Everything else on `F_BAT` stays: `DS5` pin 3 (cathode) and `MOD1R` pin 1 (the
+Everything else on `F_BAT` stays: `DS5` pin 3 (cathode) and `MODR1` pin 1 (the
 Feather `BAT` pin). Unchanged and worth stating so they are not disturbed:
 `U1` pin 7 `VCCB`, `U1` pin 6 `OE` and `R16` pin 1 remain on `F_3V3`; `U4`
 pin 3 `VCCA` remains on `N_VIO`.
@@ -135,13 +145,19 @@ separate wire nodes that the power symbols unify by name:
 | (137.16, 92.71) | `R11.2` | retarget to `F_VIO` |
 | (144.78, 92.71) | `R12.2` | retarget to `F_VIO` |
 | (151.13, 116.84) | `C11.1`, `U1.3` | retarget to `F_VIO` |
-| (245.11, 102.87) | `C14.1`, `U4.7`, `MOD1R.1` (+ `DS5.2` through the hierarchy) | **mixed — needs wire surgery** |
+| (245.11, 102.87) | `C14.1`, `U4.7`, `MODR1.1` (+ `DS5` cathode through the hierarchy) | mixed — see the correction below |
 
-So three of the four are a one-line retarget each. Only the fourth is real work:
-`C14.1` and `U4.7` must be cut away from `MOD1R.1`/`DS5.2` and given their own
-`F_VIO` connection. The `F_BAT` hierarchical labels on the Feather sheet sit at
-(154.94, 160.02), (231.14, 105.41) and (30.48, 132.08), and on Power-Rails at
-(248.92, 49.53).
+So three of the four were a one-line retarget each.
+
+**The predicted wire surgery on the fourth turned out to be unnecessary**, and
+the reason is worth recording. `C14.1`/`U4.7` form their own wire node, joined to
+the rest of `F_BAT` only by *naming*: a plain `(label "F_BAT")` sitting on a
+wire's interior at (74.93, 119.38). A hierarchical-label search does not see a
+plain label, and a wire graph that only joins coincident endpoints does not see
+a label sitting mid-span — which is why the first two analyses both missed it and
+predicted cutting. Renaming that one label to `F_VIO` was the entire change. The
+`F_BAT` hierarchical labels on the Feather sheet sit at (154.94, 160.02),
+(231.14, 105.41) and (30.48, 132.08), and on Power-Rails at (248.92, 49.53).
 
 ### 4. Unfit, rename
 
@@ -196,8 +212,9 @@ both route upward together, consistent with `VIN` and `CE` being tied; pin 2
 routes to a `GND` via at (16.5, 18.3). This matches page 7 of the released
 schematic exactly.
 
-Still to build: **`power_F_VIO`** (see §3a) — a power symbol modelled on
-`blues-kicad-lib:power_F_BAT`.
+Also built: **`power_F_VIO`** (see §3a), a power symbol modelled on
+`blues-kicad-lib:power_F_BAT`, since `blues-kicad-lib` has `power_F_BAT`,
+`power_F_3V3` and `power_N_VIO` but no `power_F_VIO`.
 
 The three re-used footprints were verified against the shipped geometry rather
 than trusted: `TO277-3` pads 1/2 at (±0.985, 2.75) 1.45 × 1.15 plus the
@@ -226,7 +243,7 @@ verified by re-exporting the netlist and BOM after every step. Verified state:
 | `DS1`, `DS2`, `DS4`, `DS5` | 3-pin `FSV1045V`; both anode pins on the original anode net, pin 3 on the original cathode net, all four confirmed individually |
 | `DS3`, `DS6` | `STPS3H100U` / `SMB_Fv1.2`, pin-to-net mapping untouched |
 | `F_VIO` | `C11.1 C14.1 C34.1 R11.2 R12.2 U1.3 U4.7 U9.5` — exactly the intended set |
-| `F_BAT` | `DS5.2 MOD1R.1` only |
+| `F_BAT` | `DS5.3 MODR1.1` only — `DS5`'s cathode is pin **3** once it is an `FSV1045V`, and the Feather header keeps its KiCad-legal `MODR1` name (see §4) |
 | BOM refdes | 92 fitted symbols against 96 released designators; the only differences are `MODL1`/`MODR1` vs `MOD1L`/`MOD1R` (see §4), the non-electrical `DOC1`/`PCB1` rows, and `J9`/`J10` (below) |
 | ERC | no new violation *class* versus the v1.2 baseline; the count rises only by the same pre-existing "configuration does not include the symbol library 'Device'/'power'" artifact that every other symbol already produces in a CLI environment |
 | Annotation | clean — netlist export emits no warning |

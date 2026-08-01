@@ -4,10 +4,12 @@ This folder contains the design files for the Blues Wireless Notcarrier-F, in Ki
 
 Components in this design are sourced from the [blues-kicad-lib](https://github.com/blues/blues-kicad-lib) library. However, with the exception of 3D models, KiCad produces self-contained project files. Thus this project can still be used without access to the library.
 
-> **⚠️ Errata:** these files are a faithful port of **Notecarrier-F v1.2**
-> filed in the v1.3 directory, so they do not describe the shipped v1.3 board.
-> See [`ERRATA.md`](ERRATA.md) for the evidence and the v1.2 → v1.3 delta needed
-> to bring them up to the published revision.
+> **⚠️ Errata — v1.3 schematic, v1.2 PCB:** these files are part-way through a
+> v1.2 → v1.3 delta port. The schematic sheets describe v1.3 and have been
+> verified; `Notecarrier-F.kicad_pcb` still describes v1.2, so the two are
+> deliberately out of step and this is **not yet a usable v1.3 deliverable**.
+> See [`ERRATA.md`](ERRATA.md) for what has been applied, what remains, and why
+> "Update PCB from Schematic" must not be used to close the gap.
 
 ## Contents
 
