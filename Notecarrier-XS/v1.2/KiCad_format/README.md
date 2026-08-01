@@ -18,6 +18,10 @@ fabrication package — see
 > drill are otherwise exact against the published fab package, and the
 > netlist matches the source design 57/57. Details in
 > [`documentation/Porting-Notes.md`](documentation/Porting-Notes.md).
+>
+> Since publication the port has additionally been checked against the
+> **released build's** pick-and-place file: all 44 placed parts match the
+> shipped boards on side and rotation.
 
 ## Contents
 

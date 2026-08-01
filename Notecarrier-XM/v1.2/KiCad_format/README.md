@@ -19,6 +19,10 @@ fabrication package — see
 > board. Connectivity matches the source design 37/37 and the remaining
 > copper/mask/paste/drill match the published fab. Details in
 > [`documentation/Porting-Notes.md`](documentation/Porting-Notes.md).
+>
+> Since publication the port has additionally been checked against the
+> **released build's** pick-and-place file: all 13 placed parts match the
+> shipped boards on side and rotation.
 
 ## Contents
 

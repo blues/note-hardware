@@ -15,6 +15,9 @@ boards:
 
   mojo:
     product_dir: Mojo/v1.1
+    pnp:
+      path: "Mojo/v1.1/Assembly Normal/Pick Place/PNP-Mojo-v4-Normal.csv"
+      skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
     kicad:
       sch: Mojo/v1.1/KiCad_format/Mojo.kicad_sch
       pcb: Mojo/v1.1/KiCad_format/Mojo.kicad_pcb
@@ -155,6 +158,9 @@ boards:
 
   notecarrier-xi:
     product_dir: Notecarrier-XI/v1.4
+    pnp:
+      path: "Notecarrier-XI/v1.4/PCB + 3D + 2D/FAB/Pick Place/Pick Place for Notecarrier-XI_V4.txt"
+      skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
     kicad:
       sch: Notecarrier-XI/v1.4/KiCad_format/Notecarrier-XI.kicad_sch
       pcb: Notecarrier-XI/v1.4/KiCad_format/Notecarrier-XI.kicad_pcb
@@ -199,6 +205,12 @@ boards:
   # (see Notecarrier-XS/v1.2/KiCad_format/documentation/Porting-Notes.md).
   notecarrier-xs:
     product_dir: Notecarrier-XS/v1.2
+    pnp:
+      path: "Notecarrier-XS/v1.2/3000-789-002_PnP-file.pnp"
+      skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
+      # sub-pad residuals on two connectors: a placement-origin
+      # convention, not a design difference (see the report)
+      allowed_position_outliers: 2
     kicad:
       sch: Notecarrier-XS/v1.2/KiCad_format/Notecarrier-XS.kicad_sch
       pcb: Notecarrier-XS/v1.2/KiCad_format/Notecarrier-XS.kicad_pcb
@@ -232,6 +244,12 @@ boards:
 
   notecarrier-x:
     product_dir: Notecarrier-X/v1.2
+    pnp:
+      path: "Notecarrier-X/v1.2/3000-794-001_PnP-file.pnp"
+      skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
+      # sub-pad residuals on two connectors: a placement-origin
+      # convention, not a design difference (see the report)
+      allowed_position_outliers: 2
     kicad:
       sch: Notecarrier-X/v1.2/KiCad_format/Notecarrier-X.kicad_sch
       pcb: Notecarrier-X/v1.2/KiCad_format/Notecarrier-X.kicad_pcb
@@ -265,6 +283,9 @@ boards:
 
   notecarrier-xm:
     product_dir: Notecarrier-XM/v1.2
+    pnp:
+      path: "Notecarrier-XM/v1.2/3000-793-001_PnP-file.pnp"
+      skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
     kicad:
       sch: Notecarrier-XM/v1.2/KiCad_format/Notecarrier-XM.kicad_sch
       pcb: Notecarrier-XM/v1.2/KiCad_format/Notecarrier-XM.kicad_pcb

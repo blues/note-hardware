@@ -22,8 +22,9 @@ Designer or OrCAD/Allegro. For a number of products a complete
 also provided in a `KiCad_format/` folder alongside the original design files.
 Each KiCad port was converted from the original sources and validated against
 the shipped fabrication outputs (ERC/DRC, BOM comparison, netlist/connectivity
-comparison, and per-layer gerber raster diffs — see the `validation/` folder
-and `documentation/Porting-Notes.md` inside each port).
+comparison, per-layer gerber raster diffs, and — where the product ships a
+pick-and-place file — a placement comparison against the released build; see the
+`validation/` folder and `documentation/Porting-Notes.md` inside each port).
 
 |Product|KiCad version|Location|
 |---|---|---|
@@ -61,7 +62,13 @@ disclaimer**: they were made from the closest available design-house sources
 rather than the exact released v1.2 snapshots, with the differences reviewed
 and documented in each port's `documentation/Porting-Notes.md` (silk version
 text on all three; the production-DNP GPS jumper on the opposite side on
-X/XS; several rerouted signals on XM).
+X/XS; several rerouted signals on XM). All three have since been checked
+against the **released build's** pick-and-place file — every placed part is on
+the same board side at the same rotation as the boards that were actually
+built — which narrows the disclaimer to silkscreen, the unpopulated jumper's
+side, and routing geometry. Fully retiring it needs a netlist from the released
+snapshot, which does not exist anywhere in the Blues organisation's
+repositories.
 
 Some products do not have a KiCad port, deliberately:
 
@@ -74,7 +81,8 @@ Some products do not have a KiCad port, deliberately:
   exists. (The Notecarrier-Pi v2.0 port shows that an Allegro board *can* be
   delta-ported when a validated KiCad base and the full fab package exist;
   Swan has no prior KiCad port to delta from.)
-(The unfinished Notecarrier-A v2.3 port above is a separate case: it is
+
+(The unfinished Notecarrier-A v2.3 port listed above is a separate case: it is
 in progress rather than deliberately skipped.)
 
 ## More Information

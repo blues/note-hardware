@@ -1,0 +1,28 @@
+Placement comparison vs the shipped pick-and-place file
+  board:      mojo
+  pnp file:   PNP-Mojo-v4-Normal.csv
+  placements: 11 in the file, 11 matched in the port
+  fitted origin offset (135.801, 117.704) mm, y-flip=True
+
+Hard checks (unambiguous in the assembly file):
+  refdes in the file but missing from the port: 0
+  board-side mismatches: 0
+  rotation mismatches:   0
+
+Position residuals (informational): the pick-and-place file references each
+part's body centre, while KiCad measures from the footprint origin, so
+connectors and other asymmetric parts carry a fixed per-footprint offset -
+it even changes sign when the part is rotated 180 degrees. Copper geometry is
+proven exactly by the gerber diff instead. Residuals over 0.05 mm:
+  4 of 11
+    J1: residual (-0.575, +0.000) mm
+    J4: residual (+0.575, +0.000) mm
+    J5: residual (+0.000, +0.266) mm
+    J6: residual (+0.000, -0.266) mm
+  largest residuals (>5.0 mm) are exact pin-pitch multiples, i.e. the
+  origin sits on a pin rather than the body centre: 0
+
+This report is committed, so any future change to these residuals shows up
+as a diff for review - the same convention the gerber-diff gate uses.
+
+RESULT: PASS - 11 placements checked; side and rotation match the released build for 11/11

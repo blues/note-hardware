@@ -34,6 +34,21 @@ v1.2 fab (see [`../validation/`](../validation/)) shows, all reviewed:
    data match the published fab package, and the netlist was proven identical
    to the source board (37/37 net partitions).
 
+**What has since been confirmed against the released build.** The shipped
+pick-and-place file for this assembly is generated from the released design, so
+comparing against it tests the port independently of the source snapshot it was
+made from. All 13 placed parts are present in the port, on the same board side,
+at the same rotation as the boards that were actually built. (Position residuals are reported but not gated: the assembly file references
+each part's body centre while KiCad measures from the footprint origin, so
+asymmetric parts carry a fixed per-footprint offset — it even changes sign when
+a part is rotated 180°. Copper geometry is proven exactly by the gerber diff.)
+
+What is still missing to retire this disclaimer entirely is a **netlist from the
+released snapshot** — a Protel `.NET`, or better an IPC-D-356A/ODB++ export of the
+released PCB, which would also validate geometry and plugs into the netlist gate
+already used for the Notecarrier-CX and -XI ports. A sweep of all 293
+repositories in the Blues organisation found no such file for this board.
+
 If the exact released v1.2 Altium snapshot ever becomes available, this port
 should be regenerated from it and the disclaimer dropped.
 
@@ -88,6 +103,7 @@ Gates run by `_Tools/kicad_validation/run_all.py notecarrier-xm`
 | BOM vs `BOM-3000-793-001.xlsx` | PASS — exact on `BL PART NUMBER` per refdes |
 | Netlist vs source PcbDoc (pad-to-net partitions) | PASS — 37/37 |
 | Gerber raster diff vs published `2200-917__2024-06-12.zip` | PASS with the documented deviations above |
+| Placement vs shipped pick-and-place file | PASS — 13/13 on board side and rotation (`../validation/pnp-compare.txt`) |
 | kicanvas headless render (all sheets + board) | PASS |
 | RAG extract parse | PASS |
 

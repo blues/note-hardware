@@ -9,6 +9,9 @@ policy; a SKIP requires justification in the board's Porting-Notes.md):
   3. BOM          bom_compare.py vs shipped spreadsheet
   4. NETLIST      netlist_compare.py vs shipped ODB++ (when the board has one)
   5. GERBER-DIFF  gerber_diff.py vs shipped fab package (human reviews PNGs)
+  5b. PNP         pnp_compare.py vs the shipped pick-and-place file - the only
+                  gate that checks the port against the *released build* rather
+                  than against the design sources it was converted from
   6. KICANVAS     kicanvas_check/render_check.py on every sch sheet + pcb
   7. RAG          extract_for_rag/extract.py parses the new sheets
 
@@ -131,6 +134,15 @@ class Gates:
                      "--out", self.val_dir])
             return r.returncode == 0
 
+    def pnp(self):
+        if "pnp" not in self.cfg or not self.pcb:
+            raise SkipGate("no shipped pick-and-place file configured")
+        r = run([PY, HERE / "pnp_compare.py", "--kicad", self.pcb,
+                 "--board", self.name, "--config", HERE / "boards.yaml",
+                 "--repo", self.repo,
+                 "--report", self.val_dir / "pnp-compare.txt"])
+        return r.returncode == 0
+
     def kicanvas(self):
         sheets = sorted(self.sch.parent.glob("*.kicad_sch"))
         files = sheets + ([self.pcb] if self.pcb else [])
@@ -174,7 +186,7 @@ def main():
 
     for gid, fn in [("ERC", g.erc), ("DRC", g.drc), ("BOM", g.bom),
                     ("NETLIST", g.netlist), ("GERBER-DIFF", g.gerber),
-                    ("KICANVAS", g.kicanvas), ("RAG", g.rag)]:
+                    ("PNP", g.pnp), ("KICANVAS", g.kicanvas), ("RAG", g.rag)]:
         if gid in args.skip:
             print(f"\n== {gid} ==\n  SKIPPED (--skip)")
             g.results[gid] = "SKIP"

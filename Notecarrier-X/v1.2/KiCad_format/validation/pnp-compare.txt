@@ -1,0 +1,27 @@
+Placement comparison vs the shipped pick-and-place file
+  board:      notecarrier-x
+  pnp file:   3000-794-001_PnP-file.pnp
+  placements: 41 in the file, 41 matched in the port
+  fitted origin offset (115.444, 124.054) mm, y-flip=True
+
+Hard checks (unambiguous in the assembly file):
+  refdes in the file but missing from the port: 0
+  board-side mismatches: 0
+  rotation mismatches:   0
+
+Position residuals (informational): the pick-and-place file references each
+part's body centre, while KiCad measures from the footprint origin, so
+connectors and other asymmetric parts carry a fixed per-footprint offset -
+it even changes sign when the part is rotated 180 degrees. Copper geometry is
+proven exactly by the gerber diff instead. Residuals over 0.05 mm:
+  3 of 41
+    J1: residual (-0.229, -0.000) mm
+    J4: residual (-0.625, +0.012) mm
+    P4: residual (+0.162, +0.000) mm
+  largest residuals (>5.0 mm) are exact pin-pitch multiples, i.e. the
+  origin sits on a pin rather than the body centre: 0
+
+This report is committed, so any future change to these residuals shows up
+as a diff for review - the same convention the gerber-diff gate uses.
+
+RESULT: PASS - 41 placements checked; side and rotation match the released build for 41/41

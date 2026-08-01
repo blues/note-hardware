@@ -42,6 +42,25 @@ title-block text variables were set to the published v1.2 numbers
 (`3000-794-001` / `2200-918`) so the drawings match the published product
 documentation.
 
+**What has since been confirmed against the released build.** The shipped
+pick-and-place file for this assembly is generated from the released design, so
+comparing against it tests the port independently of the source snapshot it was
+made from. All 41 placed parts are present in the port, on the same board side,
+at the same rotation as the boards that were actually built. (Position residuals are reported but not gated: the assembly file references
+each part's body centre while KiCad measures from the footprint origin, so
+asymmetric parts carry a fixed per-footprint offset — it even changes sign when
+a part is rotated 180°. Copper geometry is proven exactly by the gerber diff.)
+
+This does **not** resolve item 2 above: R4 is unpopulated in production, so it
+does not appear in the pick-and-place file at all, and which side it sits on
+remains established from the gerber comparison alone.
+
+What is still missing to retire this disclaimer entirely is a **netlist from the
+released snapshot** — a Protel `.NET`, or better an IPC-D-356A/ODB++ export of the
+released PCB, which would also validate geometry and plugs into the netlist gate
+already used for the Notecarrier-CX and -XI ports. A sweep of all 293
+repositories in the Blues organisation found no such file for this board.
+
 If the exact released v1.2 Altium snapshot ever becomes available, this port
 should be regenerated from it and the disclaimer dropped.
 
@@ -90,6 +109,7 @@ Gates run by `_Tools/kicad_validation/run_all.py notecarrier-xs`
 | BOM vs `BOM-3000-794-001.xlsx` | PASS — exact on `BL PART NUMBER` per refdes |
 | Netlist vs source PcbDoc (pad-to-net partitions) | PASS — 56/56 |
 | Gerber raster diff vs published `2200-918__2024-06-06.zip` | PASS with the two documented deviation clusters above |
+| Placement vs shipped pick-and-place file | PASS — 41/41 on board side and rotation (`../validation/pnp-compare.txt`) |
 | kicanvas headless render (all sheets + board) | PASS |
 | RAG extract parse | PASS |
 
