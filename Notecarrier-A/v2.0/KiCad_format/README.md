@@ -18,7 +18,6 @@ Components in this design are sourced from the [blues-kicad-lib](https://github.
 	- `Notecarrier-A.kicad_sch`
 	- `Notecarrier-A.kicad_wks`
 	- `sym-lib-table`
-	- `fp-info-cache`
 	- `fp-lib-table`
 - Documentation
 	- `documentation/*`

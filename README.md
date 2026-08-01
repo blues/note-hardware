@@ -24,7 +24,8 @@ Each KiCad port was converted from the original sources and validated against
 the shipped fabrication outputs (ERC/DRC, BOM comparison, netlist/connectivity
 comparison, per-layer gerber raster diffs, and — where the product ships a
 pick-and-place file — a placement comparison against the released build; see the
-`validation/` folder and `documentation/Porting-Notes.md` inside each port).
+`validation/` folder and `documentation/Porting-Notes.md` — named
+`PortingNotes.md` in the four pre-2026 ports — inside each port).
 
 |Product|KiCad version|Location|
 |---|---|---|

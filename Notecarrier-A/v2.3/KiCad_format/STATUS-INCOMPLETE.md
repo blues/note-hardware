@@ -1,8 +1,16 @@
-# ⚠️ INCOMPLETE PORT — DO NOT PUBLISH OR COMMIT AS-IS
+# ⚠️ INCOMPLETE PORT — NOT USABLE
 
 Work in progress on the Notecarrier-A v2.3 KiCad port. The board is **not yet
-fab-accurate** and has not passed the validation battery. Deliberately left
-untracked in git.
+fab-accurate** and has not passed the validation battery. It is committed only
+so the work is resumable — clearly marked as incomplete here, in the adjacent
+`README.md`, and in the root README. Do not manufacture from it, and do not
+treat it as a KiCad equivalent of the v2.3 board.
+
+The `_wip-tooling/` scripts alongside this file are the conversion tooling,
+kept with the port so the approach is reproducible. They were written to run
+inside the porting Docker container (`kicad/kicad:9.0.9` with this repository
+mounted at `/blues` and a scratch area at `/scratch`), so their hardcoded paths
+must be adapted before running them anywhere else.
 
 ## Provenance (proven)
 
@@ -96,8 +104,11 @@ What would unlock it, in rough order of preference:
   and 3 `tracks_crossing` items to triage after the pours are fixed.
 * A `notecarrier-a-v2.3` entry in `_Tools/kicad_validation/boards.yaml` (the
   Allegro film window/`original_has_outline` support added for Notecarrier-Pi
-  v2.0 is reusable), then the full battery, `README.md` and
-  `documentation/Porting-Notes.md`, and the root README row.
+  v2.0 is reusable), then the full battery, and
+  `documentation/Porting-Notes.md`. (The `README.md` warning banner and the
+  root README's work-in-progress row already exist.)
 
-Until the pour problem is solved and the battery passes, this port must not be
-committed: the repository's rule is accuracy over coverage.
+Until the pour problem is solved and the battery passes, this port must stay
+labelled unusable, and it stays excluded from the RAG index
+(`_Tools/extract_for_rag/extract.py` `EXCLUDE_PATH`): the repository's rule is
+accuracy over coverage.

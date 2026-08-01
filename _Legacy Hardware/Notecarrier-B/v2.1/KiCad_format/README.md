@@ -15,14 +15,13 @@ Components in this design are sourced from the [blues-kicad-lib](https://github.
 	- `Notecarrier-B.kicad_sch`
 	- `Notecarrier-B.kicad_wks`
 	- `sym-lib-table`
-	- `fp-info-cache`
 	- `fp-lib-table`
 - Documentation
 	- `documentation/*`
 - Manufacturing artefacts
 	- `manufacturing/*`
 - Design references
-	- `reference/*`
+	- `Reference/*`
 - Validation artefacts
 	- `validation/*`
 

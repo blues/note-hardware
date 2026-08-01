@@ -80,6 +80,7 @@ measures 0.103 mm), edge clearance 0 (castellated design),
 | Netlist vs shipped ODB++ (`FAB/ODB`) | **89/89 partitions** (ODB `$NONE$` = unconnected-pin bucket, ignored) |
 | BOM vs `BOM-notecarrier-cx(Production).xlsx` | exact — 95 populated refdes; grouped alternate part numbers (e.g. 100n: 2000-908/2004-296) accepted per line |
 | Gerber raster diff vs `FAB/Gerber` | copper exact on F/B (castellation joins and plane tongues reconstructed from the shipped gerbers); accepted classes documented below |
+| KiCanvas / RAG extract | render + parse clean |
 
 Accepted gerber-diff classes (reviewed per layer, all cosmetic):
 - **Signal-via inner annuli** (In1/In2): KiCad plots them, Altium suppresses
@@ -90,4 +91,3 @@ Accepted gerber-diff classes (reviewed per layer, all cosmetic):
   outline at the castellation notches (removed by routing); KiCad copper is
   clamped at the outline.
 - **Silkscreen**: TrueType metric offsets (fonts substituted at import).
-| KiCanvas / RAG extract | render + parse clean |

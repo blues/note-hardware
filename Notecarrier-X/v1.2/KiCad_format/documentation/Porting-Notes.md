@@ -99,7 +99,7 @@ should be regenerated from it and the disclaimer dropped.
 
 ## Validation summary
 
-Gates run by `_Tools/kicad_validation/run_all.py notecarrier-xs`
+Gates run by `_Tools/kicad_validation/run_all.py notecarrier-x`
 (artifacts in [`../validation/`](../validation/)):
 
 | Gate | Result |

@@ -15,25 +15,30 @@ Components in this design are sourced from the [blues-kicad-lib](https://github.
 
 - This file
  	- `README.md`
+- Errata for the in-progress v1.2 → v1.3 delta port
+	- `ERRATA.md`
 - KiCad source files
 	- `Notecarrier-F.kicad_pcb`
 	- `Notecarrier-F.kicad_prl`
 	- `Notecarrier-F.kicad_pro`
+	- `Notecarrier-F.kicad_dru`
 	- `Notecarrier-F.kicad_sch`
 	- `Notecarrier-F_Feather.kicad_sch`
 	- `Notecarrier-F_IO.kicad_sch`
 	- `Notecarrier-F_Notecard.kicad_sch`
-	- `Notecarrier-F_Power.kicad_sch`
+	- `Notecarrier-F_Power-Input.kicad_sch`
+	- `Notecarrier-F_Power-Rails.kicad_sch`
 	- `Notecarrier-F.kicad_wks`
+- Project-local libraries (parts added by the v1.3 delta)
+	- `Notecarrier-F-local.kicad_sym`
+	- `Notecarrier-F-local.pretty/`
+- Library tables
 	- `sym-lib-table`
-	- `fp-info-cache`
 	- `fp-lib-table`
 - Documentation
 	- `documentation/*`
 - Manufacturing artefacts
 	- `manufacturing/*`
-- Design references
-	- `reference/*`
 - Validation artefacts
 	- `validation/*`
 
