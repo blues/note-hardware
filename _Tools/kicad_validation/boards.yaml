@@ -69,8 +69,7 @@ boards:
       skip_refdes: '^(TP|FID|MH|LOGO|CST)\d*$'
     gerbers:
       # local extraction of the in-repo shipped fab package:
-      #   unzip 'Cygnet/v1.2/Cygnet Gerbers.zip' -d <original_dir>
-      original_dir: /private/tmp/claude-501/-Users-roblauer-Documents-GitHub-blues-note-hardware/26345e84-f61c-4c64-85bd-58e534b0269f/scratchpad/cygnet-gerbers
+      original_zip: "Cygnet/v1.2/Cygnet Gerbers.zip"
       original_tool: Altium
       outline:
         kicad: "*Edge_Cuts.gm1"
@@ -104,12 +103,22 @@ boards:
       skip_refdes: '^(TP|FID|FD|MH|LOGO)\d*$'
     gerbers:
       # local extraction of the in-repo shipped fab package:
-      #   unzip 'Scoop/v1.0/992-00084-A_Gerbers.zip' -d <original_dir>
-      original_dir: /private/tmp/claude-501/-Users-roblauer-Documents-GitHub-blues-note-hardware/26345e84-f61c-4c64-85bd-58e534b0269f/scratchpad/scoop-gerbers
+      original_zip: "Scoop/v1.0/992-00084-A_Gerbers.zip"
       original_tool: Altium
       outline:
         kicad: "*Edge_Cuts.gm1"
         original: "*.GM1"
+      # The shipped .GM1 draws the board outline AND a caption ("Board Outline /
+      # scoop v4.GM1") parked at x=8.0in, y=-1.1in. Auto-sizing the window from
+      # that file's bounding box framed an 8.04 x 1.90in canvas against KiCad's
+      # 2.35 x 0.80in board, so the two sides rendered at different scales and
+      # the "diff" was just two separate pictures of the board. The board
+      # outline itself is 0..2.350 x 0..0.800in in both files, so both windows
+      # are pinned to it explicitly.
+      # (KiCad's own Edge_Cuts bbox is correct and auto-detected; only the
+      # shipped side needs pinning, and the two frames have different origins.)
+      window:
+        original: [0.0, 0.0, 2.350, 0.800]
       layers:
         F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
         B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
@@ -225,8 +234,7 @@ boards:
       skip_refdes: '^(TP|FID|FD|MH|LOGO|DOC|PCB|ASS)\d*$'
     gerbers:
       # local extraction of the in-repo shipped fab package:
-      #   unzip 'Notecarrier-XS/v1.2/2200-914__2024-06-06.zip' -d <original_dir>
-      original_dir: /private/tmp/claude-501/-Users-roblauer-Documents-GitHub-blues-note-hardware/26345e84-f61c-4c64-85bd-58e534b0269f/scratchpad/xs-gerbers
+      original_zip: "Notecarrier-XS/v1.2/2200-914__2024-06-06.zip"
       original_tool: Altium
       outline:
         kicad: "*Edge_Cuts.gm1"
@@ -263,8 +271,7 @@ boards:
       skip_refdes: '^(TP|FID|FD|MH|LOGO|DOC|PCB|ASS)\d*$'
     gerbers:
       # local extraction of the in-repo shipped fab package:
-      #   unzip 'Notecarrier-X/v1.2/2200-918__2024-06-06.zip' -d <original_dir>
-      original_dir: /private/tmp/claude-501/-Users-roblauer-Documents-GitHub-blues-note-hardware/26345e84-f61c-4c64-85bd-58e534b0269f/scratchpad/x-gerbers
+      original_zip: "Notecarrier-X/v1.2/2200-918__2024-06-06.zip"
       original_tool: Altium
       outline:
         kicad: "*Edge_Cuts.gm1"
@@ -299,8 +306,7 @@ boards:
       skip_refdes: '^(TP|FID|FD|MH|LOGO|DOC|PCB|ASS)\d*$'
     gerbers:
       # local extraction of the in-repo shipped fab package:
-      #   unzip 'Notecarrier-XM/v1.2/2200-917__2024-06-12.zip' -d <original_dir>
-      original_dir: /private/tmp/claude-501/-Users-roblauer-Documents-GitHub-blues-note-hardware/26345e84-f61c-4c64-85bd-58e534b0269f/scratchpad/xm-gerbers
+      original_zip: "Notecarrier-XM/v1.2/2200-917__2024-06-12.zip"
       original_tool: Altium
       outline:
         kicad: "*Edge_Cuts.gm1"
@@ -327,7 +333,6 @@ boards:
   # from the validated v1.1 KiCad port (see the port's Porting-Notes.md).
   # The shipped artwork films are Allegro .art with an A3 drawing frame, so
   # the diff uses explicit render windows and the films' own outline strokes.
-  # original_dir must hold the unzipped contents of
   # "Notecarrier-Pi/v2.0/Notecarrier-Pi Gerbers v2.zip".
   notecarrier-pi:
     product_dir: Notecarrier-Pi/v2.0
@@ -339,7 +344,7 @@ boards:
     # its result is committed as validation/bom-compare.txt. Run with
     # --skip BOM.
     gerbers:
-      original_dir: /tmp/pi20-gerbers
+      original_zip: "Notecarrier-Pi/v2.0/Notecarrier-Pi Gerbers v2.zip"
       original_tool: Allegro
       original_has_outline: true
       window:

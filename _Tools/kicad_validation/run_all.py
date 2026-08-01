@@ -125,13 +125,14 @@ class Gates:
             if r.returncode != 0:
                 return False
             cfg_g = dict(self.cfg["gerbers"])
-            cfg_g["original_dir"] = str(self.repo / cfg_g["original_dir"])
             tmp_cfg = Path(td) / "boards-abs.yaml"
             tmp_cfg.write_text(yaml.safe_dump(
                 {"boards": {self.name: {"gerbers": cfg_g}}}))
+            # gerber_diff resolves original_zip / a relative original_dir
+            # against --repo, so nothing here depends on a local scratch dir.
             r = run([PY, HERE / "gerber_diff.py", "--board", self.name,
                      "--config", tmp_cfg, "--kicad-dir", td,
-                     "--out", self.val_dir])
+                     "--repo", self.repo, "--out", self.val_dir])
             return r.returncode == 0
 
     def pnp(self):

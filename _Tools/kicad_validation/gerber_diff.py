@@ -126,16 +126,66 @@ def size(png):
     return r.stdout.strip()
 
 
+def ink_fraction(png):
+    """Fraction of the canvas covered by drawn copper. A render that comes back
+    blank means the layer, the window or the file glob is wrong - which used to
+    pass silently because nobody looked inside the image."""
+    r = subprocess.run([MAGICK, str(png), "-colorspace", "Gray",
+                        "-format", "%[fx:1-mean]", "info:"],
+                       capture_output=True, text=True)
+    try:
+        return float(r.stdout.strip())
+    except ValueError:
+        return 0.0
+
+
+def mean_difference(a, b):
+    """Mean per-pixel difference between two renders, 0.0 = identical."""
+    r = subprocess.run([MAGICK, str(a), str(b), "-compose", "difference",
+                        "-composite", "-colorspace", "Gray",
+                        "-format", "%[fx:mean]", "info:"],
+                       capture_output=True, text=True)
+    try:
+        return float(r.stdout.strip())
+    except ValueError:
+        return 1.0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--board", required=True)
     ap.add_argument("--config", required=True, type=Path)
     ap.add_argument("--kicad-dir", required=True, type=Path, help="dir with KiCad-exported gerbers")
     ap.add_argument("--out", required=True, type=Path)
+    ap.add_argument("--repo", type=Path, default=Path("."),
+                    help="repo root, for resolving original_zip / original_dir")
     args = ap.parse_args()
 
     cfg = yaml.safe_load(args.config.read_text())["boards"][args.board]["gerbers"]
-    orig_dir = Path(cfg["original_dir"])
+    # Prefer the committed archive: a bare original_dir pointing at somebody's
+    # scratch directory cannot be reproduced in CI or another checkout.
+    if cfg.get("original_zip"):
+        import zipfile
+        zpath = args.repo / cfg["original_zip"]
+        orig_dir = args.out / "_shipped"
+        orig_dir.mkdir(parents=True, exist_ok=True)
+        with zipfile.ZipFile(zpath) as z:
+            z.extractall(orig_dir)
+        # Packages vary: some put the gerbers at the root, others under a
+        # Gerber/ subdirectory alongside a fabrication PDF. Locate the directory
+        # that actually holds the outline layer rather than guessing.
+        want = cfg["outline"]["original"]
+        if not glob.glob(str(orig_dir / want)):
+            hit = next((d for d in sorted(orig_dir.rglob("*"))
+                        if d.is_dir() and glob.glob(str(d / want))), None)
+            if hit is None:
+                raise SystemExit(
+                    f"{cfg['original_zip']} contains no {want!r} at any level")
+            orig_dir = hit
+    else:
+        orig_dir = Path(cfg["original_dir"])
+        if not orig_dir.is_absolute():
+            orig_dir = args.repo / orig_dir
     tool = cfg.get("original_tool", "Original")
     args.out.mkdir(parents=True, exist_ok=True)
 
@@ -148,8 +198,38 @@ def main():
     win = cfg.get("window", {})
     k_bbox = tuple(win["kicad"]) if "kicad" in win else gerber_bbox_inches(k_outline)
     o_bbox = tuple(win["original"]) if "original" in win else gerber_bbox_inches(o_outline)
+    # Silkscreen legitimately differs everywhere: Altium and KiCad stroke text
+    # with different font metrics, so glyphs land a fraction of a millimetre
+    # apart even when the port is exact. Copper, mask and paste have no such
+    # excuse and are held to a tight threshold. Either can be overridden per
+    # board, as a single number or a per-layer mapping.
+    thr_cfg = cfg.get("max_mean_difference", {})
+    if not isinstance(thr_cfg, dict):
+        thr_cfg = {"default": float(thr_cfg)}
+
+    def threshold(layer):
+        if layer in thr_cfg:
+            return float(thr_cfg[layer])
+        if "Silkscreen" in layer or "Overlay" in layer:
+            return float(thr_cfg.get("silkscreen", 0.06))
+        return float(thr_cfg.get("default", 0.02))
 
     problems = []
+    # The two renders only mean anything if they frame the same board. A shipped
+    # outline layer that also carries a drawing frame or dimension artwork spans
+    # far more than the board, which silently renders the two sides at different
+    # scales - they then look like separate copies of the board rather than an
+    # overlay, and every per-pixel comparison downstream is meaningless.
+    kw, kh = k_bbox[2] - k_bbox[0], k_bbox[3] - k_bbox[1]
+    ow, oh = o_bbox[2] - o_bbox[0], o_bbox[3] - o_bbox[1]
+    if max(abs(kw - ow), abs(kh - oh)) > 0.05:
+        problems.append(
+            f"outline extents differ: KiCad {kw:.3f}x{kh:.3f} in vs "
+            f"{cfg.get('original_tool', 'original')} {ow:.3f}x{oh:.3f} in. The "
+            f"shipped outline probably includes a drawing frame or dimension "
+            f"artwork; set an explicit `window:` for this board, or point "
+            f"`outline.original` at a layer that carries only the board edge.")
+
     for layer, m in cfg["layers"].items():
         k_png = args.out / f"{layer}-KiCad.png"
         o_png = args.out / f"{layer}-{tool}.png"
@@ -202,7 +282,23 @@ def main():
              "(", str(o_png), "-grayscale", "Rec709Luminance", ")",
              "(", "-clone", "0-1", "-compose", "darken", "-composite", ")",
              "-channel", "RGB", "-combine", str(d_png)], check=True)
-        print(f"  {layer}: rendered -> {d_png.name}")
+
+        k_ink, o_ink = ink_fraction(k_png), ink_fraction(o_png)
+        for who, frac, png in (("KiCad", k_ink, k_png), (tool, o_ink, o_png)):
+            if frac < 1e-5:
+                problems.append(f"{layer}: the {who} render {png.name} is blank "
+                                f"- nothing was drawn, so the comparison is empty")
+        diff = mean_difference(k_png, o_png)
+        max_diff = threshold(layer)
+        flag = ""
+        if diff > max_diff:
+            problems.append(f"{layer}: mean per-pixel difference {diff:.4f} "
+                            f"exceeds the {max_diff} threshold - the two renders "
+                            f"do not describe the same artwork")
+            flag = "   <-- OVER THRESHOLD"
+        print(f"  {layer}: rendered -> {d_png.name}  "
+              f"(ink KiCad {k_ink:.4f} / {tool} {o_ink:.4f}, "
+              f"mean diff {diff:.4f}){flag}")
 
     if problems:
         print("\nNotes (review these first):")
@@ -210,7 +306,9 @@ def main():
             print(f"  - {p}")
     print(f"\nDone. Review the *-diff.png files in {args.out} — KiCad-only content "
           f"appears in one color channel, {tool}-only in another.")
-    sys.exit(0)
+    print(f"\nRESULT: {'FAIL' if problems else 'PASS'} - "
+          f"{len(cfg['layers'])} layers rendered, {len(problems)} structural problem(s)")
+    sys.exit(1 if problems else 0)
 
 
 if __name__ == "__main__":

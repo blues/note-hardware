@@ -55,5 +55,35 @@ severity baseline from the Notecarrier-A port.
 | ERC / DRC (error severity, incl. schematic parity) | **0 / 0** |
 | Netlist vs Altium PcbDoc (fresh headless import) | **7/7 nets exact** (D1 compile-masked part excluded) |
 | BOM vs `992-00084-A_BOM.xlsx` | exact — 12 populated refdes, MPN-compared (BOM "Name" column holds descriptions, not values) |
-| Gerber raster diff vs `scoop v4.*` | PASS (copper/mask/paste; silk shows the usual TrueType metric offsets) |
+| Gerber raster diff vs `scoop v4.*` | PASS (copper/mask/paste; silk shows the usual TrueType metric offsets) — **but see the correction below: the original run of this gate was not a valid comparison** |
+
+### Correction: the first gerber diff on this board proved nothing
+
+The `PASS` above was originally recorded against a comparison that could not
+have detected a difference. The shipped `scoop v4.GM1` draws the board outline
+*and* a caption ("Board Outline / scoop v4.GM1") parked at x ≈ 8.0 in,
+y ≈ −1.1 in. The harness sized its render window from that file's bounding box,
+so the shipped side was framed at 8.036 × 1.897 in while the KiCad side was
+framed at its true 2.350 × 0.800 in. The two images were therefore drawn at
+different scales, and the committed `F_Cu-diff.png` showed two separate
+red and green pictures of the board rather than an overlay — which the gate
+happily reported as a pass, because it only ever checked that gerbv had
+produced a file.
+
+Fixed by pinning the shipped render window to the board outline
+(`window.original: [0.0, 0.0, 2.350, 0.800]` in `boards.yaml`; the KiCad side's
+own bounding box was always correct and is still auto-detected). The board
+outline measures 2.350 × 0.800 in in *both* files, which is what makes the
+comparison legitimate.
+
+With a real overlay, the copper does match: mean per-pixel difference is
+0.0106–0.0112 on `F_Cu`/`B_Cu`, and the residual is the board-edge stroke, which
+the two tools draw at slightly different widths. All validation images in
+`../validation/` have been regenerated from the corrected comparison.
+
+The gate itself was rebuilt at the same time so this class of failure cannot
+recur silently: it now compares the two outline extents before rendering,
+measures the ink in each render and fails on a blank one, computes a mean
+per-pixel difference against a threshold, and — unlike before — exits non-zero
+when any of those checks fail.
 | KiCanvas / RAG extract | render + parse clean |
