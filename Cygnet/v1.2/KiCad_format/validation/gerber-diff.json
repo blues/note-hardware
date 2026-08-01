@@ -1,0 +1,23 @@
+{
+ "board": "cygnet",
+ "measured": {
+  "B_Cu": 0.001,
+  "B_Mask": 0.04,
+  "B_Paste": 0.0,
+  "B_Silkscreen": 0.541,
+  "F_Cu": 0.002,
+  "F_Mask": 0.023,
+  "F_Paste": 0.001,
+  "F_Silkscreen": 0.788,
+  "In1_Cu": 0.105,
+  "In2_Cu": 0.001
+ },
+ "problems": [
+  {
+   "kind": "threshold",
+   "layer": "In1_Cu",
+   "message": "In1_Cu: 0.105 of the drawn area differs (raw 0.0034 over union ink 0.0321), above the 0.02 threshold - the two renders do not describe the same artwork"
+  }
+ ],
+ "result": "FAIL"
+}
