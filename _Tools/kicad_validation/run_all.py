@@ -2,7 +2,10 @@
 """Run the full validation battery for one ported board.
 
 Gates (hard — any FAIL means the port must be fixed or dropped, per the NO-GO
-policy; a SKIP requires justification in the board's Porting-Notes.md):
+policy). A gate that cannot run is NOT a pass: it fails unless the board records
+why under `skip_gates.<GATE>` in boards.yaml, which keeps the justification
+machine-readable and reviewable instead of relying on someone remembering a
+--skip flag. --skip is likewise refused for any gate with no declared reason.
 
   1. ERC          kicad-cli sch erc --exit-code-violations
   2. DRC          kicad-cli pcb drc --exit-code-violations
@@ -59,8 +62,19 @@ class Gates:
         try:
             ok = fn()
         except SkipGate as e:
-            print(f"  SKIPPED: {e}")
-            self.results[gid] = "SKIP"
+            # A gate that cannot run is not a gate that passed. Skipping is
+            # allowed only where the board declares why, in boards.yaml, so the
+            # justification is reviewable and travels with the config instead of
+            # living in a command line somebody has to remember.
+            why = (self.cfg.get("skip_gates") or {}).get(gid)
+            if why:
+                print(f"  SKIPPED: {e}\n  justified: {why}")
+                self.results[gid] = "SKIP"
+            else:
+                print(f"  FAIL: {e}\n  This gate is required. Either configure "
+                      f"it, or record a justification under skip_gates.{gid} "
+                      f"in boards.yaml.")
+                self.results[gid] = "FAIL"
             return
         self.results[gid] = "PASS" if ok else "FAIL"
         print(f"  {self.results[gid]}")
@@ -190,7 +204,14 @@ def main():
                     ("NETLIST", g.netlist), ("GERBER-DIFF", g.gerber),
                     ("PNP", g.pnp), ("KICANVAS", g.kicanvas), ("RAG", g.rag)]:
         if gid in args.skip:
-            print(f"\n== {gid} ==\n  SKIPPED (--skip)")
+            why = (cfg.get("skip_gates") or {}).get(gid)
+            if not why:
+                print(f"\n== {gid} ==\n  FAIL: --skip {gid} was requested but "
+                      f"boards.yaml records no justification under "
+                      f"skip_gates.{gid}.")
+                g.results[gid] = "FAIL"
+                continue
+            print(f"\n== {gid} ==\n  SKIPPED (--skip)\n  justified: {why}")
             g.results[gid] = "SKIP"
             continue
         g.gate(gid, fn)

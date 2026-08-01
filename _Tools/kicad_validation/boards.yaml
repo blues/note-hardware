@@ -15,6 +15,10 @@ boards:
 
   mojo:
     product_dir: Mojo/v1.1
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
     pnp:
       path: "Mojo/v1.1/Assembly Normal/Pick Place/PNP-Mojo-v4-Normal.csv"
       skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
@@ -51,6 +55,11 @@ boards:
 
   cygnet:
     product_dir: Cygnet/v1.2
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
+      PNP: "no pick-and-place file is published for this board, so there is no released-build placement data to compare against"
     kicad:
       sch: Cygnet/v1.2/KiCad_format/Cygnet.kicad_sch
       pcb: Cygnet/v1.2/KiCad_format/Cygnet.kicad_pcb
@@ -88,6 +97,11 @@ boards:
 
   scoop:
     product_dir: Scoop/v1.0
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
+      PNP: "no pick-and-place file is published for this board, so there is no released-build placement data to compare against"
     kicad:
       sch: Scoop/v1.0/KiCad_format/Scoop.kicad_sch
       pcb: Scoop/v1.0/KiCad_format/Scoop.kicad_pcb
@@ -131,6 +145,10 @@ boards:
 
   notecarrier-cx:
     product_dir: Notecarrier-CX/v1.7
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      PNP: "no pick-and-place file is published for this board, so there is no released-build placement data to compare against"
     kicad:
       sch: Notecarrier-CX/v1.7/KiCad_format/Notecarrier-CX.kicad_sch
       pcb: Notecarrier-CX/v1.7/KiCad_format/Notecarrier-CX.kicad_pcb
@@ -214,6 +232,10 @@ boards:
   # (see Notecarrier-XS/v1.2/KiCad_format/documentation/Porting-Notes.md).
   notecarrier-xs:
     product_dir: Notecarrier-XS/v1.2
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
     pnp:
       path: "Notecarrier-XS/v1.2/3000-789-002_PnP-file.pnp"
       skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
@@ -251,6 +273,10 @@ boards:
 
   notecarrier-x:
     product_dir: Notecarrier-X/v1.2
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
     pnp:
       path: "Notecarrier-X/v1.2/3000-794-001_PnP-file.pnp"
       skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
@@ -288,6 +314,10 @@ boards:
 
   notecarrier-xm:
     product_dir: Notecarrier-XM/v1.2
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
     pnp:
       path: "Notecarrier-XM/v1.2/3000-793-001_PnP-file.pnp"
       skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
@@ -336,6 +366,12 @@ boards:
   # "Notecarrier-Pi/v2.0/Notecarrier-Pi Gerbers v2.zip".
   notecarrier-pi:
     product_dir: Notecarrier-Pi/v2.0
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
+      PNP: "no pick-and-place file is published for this board, so there is no released-build placement data to compare against"
+      BOM: "the shipped v2.0 BOM spreadsheet lives in the internal fae repo and is not part of note-hardware; the comparison was run during porting and its output is committed as validation/bom-compare.txt"
     kicad:
       sch: Notecarrier-Pi/v2.0/KiCad_format/Notecarrier-Pi.kicad_sch
       pcb: Notecarrier-Pi/v2.0/KiCad_format/Notecarrier-Pi.kicad_pcb

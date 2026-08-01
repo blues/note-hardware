@@ -14,6 +14,12 @@ passes or the failure is explicitly justified in the board's
 `documentation/Porting-Notes.md`. A board that cannot be proven against its
 original fab outputs is dropped, not shipped.
 
+**A gate that does not run has not passed.** `run_all.py` fails any gate that is
+missing configuration or is requested via `--skip`, unless the board records the
+reason under `skip_gates.<GATE>` in `boards.yaml`. That keeps every omission
+machine-readable and reviewable in the diff, rather than depending on someone
+remembering the right command line.
+
 | Gate | Tool | Proves |
 |---|---|---|
 | ERC | `kicad-cli sch erc --exit-code-violations` | schematic is electrically well-formed |
@@ -59,5 +65,9 @@ Individual tools can be run standalone; each has a `--help`.
 - KiCad file format target for new ports: **KiCad 9** (sch `20250114`, pcb
   `20241229`). Gate G0 (2026-07-28) verified KiCanvas renders KiCad 9 formats
   cleanly, including a 9-format resave of the existing Notecarrier-A port.
-  The four pre-existing ports remain KiCad 7 on purpose — they open fine in
-  KiCad 9 and KiCanvas, and resaving would orphan their validation artifacts.
+  The four pre-existing ports (Notecarrier-A v2.0, -B v2.1, -F v1.3, -Pi v1.1)
+  were **upgraded to KiCad 9** on this branch, after an audit verified the
+  upgrade is lossless: every fabrication layer is geometrically identical at
+  600 dpi before and after, drill files are textually identical, and the
+  netlists are unchanged. Their zone fills are *not* refilled — these ports
+  depend on the preserved fills, and refilling changes copper.
