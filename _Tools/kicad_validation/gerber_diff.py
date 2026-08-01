@@ -204,6 +204,8 @@ def main():
     ap.add_argument("--config", required=True, type=Path)
     ap.add_argument("--kicad-dir", required=True, type=Path, help="dir with KiCad-exported gerbers")
     ap.add_argument("--out", required=True, type=Path)
+    ap.add_argument("--json", type=Path,
+                    help="write a machine-readable result summary here")
     ap.add_argument("--baseline", type=Path,
                     help="committed YAML of reviewed per-layer differences")
     ap.add_argument("--update-baseline", action="store_true",
@@ -285,6 +287,13 @@ def main():
         return float(thr_cfg.get("default", 0.02))
 
     problems = []
+
+    def fail(layer, kind, message):
+        """Record a hard failure. Structured so consumers - the regression
+        suite in particular - can require a *specific* problem rather than
+        matching on message text and silently ignoring kinds they do not know."""
+        problems.append({"layer": layer, "kind": kind, "message": message})
+
     # The two renders only mean anything if they frame the same board. A shipped
     # outline layer that also carries a drawing frame or dimension artwork spans
     # far more than the board, which silently renders the two sides at different
@@ -293,7 +302,7 @@ def main():
     kw, kh = k_bbox[2] - k_bbox[0], k_bbox[3] - k_bbox[1]
     ow, oh = o_bbox[2] - o_bbox[0], o_bbox[3] - o_bbox[1]
     if max(abs(kw - ow), abs(kh - oh)) > 0.05:
-        problems.append(
+        fail(None, "outline-extents",
             f"outline extents differ: KiCad {kw:.3f}x{kh:.3f} in vs "
             f"{cfg.get('original_tool', 'original')} {ow:.3f}x{oh:.3f} in. The "
             f"shipped outline probably includes a drawing frame or dimension "
@@ -338,8 +347,9 @@ def main():
 
         mismatch = pad_to_match(k_png, o_png)
         if mismatch:
-            problems.append(f"{layer}: window size mismatch KiCad/{tool} {mismatch} "
-                            f"— check board outline equivalence")
+            fail(layer, "window-size",
+                 f"{layer}: window size mismatch KiCad/{tool} {mismatch} "
+                 f"— check board outline equivalence")
 
         subprocess.run(
             [MAGICK, "(", str(k_png), "-grayscale", "Rec709Luminance", ")",
@@ -376,12 +386,14 @@ def main():
         k_ink, o_ink = ink_fraction(k_solo), ink_fraction(o_solo)  # k_solo never has the outline
         EMPTY = 1e-6
         if k_ink < EMPTY and o_ink >= EMPTY:
-            problems.append(f"{layer}: the KiCad export draws NOTHING on this "
-                            f"layer while {tool} draws {o_ink:.4f} - the layer is "
-                            f"missing from the port")
+            fail(layer, "empty-kicad",
+                 f"{layer}: the KiCad export draws NOTHING on this "
+                 f"layer while {tool} draws {o_ink:.4f} - the layer is "
+                 f"missing from the port")
         elif o_ink < EMPTY and k_ink >= EMPTY:
-            problems.append(f"{layer}: {tool} draws NOTHING on this layer while "
-                            f"KiCad draws {k_ink:.4f}")
+            fail(layer, "empty-original",
+                 f"{layer}: {tool} draws NOTHING on this layer while "
+                 f"KiCad draws {k_ink:.4f}")
 
         # Normalised against how much either side actually draws, so a sparse
         # layer is judged on its own content rather than on canvas area: an
@@ -392,10 +404,11 @@ def main():
         max_diff = threshold(layer)
         flag = ""
         if diff > max_diff:
-            problems.append(f"{layer}: {diff:.3f} of the drawn area differs "
-                            f"(raw {raw:.4f} over union ink {u:.4f}), above the "
-                            f"{max_diff} threshold - the two renders do not "
-                            f"describe the same artwork")
+            fail(layer, "threshold",
+                 f"{layer}: {diff:.3f} of the drawn area differs "
+                 f"(raw {raw:.4f} over union ink {u:.4f}), above the "
+                 f"{max_diff} threshold - the two renders do not "
+                 f"describe the same artwork")
             flag = "   <-- OVER THRESHOLD"
         measured[layer] = round(diff, 3)
         print(f"  {layer}: rendered -> {d_png.name}{solo_note}  "
@@ -405,7 +418,7 @@ def main():
     if problems:
         print("\nNotes (review these first):")
         for p in problems:
-            print(f"  - {p}")
+            print(f"  - [{p['kind']}] {p['message']}")
     print(f"\nDone. Review the *-diff.png files in {args.out} — KiCad-only content "
           f"appears in one color channel, {tool}-only in another.")
     if args.update_baseline and args.baseline:
@@ -416,6 +429,15 @@ def main():
             "# Regenerate only with --update-baseline, and re-review every entry.\n"
             + yaml.safe_dump(measured, sort_keys=True))
         print(f"wrote {len(measured)} baseline entries to {args.baseline}")
+
+    if args.json:
+        import json
+        args.json.write_text(json.dumps({
+            "board": args.board,
+            "result": "FAIL" if problems else "PASS",
+            "problems": problems,
+            "measured": measured,
+        }, indent=1, sort_keys=True))
 
     print(f"\nRESULT: {'FAIL' if problems else 'PASS'} - "
           f"{len(cfg['layers'])} layers rendered, {len(problems)} structural problem(s)")

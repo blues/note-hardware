@@ -10,6 +10,7 @@ Usage:  .venv/bin/python test_gerber_diff.py [--board scoop]
 """
 
 import argparse
+import json
 import os
 import re
 import subprocess
@@ -34,16 +35,27 @@ def export_gerbers(pcb, out):
 
 
 def run_gate(board, cfg_gerbers, kicad_dir, baseline=None):
+    """Run the gate and return (rc, text, problems) where problems is the gate's
+    OWN structured list. Scraping stdout for known message shapes is how this
+    suite previously ignored whole classes of failure it had not thought of."""
     with tempfile.TemporaryDirectory() as td:
         cfgp = Path(td) / "b.yaml"
         cfgp.write_text(yaml.safe_dump({"boards": {board: {"gerbers": cfg_gerbers}}}))
+        jsonp = Path(td) / "result.json"
         cmd = [PY, HERE / "gerber_diff.py", "--board", board,
                "--config", str(cfgp), "--kicad-dir", str(kicad_dir),
-               "--repo", str(REPO), "--out", td + "/out"]
+               "--repo", str(REPO), "--out", td + "/out", "--json", str(jsonp)]
         if baseline:
             cmd += ["--baseline", str(baseline)]
         r = subprocess.run(cmd, capture_output=True, text=True)
-        return r.returncode, r.stdout + r.stderr
+        problems = []
+        if jsonp.exists():
+            problems = json.loads(jsonp.read_text())["problems"]
+        elif r.returncode != 0:
+            # the gate died before writing a summary - that is itself a failure
+            problems = [{"layer": None, "kind": "gate-crashed",
+                         "message": (r.stderr or r.stdout).strip()[:200]}]
+        return r.returncode, r.stdout + r.stderr, problems
 
 
 def blank_layer(path):
@@ -71,19 +83,24 @@ def all_boards_clean():
             g.mkdir()
             export_gerbers(REPO / c["kicad"]["pcb"], g)
             val = REPO / Path(c["kicad"]["pcb"]).parent / "validation"
-            rc, out = run_gate(b, c["gerbers"], g,
-                               baseline=val / "gerber-baseline.yaml")
-        # Collect the specific layers the gate objected to, so an expected
-        # failure cannot stand in for an unexpected one.
-        layers = sorted({m.group(1) for m in
-                         (re.match(r"\s*(\w+): ", l) for l in out.splitlines()
-                          if "OVER THRESHOLD" in l or "draws NOTHING" in l)
-                         if m})
-        status = "PASS" if rc == 0 else f"FAIL on {layers or '?'}"
+            rc, out, problems = run_gate(b, c["gerbers"], g,
+                                         baseline=val / "gerber-baseline.yaml")
+        # Every problem the gate reported, by (layer, kind) - taken from the
+        # gate's own output rather than inferred from message text, so a failure
+        # kind this suite has never seen still counts.
+        found = sorted({(p["layer"], p["kind"]) for p in problems},
+                       key=lambda x: (x[0] or "", x[1]))
+        status = "PASS" if rc == 0 else "FAIL " + ", ".join(
+            f"{l or '*'}/{k}" for l, k in found)
         print(f"    {b:16s} {status}")
-        if rc != 0:
-            bad.append((b, layers))
+        if rc != 0 or found:
+            bad.append((b, found))
     return bad
+
+
+def _key(pairs):
+    """Order (layer, kind) pairs with a None layer sorting first."""
+    return sorted(pairs, key=lambda x: (x[0] or "", x[1]))
 
 
 def main():
@@ -102,24 +119,24 @@ def main():
         # extra annular rings are an unresolved defect deliberately kept out of
         # its baseline. Accepting "cygnet failed somehow" would let a genuine new
         # regression on any other Cygnet layer hide behind the known one.
-        EXPECTED = {"cygnet": ["In1_Cu"]}
+        EXPECTED = {"cygnet": [("In1_Cu", "threshold")]}
 
         problems = []
-        for b, layers in sorted(got.items()):
+        for b, layers in sorted(got.items(), key=lambda kv: kv[0]):
             want = EXPECTED.get(b)
             if want is None:
                 problems.append(f"{b} regressed against its baseline on {layers}")
-            elif layers != want:
-                extra = [l for l in layers if l not in want]
-                missing = [l for l in want if l not in layers]
+            elif _key(layers) != _key(want):
+                extra = [x for x in layers if x not in want]
+                missing = [x for x in want if x not in layers]
                 problems.append(
-                    f"{b} was expected to fail on exactly {want} but failed on "
+                    f"{b} was expected to fail on exactly {want} but reported "
                     f"{layers}" + (f"; unexpected: {extra}" if extra else "")
                     + (f"; no longer failing: {missing}" if missing else ""))
         for b, want in EXPECTED.items():
             if b not in got:
                 problems.append(
-                    f"{b} was expected to fail on {want} but passed - either the "
+                    f"{b} was expected to report {want} but was clean - either the "
                     f"defect was fixed (update EXPECTED) or it was written into "
                     f"the board's gerber-baseline.yaml, which would bury it")
 
@@ -146,7 +163,7 @@ def main():
         export_gerbers(REPO / cfg["kicad"]["pcb"], base)
 
         # 1. the unmodified port must pass, or the rest proves nothing
-        rc, out = run_gate(args.board, gcfg, base, baseline=bl)
+        rc, out, _ = run_gate(args.board, gcfg, base, baseline=bl)
         print(f"[1] unmodified port                  -> rc={rc}")
         if rc != 0:
             failures.append("the unmodified port does not pass; "
@@ -181,7 +198,7 @@ def main():
                 failures.append(f"could not find the {layer} gerber to blank")
                 continue
             blank_layer(hits[0])
-            rc, out = run_gate(args.board, gcfg, trial, baseline=bl)
+            rc, out, _ = run_gate(args.board, gcfg, trial, baseline=bl)
             caught = "draws NOTHING" in out or rc != 0
             print(f"[2] {layer} emptied{'':<{max(0, 21 - len(layer))}}-> rc={rc} {'CAUGHT' if caught else 'MISSED'}")
             if not caught:
@@ -197,7 +214,7 @@ def main():
             b = glob.glob(str(trial / gcfg["layers"]["B_Cu"]["kicad"]))
             if f and b:
                 Path(f[0]).write_text(Path(b[0]).read_text(errors="replace"))
-                rc, out = run_gate(args.board, gcfg, trial, baseline=bl)
+                rc, out, _ = run_gate(args.board, gcfg, trial, baseline=bl)
                 print(f"[3] F_Cu replaced by B_Cu           -> rc={rc} "
                       f"{'CAUGHT' if rc != 0 else 'MISSED'}")
                 if rc == 0:

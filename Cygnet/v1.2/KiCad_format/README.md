@@ -24,7 +24,7 @@ match on every layer **except inner layer 1**. See
 > The cause and what would resolve it are in
 > [`documentation/Porting-Notes.md`](documentation/Porting-Notes.md#import-quirks-and-fixes).
 > For fabrication, use the original package at
-> [`../Cygnet Gerbers.zip`](../) instead.
+> [`../Cygnet Gerbers.zip`](../Cygnet%20Gerbers.zip) instead.
 
 ## Contents
 
@@ -38,7 +38,7 @@ match on every layer **except inner layer 1**. See
 | `Cygnet-altium-import.kicad_sym` / `Cygnet-altium-import.pretty/` | Project symbol/footprint libraries captured during the import |
 | `sym-lib-table` / `fp-lib-table` | Library tables (the original Altium lib nicknames are aliased to the project library) |
 | `documentation/` | Porting notes and plotted schematic/board PDFs |
-| `manufacturing/Cygnet_RevA.zip` | Gerbers + Excellon drills exported from KiCad. **⚠️ Reference only — not for production.** Its `In1_Cu` layer does not match the shipped fabrication data (see the warning above). The authoritative production package is [`../Cygnet Gerbers.zip`](../) |
+| `manufacturing/Cygnet_RevA.zip` | Gerbers + Excellon drills exported from KiCad. **⚠️ Reference only — not for production.** Its `In1_Cu` layer does not match the shipped fabrication data (see the warning above). The authoritative production package is [`../Cygnet Gerbers.zip`](../Cygnet%20Gerbers.zip) |
 | `validation/` | ERC/DRC reports, per-layer gerber diffs, BOM comparison, Altium netlist cross-check, KiCanvas screenshots |
 
 The project is self-contained. Note: the buttons labelled BOOT/RST/USER on
