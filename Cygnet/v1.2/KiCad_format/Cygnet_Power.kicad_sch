@@ -5206,19 +5206,9 @@
 		)
 		(uuid "ef610df1-474b-482f-ab94-276292028ad1")
 	)
-	(text_box "Iqmax=1.5uA\nIsdmax=1uA\nVEN-IH=1.2V\nVEN-IL=0.3V\nIPD-EN=0.2uA"
+	(text "Iqmax=1.5uA\nIsdmax=1uA\nVEN-IH=1.2V\nVEN-IL=0.3V\nIPD-EN=0.2uA"
 		(exclude_from_sim no)
-		(at 89.408 250.0122 0)
-		(size -18.288 13.97)
-		(margins 0.9525 0.9525 0.9525 0.9525)
-		(stroke
-			(width -0.0001)
-			(type default)
-			(color 0 0 0 1)
-		)
-		(fill
-			(type none)
-		)
+		(at 72.0725 250.965 0)
 		(effects
 			(font
 				(size 1.397 1.397)
@@ -5229,19 +5219,9 @@
 		)
 		(uuid "69a7f730-1e87-4fa9-8d55-148f6d3e5643")
 	)
-	(text_box "LIPO BATTERY\n3.3V - 4.2V"
+	(text "LIPO BATTERY\n3.3V - 4.2V"
 		(exclude_from_sim no)
-		(at 302.768 156.7942 0)
-		(size -18.288 5.588)
-		(margins 0.9525 0.9525 0.9525 0.9525)
-		(stroke
-			(width -0.0001)
-			(type default)
-			(color 0 0 0 1)
-		)
-		(fill
-			(type none)
-		)
+		(at 285.432 157.747 0)
 		(effects
 			(font
 				(size 1.016 1.016)
@@ -5252,11 +5232,9 @@
 		)
 		(uuid "8ee167e6-5d33-4bce-a0a8-f17a90ad3eb5")
 	)
-	(text_box "Note: Do not mount/ populate R14"
-		(exclude_from_sim no)
-		(at 75 72.0022 0)
-		(size -22.5 7.5)
-		(margins 0.9525 0.9525 0.9525 0.9525)
+	(rectangle
+		(start 52.5 72.0022)
+		(end 75 79.5022)
 		(stroke
 			(width 0)
 			(type default)
@@ -5266,19 +5244,23 @@
 			(type color)
 			(color 255 255 150 1)
 		)
+		(uuid "c474e3c0-d0c6-59b2-89c1-545e0d38787d")
+	)
+	(text "Note: Do not\nmount/ populate\nR14"
+		(exclude_from_sim no)
+		(at 53.4525 72.9547 0)
 		(effects
 			(font
 				(size 1.27 1.27)
+				(color 0 0 193 1)
 			)
 			(justify left top)
 		)
 		(uuid "92d1d5a4-a135-43d8-9085-03072c208c64")
 	)
-	(text_box "CURRENT LEGEND\n2A: +VMAIN, GND\n1A: +VIN, +VBAT\n500mA: +3V3_OUT, +VUSB, +VIO \n250mA: +3V3_VUSB, +3V3_CONN\n\n < 20 mA: GPIO/ control pins"
-		(exclude_from_sim no)
-		(at 242.4 142.5422 0)
-		(size -90 30)
-		(margins 0.9525 0.9525 0.9525 0.9525)
+	(rectangle
+		(start 152.4 142.542)
+		(end 242.4 172.542)
 		(stroke
 			(width 0)
 			(type default)
@@ -5288,9 +5270,15 @@
 			(type color)
 			(color 255 255 150 1)
 		)
+		(uuid "7355cce8-4cdc-5ba3-a1b2-771359f46f08")
+	)
+	(text "CURRENT LEGEND\n2A: +VMAIN, GND\n1A: +VIN, +VBAT\n500mA: +3V3_OUT, +VUSB, +VIO\n250mA: +3V3_VUSB, +3V3_CONN\n\n< 20 mA: GPIO/ control pins"
+		(exclude_from_sim no)
+		(at 153.352 143.495 0)
 		(effects
 			(font
 				(size 1.778 1.778)
+				(color 0 0 193 1)
 			)
 			(justify left top)
 		)

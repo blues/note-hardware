@@ -5207,19 +5207,9 @@
 
 
 
-	(text_box "DESIGN NOTE:\n\nPower Path:\n- Input current limit: 3.5A\n- 26mOhm reverse blocking transistor\n- 15mOhm battery transistor\n\nBuck Regulator:\n- 1.5MHz frequency\n- Input Voltage: 4.5-5.5V\n- Output Voltage: 3.3-4.2V\n- Peak current: 1.6A"
+	(text "DESIGN NOTE:\n\nPower Path:\n- Input current limit: 3.5A\n- 26mOhm reverse blocking transistor\n- 15mOhm battery transistor\n\nBuck Regulator:\n- 1.5MHz frequency\n- Input Voltage: 4.5-5.5V\n- Output Voltage: 3.3-4.2V\n- Peak current: 1.6A"
 		(exclude_from_sim no)
-		(at 91.44 39.8272 0)
-		(size -33.02 26.67)
-		(margins 0.9525 0.9525 0.9525 0.9525)
-		(stroke
-			(width -0.0001)
-			(type default)
-			(color 0 0 0 1)
-		)
-		(fill
-			(type none)
-		)
+		(at 59.3725 40.7797 0)
 		(effects
 			(font
 				(size 1.016 1.016)
@@ -5228,19 +5218,9 @@
 		)
 		(uuid "a7d88331-1e56-4959-ae64-d4893150bac9")
 	)
-	(text_box "DESIGN NOTE:\n\nCharger:\n- Default charging voltage: 4.2V\n- Default charging current: 320mA\n- Default termination current: 20mA\n- Default pre-charge current: 20mA\n- No battery thermal protection\n- No battery behaviour: +VBAT is pulled to VUSB - 0.7V through D4 & R20"
+	(text "DESIGN NOTE:\n\nCharger:\n- Default charging voltage: 4.2V\n- Default charging current: 320mA\n- Default termination current: 20mA\n- Default pre-charge current: 20mA\n- No battery thermal protection\n- No battery behaviour: +VBAT is\npulled to VUSB - 0.7V through D4 &\nR20"
 		(exclude_from_sim no)
-		(at 49.53 39.8272 0)
-		(size -33.02 26.67)
-		(margins 0.9525 0.9525 0.9525 0.9525)
-		(stroke
-			(width -0.0001)
-			(type default)
-			(color 0 0 0 1)
-		)
-		(fill
-			(type none)
-		)
+		(at 17.4625 40.7797 0)
 		(effects
 			(font
 				(size 1.016 1.016)
@@ -5249,19 +5229,9 @@
 		)
 		(uuid "cbbe9180-faad-4ddd-8fde-24de07e15fdd")
 	)
-	(text_box "DESIGN NOTE:\nInput Voltage: 2.5V - 5.5V\nOutput Voltage: 3.3V\n\nMax continuous output current over whole input voltage range: 1A"
+	(text "DESIGN NOTE:\nInput Voltage: 2.5V - 5.5V\nOutput Voltage: 3.3V\n\nMax continuous output\ncurrent over whole input\nvoltage range: 1A"
 		(exclude_from_sim no)
-		(at 276.86 36.0172 0)
-		(size -24.13 16.51)
-		(margins 0.9525 0.9525 0.9525 0.9525)
-		(stroke
-			(width -0.0001)
-			(type default)
-			(color 0 0 0 1)
-		)
-		(fill
-			(type none)
-		)
+		(at 253.683 36.9697 0)
 		(effects
 			(font
 				(size 1.016 1.016)

@@ -4070,19 +4070,9 @@
 
 
 
-	(text_box "DESIGN NOTE:\nInput Voltage: 1.8V - 5.5V\nOutput Voltage: 3.3V\n\nPeak Output Current: 500mA\nAverage Current: 100mA"
+	(text "DESIGN NOTE:\nInput Voltage: 1.8V - 5.5V\nOutput Voltage: 3.3V\n\nPeak Output Current:\n500mA\nAverage Current: 100mA"
 		(exclude_from_sim no)
-		(at 213.36 43.6372 0)
-		(size -24.13 12.7)
-		(margins 0.9525 0.9525 0.9525 0.9525)
-		(stroke
-			(width -0.0001)
-			(type default)
-			(color 0 0 0 1)
-		)
-		(fill
-			(type none)
-		)
+		(at 190.183 44.5897 0)
 		(effects
 			(font
 				(size 1.016 1.016)
@@ -4091,19 +4081,9 @@
 		)
 		(uuid "024c0ced-bb8e-4e07-935c-602eecae245e")
 	)
-	(text_box "DESIGN NOTE:\n\nCharger:\n- Default charging voltage: 4.2V\n- Default charging current: 320mA\n- Default termination current: 20mA\n- Default pre-charge current: 20mA\n- No battery thermal protection"
+	(text "DESIGN NOTE:\n\nCharger:\n- Default charging voltage: 4.2V\n- Default charging current: 320mA\n- Default termination current: 20mA\n- Default pre-charge current: 20mA\n- No battery thermal protection"
 		(exclude_from_sim no)
-		(at 59.69 43.6372 0)
-		(size -33.02 16.51)
-		(margins 0.9525 0.9525 0.9525 0.9525)
-		(stroke
-			(width -0.0001)
-			(type default)
-			(color 0 0 0 1)
-		)
-		(fill
-			(type none)
-		)
+		(at 27.6225 44.5897 0)
 		(effects
 			(font
 				(size 1.016 1.016)
@@ -4112,19 +4092,9 @@
 		)
 		(uuid "2d075786-115f-4f52-b7c8-0f22b54ab263")
 	)
-	(text_box "DESIGN NOTE:\n\nPower Path:\n- Input current limit: 3.5A\n- 26mOhm reverse blocking transistor\n- 15mOhm battery transistor\n\nBuck Regulator:\n- 1.5MHz frequency\n- Input Voltage: 5V\n- Output Voltage: 3.3-4.2V\n- Peak current: 2.5A"
+	(text "DESIGN NOTE:\n\nPower Path:\n- Input current limit: 3.5A\n- 26mOhm reverse blocking transistor\n- 15mOhm battery transistor\n\nBuck Regulator:\n- 1.5MHz frequency\n- Input Voltage: 5V\n- Output Voltage: 3.3-4.2V\n- Peak current: 2.5A"
 		(exclude_from_sim no)
-		(at 119.38 34.7472 0)
-		(size -33.02 26.67)
-		(margins 0.9525 0.9525 0.9525 0.9525)
-		(stroke
-			(width -0.0001)
-			(type default)
-			(color 0 0 0 1)
-		)
-		(fill
-			(type none)
-		)
+		(at 87.3125 35.6997 0)
 		(effects
 			(font
 				(size 1.016 1.016)

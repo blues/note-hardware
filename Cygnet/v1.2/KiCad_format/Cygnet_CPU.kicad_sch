@@ -9541,11 +9541,9 @@
 		)
 		(uuid "cd771929-56e6-410f-880a-d8507c11ccbd")
 	)
-	(text_box "ADC FOR BATTERY VOLTAGE"
-		(exclude_from_sim no)
-		(at 178 100.5022 0)
-		(size -23 4)
-		(margins 0.9525 0.9525 0.9525 0.9525)
+	(rectangle
+		(start 155 100.502)
+		(end 178 104.502)
 		(stroke
 			(width 0)
 			(type default)
@@ -9555,27 +9553,23 @@
 			(type color)
 			(color 255 255 150 1)
 		)
+		(uuid "95a5b036-f437-5eba-83b6-8565ba819f3d")
+	)
+	(text "ADC FOR BATTERY VOLTAGE"
+		(exclude_from_sim no)
+		(at 155.952 101.455 0)
 		(effects
 			(font
 				(size 0.762 0.762)
+				(color 0 0 193 1)
 			)
 			(justify left top)
 		)
 		(uuid "4cdb09d0-3d8b-4fa4-bf54-9417b3843689")
 	)
-	(text_box "Decoupling capacitors for:\nVDD1, VDD2, VBAT, VDDUSB, VDDA"
+	(text "Decoupling capacitors for:\nVDD1, VDD2, VBAT, VDDUSB, VDDA"
 		(exclude_from_sim no)
-		(at 81.98 28.3822 0)
-		(size -40.98 7.62)
-		(margins 0.9525 0.9525 0.9525 0.9525)
-		(stroke
-			(width -0.0001)
-			(type default)
-			(color 0 0 0 1)
-		)
-		(fill
-			(type none)
-		)
+		(at 41.9525 29.3347 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9584,11 +9578,9 @@
 		)
 		(uuid "6d73856f-a199-48fe-b05d-027fa1ccc18a")
 	)
-	(text_box "+3V3_OUT IS OUTPUT FROM 2A TPS63020DSJR"
-		(exclude_from_sim no)
-		(at 326.5 19.0022 0)
-		(size -38 8)
-		(margins 0.9525 0.9525 0.9525 0.9525)
+	(rectangle
+		(start 288.5 19.0022)
+		(end 326.5 27.0022)
 		(stroke
 			(width 0)
 			(type default)
@@ -9598,19 +9590,23 @@
 			(type color)
 			(color 255 255 150 1)
 		)
+		(uuid "89872baf-8acf-5bbd-b5a1-d7c9d13f5dd2")
+	)
+	(text "+3V3_OUT IS OUTPUT FROM 2A\nTPS63020DSJR"
+		(exclude_from_sim no)
+		(at 289.452 19.9547 0)
 		(effects
 			(font
 				(size 1.27 1.27)
+				(color 0 0 193 1)
 			)
 			(justify left top)
 		)
 		(uuid "73efd3ec-981d-4463-be72-aaa57ac2f6bc")
 	)
-	(text_box "NRST CONNECTED \nTO INTERNAL PU"
-		(exclude_from_sim no)
-		(at 251.5 75.0022 0)
-		(size -19 7)
-		(margins 0.9525 0.9525 0.9525 0.9525)
+	(rectangle
+		(start 232.5 75.0022)
+		(end 251.5 82.0022)
 		(stroke
 			(width 0)
 			(type default)
@@ -9620,9 +9616,15 @@
 			(type color)
 			(color 255 255 150 1)
 		)
+		(uuid "025765a2-2503-500c-b0f8-0f580920f7e1")
+	)
+	(text "NRST CONNECTED\nTO INTERNAL PU"
+		(exclude_from_sim no)
+		(at 233.452 75.9547 0)
 		(effects
 			(font
 				(size 1.016 1.016)
+				(color 0 0 193 1)
 			)
 			(justify left top)
 		)
