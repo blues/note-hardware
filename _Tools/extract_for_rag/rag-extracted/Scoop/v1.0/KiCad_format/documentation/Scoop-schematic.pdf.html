@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Scoop — SCHEMATIC (v1.0)</title>
+<meta name="rag:product" content="Scoop">
+<meta name="rag:version" content="v1.0">
+<meta name="rag:doc_type" content="schematic">
+<meta name="rag:source_file" content="Scoop/v1.0/KiCad_format/documentation/Scoop-schematic.pdf">
+<style>body{font-family:system-ui,-apple-system,sans-serif;max-width:64rem;margin:2rem auto;padding:0 1rem;line-height:1.5;color:#111}h1{font-size:1.4rem}h2{font-size:1.15rem;margin-top:1.5rem}h3{font-size:1rem}table{border-collapse:collapse;margin:0.5rem 0}th,td{border:1px solid #ccc;padding:2px 8px;text-align:left;vertical-align:top}code{background:#f4f4f4;padding:1px 4px;border-radius:3px}.source{color:#555;font-size:0.9rem}</style>
+</head>
+<body>
+<main>
+<h1>Scoop — SCHEMATIC (v1.0)</h1>
+<p class="source">Source file: <a href="https://github.com/blues/note-hardware/blob/master/Scoop/v1.0/KiCad_format/documentation/Scoop-schematic.pdf">Scoop/v1.0/KiCad_format/documentation/Scoop-schematic.pdf</a></p>
+<h2>Page 1</h2>
+<h2>2.5V-24V Charge</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J1</td>
+<td>S2B-PH-SM4-TB(LF)(SN)</td>
+</tr>
+<tr>
+<td>J3</td>
+<td>Header 2-Pin, 0.100 inch (0.230 inch head); shown crossed out</td>
+</tr>
+<tr>
+<td>U1</td>
+<td>NCP718BSNADJT1G</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>1uF, 0805, 10%</td>
+</tr>
+<tr>
+<td>R1</td>
+<td>178k</td>
+</tr>
+<tr>
+<td>R2</td>
+<td>82k</td>
+</tr>
+<tr>
+<td>C1</td>
+<td>1uF, 0805, 10%</td>
+</tr>
+<tr>
+<td>D1</td>
+<td>FSV1045V; shown crossed out</td>
+</tr>
+<tr>
+<td>Z1</td>
+<td>Test Point</td>
+</tr>
+<tr>
+<td>Z2</td>
+<td>Test Point</td>
+</tr>
+</tbody>
+</table>
+<h3>J1 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Charge Input</td>
+<td style="text-align: right;">1</td>
+<td>+</td>
+<td>VIN</td>
+</tr>
+<tr>
+<td>Charge Input</td>
+<td style="text-align: right;">2</td>
+<td>-</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>J3 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Charge Input Header</td>
+<td style="text-align: right;">1</td>
+<td></td>
+<td>VIN</td>
+</tr>
+<tr>
+<td>Charge Input Header</td>
+<td style="text-align: right;">2</td>
+<td></td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>U1 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LDO Regulator</td>
+<td style="text-align: right;">1</td>
+<td>IN</td>
+<td>VIN</td>
+</tr>
+<tr>
+<td>LDO Regulator</td>
+<td style="text-align: right;">2</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>LDO Regulator</td>
+<td style="text-align: right;">3</td>
+<td>EN</td>
+<td>VIN</td>
+</tr>
+<tr>
+<td>LDO Regulator</td>
+<td style="text-align: right;">4</td>
+<td>ADJ</td>
+<td>3V8REGFB</td>
+</tr>
+<tr>
+<td>LDO Regulator</td>
+<td style="text-align: right;">5</td>
+<td>OUT</td>
+<td>3V8</td>
+</tr>
+</tbody>
+</table>
+<h3>Charge Block Notes</h3>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text label: <code>2.5V-24V CHARGE</code></td>
+</tr>
+<tr>
+<td>U1 note: <code>Vfb=1.2V</code></td>
+</tr>
+<tr>
+<td>U1 note: <code>Vout=3.8V</code></td>
+</tr>
+<tr>
+<td>Z1 is a test point on net <code>3V8</code>.</td>
+</tr>
+<tr>
+<td>Z2 is a test point on net <code>GND</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2>2.5V-3.8V Output</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>U4</td>
+<td>MAX40203AUK+T</td>
+</tr>
+<tr>
+<td>Z3</td>
+<td>Test Point</td>
+</tr>
+<tr>
+<td>Z4</td>
+<td>Test Point</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>1uF, 0603, 10%</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>VEL13353R8257G</td>
+</tr>
+<tr>
+<td>U3</td>
+<td>BD49K25G-TL; BD49K25G-TLCT-ND</td>
+</tr>
+<tr>
+<td>U2</td>
+<td>MAX40203AUK+T</td>
+</tr>
+<tr>
+<td>J2</td>
+<td>S2B-PH-SM4-TB(LF)(SN)</td>
+</tr>
+<tr>
+<td>J4</td>
+<td>Header 2-Pin, 0.100 inch (0.230 inch head); shown crossed out</td>
+</tr>
+</tbody>
+</table>
+<h3>U4 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power Path</td>
+<td style="text-align: right;">1</td>
+<td>VDD</td>
+<td>3V8</td>
+</tr>
+<tr>
+<td>Power Path</td>
+<td style="text-align: right;">2</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Power Path</td>
+<td style="text-align: right;">3</td>
+<td>EN</td>
+<td>3V8</td>
+</tr>
+<tr>
+<td>Power Path</td>
+<td style="text-align: right;">4</td>
+<td>NC</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Power Path</td>
+<td style="text-align: right;">5</td>
+<td>OUT</td>
+<td>VBAT</td>
+</tr>
+</tbody>
+</table>
+<h3>U3 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Voltage Detector</td>
+<td style="text-align: right;">1</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Voltage Detector</td>
+<td style="text-align: right;">2</td>
+<td>Vout</td>
+<td>OUT_EN</td>
+</tr>
+<tr>
+<td>Voltage Detector</td>
+<td style="text-align: right;">3</td>
+<td>Vdd</td>
+<td>VBAT</td>
+</tr>
+</tbody>
+</table>
+<h3>U2 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Output Switch</td>
+<td style="text-align: right;">1</td>
+<td>VDD</td>
+<td>VBAT</td>
+</tr>
+<tr>
+<td>Output Switch</td>
+<td style="text-align: right;">2</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Output Switch</td>
+<td style="text-align: right;">3</td>
+<td>EN</td>
+<td>OUT_EN</td>
+</tr>
+<tr>
+<td>Output Switch</td>
+<td style="text-align: right;">4</td>
+<td>NC</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Output Switch</td>
+<td style="text-align: right;">5</td>
+<td>OUT</td>
+<td>VOUT</td>
+</tr>
+</tbody>
+</table>
+<h3>J2 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Output Connector</td>
+<td style="text-align: right;">1</td>
+<td>+</td>
+<td>VOUT</td>
+</tr>
+<tr>
+<td>Output Connector</td>
+<td style="text-align: right;">2</td>
+<td>-</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>J4 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Output Header</td>
+<td style="text-align: right;">1</td>
+<td></td>
+<td>VOUT</td>
+</tr>
+<tr>
+<td>Output Header</td>
+<td style="text-align: right;">2</td>
+<td></td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>Output Block Notes</h3>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text label: <code>2.5V-3.8V OUTPUT</code></td>
+</tr>
+<tr>
+<td>Z3 is a test point on net <code>VBAT</code>.</td>
+</tr>
+<tr>
+<td>Z4 is a test point on net <code>GND</code>.</td>
+</tr>
+<tr>
+<td>C2 note: <code>CAPACITANCE: 250F</code></td>
+</tr>
+<tr>
+<td>C2 note: <code>RATED VOLTAGE: 3.8V</code></td>
+</tr>
+<tr>
+<td>C2 note: <code>CURRENT (RATED): 0.75A</code></td>
+</tr>
+<tr>
+<td>C2 note: <code>CURRENT (PULSE): 5.0A</code></td>
+</tr>
+<tr>
+<td>C2 note: <code>CHARGE VOLTAGE (MAX): 3.85V</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Mounting Headers</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J5</td>
+<td>Header 2-Pin, 0.100 inch (0.230 inch head); shown crossed out</td>
+</tr>
+<tr>
+<td>J6</td>
+<td>Header 2-Pin, 0.100 inch (0.230 inch head); shown crossed out</td>
+</tr>
+</tbody>
+</table>
+<h3>J5 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mounting Header</td>
+<td style="text-align: right;">1</td>
+<td></td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Mounting Header</td>
+<td style="text-align: right;">2</td>
+<td></td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>J6 Pin Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mounting Header</td>
+<td style="text-align: right;">1</td>
+<td></td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Mounting Header</td>
+<td style="text-align: right;">2</td>
+<td></td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h2>Mounting Screws and Slots</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M1</td>
+<td>M2</td>
+</tr>
+<tr>
+<td>M2</td>
+<td>M2</td>
+</tr>
+<tr>
+<td>M5</td>
+<td>M2</td>
+</tr>
+<tr>
+<td>M3</td>
+<td>5mm slot</td>
+</tr>
+<tr>
+<td>M4</td>
+<td>5mm slot</td>
+</tr>
+</tbody>
+</table>
+<h3>Notes</h3>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text label: <code>Mounting Screws</code></td>
+</tr>
+<tr>
+<td>Text label: <code>Mounting Slots</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Fiducials</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FD1</td>
+<td>PF; Global Fiducial</td>
+</tr>
+<tr>
+<td>FD2</td>
+<td>PF; Global Fiducial</td>
+</tr>
+<tr>
+<td>FD3</td>
+<td>PF; Global Fiducial</td>
+</tr>
+</tbody>
+</table>
+<h2>Named Nets and Signals</h2>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Description / Where Seen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VIN</td>
+<td>Charge input net from J1 and J3; input to U1 IN and EN.</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Ground net used throughout schematic.</td>
+</tr>
+<tr>
+<td>3V8</td>
+<td>U1 output net; connected to Z1, C1, R1, and U4 VDD/EN.</td>
+</tr>
+<tr>
+<td>3V8REGFB</td>
+<td>Feedback divider net connected to U1 ADJ, R1, and R2.</td>
+</tr>
+<tr>
+<td>VBAT</td>
+<td>Storage/battery net connected to U4 OUT, Z3, C2, C3, U3 Vdd, and U2 VDD.</td>
+</tr>
+<tr>
+<td>OUT_EN</td>
+<td>Enable net from U3 Vout to U2 EN.</td>
+</tr>
+<tr>
+<td>VOUT</td>
+<td>Output net from U2 OUT to J2 and J4.</td>
+</tr>
+</tbody>
+</table>
+<h2>Reference Figures / Embedded Notes</h2>
+<h3>Components or Figures</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Figure 8</td>
+<td>Short Circuit Current vs. Temperature</td>
+</tr>
+<tr>
+<td>Figure 9</td>
+<td>SOA Current Limit vs. Differential Voltage</td>
+</tr>
+</tbody>
+</table>
+<h3>Figure Notes</h3>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Figure 8 caption: <code>Figure 8. Short Circuit Current vs. Temperature</code></td>
+</tr>
+<tr>
+<td>Figure 8 axes include <code>I_SC, SHORT CIRCUIT CURRENT (mA)</code> and <code>T_J, JUNCTION TEMPERATURE (°C)</code>.</td>
+</tr>
+<tr>
+<td>Figure 8 conditions shown: <code>VIN = 2.5 V</code>, <code>VOUT = 1.2 V</code>, <code>CIN = 1 µF</code>, <code>COUT = 1 µF</code>.</td>
+</tr>
+<tr>
+<td>Figure 9 caption: <code>Figure 9. SOA Current Limit vs. Differential Voltage</code></td>
+</tr>
+<tr>
+<td>Figure 9 axes include <code>SOA CURRENT LIMITATION (mA)</code> and <code>V_DIF, DIFFERENTIAL VOLTAGE VIN - VOUT (V)</code>.</td>
+</tr>
+<tr>
+<td>Figure 9 conditions shown: <code>f = 50 Hz</code>, <code>Duty = 20%</code>, <code>CIN = 1 µF</code>, <code>COUT = 1 µF</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2>Title Block and Sheet Notes</h2>
+<h3>Title Block Text</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title</td>
+<td>Scoop</td>
+</tr>
+<tr>
+<td>Company / Marking</td>
+<td>Blues Inc</td>
+</tr>
+<tr>
+<td>Logo / Marking</td>
+<td>EmpiricalEE</td>
+</tr>
+<tr>
+<td>Logo / Marking</td>
+<td>ToyBuilder LABS</td>
+</tr>
+<tr>
+<td>File</td>
+<td>Scoop.kicad_sch</td>
+</tr>
+<tr>
+<td>Revision</td>
+<td>v1.0</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>2026-07-28</td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>1/1</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>B</td>
+</tr>
+<tr>
+<td>Drawn By</td>
+<td>Ported from Altiom...</td>
+</tr>
+<tr>
+<td>Other text</td>
+<td>Production</td>
+</tr>
+<tr>
+<td>Copyright</td>
+<td>Copyright(c) 20...</td>
+</tr>
+</tbody>
+</table>
+</main>
+</body>
+</html>

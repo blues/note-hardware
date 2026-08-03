@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mojo — SCHEMATIC (v1.1)</title>
+<meta name="rag:product" content="Mojo">
+<meta name="rag:version" content="v1.1">
+<meta name="rag:doc_type" content="schematic">
+<meta name="rag:source_file" content="Mojo/v1.1/KiCad_format/documentation/Mojo-schematic.pdf">
+<style>body{font-family:system-ui,-apple-system,sans-serif;max-width:64rem;margin:2rem auto;padding:0 1rem;line-height:1.5;color:#111}h1{font-size:1.4rem}h2{font-size:1.15rem;margin-top:1.5rem}h3{font-size:1rem}table{border-collapse:collapse;margin:0.5rem 0}th,td{border:1px solid #ccc;padding:2px 8px;text-align:left;vertical-align:top}code{background:#f4f4f4;padding:1px 4px;border-radius:3px}.source{color:#555;font-size:0.9rem}</style>
+</head>
+<body>
+<main>
+<h1>Mojo — SCHEMATIC (v1.1)</h1>
+<p class="source">Source file: <a href="https://github.com/blues/note-hardware/blob/master/Mojo/v1.1/KiCad_format/documentation/Mojo-schematic.pdf">Mojo/v1.1/KiCad_format/documentation/Mojo-schematic.pdf</a></p>
+<h2>Page 1</h2>
+<h2>Battery, Load, and Current Sense Path</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J1</td>
+<td>20404</td>
+</tr>
+<tr>
+<td>J2</td>
+<td>Header 2-Pin, 0.100 in</td>
+</tr>
+<tr>
+<td>J3</td>
+<td>Header 2-Pin, 0.100 in</td>
+</tr>
+<tr>
+<td>J4</td>
+<td>20404</td>
+</tr>
+<tr>
+<td>R1</td>
+<td>250mΩ</td>
+</tr>
+</tbody>
+</table>
+<h3>Connector Pin Mapping: J1</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Battery</td>
+<td style="text-align: right;">1</td>
+<td>+</td>
+<td>VBAT</td>
+</tr>
+<tr>
+<td>Battery</td>
+<td style="text-align: right;">2</td>
+<td>-</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>Connector Pin Mapping: J2</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Battery header</td>
+<td style="text-align: right;">1</td>
+<td></td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Battery header</td>
+<td style="text-align: right;">2</td>
+<td></td>
+<td>VBAT</td>
+</tr>
+</tbody>
+</table>
+<h3>Connector Pin Mapping: J3</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Load header</td>
+<td style="text-align: right;">1</td>
+<td></td>
+<td>VLOAD</td>
+</tr>
+<tr>
+<td>Load header</td>
+<td style="text-align: right;">2</td>
+<td></td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>Connector Pin Mapping: J4</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Load</td>
+<td style="text-align: right;">1</td>
+<td>+</td>
+<td>VLOAD</td>
+</tr>
+<tr>
+<td>Load</td>
+<td style="text-align: right;">2</td>
+<td>-</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>Named Nets / Signals</h3>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BAT</td>
+<td>Label near J1 battery connector</td>
+</tr>
+<tr>
+<td>LOAD</td>
+<td>Label near J4 load connector</td>
+</tr>
+<tr>
+<td>VBAT</td>
+<td>Battery positive / sense resistor high side</td>
+</tr>
+<tr>
+<td>VLOAD</td>
+<td>Load side / sense resistor low side</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Ground</td>
+</tr>
+</tbody>
+</table>
+<h2>LTC2959 Monitor IC</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IC1</td>
+<td>LTC2959IDDB#TRMPBF</td>
+</tr>
+<tr>
+<td>C1</td>
+<td>1uF 0805 10%</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>1uF 0805 10%</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>0.47 µF</td>
+</tr>
+<tr>
+<td>Z1</td>
+<td>Test Point</td>
+</tr>
+</tbody>
+</table>
+<h3>IC Pin Mapping: IC1</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power</td>
+<td style="text-align: right;">1</td>
+<td>VDD</td>
+<td>3V3</td>
+</tr>
+<tr>
+<td>Sense</td>
+<td style="text-align: right;">2</td>
+<td>SENSEP</td>
+<td>VBAT</td>
+</tr>
+<tr>
+<td>Filter</td>
+<td style="text-align: right;">3</td>
+<td>CFP</td>
+<td>C3</td>
+</tr>
+<tr>
+<td>Filter</td>
+<td style="text-align: right;">4</td>
+<td>CFN</td>
+<td>C3</td>
+</tr>
+<tr>
+<td>Sense</td>
+<td style="text-align: right;">5</td>
+<td>SENSEN</td>
+<td>VLOAD</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">6</td>
+<td>SCL</td>
+<td>SCL</td>
+</tr>
+<tr>
+<td>I2C</td>
+<td style="text-align: right;">7</td>
+<td>SDA</td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td style="text-align: right;">8</td>
+<td>GPIO</td>
+<td>GPIO</td>
+</tr>
+<tr>
+<td>Regulator</td>
+<td style="text-align: right;">9</td>
+<td>VREG</td>
+<td>C2</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">10</td>
+<td>GND_1</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td style="text-align: right;">11</td>
+<td>GND_2</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<h3>Test Point Pin Mapping: Z1</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPIO</td>
+<td style="text-align: right;"></td>
+<td>Test Point</td>
+<td>GPIO</td>
+</tr>
+</tbody>
+</table>
+<h3>Named Nets / Signals</h3>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3V3</td>
+<td>IC1 VDD supply; C1 connected from 3V3 to GND</td>
+</tr>
+<tr>
+<td>VBAT</td>
+<td>IC1 SENSEP</td>
+</tr>
+<tr>
+<td>VLOAD</td>
+<td>IC1 SENSEN</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td>IC1 GPIO; connected to Z1 test point</td>
+</tr>
+<tr>
+<td>SDA</td>
+<td>IC1 SDA</td>
+</tr>
+<tr>
+<td>SCL</td>
+<td>IC1 SCL</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>IC1 grounds; C1 and C2 return</td>
+</tr>
+</tbody>
+</table>
+<h3>Notes</h3>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I2C Address: 1100011b</td>
+</tr>
+<tr>
+<td>Do not solder exposed pad</td>
+</tr>
+</tbody>
+</table>
+<h2>I2C Pullups and Qwiic Connectors</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R2</td>
+<td>RC0603FR-0722KL</td>
+</tr>
+<tr>
+<td>R3</td>
+<td>RC0603FR-0722KL</td>
+</tr>
+<tr>
+<td>J5</td>
+<td>QWIIC SM04B-SRSS-TB(LF)(SN)</td>
+</tr>
+<tr>
+<td>J6</td>
+<td>QWIIC SM04B-SRSS-TB(LF)(SN)</td>
+</tr>
+</tbody>
+</table>
+<h3>Connector Pin Mapping: J5</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qwiic</td>
+<td style="text-align: right;">1</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Qwiic</td>
+<td style="text-align: right;">2</td>
+<td>3V3</td>
+<td>3V3</td>
+</tr>
+<tr>
+<td>Qwiic</td>
+<td style="text-align: right;">3</td>
+<td>SDA</td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>Qwiic</td>
+<td style="text-align: right;">4</td>
+<td>SCL</td>
+<td>SCL</td>
+</tr>
+</tbody>
+</table>
+<h3>Connector Pin Mapping: J6</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qwiic</td>
+<td style="text-align: right;">1</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Qwiic</td>
+<td style="text-align: right;">2</td>
+<td>3V3</td>
+<td>3V3</td>
+</tr>
+<tr>
+<td>Qwiic</td>
+<td style="text-align: right;">3</td>
+<td>SDA</td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>Qwiic</td>
+<td style="text-align: right;">4</td>
+<td>SCL</td>
+<td>SCL</td>
+</tr>
+</tbody>
+</table>
+<h3>Named Nets / Signals</h3>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SDA</td>
+<td>Pulled up to 3V3 by R2; routed to J5 and J6</td>
+</tr>
+<tr>
+<td>SCL</td>
+<td>Pulled up to 3V3 by R3; routed to J5 and J6</td>
+</tr>
+<tr>
+<td>3V3</td>
+<td>Qwiic power</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Qwiic ground</td>
+</tr>
+</tbody>
+</table>
+<h2>Mounting Headers</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J7</td>
+<td>Header 3-Pin, 0.100 in</td>
+</tr>
+<tr>
+<td>J8</td>
+<td>Header 3-Pin, 0.100 in</td>
+</tr>
+</tbody>
+</table>
+<h3>Connector Pin Mapping: J7</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mounting header</td>
+<td style="text-align: right;">1</td>
+<td></td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Mounting header</td>
+<td style="text-align: right;">2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mounting header</td>
+<td style="text-align: right;">3</td>
+<td></td>
+<td>3V3</td>
+</tr>
+</tbody>
+</table>
+<h3>Connector Pin Mapping: J8</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th style="text-align: right;">Pin</th>
+<th>Name</th>
+<th>Net/Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mounting header</td>
+<td style="text-align: right;">1</td>
+<td></td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Mounting header</td>
+<td style="text-align: right;">2</td>
+<td></td>
+<td>SDA</td>
+</tr>
+<tr>
+<td>Mounting header</td>
+<td style="text-align: right;">3</td>
+<td></td>
+<td>SCL</td>
+</tr>
+</tbody>
+</table>
+<h3>Named Nets / Signals</h3>
+<table>
+<thead>
+<tr>
+<th>Net/Signal</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3V3</td>
+<td>Routed to J7 pin 3</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Routed to J7 pin 1 and J8 pin 1</td>
+</tr>
+<tr>
+<td>SDA</td>
+<td>Routed to J8 pin 2</td>
+</tr>
+<tr>
+<td>SCL</td>
+<td>Routed to J8 pin 3</td>
+</tr>
+</tbody>
+</table>
+<h2>Mounting Screws and Logos</h2>
+<h3>Components</h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Value/Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MH1</td>
+<td>M2</td>
+</tr>
+<tr>
+<td>MH2</td>
+<td>M2</td>
+</tr>
+<tr>
+<td>MH3</td>
+<td>M2</td>
+</tr>
+<tr>
+<td>MH4</td>
+<td>M2</td>
+</tr>
+<tr>
+<td></td>
+<td>Logo</td>
+</tr>
+<tr>
+<td></td>
+<td>Logo</td>
+</tr>
+</tbody>
+</table>
+<h3>Notes</h3>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mounting Screws</td>
+</tr>
+<tr>
+<td>Mounting Headers</td>
+</tr>
+</tbody>
+</table>
+<h2>Title Block and Sheet Notes</h2>
+<h3>Title Block</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title</td>
+<td>Mojo</td>
+</tr>
+<tr>
+<td>Company</td>
+<td>Blues Inc</td>
+</tr>
+<tr>
+<td>File</td>
+<td>Mojo.kicad_sch</td>
+</tr>
+<tr>
+<td>Revision</td>
+<td>v1.1</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>2026-07-28</td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>1/1</td>
+</tr>
+<tr>
+<td>Sheet notation</td>
+<td>Sheet 1 of 1</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>B</td>
+</tr>
+</tbody>
+</table>
+<h3>Visible Notes</h3>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Drawn By: Ported from Altiq… original resources</td>
+</tr>
+<tr>
+<td>EmpiricalEE</td>
+</tr>
+<tr>
+<td>ToyBuilder LABS</td>
+</tr>
+<tr>
+<td>Blues Inc</td>
+</tr>
+<tr>
+<td>Copyright(c) …</td>
+</tr>
+</tbody>
+</table>
+</main>
+</body>
+</html>
