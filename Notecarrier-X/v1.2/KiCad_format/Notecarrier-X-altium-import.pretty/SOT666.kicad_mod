@@ -1,0 +1,201 @@
+(footprint "SOT666"
+(version 20241229)
+(generator "pcbnew")
+(generator_version "9.0")
+	(layer "B.Cu")
+	(uuid "fe4d8c1c-de3a-4925-8c7e-e6063b4276ba")
+	(property "Reference" "TVS1"
+		(at -1.42621 -1.1557 0)
+		(unlocked yes)
+		(layer "B.SilkS")
+		(hide yes)
+		(uuid "654134f3-a61d-40e5-ab4f-1bf21f6bfb86")
+		(effects
+			(font
+				(size 1.524 1.524)
+				(thickness 0.254)
+			)
+			(justify left bottom mirror)
+		)
+	)
+	(property "Value" "PESD5V0L5UV,125"
+		(at 0.2735 -4.3 0)
+		(unlocked yes)
+		(layer "User.12")
+		(uuid "05028e79-4da4-46dc-b256-3f14aa3e3fcb")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+			(justify left bottom mirror)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "68627f8b-df8b-49c0-aa81-5f8c26ff772e")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6186b317-9725-4c66-a952-7d0c887837db")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(sheetname "04_NOTECARD-CONNECTION")
+	(sheetfile "04_NOTECARD-CONNECTION.kicad_sch")
+	(fp_line
+		(start 0.7 0)
+		(end -0.7 0)
+		(stroke
+			(width 0.3)
+			(type solid)
+		)
+		(layer "B.SilkS")
+		(uuid "5c8346b7-6e2c-4f24-8469-638b59ae97ff")
+	)
+	(fp_circle
+		(center -1.027 -1.62233)
+		(end -1.1032 -1.62233)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(fill no)
+		(layer "B.SilkS")
+		(uuid "e9e20e8d-ff83-47cc-9a2f-94f217199713")
+	)
+	(fp_line
+		(start -0.8 0.8)
+		(end -0.8 -0.8)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "2ed99335-b569-4c4e-8ba1-0a69eb2343da")
+	)
+	(fp_line
+		(start 0.8 0.8)
+		(end -0.8 0.8)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "6dcfaf47-45da-423a-a3a8-58398233d172")
+	)
+	(fp_line
+		(start 0.8 0.8)
+		(end 0.8 -0.8)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "77f48111-bb0b-4122-bcfc-d61461ba00f2")
+	)
+	(fp_line
+		(start 0.8 -0.8)
+		(end -0.8 -0.8)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.14")
+		(uuid "36247e96-5ad6-4ca2-b971-45eea046d063")
+	)
+	(fp_poly
+		(pts
+			(xy -0.8 -0.8) (xy -0.79995 -0.19995) (xy -0.19995 -0.79996)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill yes)
+		(layer "User.14")
+		(uuid "ad86bc80-9992-4336-b891-ceefbbd5ef79")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0.4235 -3 0)
+		(unlocked yes)
+		(layer "User.14")
+		(uuid "715debd3-0d46-456b-ba28-94b7b2d169bb")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+			(justify left bottom mirror)
+		)
+	)
+	(pad "1" smd rect
+		(at -0.5 -0.80501 180)
+		(size 0.99 0.3)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(uuid "5e2475a4-e7d8-499d-ab13-a3deb7890b3e")
+	)
+	(pad "2" smd rect
+		(at 0 -0.80501 180)
+		(size 0.99 0.3)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(uuid "c8191c43-e962-4529-b43a-2c4ac8e7422c")
+	)
+	(pad "3" smd rect
+		(at 0.5 -0.80501 180)
+		(size 0.99 0.3)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(uuid "bd180946-05a1-43cb-894e-81c66a9974f2")
+	)
+	(pad "4" smd rect
+		(at 0.5 0.805 180)
+		(size 0.99 0.3)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(uuid "4527d33e-6b56-4021-9839-a530f8ccd061")
+	)
+	(pad "5" smd rect
+		(at 0 0.805 180)
+		(size 0.99 0.3)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(uuid "6cf1db0d-6e32-4500-9e7a-3ee32249a117")
+	)
+	(pad "6" smd rect
+		(at -0.5 0.805 180)
+		(size 0.99 0.3)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(uuid "3f582b9e-60c7-4555-95dd-e2ebb975e924")
+	)
+	(embedded_fonts no)
+	(embedded_files
+		(file
+			(name "SOT666.stp")
+			(type other)
+			(checksum "875FF5569040DC32E35B962EF05CA0C8")
+		)
+	)
+	(model "kicad-embed://SOT666.stp"
+		(offset
+			(xyz 0 -0.00001 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 0)
+		)
+	)
+)

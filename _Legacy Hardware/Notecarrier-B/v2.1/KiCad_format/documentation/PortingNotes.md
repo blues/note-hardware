@@ -59,9 +59,12 @@
 | OUTLINE.dxf | User.1 | Could be Board geometry --> Design_Outline. Who knows? Includes edge cuts, edge clearance and dimension annotations. |
 | ASSEMBLY-TOP.dxf | User.2 | RefDes is in Components. Courtyard is in Package Geometry. Courtyards sufficient to align components. |
 | ASSEMBLY-BOT.dxf | User.3 | Courtyards sufficient to align components. |
-| SILKSCREEN-TOP.dxf | User.4 | Again, check Geometry and Components. Text came through as text! So now needs to be repositioned because fonts are different. || SILKSCREEN-BOT.dxf | User.5 | Text came through as text! So now needs to be repositioned because fonts are different. || TOP-ETCH.dxf | User.6 | Fills came through as outlines, traces as thin lines. Will be used as guides for new elements. |
+| SILKSCREEN-TOP.dxf | User.4 | Again, check Geometry and Components. Text came through as text! So now needs to be repositioned because fonts are different. |
+| SILKSCREEN-BOT.dxf | User.5 | Text came through as text! So now needs to be repositioned because fonts are different. |
+| TOP-ETCH.dxf | User.6 | Fills came through as outlines, traces as thin lines. Will be used as guides for new elements. |
 | BOT-ETCH.dxf | User.7 | Fills came through as outlines, traces as thin lines. Will be used as guides for new elements. |
-| TOP-VIA.dxf | User.8 | Also includes test points, so need top and bottom. || BOT-VIA.dxf | User.9 | But doesn't include fiducials, so do them manually. |
+| TOP-VIA.dxf | User.8 | Also includes test points, so need top and bottom. |
+| BOT-VIA.dxf | User.9 | But doesn't include fiducials, so do them manually. |
 | TOP/BOT-PIN.dxf | - | No useful information. |
 
 - To convert the `ETCH.dxf` layers into tracks:
@@ -307,3 +310,28 @@ As an aside, moving the drawing sheet file into the library was also considered,
 | USB4105-GF-A | USB4105-GF-A | |
 | USB4105-GF-A-ULTRA-LIBRARIAN | USB4105-GF-A-ULTRA-LIBRARIAN | |
 | WS2812B-2020 | WS2812B-2020 | ws2812b-2020 v1 |
+
+## KiCad 9 update (2026-07-31)
+
+This port was originally authored in KiCad 7 and has been upgraded in place to
+**KiCad 9** (board format 20221018 → 20241229, schematics → 20250114). The
+upgrade was verified to be lossless:
+
+* every fabrication layer — copper, mask, paste, silkscreen and Edge.Cuts —
+  is geometrically identical before and after (raster comparison at 600 dpi),
+  and the drill file is textually identical;
+* the schematic netlist is unchanged: same component set and the same net
+  partitions.
+
+**Do not refill the zones.** These ports depend on the fills preserved from the
+original import; regenerating them changes the copper. The upgrade path used
+here (load and save) does not refill.
+
+### DRC exclusions no longer suppress anything
+
+The exclusions recorded in the project file were written by KiCad 7 and its
+marker keys no longer match, so KiCad 9 re-reports the violations that were
+reviewed and accepted when this port was made. They are left in place as the
+author's record. Current state under KiCad 9: **0 ERC** and **4 DRC errors with 1 unconnected item**.
+
+These are open items worth a look rather than known-accepted ones: 2 `shorting_items` against a net-less object, 2 `solder_mask_bridge`, and 1 missing connection between the `GND` zone and `J20` pad 6. The published board file and all 13 shipped gerber/drill files are md5-identical to the internal v14 release, so the source data is not in question.

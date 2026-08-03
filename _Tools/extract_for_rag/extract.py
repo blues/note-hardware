@@ -4,6 +4,8 @@
 Tier 1 = the cleanly-answerable hardware content:
   * BOMs            (.xlsx / .csv)        -> HTML tables
   * KiCad schematics (.kicad_sch)         -> component + net summary (parsed s-expr)
+                                             (component table carries MPN where the symbols have
+                                             one; the net list includes power-rail names)
   * Schematic PDFs  (.pdf, schematic only) -> per-page descriptions via a vision model (VLM)
 
 Output is written under _Tools/extract_for_rag/rag-extracted/, mirroring the source tree, one
@@ -82,7 +84,22 @@ BOM, KICAD, SCHEMATIC = "bom", "kicad", "schematic"
 # Path fragments (lowercase, "/"-joined) whose files are never indexed.
 # KiCad_format/validation/ holds QA port-comparison artifacts (Gerber-diff PNGs and BOMs
 # exported from both OrCAD/Altium and KiCad) that are ~90-93% replicants of the canonical BOM.
-EXCLUDE_PATH = ("kicad_format/validation/",)
+#
+# The KiCad_format exclusion below keeps known-inaccurate component data out of the index.
+# It is deliberate and should be removed when the underlying port is fixed:
+#
+#   Notecarrier-A/v2.3 - an unfinished port (see its STATUS-INCOMPLETE.md). Because only the
+#     highest version per product is indexed, leaving it in would silently displace the
+#     validated v2.0 port as the sole KiCad source for Notecarrier-A.
+#
+# Notecarrier-F/v1.3 was excluded here while its schematic still described v1.2. That delta
+# has since been applied and verified, and this extractor only ever reads .kicad_sch - never
+# the board - so the pages it produces for F now describe the shipped v1.3 design. The port's
+# PCB is still mid-port (see its ERRATA.md), which does not affect what is indexed.
+EXCLUDE_PATH = (
+    "kicad_format/validation/",
+    "notecarrier-a/v2.3/kicad_format/",
+)
 
 # A reference designator like C12, R5, U3, J2. Used for BOM dedup.
 REFDES_RE = re.compile(r"^[A-Z]{1,3}\d+$")
@@ -410,7 +427,7 @@ def extract_kicad(path: Path) -> str | None:
     root = parsed[0]
     title = ""
     nets: set[str] = set()
-    symbols: list[tuple[str, str]] = []          # (value, footprint) per placed symbol
+    symbols: list[tuple[str, str, str]] = []     # (value, footprint, mpn) per placed symbol
     path_ref_maps: list[dict[str, str]] = []     # {instance-path: ref} per placed symbol
     for c in root:
         if not isinstance(c, list):
@@ -424,10 +441,18 @@ def extract_kicad(path: Path) -> str | None:
             continue  # library definitions, not placed parts
         elif head == "symbol":
             p = _props(c)
-            symbols.append((p.get("Value", ""), p.get("Footprint", "")))
+            ref = p.get("Reference", "")
+            # A power symbol names a net rather than being a part: its Value is the rail name
+            # (GND, VUSB, +3V3 ...). Those are the names most hardware questions use, and they
+            # are not labels, so without this the net list misses every power rail.
+            if ref.startswith("#"):
+                val = p.get("Value", "")
+                if val and val not in ("PWR_FLAG", "~"):
+                    nets.add(val)
+            symbols.append((p.get("Value", ""), p.get("Footprint", ""), p.get("MPN", "")))
             prm = _symbol_path_refs(c)
-            if not prm and p.get("Reference"):
-                prm = {"": p["Reference"]}  # older format without (instances)
+            if not prm and ref:
+                prm = {"": ref}  # older format without (instances)
             path_ref_maps.append(prm)
         elif head in ("label", "global_label", "hierarchical_label"):
             if len(c) > 1:
@@ -435,8 +460,8 @@ def extract_kicad(path: Path) -> str | None:
 
     refs = _resolve_designators(path_ref_maps)
     comps = [
-        (ref, value, fp)
-        for (value, fp), ref in zip(symbols, refs)
+        (ref, value, fp, mpn)
+        for (value, fp, mpn), ref in zip(symbols, refs)
         if ref and _is_electrical(ref)
     ]
     comps = sorted(set(comps), key=lambda r: _natkey(r[0]))
@@ -447,7 +472,14 @@ def extract_kicad(path: Path) -> str | None:
     if title:
         md.append(f"_Sheet title: {title}_\n")
     md.append(f"### Components ({len(comps)})\n")
-    md.append(rows_to_md_table([["Reference", "Value", "Footprint"], *comps]))
+    # MPN is carried on the symbols and is what part-identification questions ask for, so it is
+    # emitted alongside the value; the column is dropped when no symbol on the sheet has one.
+    if any(c[3] for c in comps):
+        md.append(rows_to_md_table([["Reference", "Value", "MPN", "Footprint"],
+                                    *((r, v, m, f) for r, v, f, m in comps)]))
+    else:
+        md.append(rows_to_md_table([["Reference", "Value", "Footprint"],
+                                    *((r, v, f) for r, v, f, _ in comps)]))
     if nets:
         md.append(f"\n### Nets / labels ({len(nets)})\n")
         md.append(", ".join(f"`{n}`" for n in sorted(nets, key=_natkey)))

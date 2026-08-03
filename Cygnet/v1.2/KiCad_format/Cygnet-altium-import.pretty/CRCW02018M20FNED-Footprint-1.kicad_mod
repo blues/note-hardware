@@ -1,0 +1,170 @@
+(footprint "CRCW02018M20FNED-Footprint-1"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(locked yes)
+	(layer "F.Cu")
+	(property "Reference" "R19"
+		(at 2.346198 1.942495 270)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "4cc40fc0-f42e-4dcd-93d4-944884816fa8")
+		(effects
+			(font
+				(size 1.524 1.524)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Value" "8.2M"
+		(at -2.454402 2.70424 270)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "461fe798-0917-49c7-87ac-307c529dbd0f")
+		(effects
+			(font
+				(size 1.524 1.524)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f6fb690a-c328-43ae-84c9-87d787eb1f27")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "0201 (0603METRIC) Fixed Resistor Crcw 0.024LX0.012W 0.60MMX0.30MM 0.05W 1/20W 8.2MOHM ±200PPM/C"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "116f1a9d-e6eb-45e7-9be9-24e437abdf69")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_line
+		(start -0.32496 -0.17498)
+		(end 0.32508 -0.17498)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.Fab")
+		(uuid "30d434a4-6e93-4775-9d17-68518698390a")
+	)
+	(fp_line
+		(start -0.32496 0.17498)
+		(end -0.32496 -0.17498)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.Fab")
+		(uuid "f6032e0f-64a6-455f-907e-01976d4a0e46")
+	)
+	(fp_line
+		(start -0.32496 0.17498)
+		(end 0.32508 0.17498)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.Fab")
+		(uuid "b4d92b25-9a92-4d4b-b7e6-c2a0d6dece1e")
+	)
+	(fp_line
+		(start 0.32508 0.17498)
+		(end 0.32508 -0.17498)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "B.Fab")
+		(uuid "1c4422e8-bd58-4a3f-8af4-8ba4804c17be")
+	)
+	(fp_line
+		(start -0.84993 -0.45001)
+		(end 0.85004 -0.45001)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.13")
+		(uuid "fd4c4ed3-f62d-48bc-9c8d-cdec2764346a")
+	)
+	(fp_line
+		(start -0.84993 0.45001)
+		(end -0.84993 -0.45001)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.13")
+		(uuid "89711664-8e6a-4a80-81ba-5bc6806435bc")
+	)
+	(fp_line
+		(start -0.84993 0.45001)
+		(end 0.85004 0.45001)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.13")
+		(uuid "33993cd2-ad1c-461b-8938-af9736b8b6ba")
+	)
+	(fp_line
+		(start -0.17495 0.00002)
+		(end 0.17506 0.00002)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.13")
+		(uuid "4282e0ed-42bc-4306-ac5b-39423468cb4a")
+	)
+	(fp_line
+		(start 0.00006 0.17498)
+		(end 0.00006 -0.17498)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "User.13")
+		(uuid "9395fb25-aba1-41b7-9d13-560e529f9a09")
+	)
+	(fp_line
+		(start 0.85004 0.45001)
+		(end 0.85004 -0.45001)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "User.13")
+		(uuid "96a66a1f-3974-4075-927c-86ee697f6005")
+	)
+	(pad "1" smd rect
+		(at -0.37495 0.00002 90)
+		(size 0.45 0.55)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "14c4db15-e0cb-4658-8c50-0d1553dc2453")
+	)
+	(pad "2" smd rect
+		(at 0.37506 0.00002 90)
+		(size 0.45 0.55)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "60a18e83-f797-41a9-b946-10085d1ec331")
+	)
+	(embedded_fonts no)
+)

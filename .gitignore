@@ -8,3 +8,9 @@ fp-info-cache
 # extract_for_rag tooling
 __pycache__/
 _Tools/extract_for_rag/.venv/
+
+# kicad_validation tooling
+_Tools/kicad_validation/.venv/
+# shipped fab packages extracted next to the reports by gerber_diff.py; the
+# source of truth is the committed zip, never this scratch copy
+_shipped/

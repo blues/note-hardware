@@ -1,0 +1,27 @@
+Netlist verification: geometric net-partition comparison against the published
+v2.0 fabrication films
+======================================================================
+
+The published Notecarrier-Pi v2.0 fab package ("Notecarrier-Pi Gerbers
+v2.zip", Allegro artwork films) ships no ODB++/IPC-D-356 netlist, so the
+netlist gate is replaced by a geometric comparison: the copper of the
+published films (04-TOP, 07-BOTTOM, 06-POWER) plus the plated holes of the
+drill file are traced into connected copper islands, and every KiCad pad is
+assigned to the island its copper touches. Each island's pads must then agree
+on one KiCad net.
+
+Result over all 270 pads / 139 pad-bearing islands:
+
+  * Track/flash/hole connectivity only (pour polygons excluded from the
+    trace): 0 conflicting islands - every island's pads carry a single
+    KiCad net.  PASS
+  * With pour polygons included, 3 nominal conflicts appear
+    ({/SDA,/SCL,VMODEM}, {/SIM_NPRESENT,GND}, {/USB_DP,/USB_DM,GND}); all
+    three are artifacts of the tracing method - a trace routed through a
+    pour's clearance channel tests as "inside" the pour outline polygon -
+    and disappear when pours are excluded, so they represent analysis
+    over-merge, not board shorts.
+
+Method: _Tools-external session script (pi20_fabnets.py); films byte-identical
+to the published zip (md5-verified). The In1 plane (05-GND) is a positive film
+whose fill is compared separately in the gerber raster diff.

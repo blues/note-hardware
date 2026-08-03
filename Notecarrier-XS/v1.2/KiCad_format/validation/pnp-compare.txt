@@ -1,0 +1,25 @@
+Placement comparison vs the shipped pick-and-place file
+  board:      notecarrier-xs
+  pnp file:   3000-789-002_PnP-file.pnp
+  placements: 44 in the file, 44 matched in the port
+  fitted origin offset (115.444, 140.729) mm, y-flip=True
+
+Hard checks (unambiguous in the assembly file):
+  refdes in the file but missing from the port: 0
+  board-side mismatches: 0
+  rotation mismatches:   0
+
+
+Position (gated). Each part's expected residual is predicted from its own
+pad bounding box, because the assembly file references the body centre
+while KiCad measures from the footprint origin. What is left after that
+prediction is real displacement, not a per-footprint constant.
+  explained by the body-centre prediction: 43 of 44
+  accepted against the committed baseline:  1
+    J3: (+0.325, +0.000) mm, matches baseline
+  UNEXPLAINED:                              0
+
+This report is committed, so any future change to these residuals shows up
+as a diff for review - the same convention the gerber-diff gate uses.
+
+RESULT: PASS - 44 placements checked; side and rotation match the released build for 44/44; 0 unexplained displacement(s)

@@ -1,0 +1,18 @@
+# Per-layer normalised difference (differing ink / union ink) measured
+# against the shipped fab package, frozen after review. The gate allows
+# each value + 0.01, so this catches drift rather than excusing it.
+# Regenerate only with --update-baseline, and re-review every entry.
+#
+# In1_Cu is DELIBERATELY ABSENT. It measures 0.105 - roughly fifty annular
+# rings that the shipped .G1 does not have - and that is an unresolved
+# defect, not an accepted deviation. Recording it here would convert a real
+# finding into a permanent excuse. See ../documentation/Porting-Notes.md.
+B_Cu: 0.001
+B_Mask: 0.04
+B_Paste: 0.0
+B_Silkscreen: 0.541
+F_Cu: 0.002
+F_Mask: 0.023
+F_Paste: 0.001
+F_Silkscreen: 0.788
+In2_Cu: 0.001

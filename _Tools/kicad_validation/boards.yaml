@@ -1,0 +1,409 @@
+# Per-board configuration for the KiCad port validation harness.
+#
+# All paths are relative to the repository root. A board entry is added/filled
+# in as its port is executed. A gate whose config is absent is a FAILURE unless
+# the board records why under skip_gates.<GATE> below; only then is it reported
+# as SKIPPED (see the NO-GO policy in README.md).
+#
+# Sections per board:
+#   kicad:    project paths (root sheet, pcb)
+#   bom:      shipped-BOM parsing rules (see bom_compare.py)
+#   gerbers:  layer map KiCad-export <-> shipped fab package (see gerber_diff.py)
+#   odb:      extracted ODB++ root, when the product ships one (netlist gate)
+
+boards:
+
+  mojo:
+    product_dir: Mojo/v1.1
+    ipc356:
+      # shipped IPC-D-356A netlist (lives under Test Points/, but its 317/327
+      # records cover every component pad, not just probe targets)
+      path: "Mojo/v1.1/Fabrication/Test Points/Testpoint Mojo-v4.ipc"
+    pnp:
+      path: "Mojo/v1.1/Assembly Normal/Pick Place/PNP-Mojo-v4-Normal.csv"
+      skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
+    kicad:
+      sch: Mojo/v1.1/KiCad_format/Mojo.kicad_sch
+      pcb: Mojo/v1.1/KiCad_format/Mojo.kicad_pcb
+    bom:
+      path: Mojo/v1.1/Assembly Normal/BOM/BOM-Mojo-v4-Normal.xls
+      sheet: BOM Simple
+      header_contains: Designator
+      kicad_mpn_field: MANUFACTURER PART NUMBER
+      columns:
+        refs: Designator
+        value: Name
+        mpn: Manufacturer Part Number 1
+      skip_refdes: '^(TP|FID|MH|LOGO)\d*$'
+    gerbers:
+      original_dir: Mojo/v1.1/Fabrication/Gerber
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
+
+  # --- filled in as each port is executed (see plan order) -------------------
+
+  cygnet:
+    product_dir: Cygnet/v1.2
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
+      PNP: "no pick-and-place file is published for this board, so there is no released-build placement data to compare against"
+    kicad:
+      sch: Cygnet/v1.2/KiCad_format/Cygnet.kicad_sch
+      pcb: Cygnet/v1.2/KiCad_format/Cygnet.kicad_pcb
+    bom:
+      path: Cygnet/v1.2/Cygnet v1.2 BOM.xlsx
+      header_contains: Designator
+      kicad_mpn_field: MPN
+      columns:
+        refs: Designator
+        value: Name
+        mpn: Manufacturer Part Number 1
+      refdes_map:
+        BOOT: SW1
+        RST: SW2
+        USER: SW3
+      skip_refdes: '^(TP|FID|MH|LOGO|CST)\d*$'
+    gerbers:
+      # local extraction of the in-repo shipped fab package:
+      original_zip: "Cygnet/v1.2/Cygnet Gerbers.zip"
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        In1_Cu:       { kicad: "*L2.g1", original: "*.G1" }
+        In2_Cu:       { kicad: "*L3.g2", original: "*.G2" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
+
+  scoop:
+    product_dir: Scoop/v1.0
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
+    pnp:
+      # the released pick-and-place file ships inside the committed fab archive
+      zip: "Scoop/v1.0/992-00084-A_Gerbers.zip"
+      member: "*Pick Place/PNP-scoop-v4-*.txt"
+      # +PROJECTID is a "Standard (No BOM)" documentation marker parked off the
+      # board in the released file, not a fitted component
+      skip_refdes: "^(TP|FID|FD|MH|LOGO|DOC|PCB)\\d*$|^\\+PROJECTID$"
+    kicad:
+      sch: Scoop/v1.0/KiCad_format/Scoop.kicad_sch
+      pcb: Scoop/v1.0/KiCad_format/Scoop.kicad_pcb
+    bom:
+      path: Scoop/v1.0/992-00084-A_BOM.xlsx
+      header_contains: Ref Des
+      kicad_mpn_field: MANUFACTURER PART NUMBER
+      check_value: false
+      columns:
+        refs: Ref Des
+        value: Name
+        mpn: MPN
+      skip_refdes: '^(TP|FID|FD|MH|LOGO)\d*$'
+    gerbers:
+      # local extraction of the in-repo shipped fab package:
+      original_zip: "Scoop/v1.0/992-00084-A_Gerbers.zip"
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM1"
+      # The shipped .GM1 draws the board outline AND a caption ("Board Outline /
+      # scoop v4.GM1") parked at x=8.0in, y=-1.1in. Auto-sizing the window from
+      # that file's bounding box framed an 8.04 x 1.90in canvas against KiCad's
+      # 2.35 x 0.80in board, so the two sides rendered at different scales and
+      # the "diff" was just two separate pictures of the board. The board
+      # outline itself is 0..2.350 x 0..0.800in in both files, so both windows
+      # are pinned to it explicitly.
+      # (KiCad's own Edge_Cuts bbox is correct and auto-detected; only the
+      # shipped side needs pinning, and the two frames have different origins.)
+      window:
+        original: [0.0, 0.0, 2.350, 0.800]
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
+
+  notecarrier-cx:
+    product_dir: Notecarrier-CX/v1.7
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      PNP: "no pick-and-place file is published for this board; the shipped ODB++ does carry top-side component centroids (CMP records), which pnp_compare's parsers do not consume - placement is covered by the 89/89 connectivity match against that same ODB++ (NETLIST gate) and the copper-exact gerber diff"
+    kicad:
+      sch: Notecarrier-CX/v1.7/KiCad_format/Notecarrier-CX.kicad_sch
+      pcb: Notecarrier-CX/v1.7/KiCad_format/Notecarrier-CX.kicad_pcb
+    bom:
+      path: Notecarrier-CX/v1.7/BOM/BOM-notecarrier-cx(Production).xlsx
+      header_contains: Designator
+      kicad_mpn_field: BL PART NUMBER
+      columns:
+        refs: Designator
+        value: Name
+        mpn: BL Part Number
+      skip_refdes: '^(FD|LOGO|DOC|PCB)\d*$'
+    odb:
+      # tarball at Notecarrier-CX/v1.7/FAB/ODB/ ships pre-extracted at odb/
+      root: Notecarrier-CX/v1.7/FAB/ODB/odb
+      step: pcb
+    gerbers:
+      original_dir: Notecarrier-CX/v1.7/FAB/Gerber
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM15"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        In1_Cu:       { kicad: "*.g1", original: "*.G1" }
+        In2_Cu:       { kicad: "*.g2", original: "*.G2" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
+
+  notecarrier-xi:
+    product_dir: Notecarrier-XI/v1.4
+    pnp:
+      path: "Notecarrier-XI/v1.4/PCB + 3D + 2D/FAB/Pick Place/Pick Place for Notecarrier-XI_V4.txt"
+      skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
+    kicad:
+      sch: Notecarrier-XI/v1.4/KiCad_format/Notecarrier-XI.kicad_sch
+      pcb: Notecarrier-XI/v1.4/KiCad_format/Notecarrier-XI.kicad_pcb
+    bom:
+      path: Notecarrier-XI/v1.4/SCH + BOM/BOM/BOM-ActiveBOM.xlsx
+      header_contains: Designator
+      kicad_mpn_field: MANUFACTURER PART NUMBER
+      columns:
+        refs: Designator
+        value: Name
+        # This ActiveBOM export fills MPN for only 1 of its 66 lines, so the MPN
+        # half of the comparison is nearly vacuous here - refdes and part name
+        # carry the gate. The mapping is right; the source data is thin.
+        mpn: MPN
+      skip_refdes: '^(FD|LOGO|DOC|PCB)\d*$'
+    odb:
+      root: Notecarrier-XI/v1.4/PCB + 3D + 2D/FAB/ODB/odb
+      step: pcb
+    gerbers:
+      original_dir: Notecarrier-XI/v1.4/PCB + 3D + 2D/FAB/Gerber
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM15"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        In1_Cu:       { kicad: "*.g1", original: "*.G1" }
+        In2_Cu:       { kicad: "*.g2", original: "*.G2" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
+
+  # notecarrier-xs / notecarrier-x / notecarrier-xm: the byte repo's dev/
+  # folders never captured the published v1.2 sources (dev jumped from v1.1
+  # straight to v1.3-in-progress), so all three are ported from the closest
+  # available source (the post-v1.2 design-house dev state) and published
+  # WITH A DOCUMENTED DISCLAIMER — each gerber diff vs the published v1.2 fab
+  # shows known, documented deviations (see each port's
+  # KiCad_format/documentation/Porting-Notes.md).
+  notecarrier-xs:
+    product_dir: Notecarrier-XS/v1.2
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
+    pnp:
+      path: "Notecarrier-XS/v1.2/3000-789-002_PnP-file.pnp"
+      skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
+      # sub-pad residuals on two connectors: a placement-origin
+      # convention, not a design difference (see the report)
+    kicad:
+      sch: Notecarrier-XS/v1.2/KiCad_format/Notecarrier-XS.kicad_sch
+      pcb: Notecarrier-XS/v1.2/KiCad_format/Notecarrier-XS.kicad_pcb
+    bom:
+      path: Notecarrier-XS/v1.2/BOM-3000-789-002.xlsx
+      header_contains: Reference
+      kicad_mpn_field: BL PART NUMBER
+      check_value: false
+      columns:
+        refs: Reference
+        value: Item Name
+        mpn: BL Part Number
+      skip_refdes: '^(TP|FID|FD|MH|LOGO|DOC|PCB|ASS)\d*$'
+    gerbers:
+      # local extraction of the in-repo shipped fab package:
+      original_zip: "Notecarrier-XS/v1.2/2200-914__2024-06-06.zip"
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM15"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
+
+  notecarrier-x:
+    product_dir: Notecarrier-X/v1.2
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
+    pnp:
+      path: "Notecarrier-X/v1.2/3000-794-001_PnP-file.pnp"
+      skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
+      # sub-pad residuals on two connectors: a placement-origin
+      # convention, not a design difference (see the report)
+    kicad:
+      sch: Notecarrier-X/v1.2/KiCad_format/Notecarrier-X.kicad_sch
+      pcb: Notecarrier-X/v1.2/KiCad_format/Notecarrier-X.kicad_pcb
+    bom:
+      path: Notecarrier-X/v1.2/BOM-3000-794-001.xlsx
+      header_contains: Reference
+      kicad_mpn_field: BL PART NUMBER
+      check_value: false
+      columns:
+        refs: Reference
+        value: Item Name
+        mpn: BL Part Number
+      skip_refdes: '^(TP|FID|FD|MH|LOGO|DOC|PCB|ASS)\d*$'
+    gerbers:
+      # local extraction of the in-repo shipped fab package:
+      original_zip: "Notecarrier-X/v1.2/2200-918__2024-06-06.zip"
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM15"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
+
+  notecarrier-xm:
+    product_dir: Notecarrier-XM/v1.2
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC and by the per-layer gerber diff"
+    pnp:
+      path: "Notecarrier-XM/v1.2/3000-793-001_PnP-file.pnp"
+      skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB)\\d*$"
+    kicad:
+      sch: Notecarrier-XM/v1.2/KiCad_format/Notecarrier-XM.kicad_sch
+      pcb: Notecarrier-XM/v1.2/KiCad_format/Notecarrier-XM.kicad_pcb
+    bom:
+      path: Notecarrier-XM/v1.2/BOM-3000-793-001.xlsx
+      header_contains: Reference
+      kicad_mpn_field: BL PART NUMBER
+      check_value: false
+      columns:
+        refs: Reference
+        value: Item Name
+        mpn: BL Part Number
+      skip_refdes: '^(TP|FID|FD|MH|LOGO|DOC|PCB|ASS)\d*$'
+    gerbers:
+      # local extraction of the in-repo shipped fab package:
+      original_zip: "Notecarrier-XM/v1.2/2200-917__2024-06-12.zip"
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM15"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
+
+  # notecarrier-xp: NO-GO — the published v3.1 fab (2200-925, 2024-06-26) was
+  # generated from an uncommitted working state. Every committed dev/ state
+  # differs in copper: 5d577c0/907d345 add a fully-routed DNP subcircuit
+  # (Q1, R12-R15, C18/C19) absent from the fab, and 469a5f7 removes it but
+  # reroutes the bottom-centre track bundle. See the X-series porting notes.
+  notecarrier-xp:
+    product_dir: Notecarrier-XP/v3.1
+
+  # Notecarrier-Pi v2.0 - OrCAD/Allegro-authored revision, ported as a delta
+  # from the validated v1.1 KiCad port (see the port's Porting-Notes.md).
+  # The shipped artwork films are Allegro .art with an A3 drawing frame, so
+  # the diff uses explicit render windows and the films' own outline strokes.
+  # "Notecarrier-Pi/v2.0/Notecarrier-Pi Gerbers v2.zip".
+  notecarrier-pi:
+    product_dir: Notecarrier-Pi/v2.0
+    # Gates this board cannot run, and why. run_all.py treats a skipped
+    # gate as a failure unless it is declared here.
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the fab-connectivity trace committed as validation/fabnet-compare.txt, the schematic-parity check inside DRC, and the per-layer film diff"
+      PNP: "the shipped package carries Allegro PLACETOP/PLACEBOTTOM data in a board-local, per-side-mirrored frame that pnp_compare's parsers do not consume; placement was verified during the delta port via the calibrated film transform and the numeric pad-vs-flash check recorded in documentation/Porting-Notes.md"
+      BOM: "the shipped v2.0 BOM spreadsheet lives in the internal fae repo and is not part of note-hardware; the comparison was run during porting and its output is committed as validation/bom-compare.txt"
+    kicad:
+      sch: Notecarrier-Pi/v2.0/KiCad_format/Notecarrier-Pi.kicad_sch
+      pcb: Notecarrier-Pi/v2.0/KiCad_format/Notecarrier-Pi.kicad_pcb
+    # BOM gate: the shipped v2.0 BOM spreadsheet is internal (fae repo) and
+    # not part of note-hardware; the comparison was run during porting and
+    # its result is committed as validation/bom-compare.txt. Run with
+    # --skip BOM.
+    gerbers:
+      original_zip: "Notecarrier-Pi/v2.0/Notecarrier-Pi Gerbers v2.zip"
+      original_tool: Allegro
+      original_has_outline: true
+      window:
+        original: [-2.7591, -0.0984, -0.0031, 2.2246]
+        kicad: [2.359, -5.610, 5.115, -3.287]
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "03-MANUFACTURING.art"
+      layers:
+        F_Cu: { kicad: "*.gtl", original: "04-TOP.art" }
+        B_Cu: { kicad: "*.gbl", original: "07-BOTTOM.art" }
+        In1_Cu: { kicad: "*In1_Cu.g1", original: "05-GND.art" }
+        In2_Cu: { kicad: "*In2_Cu.g2", original: "06-POWER.art" }
+        F_Paste: { kicad: "*.gtp", original: "10-PASTETOP.art" }
+        B_Paste: { kicad: "*.gbp", original: "11-PASTEBOTTOM.art" }
+        F_Mask: { kicad: "*.gts", original: "08-SOLDERTOP.art" }
+        B_Mask: { kicad: "*.gbs", original: "09-SOLDERBOTTOM.art" }
+        F_Silkscreen: { kicad: "*.gto", original: "12-SILKTOP.art" }
+        B_Silkscreen: { kicad: "*.gbo", original: "13-SILKBOTTOM.art" }

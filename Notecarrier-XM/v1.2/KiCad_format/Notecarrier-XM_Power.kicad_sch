@@ -1,0 +1,3621 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "747e8da1-cbf7-4e3f-a878-10e6281a541a")
+	(paper "A4")
+	(title_block
+		(rev "v1.2")
+		(company "Byte Lab Grupa d.o.o.")
+	)
+	(lib_symbols
+		(symbol "100378_notecarrier-xm-altium-import:+VBAT_ARROW"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "+VBAT"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name '+VBAT'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "+VBAT_ARROW_0_0"
+				(polyline
+					(pts
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0)
+					(hide yes)
+					(name "+VBAT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "100378_notecarrier-xm-altium-import:+VIO_ARROW"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "+VIO"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name '+VIO'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "+VIO_ARROW_0_0"
+				(polyline
+					(pts
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0)
+					(hide yes)
+					(name "+VIO"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "100378_notecarrier-xm-altium-import:+VMAIN_ARROW"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "+VMAIN"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name '+VMAIN'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "+VMAIN_ARROW_0_0"
+				(polyline
+					(pts
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0)
+					(hide yes)
+					(name "+VMAIN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "100378_notecarrier-xm-altium-import:+VUSB_ARROW"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "+VUSB"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name '+VUSB'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "+VUSB_ARROW_0_0"
+				(polyline
+					(pts
+						(xy -0.635 -1.27) (xy 0.635 -1.27) (xy 0 -2.54) (xy -0.635 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0)
+					(hide yes)
+					(name "+VUSB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "100378_notecarrier-xm-altium-import:GND_BAR"
+			(power)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name 'GND'"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "GND_BAR_0_0"
+				(polyline
+					(pts
+						(xy -1.27 -2.54) (xy 1.27 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0)
+					(hide yes)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "BL_Analog:root_0_ISL9122AIINZ-T_BL_Analog.SchLib"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "IC CON BUCK-BOOST ADJ 0.5A WLCSP-8"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*BGA8N40P2X4_180x100x50*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "root_0_ISL9122AIINZ-T_BL_Analog.SchLib_1_0"
+				(rectangle
+					(start 0 -20.32)
+					(end -33.02 0)
+					(stroke
+						(width 0.0254)
+						(type solid)
+						(color 128 0 0 1)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin power_in line
+					(at -30.48 5.08 270)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -30.48 -25.4 90)
+					(length 5.08)
+					(name "SCL"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "D1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -25.4 -25.4 90)
+					(length 5.08)
+					(name "SDA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "D2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -20.32 5.08 270)
+					(length 5.08)
+					(name "EN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -12.7 5.08 270)
+					(length 5.08)
+					(name "VIN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -12.7 -25.4 90)
+					(length 5.08)
+					(name "VOUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -2.54 5.08 270)
+					(length 5.08)
+					(name "LX1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -2.54 -25.4 90)
+					(length 5.08)
+					(name "LX2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "BL_Analog:root_0_LM66200DRLR_BL_Analog.SchLib"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "IC, Power switch, OR Controller N+1 ORing Controller N-Channel 2:1 SOT-583"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*SOT-583*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "root_0_LM66200DRLR_BL_Analog.SchLib_1_0"
+				(rectangle
+					(start 0 -17.78)
+					(end -27.94 0)
+					(stroke
+						(width 0.0254)
+						(type solid)
+						(color 128 0 0 1)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin power_in line
+					(at -25.4 5.08 270)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -22.86 5.08 270)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -17.78 5.08 270)
+					(length 5.08)
+					(name "~{ON}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at -17.78 -22.86 90)
+					(length 5.08)
+					(name "STAT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -12.7 5.08 270)
+					(length 5.08)
+					(name "VIN2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -7.62 -22.86 90)
+					(length 5.08)
+					(name "VOUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -5.08 -22.86 90)
+					(length 5.08)
+					(name "VOUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 5.08 270)
+					(length 5.08)
+					(name "VIN1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "BL_Passive:root_0_L0603-1u-20 MCKK1608T1R0MN_BL_Passive.SchLib"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Inductor 0603 1u ±20% 1.3A"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*L-0603*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "root_0_L0603-1u-20 MCKK1608T1R0MN_BL_Passive.SchLib_1_0"
+				(arc
+					(start 0 2.54)
+					(mid 0.635 1.905)
+					(end 0 1.27)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 1.27)
+					(mid 0.635 0.635)
+					(end 0 0)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 0)
+					(mid 0.635 -0.635)
+					(end 0 -1.27)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 -1.27)
+					(mid 0.635 -1.905)
+					(end 0 -2.54)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "BL_Passive:root_0_R0402-10M-1_BL_Passive.SchLib"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Resistor 10M ±1% 0402"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*R-0402*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "root_0_R0402-10M-1_BL_Passive.SchLib_1_0"
+				(polyline
+					(pts
+						(xy -0.762 3.81) (xy 0.762 3.81) (xy 0.762 -1.27) (xy -0.762 -1.27) (xy -0.762 3.81)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 0 5.08 270)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "BL_Passive:root_1_C0805-22u-16V-X5R_BL_Passive.SchLib"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Capacitor ceramic 22u ±10% X5R 16V 0805"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*C-0805*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "root_1_C0805-22u-16V-X5R_BL_Passive.SchLib_1_0"
+				(polyline
+					(pts
+						(xy -4.572 -0.762) (xy -0.508 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 0) (xy -2.54 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 -2.54) (xy -2.54 -1.778)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.508 -1.778) (xy -4.572 -1.778)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -2.54 2.54 270)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -2.54 -5.08 90)
+					(length 2.54)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(rectangle
+		(start 172.72 44.9072)
+		(end 147.32 60.1472)
+		(stroke
+			(width 0.508)
+			(type solid)
+			(color 218 36 103 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 2c8496d0-911e-4f70-9cf3-23ca9a43726f)
+	)
+	(text "3V3 Buck/Boost Regulator"
+		(exclude_from_sim no)
+		(at 142.24 42.3672 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+				(thickness 0.508)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+		(uuid "113cbcd5-6174-435d-ac33-84bf05f98ee5")
+	)
+
+
+
+
+
+
+
+
+
+
+
+
+
+	(text "Copyright © 2023 Blues Inc."
+		(exclude_from_sim no)
+		(at 6.35 25.8572 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "95cc3631-8f32-4444-9795-ef3486c3ef9d")
+	)
+
+
+
+	(text "VBUS ORing"
+		(exclude_from_sim no)
+		(at 15.24 42.3672 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+				(thickness 0.508)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+		(uuid "ce834a10-7bbd-4433-a994-019842d5723a")
+	)
+
+
+
+	(text "DESIGN NOTE:\nInput Voltage: 1.8V - 5.5V\nOutput Voltage: 3.3V\n\nPeak Output Current:\n500mA\nAverage Current: 100mA"
+		(exclude_from_sim no)
+		(at 149.542 47.1297 0)
+		(effects
+			(font
+				(size 1.016 1.016)
+			)
+			(justify left top)
+		)
+		(uuid "c523bb13-f720-48f3-b275-8ef0fc9faa91")
+	)
+	(junction
+		(at 91.44 60.1472)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "07ab3258-f98f-4808-beb6-4c511714b913")
+	)
+	(junction
+		(at 53.34 77.9272)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "23c6adf4-2ae9-4354-92a4-c77b79104c6f")
+	)
+	(junction
+		(at 53.34 80.4672)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7e20e9ba-e702-4e3e-ac1b-9e173848b898")
+	)
+	(junction
+		(at 187.96 77.9272)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "88553d8d-4e74-4540-bf03-a1e7d450076f")
+	)
+	(junction
+		(at 149.86 70.3072)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "af82432f-82a0-40cf-ba1f-1633b14c8a9c")
+	)
+	(junction
+		(at 231.14 70.3072)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ce7bcb81-b5c3-449e-b647-8b8686f7a3e7")
+	)
+	(no_connect
+		(at 223.52 83.0072)
+		(uuid "135fbe79-1934-4f38-b4e0-b17b1aed1fd8")
+	)
+	(no_connect
+		(at 86.36 72.8472)
+		(uuid "24051909-c3b5-4b49-9a1e-6d03c69923ba")
+	)
+	(no_connect
+		(at 223.52 88.0872)
+		(uuid "d5cdc18c-2e4e-4fdd-bc8f-001e903c46fe")
+	)
+	(polyline
+		(pts
+			(xy 259.08 204.9272) (xy 259.08 176.9872)
+		)
+		(stroke
+			(width 0.0254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(uuid "0346a18f-f4d5-4c04-8f77-17b0cbbc14c0")
+	)
+	(wire
+		(pts
+			(xy 53.34 83.0072) (xy 53.34 80.4672)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "048e5765-a632-4ddc-8145-a705477aad90")
+	)
+	(wire
+		(pts
+			(xy 187.96 93.1672) (xy 187.96 88.0872)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "09576f8f-30cf-4b40-92e9-798e84688ee2")
+	)
+	(polyline
+		(pts
+			(xy 258.826 183.5912) (xy 193.04 183.5912)
+		)
+		(stroke
+			(width 0.0254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(uuid "0fe3db52-e4fc-4927-bff8-2325682e9fbc")
+	)
+	(polyline
+		(pts
+			(xy 10.16 103.3272) (xy 10.16 32.2072)
+		)
+		(stroke
+			(width 0.508)
+			(type dash)
+			(color 17 3 127 1)
+		)
+		(uuid "12c374a5-c1cb-437a-a216-8ba595ff5e99")
+	)
+	(polyline
+		(pts
+			(xy 241.3 32.2072) (xy 241.3 103.3272)
+		)
+		(stroke
+			(width 0.508)
+			(type dash)
+			(color 17 3 127 1)
+		)
+		(uuid "12dc5353-bc25-4d86-b793-e85149ee1568")
+	)
+	(wire
+		(pts
+			(xy 228.6 44.9072) (xy 228.6 60.1472)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ae920d8-843f-4a6d-a5c4-b95fb0d59a91")
+	)
+	(wire
+		(pts
+			(xy 91.44 60.1472) (xy 91.44 55.0672)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "32e28193-9f09-4e9d-a5d8-26161fdb1595")
+	)
+	(polyline
+		(pts
+			(xy 193.04 204.9272) (xy 193.04 176.9872)
+		)
+		(stroke
+			(width 0.0254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(uuid "37812bfc-ba17-471b-b322-9ff4caaae8ae")
+	)
+	(wire
+		(pts
+			(xy 231.14 77.9272) (xy 231.14 70.3072)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d992766-e6d2-44d3-b48f-2e2f596610a6")
+	)
+	(wire
+		(pts
+			(xy 187.96 44.9072) (xy 205.74 44.9072)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "412140f4-2ac5-42d4-be8c-5a85e86cde8d")
+	)
+	(wire
+		(pts
+			(xy 228.6 60.1472) (xy 223.52 60.1472)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4aae9bda-5832-4f72-b93d-fa26c642e3d5")
+	)
+	(polyline
+		(pts
+			(xy 258.826 194.7672) (xy 193.04 194.7672)
+		)
+		(stroke
+			(width 0.0254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(uuid "54a08347-2fa7-483a-9373-e45e51be5f42")
+	)
+	(wire
+		(pts
+			(xy 53.34 80.4672) (xy 53.34 77.9272)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5888663f-7298-42d3-a9db-5551c08bb7e3")
+	)
+	(wire
+		(pts
+			(xy 149.86 70.3072) (xy 149.86 67.7672)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "594d2942-8a98-408f-b637-1f9898b31c17")
+	)
+	(polyline
+		(pts
+			(xy 137.16 103.3272) (xy 137.16 32.2072)
+		)
+		(stroke
+			(width 0.508)
+			(type dash)
+			(color 17 3 127 1)
+		)
+		(uuid "5d9ff6b5-e8a2-487c-bb74-340959b425c6")
+	)
+	(wire
+		(pts
+			(xy 193.04 70.3072) (xy 149.86 70.3072)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "657b840d-ada9-4192-83d6-7c8ed8a5607d")
+	)
+	(wire
+		(pts
+			(xy 187.96 83.0072) (xy 187.96 77.9272)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "679b302d-9827-47d0-8435-a4ca2c5a9b46")
+	)
+	(polyline
+		(pts
+			(xy 132.08 103.3272) (xy 10.16 103.3272)
+		)
+		(stroke
+			(width 0.508)
+			(type dash)
+			(color 17 3 127 1)
+		)
+		(uuid "72c2e12e-e872-4b92-80f0-a1b70868534b")
+	)
+	(polyline
+		(pts
+			(xy 241.3 103.3272) (xy 137.16 103.3272)
+		)
+		(stroke
+			(width 0.508)
+			(type dash)
+			(color 17 3 127 1)
+		)
+		(uuid "7616a52c-6910-460c-b0da-28a5619f3c17")
+	)
+	(polyline
+		(pts
+			(xy 258.826 199.8472) (xy 193.04 199.8472)
+		)
+		(stroke
+			(width 0.0254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(uuid "7da78dd0-4438-40da-97dd-5aa1b191f0f7")
+	)
+	(wire
+		(pts
+			(xy 91.44 62.6872) (xy 91.44 60.1472)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "895f111e-4662-49f3-84be-cd684df849cc")
+	)
+	(wire
+		(pts
+			(xy 58.42 80.4672) (xy 53.34 80.4672)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a0af1c0-09c2-42a4-a85c-f895e9dcdcac")
+	)
+	(wire
+		(pts
+			(xy 231.14 70.3072) (xy 223.52 70.3072)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "997c4225-7546-4ec5-a90e-aeab7d1a8e34")
+	)
+	(polyline
+		(pts
+			(xy 193.04 176.9872) (xy 287.02 176.9872)
+		)
+		(stroke
+			(width 0.0254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(uuid "9ddb6d79-2a11-40e8-9b40-cc44a7c0f45c")
+	)
+	(polyline
+		(pts
+			(xy 228.092 199.8472) (xy 228.092 204.9272)
+		)
+		(stroke
+			(width 0.0254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(uuid "a0a1d8c8-e8b7-4d25-ae67-b1ca1f6fbde5")
+	)
+	(wire
+		(pts
+			(xy 149.86 93.1672) (xy 149.86 85.5472)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a0bcd937-1af3-4f12-b8e1-ef863a267ffd")
+	)
+	(wire
+		(pts
+			(xy 171.45 77.9272) (xy 175.26 77.9272)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a6a27b6d-4686-427d-8d00-b3b4b0079c44")
+	)
+	(wire
+		(pts
+			(xy 187.96 88.0872) (xy 193.04 88.0872)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b0f45042-4691-49b6-838d-24db7127c407")
+	)
+	(wire
+		(pts
+			(xy 48.26 67.7672) (xy 58.42 67.7672)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b2fdfd31-b352-4811-8838-df0487fbb29c")
+	)
+	(wire
+		(pts
+			(xy 53.34 72.8472) (xy 53.34 77.9272)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd72378d-27ae-483e-9b6e-2c55828365cf")
+	)
+	(polyline
+		(pts
+			(xy 10.16 32.2072) (xy 132.08 32.2072)
+		)
+		(stroke
+			(width 0.508)
+			(type dash)
+			(color 17 3 127 1)
+		)
+		(uuid "bdfb8cad-4c13-4715-b899-37ce97399c3b")
+	)
+	(wire
+		(pts
+			(xy 149.86 70.3072) (xy 149.86 77.9272)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc40b69f-b12e-447a-92b8-ddefa4672729")
+	)
+	(wire
+		(pts
+			(xy 213.36 44.9072) (xy 228.6 44.9072)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d54dc39b-5083-406f-be36-9037915f8e37")
+	)
+	(wire
+		(pts
+			(xy 180.34 83.0072) (xy 187.96 83.0072)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d5b66431-a891-4d53-a19e-79ef77567cec")
+	)
+	(wire
+		(pts
+			(xy 193.04 60.1472) (xy 187.96 60.1472)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d6339b39-b78e-4568-a484-c49a0227b6ff")
+	)
+	(polyline
+		(pts
+			(xy 258.826 189.1792) (xy 193.04 189.1792)
+		)
+		(stroke
+			(width 0.0254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(uuid "d6f4c49f-d374-45a8-ab30-65968bfde15e")
+	)
+	(polyline
+		(pts
+			(xy 242.57 199.8472) (xy 242.57 204.9272)
+		)
+		(stroke
+			(width 0.0254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(uuid "e072897c-da8b-482b-9d3a-df034f103f39")
+	)
+	(polyline
+		(pts
+			(xy 132.08 32.2072) (xy 132.08 103.3272)
+		)
+		(stroke
+			(width 0.508)
+			(type dash)
+			(color 17 3 127 1)
+		)
+		(uuid "e1344d7e-1965-45fa-a224-34ed13fae08f")
+	)
+	(polyline
+		(pts
+			(xy 228.092 194.7672) (xy 228.092 199.8472)
+		)
+		(stroke
+			(width 0.0254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(uuid "e2120218-74b6-4a40-9e45-11a4faf0828c")
+	)
+	(wire
+		(pts
+			(xy 48.26 57.6072) (xy 58.42 57.6072)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e374baab-b284-4516-b8bb-af8ac0c75f77")
+	)
+	(wire
+		(pts
+			(xy 53.34 77.9272) (xy 58.42 77.9272)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e62a8f45-2d45-45b4-ab3f-88442cdc1399")
+	)
+	(wire
+		(pts
+			(xy 187.96 77.9272) (xy 193.04 77.9272)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e6c40d65-ddce-4b2c-8207-32dccc1030d9")
+	)
+	(polyline
+		(pts
+			(xy 137.16 32.2072) (xy 241.3 32.2072)
+		)
+		(stroke
+			(width 0.508)
+			(type dash)
+			(color 17 3 127 1)
+		)
+		(uuid "eaf7464f-a312-4cdb-a2c1-269000fde6e4")
+	)
+	(wire
+		(pts
+			(xy 86.36 62.6872) (xy 91.44 62.6872)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eb66360c-0811-46fd-a452-e693cd50fac9")
+	)
+	(wire
+		(pts
+			(xy 58.42 72.8472) (xy 53.34 72.8472)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ebeaa9bb-5fb9-41a5-85fa-24730e850dec")
+	)
+	(wire
+		(pts
+			(xy 187.96 60.1472) (xy 187.96 44.9072)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ed609bbc-4b13-420f-97d2-436032a2c661")
+	)
+	(wire
+		(pts
+			(xy 231.14 93.1672) (xy 231.14 85.5472)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8e9c12e-7412-431b-b85f-906d353f0c3d")
+	)
+	(wire
+		(pts
+			(xy 86.36 60.1472) (xy 91.44 60.1472)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fea11887-6872-455c-bd66-ff3230ff4304")
+	)
+	(wire
+		(pts
+			(xy 182.88 77.9272) (xy 187.96 77.9272)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff3a4efd-2f1e-416a-a429-6232d210f52f")
+	)
+	(global_label "VIO_EN"
+		(shape input)
+		(at 180.34 83.0072 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "be33eb98-d5e1-4a1b-a2b9-c5b26f9ced34")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 180.34 83.0072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "100378_notecarrier-xm-altium-import:GND_BAR")
+		(at 149.86 93.1672 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "11177c2c-57e7-4147-aeff-8ee533a43efb")
+		(property "Reference" "#PWR0139"
+			(at 149.86 93.1672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 149.86 96.9772 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 149.86 93.1672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 149.86 93.1672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 149.86 93.1672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "ed88a006-923f-472e-911c-e5397ba9b7b3")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "#PWR0139")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "100378_notecarrier-xm-altium-import:+VIO_ARROW")
+		(at 231.14 70.3072 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "203a883d-01fc-47cc-9590-c71a41db6357")
+		(property "Reference" "#PWR0140"
+			(at 231.14 70.3072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+VIO"
+			(at 231.14 66.4972 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 231.14 70.3072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 231.14 70.3072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 231.14 70.3072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "62394896-06e7-4ca8-bc66-446da64239c9")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "#PWR0140")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "100378_notecarrier-xm-altium-import:GND_BAR")
+		(at 53.34 83.0072 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "22740183-815a-42bc-a80c-ce97d41985a6")
+		(property "Reference" "#PWR0141"
+			(at 53.34 83.0072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 53.34 86.8172 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 53.34 83.0072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 53.34 83.0072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 53.34 83.0072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "7f009bde-eada-471a-91d2-9363ec8212f9")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "#PWR0141")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BL_Analog:root_0_LM66200DRLR_BL_Analog.SchLib")
+		(at 63.5 55.0672 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4c9adf9d-a9f8-4349-8af8-033d68ce9395")
+		(property "Reference" "U3"
+			(at 63.5 55.0672 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "LM66200DRLR"
+			(at 63.5 85.5472 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "SOT-583"
+			(at 63.5 55.0672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 63.5 55.0672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "IC, Power switch, OR Controller N+1 ORing Controller N-Channel 2:1 SOT-583"
+			(at 63.5 55.0672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "CHECKED_BY" "Hamin"
+			(at 57.912 100.7872 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "DATEMODIFIED" "06-02-2023"
+			(at 57.912 100.7872 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "DRAWN_BY" "Golubic"
+			(at 57.912 100.7872 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER PART NUMBER" "LM66200DRLR"
+			(at 57.912 100.7872 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Texas Instruments"
+			(at 57.912 100.7872 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "NOTE" "*"
+			(at 57.912 100.7872 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "BL PART NUMBER" "2007-318"
+			(at 57.912 100.7872 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "SUPPLIER 1" "Digi-Key"
+			(at 50.292 49.9872 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "SUPPLIER PART NUMBER 1" "296-LM66200DRLRTR-ND"
+			(at 50.292 49.9872 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "239b410d-897b-4413-beea-9d4e13f83aad")
+		)
+		(pin "4"
+			(uuid "14d366f3-716a-4cba-8eeb-79c83a60d493")
+		)
+		(pin "5"
+			(uuid "2ad77174-f84d-4546-923a-dd9505aae71c")
+		)
+		(pin "8"
+			(uuid "1b818327-5d7f-4d96-aeea-6347f154895d")
+		)
+		(pin "6"
+			(uuid "1804d13f-787d-4a27-b001-7dfaf9e809a5")
+		)
+		(pin "2"
+			(uuid "2759f858-2d38-40f0-b879-12ca47ce1041")
+		)
+		(pin "7"
+			(uuid "ffcc7b66-1385-491c-93dc-17faed22e921")
+		)
+		(pin "1"
+			(uuid "c8c73183-1d44-4e78-aff6-a996f281decf")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "U3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "100378_notecarrier-xm-altium-import:+VMAIN_ARROW")
+		(at 171.45 77.9272 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6a72aa2b-eb77-423b-96ff-0da51788ffb8")
+		(property "Reference" "#PWR0142"
+			(at 171.45 77.9272 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+VMAIN"
+			(at 167.64 77.9272 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 171.45 77.9272 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 171.45 77.9272 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 171.45 77.9272 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "b89a1e5f-7e36-45f7-b153-d8c5e93f3de5")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "#PWR0142")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "100378_notecarrier-xm-altium-import:GND_BAR")
+		(at 187.96 93.1672 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "72656184-d748-416d-97a1-46742e4caef0")
+		(property "Reference" "#PWR0143"
+			(at 187.96 93.1672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 187.96 96.9772 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 187.96 93.1672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 187.96 93.1672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 187.96 93.1672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "0079bbaa-cd92-43f8-88b5-4107b5e8aa2d")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "#PWR0143")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "100378_notecarrier-xm-altium-import:+VUSB_ARROW")
+		(at 48.26 67.7672 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "76d9f603-6943-490d-889a-aeeeb5f0879e")
+		(property "Reference" "#PWR0144"
+			(at 48.26 67.7672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+VUSB"
+			(at 48.26 63.9572 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 48.26 67.7672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 48.26 67.7672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 48.26 67.7672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "7f859bcf-3884-4596-97a1-e9ccb454fe6d")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "#PWR0144")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "100378_notecarrier-xm-altium-import:+VMAIN_ARROW")
+		(at 91.44 55.0672 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9cc08f47-1b16-4e69-98b1-9b6c8e95d1ad")
+		(property "Reference" "#PWR0145"
+			(at 91.44 55.0672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+VMAIN"
+			(at 91.44 51.2572 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 91.44 55.0672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 91.44 55.0672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 91.44 55.0672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "5e787fd7-6668-4c69-a598-fe8cc2f22e00")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "#PWR0145")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BL_Analog:root_0_ISL9122AIINZ-T_BL_Analog.SchLib")
+		(at 198.12 57.6072 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a70f67a7-fa48-41be-ba64-be4314f078a1")
+		(property "Reference" "U1"
+			(at 198.12 57.6072 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "ISL9122AIINZ-T"
+			(at 198.12 93.1672 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "BL_Components.PcbLib:BGA8N40P2X4_180x100x50"
+			(at 198.12 57.6072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 198.12 57.6072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "IC CON BUCK-BOOST ADJ 0.5A WLCSP-8"
+			(at 198.12 57.6072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER PART NUMBER" "ISL9122AIINZ-T"
+			(at 192.532 67.2592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "DATEMODIFIED" "13-01-2023"
+			(at 192.532 67.2592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECKED_BY" "Hlupic"
+			(at 192.532 67.2592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "DRAWN_BY" "Marsic"
+			(at 192.532 67.2592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Renesas"
+			(at 192.532 67.2592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "BL PART NUMBER" "2007-147"
+			(at 192.532 67.2592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "NOTE" "*"
+			(at 192.532 67.2592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(pin "C1"
+			(uuid "cd76b7ba-400b-41e4-9985-a3005ddf3414")
+		)
+		(pin "B1"
+			(uuid "c57e9b92-af56-42f4-bd24-f120d28bfb46")
+		)
+		(pin "A2"
+			(uuid "b8624751-473a-4fe7-bbdc-7118a25f6910")
+		)
+		(pin "A1"
+			(uuid "0e73988f-6162-4529-a8d3-a78d9aee2472")
+		)
+		(pin "B2"
+			(uuid "fdc34a6d-f031-4d80-be52-7787532097e3")
+		)
+		(pin "C2"
+			(uuid "12679aa1-3601-422e-b971-1791fd0619c4")
+		)
+		(pin "D2"
+			(uuid "d9aa1c13-ba39-4228-90f8-e6417308ce17")
+		)
+		(pin "D1"
+			(uuid "16a742a8-c3f5-4a72-811a-e27c68fbef3f")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "U1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "100378_notecarrier-xm-altium-import:+VBAT_ARROW")
+		(at 48.26 57.6072 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bf8076dc-9b4c-43a8-bcc4-db4b8461cce4")
+		(property "Reference" "#PWR0146"
+			(at 48.26 57.6072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+VBAT"
+			(at 48.26 53.7972 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 48.26 57.6072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 48.26 57.6072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 48.26 57.6072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "06272839-e5d5-42a4-8db9-e76eecf62cd1")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "#PWR0146")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BL_Passive:root_0_L0603-1u-20 MCKK1608T1R0MN_BL_Passive.SchLib")
+		(at 209.55 44.9072 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c69a169e-7540-43cd-94fc-7b70c77d608b")
+		(property "Reference" "L5"
+			(at 207.01 44.1452 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "MCKK1608T1R0MN"
+			(at 200.152 48.2092 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "BL_Passive.PcbLib:L-0603"
+			(at 209.55 44.9072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 209.55 44.9072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Inductor 0603 1u ±20% 1.3A"
+			(at 209.55 44.9072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER PART NUMBER" "MCKK1608T1R0MN"
+			(at 203.962 54.5592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "DATEMODIFIED" "30-01-2020"
+			(at 203.962 54.5592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECKED_BY" "Hlupic"
+			(at 203.962 54.5592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "DRAWN_BY" "Fumic"
+			(at 203.962 54.5592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Taiyo Yuden"
+			(at 203.962 54.5592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "BL PART NUMBER" "2003-989"
+			(at 203.962 54.5592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "NOTE" "*"
+			(at 203.962 54.5592 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "SUPPLIER 1" "Digi-Key"
+			(at 205.232 42.8752 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "SUPPLIER PART NUMBER 1" "587-5973-1-ND"
+			(at 205.232 42.8752 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2064ac87-caf9-4df2-a15d-b69333ea9994")
+		)
+		(pin "2"
+			(uuid "1f1847f2-ceda-4196-b72b-b4723abe6330")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "L5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "100378_notecarrier-xm-altium-import:GND_BAR")
+		(at 231.14 93.1672 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "de47d930-11f0-4e12-9077-02a591a3912c")
+		(property "Reference" "#PWR0147"
+			(at 231.14 93.1672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 231.14 96.9772 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 231.14 93.1672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 231.14 93.1672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 231.14 93.1672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "76cb681b-2ad6-4caa-b107-b7620f5147d8")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "#PWR0147")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BL_Passive:root_1_C0805-22u-16V-X5R_BL_Passive.SchLib")
+		(at 147.32 83.0072 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e29dfaa1-b692-4c70-a02f-1736edfe271a")
+		(property "Reference" "C1"
+			(at 152.146 82.7532 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "22u"
+			(at 152.146 85.2932 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "C-0805"
+			(at 147.32 83.0072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 147.32 83.0072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capacitor ceramic 22u ±10% X5R 16V 0805"
+			(at 147.32 83.0072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "BL PART NUMBER" "2006-222"
+			(at 147.574 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "N/A"
+			(at 147.574 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER PART NUMBER" "N/A"
+			(at 147.574 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "DRAWN_BY" "Fumic"
+			(at 147.574 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "DATEMODIFIED" "28-07-2022"
+			(at 147.574 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECKED_BY" "Hamin"
+			(at 147.574 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "SUPPLIER 1" ""
+			(at 147.574 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "SUPPLIER PART NUMBER 1" ""
+			(at 147.574 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "04ef98eb-bc88-4ff2-8405-7860f0bf6c9d")
+		)
+		(pin "2"
+			(uuid "3076efd2-130b-468e-8a38-88725b710dc8")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BL_Passive:root_0_R0402-10M-1_BL_Passive.SchLib")
+		(at 180.34 77.9272 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f4fc85d2-375a-4e20-9c32-f0249b17647a")
+		(property "Reference" "R1"
+			(at 176.276 76.9112 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "10M"
+			(at 176.276 81.4832 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "BL_Passive.PcbLib:R-0402"
+			(at 180.34 77.9272 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 180.34 77.9272 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor 10M ±1% 0402"
+			(at 180.34 77.9272 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER PART NUMBER" "N/A"
+			(at 174.752 87.5792 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "DATEMODIFIED" "24-05-2016"
+			(at 174.752 87.5792 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECKED_BY" "Dodig"
+			(at 174.752 87.5792 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "DRAWN_BY" "Zvonc"
+			(at 174.752 87.5792 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "N/A"
+			(at 174.752 87.5792 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "BL PART NUMBER" "2002-832"
+			(at 174.752 87.5792 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "NOTE" "*"
+			(at 174.752 87.5792 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "SUPPLIER 1" "Digi-Key"
+			(at 174.752 75.8952 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "SUPPLIER PART NUMBER 1" "RC0402FR-0710ML"
+			(at 174.752 75.8952 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "2fb9ab79-cd9c-4f47-8a71-990d860ba719")
+		)
+		(pin "1"
+			(uuid "74a957eb-41d2-4fd0-b101-3602f3353923")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "100378_notecarrier-xm-altium-import:+VMAIN_ARROW")
+		(at 149.86 67.7672 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f7e22df6-a5c1-4460-ba29-838d274bdfda")
+		(property "Reference" "#PWR0148"
+			(at 149.86 67.7672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+VMAIN"
+			(at 149.86 63.9572 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 149.86 67.7672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 149.86 67.7672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 149.86 67.7672 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "b7421099-1c1d-489c-95d2-c05bf67c46c4")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "#PWR0148")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BL_Passive:root_1_C0805-22u-16V-X5R_BL_Passive.SchLib")
+		(at 228.6 83.0072 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fa4f24e7-31b4-448c-b028-05faa1bb9482")
+		(property "Reference" "C3"
+			(at 233.426 82.7532 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "22u"
+			(at 233.426 85.2932 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "C-0805"
+			(at 228.6 83.0072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 228.6 83.0072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capacitor ceramic 22u ±10% X5R 16V 0805"
+			(at 228.6 83.0072 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "BL PART NUMBER" "2006-222"
+			(at 228.854 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "N/A"
+			(at 228.854 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER PART NUMBER" "N/A"
+			(at 228.854 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "DRAWN_BY" "Fumic"
+			(at 228.854 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "DATEMODIFIED" "28-07-2022"
+			(at 228.854 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "CHECKED_BY" "Hamin"
+			(at 228.854 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "SUPPLIER 1" ""
+			(at 228.854 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(property "SUPPLIER PART NUMBER 1" ""
+			(at 228.854 77.4192 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "96351ba0-c4f3-42c2-a009-3c738dc5548f")
+		)
+		(pin "2"
+			(uuid "926c9933-e133-4afe-a003-4a1b6ec814ed")
+		)
+		(instances
+			(project "Notecarrier-XM"
+				(path "/776a8ba1-c5da-4455-a0f4-b952bf57d849/c474c321-6f24-4666-9dd6-7fdcdf2adbd4"
+					(reference "C3")
+					(unit 1)
+				)
+			)
+		)
+	)
+)
