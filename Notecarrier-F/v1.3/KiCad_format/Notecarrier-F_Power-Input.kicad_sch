@@ -2865,11 +2865,9 @@
 		)
 		(uuid "db39c5fd-3509-4e81-9fd2-3bebca2f0328")
 	)
-	(text_box "DESIGN NOTE:\n- Primary battery (non-rechargable) connector"
-		(exclude_from_sim no)
-		(at 227.33 68.58 0)
-		(size 31.75 8.89)
-		(margins 1.2025 1.2025 1.2025 1.2025)
+	(rectangle
+		(start 227.33 68.58)
+		(end 259.08 77.47)
 		(stroke
 			(width 0.5)
 			(type default)
@@ -2878,20 +2876,22 @@
 		(fill
 			(type none)
 		)
+		(uuid "63f5895f-c73f-589f-9480-a94795b0104f")
+	)
+	(text "DESIGN NOTE:\n- Primary battery\n(non-rechargable) connector"
+		(exclude_from_sim no)
+		(at 228.532 69.7825 0)
 		(effects
 			(font
 				(size 1.27 1.27)
-				(color 0 0 0 1)
 			)
 			(justify left top)
 		)
 		(uuid "34b3e853-30e9-4e6b-9f72-bcdd14a0c9cf")
 	)
-	(text_box "DESIGN NOTE:\n- Secondary battery (rechargable) connector\n- Li-po (3.3-4.2V) C>800mAh"
-		(exclude_from_sim no)
-		(at 137.16 66.04 0)
-		(size 34.29 11.43)
-		(margins 1.2025 1.2025 1.2025 1.2025)
+	(rectangle
+		(start 137.16 66.04)
+		(end 171.45 77.47)
 		(stroke
 			(width 0.5)
 			(type default)
@@ -2900,20 +2900,22 @@
 		(fill
 			(type none)
 		)
+		(uuid "f61ab4c2-361a-594d-8af8-1da031df8fde")
+	)
+	(text "DESIGN NOTE:\n- Secondary battery\n(rechargable) connector\n- Li-po (3.3-4.2V) C>800mAh"
+		(exclude_from_sim no)
+		(at 138.362 67.2425 0)
 		(effects
 			(font
 				(size 1.27 1.27)
-				(color 0 0 0 1)
 			)
 			(justify left top)
 		)
 		(uuid "7b164ee5-a5a5-4457-a165-23e898c5f5a1")
 	)
-	(text_box "DESIGN NOTE:\n- R_{iset} = K_{iset} / I_{out}\n- K_{iset} = 395 AΩ typically.\n- R_{iset} = 499R --> I_{out} = 791mA"
-		(exclude_from_sim no)
-		(at 78.74 76.2 0)
-		(size 38.1 11.43)
-		(margins 1.2025 1.2025 1.2025 1.2025)
+	(rectangle
+		(start 78.74 76.2)
+		(end 116.84 87.63)
 		(stroke
 			(width 0.5)
 			(type default)
@@ -2922,20 +2924,22 @@
 		(fill
 			(type none)
 		)
+		(uuid "3dbda3d1-ee62-524d-8179-37d56adb92ae")
+	)
+	(text "DESIGN NOTE:\n- R_{iset} = K_{iset} / I_{out}\n- K_{iset} = 395 AΩ typically.\n- R_{iset} = 499R --> I_{out} = 791mA"
+		(exclude_from_sim no)
+		(at 79.9425 77.4025 0)
 		(effects
 			(font
 				(size 1.27 1.27)
-				(color 0 0 0 1)
 			)
 			(justify left top)
 		)
 		(uuid "af8b4a36-a10a-4c90-840a-01800a7195c9")
 	)
-	(text_box "DESIGN NOTE:\n- Solar (PV) input connector"
-		(exclude_from_sim no)
-		(at 17.78 69.85 0)
-		(size 22.86 8.89)
-		(margins 1.2025 1.2025 1.2025 1.2025)
+	(rectangle
+		(start 17.78 69.85)
+		(end 40.64 78.74)
 		(stroke
 			(width 0.5)
 			(type default)
@@ -2944,10 +2948,14 @@
 		(fill
 			(type none)
 		)
+		(uuid "775f5d4f-6ab4-5324-a136-6d54fe720cfa")
+	)
+	(text "DESIGN NOTE:\n- Solar (PV) input\nconnector"
+		(exclude_from_sim no)
+		(at 18.9825 71.0525 0)
 		(effects
 			(font
 				(size 1.27 1.27)
-				(color 0 0 0 1)
 			)
 			(justify left top)
 		)

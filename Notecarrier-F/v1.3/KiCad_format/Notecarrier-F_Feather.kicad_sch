@@ -4364,11 +4364,9 @@
 		)
 		(uuid "f5284d01-97a0-48eb-8f98-549b73e23a1f")
 	)
-	(text_box "DESIGN NOTE:\n- AUX SW"
-		(exclude_from_sim no)
-		(at 50.8 72.39 0)
-		(size 21.59 6.35)
-		(margins 1.2025 1.2025 1.2025 1.2025)
+	(rectangle
+		(start 50.8 72.39)
+		(end 72.39 78.74)
 		(stroke
 			(width 0.5)
 			(type default)
@@ -4377,20 +4375,22 @@
 		(fill
 			(type none)
 		)
+		(uuid "dcc9fd42-9153-5b48-b3b2-5a05fe33c389")
+	)
+	(text "DESIGN NOTE:\n- AUX SW"
+		(exclude_from_sim no)
+		(at 52.0025 73.5925 0)
 		(effects
 			(font
 				(size 1.27 1.27)
-				(color 0 0 0 1)
 			)
 			(justify left top)
 		)
 		(uuid "52818c2f-9f0d-4077-94d3-914d3d3c4035")
 	)
-	(text_box "DESIGN NOTE:\n- OE is referenced to VCCA"
-		(exclude_from_sim no)
-		(at 171.45 125.73 0)
-		(size 30.48 6.35)
-		(margins 1.2025 1.2025 1.2025 1.2025)
+	(rectangle
+		(start 171.45 125.73)
+		(end 201.93 132.08)
 		(stroke
 			(width 0.5)
 			(type default)
@@ -4399,20 +4399,22 @@
 		(fill
 			(type none)
 		)
+		(uuid "a29c4b26-980d-593d-9e6e-dc1af88abfd5")
+	)
+	(text "DESIGN NOTE:\n- OE is referenced to VCCA"
+		(exclude_from_sim no)
+		(at 172.652 126.933 0)
 		(effects
 			(font
 				(size 1.27 1.27)
-				(color 0 0 0 1)
 			)
 			(justify left top)
 		)
 		(uuid "6d7b45db-8cab-40f9-89f7-ef7ce4c980af")
 	)
-	(text_box "SOFTWARE CONFIG NOTE:\nTruth table:\nIN1-2, IN3-4\nLogic 0 = NC is True/High, DFU = N\nLogic 1 = NO is True/High, DFU = Y\n"
-		(exclude_from_sim no)
-		(at 38.1 41.91 0)
-		(size 40.64 12.7)
-		(margins 1.2025 1.2025 1.2025 1.2025)
+	(rectangle
+		(start 38.1 41.91)
+		(end 78.74 54.61)
 		(stroke
 			(width 0.5)
 			(type default)
@@ -4421,20 +4423,22 @@
 		(fill
 			(type none)
 		)
+		(uuid "7d728d56-fa78-51d3-b5af-dac9e72868df")
+	)
+	(text "SOFTWARE CONFIG NOTE:\nTruth table:\nIN1-2, IN3-4\nLogic 0 = NC is True/High, DFU = N\nLogic 1 = NO is True/High, DFU = Y\n"
+		(exclude_from_sim no)
+		(at 39.3025 43.1125 0)
 		(effects
 			(font
 				(size 1.27 1.27)
-				(color 0 0 0 1)
 			)
 			(justify left top)
 		)
 		(uuid "83bb6a0a-df9a-4e95-8aec-834d9263274a")
 	)
-	(text_box "SOFTWARE CONFIG NOTE:\n- Flick switch towards \"ON\" to enable outboard DFU"
-		(exclude_from_sim no)
-		(at 38.1 26.67 0)
-		(size 40.64 12.7)
-		(margins 1.2025 1.2025 1.2025 1.2025)
+	(rectangle
+		(start 38.1 26.67)
+		(end 78.74 39.37)
 		(stroke
 			(width 0.5)
 			(type default)
@@ -4443,20 +4447,22 @@
 		(fill
 			(type none)
 		)
+		(uuid "3cc0d0e2-45d5-5525-aacc-aea322ab3176")
+	)
+	(text "SOFTWARE CONFIG NOTE:\n- Flick switch towards \"ON\" to enable\noutboard DFU"
+		(exclude_from_sim no)
+		(at 39.3025 27.8725 0)
 		(effects
 			(font
 				(size 1.27 1.27)
-				(color 0 0 0 1)
 			)
 			(justify left top)
 		)
 		(uuid "8c0dcdad-832c-4b56-9771-15b07b89a09d")
 	)
-	(text_box "DESIGN NOTE:\n- FEATHER_EN SW"
-		(exclude_from_sim no)
-		(at 36.83 119.38 0)
-		(size 21.59 6.35)
-		(margins 1.2025 1.2025 1.2025 1.2025)
+	(rectangle
+		(start 36.83 119.38)
+		(end 58.42 125.73)
 		(stroke
 			(width 0.5)
 			(type default)
@@ -4465,10 +4471,14 @@
 		(fill
 			(type none)
 		)
+		(uuid "7f2ab41d-6d43-5eb8-a683-cff852165233")
+	)
+	(text "DESIGN NOTE:\n- FEATHER_EN SW"
+		(exclude_from_sim no)
+		(at 38.0325 120.582 0)
 		(effects
 			(font
 				(size 1.27 1.27)
-				(color 0 0 0 1)
 			)
 			(justify left top)
 		)

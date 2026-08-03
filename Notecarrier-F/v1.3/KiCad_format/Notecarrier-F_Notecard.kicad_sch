@@ -4630,11 +4630,9 @@
 		)
 		(uuid "b875753f-d0b6-4a94-8ab9-ae622d35faca")
 	)
-	(text_box "DESIGN NOTE:\n- GPS ANT SW"
-		(exclude_from_sim no)
-		(at 128.27 55.88 0)
-		(size 20.32 6.35)
-		(margins 1.2025 1.2025 1.2025 1.2025)
+	(rectangle
+		(start 128.27 55.88)
+		(end 148.59 62.23)
 		(stroke
 			(width 0.5)
 			(type default)
@@ -4643,20 +4641,22 @@
 		(fill
 			(type none)
 		)
+		(uuid "9fa3818e-8b72-5bb5-af46-e8b5464ed6b2")
+	)
+	(text "DESIGN NOTE:\n- GPS ANT SW"
+		(exclude_from_sim no)
+		(at 129.472 57.0825 0)
 		(effects
 			(font
 				(size 1.27 1.27)
-				(color 0 0 0 1)
 			)
 			(justify left top)
 		)
 		(uuid "2d722c54-73b5-4456-bf7d-1e81358d8e8f")
 	)
-	(text_box "DESIGN NOTE:\n- VMODEM rated for 2A pulsed"
-		(exclude_from_sim no)
-		(at 196.85 127 0)
-		(size 33.02 6.35)
-		(margins 1.2025 1.2025 1.2025 1.2025)
+	(rectangle
+		(start 196.85 127)
+		(end 229.87 133.35)
 		(stroke
 			(width 0.5)
 			(type default)
@@ -4665,20 +4665,22 @@
 		(fill
 			(type none)
 		)
+		(uuid "8e8ef018-fc80-5329-903e-87f8b0c603fc")
+	)
+	(text "DESIGN NOTE:\n- VMODEM rated for 2A pulsed"
+		(exclude_from_sim no)
+		(at 198.052 128.202 0)
 		(effects
 			(font
 				(size 1.27 1.27)
-				(color 0 0 0 1)
 			)
 			(justify left top)
 		)
 		(uuid "57315526-5e20-4f1b-b810-e3a9c9ee6f8a")
 	)
-	(text_box "DESIGN NOTE:\n- N_VIO rated for 150mA"
-		(exclude_from_sim no)
-		(at 123.19 26.67 0)
-		(size 27.94 6.35)
-		(margins 1.2025 1.2025 1.2025 1.2025)
+	(rectangle
+		(start 123.19 26.67)
+		(end 151.13 33.02)
 		(stroke
 			(width 0.5)
 			(type default)
@@ -4687,20 +4689,22 @@
 		(fill
 			(type none)
 		)
+		(uuid "43e1db46-30b6-57d4-adad-41f3cced91c1")
+	)
+	(text "DESIGN NOTE:\n- N_VIO rated for 150mA"
+		(exclude_from_sim no)
+		(at 124.392 27.8725 0)
 		(effects
 			(font
 				(size 1.27 1.27)
-				(color 0 0 0 1)
 			)
 			(justify left top)
 		)
 		(uuid "6686f39a-7f8e-4668-ab11-d6d8d587a418")
 	)
-	(text_box "DESIGN NOTE:\n- RESET SW"
-		(exclude_from_sim no)
-		(at 261.62 134.62 0)
-		(size 17.78 6.35)
-		(margins 1.2025 1.2025 1.2025 1.2025)
+	(rectangle
+		(start 261.62 134.62)
+		(end 279.4 140.97)
 		(stroke
 			(width 0.5)
 			(type default)
@@ -4709,10 +4713,14 @@
 		(fill
 			(type none)
 		)
+		(uuid "e6ff4d38-8bdf-59a4-964c-706421273af3")
+	)
+	(text "DESIGN NOTE:\n- RESET SW"
+		(exclude_from_sim no)
+		(at 262.822 135.822 0)
 		(effects
 			(font
 				(size 1.27 1.27)
-				(color 0 0 0 1)
 			)
 			(justify left top)
 		)
