@@ -5940,16 +5940,6 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 109.22) (xy 46.99 109.22)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cff7a652-87c2-4efe-91d9-8f6fc5eab797")
-	)
-	(wire
-		(pts
 			(xy 190.5 36.83) (xy 207.01 36.83)
 		)
 		(stroke
@@ -6257,16 +6247,6 @@
 			(type default)
 		)
 		(uuid "f54ad0c8-be57-40ed-98ff-e855ca0a4380")
-	)
-	(wire
-		(pts
-			(xy 30.48 149.86) (xy 78.74 149.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f6af2bc0-c641-41e7-b858-e56a2f6f8baf")
 	)
 	(wire
 		(pts
@@ -7018,16 +6998,6 @@
 		)
 		(uuid "dc73ee14-f170-4bfc-98e0-4232858c6de2")
 	)
-	(label "F_EN"
-		(at 37.2695 109.22 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e3407309-73d9-49b6-be61-8c7c4c4b3f64")
-	)
 	(label "SW_SCL"
 		(at 233.68 165.1 180)
 		(effects
@@ -7180,17 +7150,6 @@
 			(justify right)
 		)
 		(uuid "0ebecfa4-4155-4cfd-a9be-6062e9c57e68")
-	)
-	(hierarchical_label "F_NRST"
-		(shape input)
-		(at 30.48 149.86 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "169f41e1-3f29-459e-8912-e1c630904af6")
 	)
 	(hierarchical_label "F_NRST_SW"
 		(shape input)
@@ -7402,17 +7361,6 @@
 		(uuid "94882b54-0c7e-4a70-b423-72f3cba25edf")
 	)
 
-	(hierarchical_label "F_EN"
-		(shape input)
-		(at 30.48 109.22 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "9b052234-ba73-4606-adda-e667e9d4e8c8")
-	)
 	(hierarchical_label "F_EN"
 		(shape input)
 		(at 154.94 162.56 0)
@@ -15529,4 +15477,34 @@
 			)
 		)
 	)
-)
+
+	(wire
+		(pts
+			(xy 36.83 109.22) (xy 46.99 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a0b7a1f8-6911-478f-a392-20bfacb370dd")
+	)
+	(label "N_VIO"
+		(at 36.83 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "16e0905a-7628-436b-b702-2c19eab114e1")
+	)
+	(wire
+		(pts
+			(xy 36.83 149.86) (xy 78.74 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c66c3421-7039-4d50-accb-84970a5acb83")
+	))
