@@ -1,0 +1,20 @@
+# Reviewed per-layer difference fractions for the Notecarrier-F v1.5 port
+# (gerber_diff.py, KiCad export vs the shipped 2201-139__2026-01-27 package).
+# Frozen 2026-09-16 after reviewing every *-diff.png in this folder:
+#   F_Cu / B_Cu / masks: exact (anti-aliasing only).
+#   F_Paste / B_Paste: paste-aperture edge metrics on the large exposed pads
+#     of U2/U3/U5/U7/U8 differ by a fraction of the pad outline width.
+#   In1_Cu / In2_Cu: KiCad plots the unused inner-layer annular rings of the
+#     signal vias and PTH pads that Altium suppresses (same accepted class as
+#     the Notecarrier-CX port); isolated inside the plane clearances.
+#   Silkscreens: TrueType glyph-metric offsets (fonts substituted at import).
+B_Cu: 0.003
+B_Mask: 0.009
+B_Paste: 0.022
+B_Silkscreen: 0.716
+F_Cu: 0.002
+F_Mask: 0.004
+F_Paste: 0.006
+F_Silkscreen: 0.659
+In1_Cu: 0.059
+In2_Cu: 0.061

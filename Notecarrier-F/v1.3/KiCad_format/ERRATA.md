@@ -285,3 +285,24 @@ schematic still described v1.2; that exclusion was removed once the schematic
 delta landed. The extractor only ever reads `.kicad_sch` and never the board, so
 the pages it produces describe the shipped v1.3 design even though the PCB in
 this folder is still v1.2.
+
+## Corrections applied 2026-09-16 (found while porting v1.5)
+
+The v1.5 Altium import was cross-checked, net by net, against a hand-ported
+v1.5 schematic derived from these sheets. Two of the differences turned out to
+be defects in **this** v1.3 port rather than v1.5 changes, and are now fixed:
+
+* **`SW3` (FEATHER_EN) pin 3 was wired to `F_EN`** (the Feather's EN pin) via a
+  stray `F_EN` hierarchical label and local label on the Feather sheet. The
+  released Rev 11 schematic ties it to `N_VIO` ("ON" position feeds `EN_F_BAT`
+  from `N_VIO`). The stray labels were removed and the wire relabelled `N_VIO`;
+  `F_EN` is now `J9.2` + `MODR1.2` only, as released.
+* **`R3` was still the v1.2 value (499R, 791 mA)**. Rev 11 changed it to
+  **470R** (Yageo RC0402FR-13470RL, BL 2001-420, ≈800 mA charge current), as
+  the released `BOM-3000-653-002.xlsx` shows. Value, MPN and the design note
+  were updated.
+
+Also removed: a leftover `F_NRST` hierarchical label on the Feather sheet with
+no matching pin on the root sheet symbol, which was the single ERC *error* this
+port carried. ERC on the port is now warnings only (the 42 pre-existing
+`lib_symbol_mismatch` notices). The PCB is still the v1.2 layout — see above.

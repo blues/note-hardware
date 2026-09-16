@@ -2926,7 +2926,7 @@
 		)
 		(uuid "3dbda3d1-ee62-524d-8179-37d56adb92ae")
 	)
-	(text "DESIGN NOTE:\n- R_{iset} = K_{iset} / I_{out}\n- K_{iset} = 395 AΩ typically.\n- R_{iset} = 499R --> I_{out} = 791mA"
+	(text "DESIGN NOTE:\n- R_{iset} = K_{iset} / I_{out}\n- K_{iset} = 395 AΩ typically.\n- R_{iset} = 470R --> I_{out} = 800mA (v1.3; v1.2 used 499R / 791mA)"
 		(exclude_from_sim no)
 		(at 79.9425 77.4025 0)
 		(effects
@@ -5739,7 +5739,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "499R"
+		(property "Value" "470R"
 			(at 58.42 76.2 0)
 			(effects
 				(font
@@ -5757,7 +5757,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://datasheet.octopart.com/0402WGF4990TCE-Royal-Ohm-datasheet-165785611.pdf"
+		(property "Datasheet" "https://www.yageo.com/upload/media/product/productsearch/datasheet/rchip/PYu-RC_Group_51_RoHS_L_12.pdf"
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5766,7 +5766,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "RES 499 OHM 1% 1/16W SMT 0402"
+		(property "Description" "RES 470 OHM 1% 1/16W SMT 0402"
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5775,7 +5775,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "Royal Ohm"
+		(property "Manufacturer" "Yageo"
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5784,7 +5784,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet 2" "https://datasheet.octopart.com/CR0402-FX-4990GLF-Bourns-datasheet-159578630.pdf"
+		(property "Datasheet 2" ""
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5793,7 +5793,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet 3" "https://datasheet.octopart.com/RC0402FR-07499RP-Yageo-datasheet-164759695.pdf"
+		(property "Datasheet 3" ""
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5811,7 +5811,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "0402WGF4990TCE"
+		(property "MPN" "RC0402FR-13470RL"
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5820,7 +5820,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN 2" "CR0402-FX-4990GLF"
+		(property "MPN 2" ""
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5829,7 +5829,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN 3" "RC0402FR-07499RP"
+		(property "MPN 3" ""
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5847,7 +5847,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer 2" "Bourns"
+		(property "Manufacturer 2" ""
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5856,7 +5856,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer 3" "Yageo"
+		(property "Manufacturer 3" ""
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5874,7 +5874,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mfr Description" "Res Thick Film 0402 499 Ohm 1% 0.063W(1/16W) ±100ppm/°C Pad SMD T/R"
+		(property "Mfr Description" "Resistor 470R ±1% 0402"
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5883,7 +5883,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mfr Description 2" "SMD Chip Resistor, 499 Ohm, ± 1%, 63 mW, 0402 [1005 Metric], Thick Film, General Purpose"
+		(property "Mfr Description 2" ""
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5892,7 +5892,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mfr Description 3" "Res General Purpose Thick Film 0402 499 Ohm 1% 1/16W ±100ppm/°C Molded SMD Paper T/R"
+		(property "Mfr Description 3" ""
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5910,7 +5910,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Description" "Resistor 499R ±1% 0402"
+		(property "Design Description" "Resistor 470R ±1% 0402"
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5919,7 +5919,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design MPN" "N/A"
+		(property "Design MPN" "RC0402FR-13470RL"
 			(at 57.15 74.93 0)
 			(effects
 				(font
@@ -5928,7 +5928,7 @@
 				(hide yes)
 			)
 		)
-		(property "Design Manufacturer" "N/A"
+		(property "Design Manufacturer" "Yageo"
 			(at 57.15 74.93 0)
 			(effects
 				(font

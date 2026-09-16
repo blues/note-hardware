@@ -319,6 +319,58 @@ boards:
         F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
         B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
 
+  # Notecarrier-F v1.5 - Byte Lab Altium project (100275 Rev 13) imported with
+  # KiCad 9.0.9; see Notecarrier-F/v1.5/KiCad_format/documentation/Porting-Notes.md.
+  notecarrier-f:
+    product_dir: Notecarrier-F/v1.5
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC, by the per-layer gerber diff, and by the partition comparison against an independently hand-ported v1.5 schematic recorded in validation/handport-netlist-compare.txt"
+    pnp:
+      # the design house ships one file per side
+      paths:
+        - "Notecarrier-F/v1.5/3001-069-001_PnP-file_TOP.pnp"
+        - "Notecarrier-F/v1.5/3001-069-001_PnP-file_BOT.pnp"
+      skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB|H)\\d*$"
+    kicad:
+      sch: Notecarrier-F/v1.5/KiCad_format/Notecarrier-F.kicad_sch
+      pcb: Notecarrier-F/v1.5/KiCad_format/Notecarrier-F.kicad_pcb
+    bom:
+      path: Notecarrier-F/v1.5/BOM-3001-069-001.xlsx
+      header_contains: Designator
+      kicad_mpn_field: BL PART NUMBER
+      check_value: false
+      columns:
+        refs: Designator
+        value: Comment
+        mpn: BL Part Number
+      # KiCad cannot annotate a designator that ends in a letter, so the two
+      # Feather sockets are MODL1/MODR1 in the port (shipped: MOD1L/MOD1R).
+      refdes_map:
+        MOD1L: MODL1
+        MOD1R: MODR1
+      # J9/J10 (the outer 24-pin sockets, 4UCON 12736) are fitted on the
+      # shipped product and carried in the Rev 13 schematic, but the released
+      # BOM spreadsheet omits them - see Porting-Notes.md. MOD2 is the Feather
+      # outline graphic; DOC1/PCB1 sit on the un-ported cover sheet.
+      skip_refdes: '^(TP|FID|FD|MH|LOGO|DOC|PCB|ASS|H)\d*$|^(J9|J10|MOD2)$'
+    gerbers:
+      original_zip: "Notecarrier-F/v1.5/2201-139__2026-01-27.zip"
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM15"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        In1_Cu:       { kicad: "*.g1",  original: "*.G1" }
+        In2_Cu:       { kicad: "*.g2",  original: "*.G2" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
+
   notecarrier-xm:
     product_dir: Notecarrier-XM/v1.2
     # Gates this board cannot run, and why. run_all.py treats a skipped
