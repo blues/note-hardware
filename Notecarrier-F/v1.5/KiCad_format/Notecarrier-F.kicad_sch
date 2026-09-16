@@ -1,0 +1,232 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "e770968b-4865-459f-9d90-33e3fe12bd36")
+	(paper "A4")
+	(title_block
+		(title "Notecarrier-F")
+		(date "2026-01-26")
+		(rev "13 (v1.5)")
+		(company "Byte Lab Grupa d.o.o.")
+		(comment 1 "Blues Inc")
+		(comment 2 "Ported from Altium Designer sources (100275_NOTECARRIER-F Rev 13, BOM 3001-069-001)")
+	)
+	(lib_symbols)
+	(sheet
+		(at 177.8 38.1)
+		(size 38.1 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "098aab9c-9056-405f-85d7-38edc1bd7258")
+		(property "Sheetname" "Power Input"
+			(at 177.8 37.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Notecarrier-F_Power-Input.kicad_sch"
+			(at 177.8 51.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/e770968b-4865-459f-9d90-33e3fe12bd36"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 76.2 38.1)
+		(size 38.1 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "0b823a3d-c89c-4ebc-a37c-125451db352b")
+		(property "Sheetname" "Feather Connection"
+			(at 76.2 37.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Notecarrier-F_Feather-Connection.kicad_sch"
+			(at 76.2 51.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/e770968b-4865-459f-9d90-33e3fe12bd36"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 127 38.1)
+		(size 38.1 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "1dba36d1-8335-46e9-b79f-162807129b65")
+		(property "Sheetname" "IO"
+			(at 127 37.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Notecarrier-F_IO.kicad_sch"
+			(at 127 51.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/e770968b-4865-459f-9d90-33e3fe12bd36"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25.4 38.1)
+		(size 38.1 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "66f8e308-ca36-48a8-b310-fddba527e283")
+		(property "Sheetname" "Notecard Connection"
+			(at 25.4 37.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Notecarrier-F_Notecard-Connection.kicad_sch"
+			(at 25.4 51.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/e770968b-4865-459f-9d90-33e3fe12bd36"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 228.6 38.1)
+		(size 38.1 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "b1eeb850-1e74-4e69-add9-d97547c35cd0")
+		(property "Sheetname" "Power Rails"
+			(at 228.6 37.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Notecarrier-F_Power-Rails.kicad_sch"
+			(at 228.6 51.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Notecarrier-F"
+				(path "/e770968b-4865-459f-9d90-33e3fe12bd36"
+					(page "8")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "#")
+		)
+	)
+	(embedded_fonts no)
+)

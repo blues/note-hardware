@@ -299,6 +299,28 @@ def main():
         atexit.register(lambda p=tf.name: os.path.exists(p) and os.unlink(p))
         pnp_path = Path(tf.name)
         pnp_name = f"{zpath.name}!{members[0]}"
+    elif cfg["pnp"].get("paths"):
+        # The design house ships one file per board side (e.g. Notecarrier-F
+        # v1.5: *_TOP.pnp + *_BOT.pnp). Concatenate them; the fixed-width
+        # reader ignores the repeated header lines.
+        import tempfile
+        parts = []
+        for pp in cfg["pnp"]["paths"]:
+            pp = Path(pp)
+            if not pp.is_absolute():
+                pp = root / pp
+            parts.append(pp)
+        tf = tempfile.NamedTemporaryFile(suffix=parts[0].suffix, delete=False,
+                                         mode="w", encoding="utf-8")
+        for pp in parts:
+            tf.write(pp.read_text(errors="replace"))
+            tf.write("\n")
+        tf.close()
+        import atexit
+        import os
+        atexit.register(lambda p=tf.name: os.path.exists(p) and os.unlink(p))
+        pnp_path = Path(tf.name)
+        pnp_name = "+".join(pp.name for pp in parts)
     else:
         pnp_path = Path(cfg["pnp"]["path"])
         if not pnp_path.is_absolute():

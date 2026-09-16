@@ -1,0 +1,32 @@
+Connectivity cross-check: Altium import (this project) vs the independent hand-ported v1.5 schematic
+generated 2026-09-16 by validation/handport_compare.py
+
+$ handport_compare.py <import netlist> validation/handport-netlist.net
+import nets (>=2 pins): 110   hand-port nets: 110   identical by touched-component set: 57
+  IMPORT ONLY   N_VIO ['C13', 'C19', 'C29', 'F1', 'J10', 'SW3', 'U4', 'U7']
+  HAND-PORT ONLY /Feather/F_EN ['J9', 'MOD1R', 'SW3']
+  HAND-PORT ONLY N_VIO ['C13', 'C19', 'C29', 'F1', 'J10', 'U4', 'U7']
+
+Interpretation
+--------------
+The two schematics agree on every net except one:
+
+  SW3 (FEATHER_EN slide switch) pin 3. The Altium design (and this import) tie
+  it to N_VIO, so the "ON" position feeds EN_F_BAT from N_VIO. The hand-ported
+  schematic - and the v1.3 KiCad port it was delta-ported from - tie that pin to
+  F_EN (the Feather's EN pin). The released Rev 11 (v1.3) and Rev 13 (v1.5)
+  schematic PDFs both show N_VIO, so this is a pre-existing defect in the
+  Notecarrier-F/v1.3/KiCad_format port, inherited by the hand port, and NOT a
+  property of the shipped hardware. The v1.3 port should be corrected
+  separately.
+
+A pin-level comparison (same script on (ref, pin) tuples, run during the port)
+additionally showed that the hand port had U5's pins 3 and 5 (2Y1 / 2Y0)
+transposed; the NX3L2467 data sheet and the Altium symbol agree with this
+import (pin 3 = 2Y1 = F_B0_SW, pin 5 = 2Y0 = ALT_DFU_BOOT). All other pin-level
+differences were symbol-convention differences only (SIM socket pins C1..C7 vs
+1..7, the hand port's paired USB-C pins A4_B9 / B4_A9, and swapped 1/2 pin
+numbering on several diodes, capacitors and resistors).
+
+The hand-ported netlist is kept here (handport-netlist.net) so the comparison
+can be re-run.
