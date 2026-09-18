@@ -87,8 +87,9 @@ Individual tools can be run standalone; each has a `--help`.
   Katherine Flowers), fetched from <https://kicanvas.org/kicanvas/kicanvas.js>
   on 2026-07-28. Vendoring pins the version so render results are reproducible.
 - The gerber-diff recipe (gerbv @ 1200 dpi over the board outline, ImageMagick
-  channel-combine) follows the method documented in
-  `Notecarrier-F/v1.3/KiCad_format/documentation/Porting-Notes.md`.
+  channel-combine) follows the method first documented in the original
+  Notecarrier-F hand port's notes, kept as
+  `Notecarrier-F/v1.3/KiCad_format/documentation/History_Porting-Notes-hand-port.md`.
 - KiCad file format target for new ports: **KiCad 9** (sch `20250114`, pcb
   `20241229`). Gate G0 (2026-07-28) verified KiCanvas renders KiCad 9 formats
   cleanly, including a 9-format resave of the existing Notecarrier-A port.

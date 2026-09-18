@@ -134,7 +134,8 @@ verified pin-by-pin against the released Rev 13 PDF. Its netlist is kept as
 compares the two schematics by connectivity partition
 (`handport-netlist-compare.txt`). They agree on **109 of 110 nets**; the one
 difference — `SW3` pin 3 on `N_VIO` (Altium, correct) vs `F_EN` (hand port) —
-is a defect inherited from the **v1.3 KiCad port**, which should be fixed there.
+is a defect inherited from the **original hand-made v1.3 KiCad port** (since
+superseded by a direct import of the v1.3 Altium sources, which does not have it).
 The pin-level pass also caught a transposed `2Y0/2Y1` pin pair on the hand
 port's `U5` symbol. Both findings are on the discarded hand port; this project
 is the Altium truth.

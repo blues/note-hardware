@@ -92,10 +92,9 @@ BOM, KICAD, SCHEMATIC = "bom", "kicad", "schematic"
 #     highest version per product is indexed, leaving it in would silently displace the
 #     validated v2.0 port as the sole KiCad source for Notecarrier-A.
 #
-# Notecarrier-F/v1.3 was excluded here while its schematic still described v1.2. That delta
-# has since been applied and verified, and this extractor only ever reads .kicad_sch - never
-# the board - so the pages it produces for F now describe the shipped v1.3 design. The port's
-# PCB is still mid-port (see its ERRATA.md), which does not affect what is indexed.
+# Notecarrier-F/v1.3 was excluded here while its schematic still described v1.2. It has since
+# been re-ported from the release-day Altium sources and passes every validation gate, so it
+# is indexed like any other port.
 EXCLUDE_PATH = (
     "kicad_format/validation/",
     "notecarrier-a/v2.3/kicad_format/",

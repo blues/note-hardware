@@ -5,10 +5,10 @@
   - PCB layouts and Gerber files
   - Dimensioned drawings
   - 3D models
-  - Altium Designer sources ([v1.5/Altium](v1.5/Altium))
+  - Altium Designer sources ([v1.5/Altium](v1.5/Altium), [v1.3/Altium](v1.3/Altium))
   - KiCad design files
     - [v1.5/KiCad_format](v1.5/KiCad_format) — complete schematic + PCB, imported from the Altium sources in [v1.5/Altium](v1.5/Altium) and validated against the released fab package, BOM and pick-and-place files; see its [Porting-Notes](v1.5/KiCad_format/documentation/Porting-Notes.md)
-    - [v1.3/KiCad_format](v1.3/KiCad_format) — ⚠️ mid-delta: the schematic describes v1.3 but the PCB still describes v1.2, so this is not yet a usable v1.3 deliverable; see its [ERRATA](v1.3/KiCad_format/ERRATA.md)
+    - [v1.3/KiCad_format](v1.3/KiCad_format) — complete schematic + PCB, imported from the release-day Altium sources in [v1.3/Altium](v1.3/Altium) and validated against the released fab package, BOM and pick-and-place file; see its [Porting-Notes](v1.3/KiCad_format/documentation/Porting-Notes.md)
 
 ## Revisions
 
