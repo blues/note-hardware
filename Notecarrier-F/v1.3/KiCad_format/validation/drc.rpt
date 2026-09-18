@@ -1,8 +1,8 @@
 ** Drc report for Notecarrier-F.kicad_pcb **
-** Created on 2026-09-18T09:40:34-0500 **
+** Created on 2026-09-18T10:13:59-0500 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 232 DRC violations **
+** Found 231 DRC violations **
 [via_dangling]: Via is not connected or connected on only one layer
     Local override; warning
     @(132.4011 mm, 138.0036 mm): Via [ALT_DFU_ACTIVE] on Top Layer - Bottom Layer
@@ -65,9 +65,6 @@
 [lib_footprint_mismatch]: Footprint 'NPTH_free_hole' does not match copy in library 'Notecarrier-F-altium-import'.
     Local override; warning
     @(169.3511 mm, 51.2536 mm): Footprint H9
-[lib_footprint_mismatch]: Footprint 'DIST-WASMSIM0250' does not match copy in library 'Notecarrier-F-altium-import'.
-    Local override; warning
-    @(148.5011 mm, 81.7536 mm): Footprint OBJ1
 [lib_footprint_mismatch]: Footprint 'NPTH_free_hole' does not match copy in library 'Notecarrier-F-altium-import'.
     Local override; warning
     @(167.1011 mm, 158.7536 mm): Footprint H46

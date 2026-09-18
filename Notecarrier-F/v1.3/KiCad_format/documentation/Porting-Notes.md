@@ -84,9 +84,13 @@ matches the shipped artwork.
 - **`OBJ1` mounting hole.** Altium's pad stack is 6 mm on the outer layers and
   1.524 mm on the inner layers around a 3.7 mm hole — i.e. no inner copper
   survives drilling. KiCad flags a negative annulus, so the inner-layer size
-  was set to 3.8 mm (the smallest legal ring). This is the one deliberate
-  copper deviation; it is visible in the inner-layer gerber diff and has no
-  effect on the drilled board.
+  was set to 3.8 mm (the smallest legal ring) and the unused inner layers
+  are dropped. The change is made on the live pad *before* the footprint is
+  copied into the project library, so the board and the `.pretty` copy of
+  `DIST-WASMSIM0250` agree and *Update Footprints from Library* cannot bring
+  the invalid stack back. This is the one deliberate copper deviation; it is
+  visible in the inner-layer gerber diff and has no effect on the drilled
+  board.
 - **Symbol libraries.** The original Altium lib nicknames (`BL_Analog`,
   `BL_Mechanical`, `BL_Passive`, `n21-p2`, `100275_NOTECARRIER-F-altium-import`)
   are kept on the symbols and aliased in `sym-lib-table` to the single merged
@@ -132,7 +136,7 @@ Gates run by `_Tools/kicad_validation/run_all.py notecarrier-f-v13` on
 | Gate | Result |
 |---|---|
 | ERC (error severity) | **PASS — 0** (`erc-errors.rpt`; warnings: 837 off-grid endpoints, 58 wire endpoints, 43 undriven power pins — importer artefacts, see `erc.rpt`; all six sheets present in the report) |
-| DRC + schematic parity (error severity) | **PASS — 0 violations, 0 unconnected, 0 parity errors** (`drc-errors.rpt`; 53 parity *warnings* are pads the schematic leaves unconnected; 232 cosmetic warnings: silk overlap, TrueType text thickness, mask bridges, library-copy mismatches on the three free-hole footprint variants) |
+| DRC + schematic parity (error severity) | **PASS — 0 violations, 0 unconnected, 0 parity errors** (`drc-errors.rpt`; 53 parity *warnings* are pads the schematic leaves unconnected; 231 cosmetic warnings: silk overlap, TrueType text thickness, mask bridges, and 25 library-copy mismatches that are pad-rotation-only — 20 round free holes and 5 bottom-side parts (`DS6`, `DS7`, `TVS1`, `R20`, `SW4`) whose square/180°-symmetric pads the importer rotated per instance; geometrically identical to the library copies) |
 | BOM vs `BOM-3000-653-002.xlsx` | **PASS — exact, 94 populated designators** on `BL PART NUMBER` |
 | Netlist vs shipped ODB++/IPC-356 | SKIPPED — none shipped; see the Altium-board cross-check below |
 | Gerber raster diff vs `2200-814__2023-07-10.zip` | **PASS** — F/B copper 0.001/0.001 and masks 0.004/0.009 (exact), paste 0.007/0.019, inner copper 0.054/0.053, silk 0.66/0.72; baseline frozen in `gerber-baseline.yaml` after review |

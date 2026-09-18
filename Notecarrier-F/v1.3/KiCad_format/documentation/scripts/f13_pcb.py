@@ -7,7 +7,9 @@
   * fiducials board-only + no BOM; MOD2 no BOM / no PnP; J11/R11/R12 DNP
   * every footprint re-pointed at Notecarrier-F-altium-import:<name> and the
     footprints saved into that .pretty (bottom parts flipped back to front)
-  * imported GND pours: clearance 0.5 -> 0.1499 (fills are NOT recomputed)
+  * imported GND pours: clearance 0.5 -> 0.1999 (fills are NOT recomputed)
+  * OBJ1 pad 1: legal inner annulus + unused inner layers removed, applied
+    to the live pad BEFORE the library save so board and .pretty agree
 
 Run with KiCad's bundled python:  <kicad-python> f13_pcb.py <in.kicad_pcb> <work-dir>
 """
@@ -80,6 +82,25 @@ for z in b.Zones():
     if z.GetLocalClearance() > pcbnew.FromMM(0.2):
         z.SetLocalClearance(pcbnew.FromMM(0.1999))
 print("copper zone clearances before:", dict(zc))
+
+# OBJ1 mounting hole: Altium's pad stack is 6 mm outer / 1.524 mm inner around a
+# 3.7 mm hole (no inner copper survives drilling); KiCad flags the negative
+# annulus, so give the inner layers the smallest legal ring (drill + 0.1) and
+# let KiCad drop the unused inner layers. Done on the live pad, before the
+# footprint is copied into the project library, so "Update Footprints from
+# Library" cannot re-introduce the invalid stack.
+obj1 = b.FindFootprintByReference("OBJ1")
+for p in obj1.Pads():
+    if p.GetNumber() != "1":
+        continue
+    drill = p.GetDrillSize().x
+    inner = p.GetSize(pcbnew.In1_Cu).x
+    if inner < drill:
+        ring = drill + pcbnew.FromMM(0.1)
+        p.SetSize(pcbnew.In1_Cu, pcbnew.VECTOR2I(ring, ring))
+        p.SetRemoveUnconnected(True)
+        p.SetKeepTopBottom(True)
+        print(f"OBJ1 pad 1: inner size {inner/1e6:g} -> {ring/1e6:g} mm, unused inner layers removed")
 
 # save footprints into the project library
 lib = DST / f"{LIB}.pretty"
@@ -158,20 +179,4 @@ for i, e in blocks(t, "\n\t(footprint "):
 parts.append(t[pos:]); t = "".join(parts)
 print(f"footprint Values filled from schematic: {filled}")
 
-# 2. OBJ1 mounting hole: Altium's pad stack is 6 mm outer / 1.524 mm inner around a
-#    3.7 mm hole (no inner copper survives drilling); KiCad flags the negative
-#    annulus, so give the inner layers the smallest legal ring (drill + 0.1) and
-#    let KiCad drop the unused inner layers.
-i = t.find('(property "Reference" "OBJ1"')
-k = t.find('(pad "1" thru_hole circle', i)
-seg_end = block_end(t, k)
-seg = t[k:seg_end]
-drill = float(re.search(r"\(drill ([0-9.]+)\)", seg).group(1))
-inner = re.search(r'\(layer "Inner"\n\t*\(shape circle\)\n\t*\(size ([0-9.]+) [0-9.]+\)', seg)
-if inner and float(inner.group(1)) < drill:
-    seg = seg.replace(inner.group(0), inner.group(0).replace(f"(size {inner.group(1)} {inner.group(1)})",
-                                                             f"(size {drill + 0.1:g} {drill + 0.1:g})"))
-    seg = seg.replace("(remove_unused_layers no)", "(remove_unused_layers yes)\n\t\t\t(keep_end_layers yes)", 1)
-    t = t[:k] + seg + t[seg_end:]
-    print(f"OBJ1 pad 1: inner size {inner.group(1)} -> {drill + 0.1:g} mm, unused inner layers removed")
 open(out, "w").write(t)
