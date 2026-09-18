@@ -371,6 +371,51 @@ boards:
         F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
         B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
 
+  notecarrier-f-v13:
+    product_dir: Notecarrier-F/v1.3
+    skip_gates:
+      NETLIST: "no shipped ODB++ or IPC-356 netlist exists for this board; connectivity is covered by the schematic-parity check inside DRC, by the per-layer gerber diff, and by the pad-by-pad comparison of the KiCad netlist against the nets carried by the Altium board file (validation/altium-netlist-compare.txt)"
+    pnp:
+      path: "Notecarrier-F/v1.3/PNP-3000-653-002.pnp"
+      skip_refdes: "^(FD|FID|MH|LOGO|DOC|PCB|H)\\d*$"
+    kicad:
+      sch: Notecarrier-F/v1.3/KiCad_format/Notecarrier-F.kicad_sch
+      pcb: Notecarrier-F/v1.3/KiCad_format/Notecarrier-F.kicad_pcb
+    bom:
+      path: Notecarrier-F/v1.3/BOM-3000-653-002.xlsx
+      header_contains: Reference
+      kicad_mpn_field: BL PART NUMBER
+      check_value: false
+      columns:
+        refs: Reference
+        value: Item Name
+        mpn: BL Part Number
+      # KiCad cannot annotate a designator that ends in a letter, so the two
+      # Feather sockets are MODL1/MODR1 in the port (shipped: MOD1L/MOD1R).
+      refdes_map:
+        MOD1L: MODL1
+        MOD1R: MODR1
+      # DOC1/PCB1 (document-number pseudo-parts) sit on the un-ported cover
+      # sheet; MOD2 is the Feather outline graphic; H* are free NPTH holes.
+      skip_refdes: '^(TP|FID|FD|MH|LOGO|DOC|PCB|H)\d*$|^(MOD2)$'
+    gerbers:
+      original_zip: "Notecarrier-F/v1.3/2200-814__2023-07-10.zip"
+      original_tool: Altium
+      outline:
+        kicad: "*Edge_Cuts.gm1"
+        original: "*.GM15"
+      layers:
+        F_Cu:         { kicad: "*.gtl", original: "*.GTL" }
+        In1_Cu:       { kicad: "*.g1",  original: "*.G1" }
+        In2_Cu:       { kicad: "*.g2",  original: "*.G2" }
+        B_Cu:         { kicad: "*.gbl", original: "*.GBL" }
+        F_Paste:      { kicad: "*.gtp", original: "*.GTP" }
+        B_Paste:      { kicad: "*.gbp", original: "*.GBP" }
+        F_Mask:       { kicad: "*.gts", original: "*.GTS" }
+        B_Mask:       { kicad: "*.gbs", original: "*.GBS" }
+        F_Silkscreen: { kicad: "*.gto", original: "*.GTO" }
+        B_Silkscreen: { kicad: "*.gbo", original: "*.GBO" }
+
   notecarrier-xm:
     product_dir: Notecarrier-XM/v1.2
     # Gates this board cannot run, and why. run_all.py treats a skipped

@@ -1,0 +1,13 @@
+# KiCad schematic netlist vs. the nets carried by the Altium board file
+# left: kicad-cli sch export netlist of this port; right: Notecarier-F.PcbDoc (Altium net names) imported
+# headlessly by KiCad 9.0.9, untouched apart from MOD1L/MOD1R -> MODL1/MODR1. Every pad's Altium net is
+# compared with the KiCad net of the same pad; a board net spanning two KiCad nets, or a KiCad-connected
+# pad the Altium board leaves netless, would be a conflict. The 53 'renames' are Altium auto-names
+# (NetR13_1 ...) and sheet-local names that the port carries under their KiCad names.
+
+schematic netlist: 494 pins, 168 nets
+board: 489 pads, 116 nets
+renames: 53   conflicts (board net spans >1 schematic nets): 0
+schematic-connected pads left netless on board: 0
+board pads absent from schematic netlist: 0 Counter()
+schematic nets with no board pad: 0 []

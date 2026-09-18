@@ -1,292 +1,187 @@
-# Porting Notes - Notecarrier-F
+# Notecarrier-F v1.3 — Altium ➜ KiCad 9 Porting Notes
 
-As per [Notecarrier-B](../../../../_Legacy%20Hardware/Notecarrier-B/v2.1/KiCad_format/documentation/PortingNotes.md), except:
+Ported from the Altium Designer sources for **Notecarrier-F v1.3**
+(project `100275_NOTECARRIER-F`, schematic Rev 11, PCB `2200-814`, BOM
+`3000-653-002`; design by Byte Lab Grupa d.o.o. for Blues; sources published in
+[`../../Altium/`](../../Altium/)) using KiCad 9.0.9's **File → Import →
+Non-KiCad Project → Altium Project** importer, followed by the scripted cleanup
+in [`scripts/`](scripts/) and the validation battery in
+[`_Tools/kicad_validation/`](../../../../_Tools/kicad_validation/). The
+procedure is the one used for the [v1.5 port](../../../v1.5/KiCad_format/documentation/Porting-Notes.md);
+see the Mojo, Cygnet and Notecarrier-CX Porting-Notes for shared importer
+background.
 
-## Schematic
+## Provenance of the sources
 
-- This is an Altium port, not an OrCAD port.
-- The input/output power net distinction does not apply, so I'm switching to the KiCad arrow convention instead of the Altium circle convention, and using KiCad symbols where they exist, since the interpretation is clear.
-	- That said, the `VBAT` symbol is already an arrow. I can find no explanation for the distinction, so am ignoring it.
-	- Same goes for `F_BAT` and `N_VIO`, which is (sometimes) a bar!
-	- Sadly this is also true of the chassis/earth symbols that are labelled `GND`. They are a distinction without apparent meaning, so I've opted to replace them with arrow `GND` symbols.
-- Once again, I'm ensuring symbols and footprints adhere to the existing design, rather than imposing KiCad or other industry standards. This means doing the hard work up front of replicating the source design, rather than simply substituting existing library components. Therefore, design risk is minimised as a first priority, but an easy path is left open to apply more standard conventions down the track.
-- There's little advice on signal flow: inputs and outputs are scattered a bit haphazardly and functional blocks are overlapping and unlabelled. So at times I've had to be a bit inventive to group and label things into functional boxes. I've erred on the side of retaining as much parity with the original as possible, as to not inadvertently introduce confusion, but still add some neat blue boxes and illuminating labels wherever possible.
-	- Together with the top level sheet I've introduced, this should result in a significantly easier to understand schematic, that is nonetheless a clear reproduction of the original.
-	- However it wasn't always possible to have hierachial labels on the outside of the boxes without substantial re-routing. In these cases I've compromised and left the hierarchial labels inside the functional blocks.
-- Some options for porting the original Off-Sheet Connectors were considered. To recap, Altium has three net name scopes: Net Labels (default to local to sheet), Off Sheet Connectors (global to schematic), and Ports (can be shared amongst sheets using hierarchal connections). The source files used Net Labels and Off Sheet Connectors exclusively, and no hierarchy. A like-for-like port would have used KiCad Labels for the Net Labels, and Global Labels for the Off Sheet Connectors. However, to leverage KiCad's ERC during the port, and create a KiCad project that is both maintainable and verifiably equivalent to the original, the decision was made to port all the Off Sheet Connectors as Hierarchial Labels, so a hierarchy could be introduced.
-	- To return to a like-for-like port, the top-level sheet can simply be deleted and all Hierarchial Labels replaced with Global Labels with the same name. The reverse operation cannot be done automatically, since it requires the creation of the top-level sheet. Thus, this port represents a strictly better alternative, since the like-for-like port can be automatically derived from it.
-	- Ultimately, this process was not sufficient to port the design. It turns out several of the Net Labels actually need to be global, and this was achieved in Altium by setting the "Net Identifier Scope" setting to "Automatic". Since there is no hierarchy in the original design, this automatic setting makes *all* labels global.
-		- KiCad does not have an equivalent setting, and using Global Labels in place of the Labels not only sacrifices the advantages of the hierarchy, it also produces an unattractive result due to the different visual geometry of a Global Label. Thus, an extra "Label Promotion" section was added to sheets where necessary, to promote to Hierarchial Labels those Labels that require inter-sheet connectivity.
-		- This means the port remains true to the original, with additional data to indicate the global nature of some of the labels.
-		- Even if the hierarchy was scrapped, the promotion would be necessary. The only difference would be the Labels would be promoted to Global Labels instead of Hierarchial Labels.
-		- There is one instance where things are the other way around: `F_NRST` is a Off Sheet Connector in the original, but is not used off sheet. I have left it as is, and it produces the only error in the ERC for posterity.
-- A minor one, but came up a lot: in KiCad net labels are anchored at either the start or end of the text, and nets themselves indicate they have not been terminated (eg. with a net label) with a little empty box. This prompts quality control conventions like using net labels to terminate the right or left of nets, rather than adding them at arbitrary locations along the net. That means labels on nets that terminate to the right will be aligned on their right side, with a staggered left side according to the length of the label. I have opted to adopt this KiCad convention, since it is cosmetic only, and prevents the non-conventional and doubt-inducing empty boxes.
-- KiCad symbols must be annotated (ie. the reference designator starts with a letter and ends with a number) for various functions to work like ERC and synchronising the schematic with the PCB. Thus for ease of use I've renamed `MOD1L` to `MODL1` and `MOD1R` to `MODR1`, since I can't see any possibility for harm.
+The v1.3 Altium project was not in any current design-file tree; it was
+recovered from the history of the Blues design archive, where the design house
+committed it on **10 July 2023** — the date of the `2200-814__2023-07-10`
+fabrication package — together with the Rev 11 schematic PDF. That PDF is
+byte-identical (md5) to the `100275_NOTECARRIER-F_Rev-11.PDF` published in the
+parent folder, and the shipped gerber zip in the archive is byte-identical to
+the one published here.
 
+Three snapshots of the v1.3 project exist in the archive (10 July, 11 July and
+31 August 2023). Their board files were compared headlessly through KiCad's
+Altium reader: tracks, vias, pads, zones and text are identical in all three
+(the 31 August file carries one duplicated pad record). The 31 August re-save
+differs in the **Production variant only**: it flips `J9`/`J10` to fitted,
+matching the released BOM report generated the same day. This port therefore
+uses the 10 July (fab-day) board and schematics, with `J9`/`J10` fitted as the
+released BOM `3000-653-002` states. The gerber diff below confirms the board
+matches the shipped artwork.
 
-## PCB
+## Structure and import quirks
 
-- This is an Altium port, not an OrCAD port.
-	- Significantly, this means that using KiCad's import into `pcbnew` feature is very effective. There is still too much lost in translation to use as a starting point, however this is still a simpler and more accurate way to create the pcb polygons than the gerber-to-kicad-via-DXF method used for the OrCad Notecarrier-B project.
-		- This technique was used to create the entire Edge.Cuts, User.Comments (dimensions) and copper layers by copying, pasting and positioning.
-			- The dimensions layer then just needed work to correct fonts and labels positions.
-			- The copper layers mostly only needed pour settings corrected.
-			- Other layers like silkscreens and manufacturing instructions are dominated by elements like text fields that don't port well, so they were created manually.
-			- Non-layer elements like drills and components were done in a similar manner to the OrCAD port: create/generate native equivalents and then position/configure them with the help of scripts.
-		- For the record, warnings during import were:
-			- Altium layer 72 moved to Eco1_User
-			- Altium layer 71 moved to Eco1_User
-			- OBJ1 pad 1 complex pad stack not supported.
-			- Ignored polygon shape of kind 2.
-- The meaning of the dozens of Altium layers is a well-known source of ambiguity. I was guided by the actual content, and when in doubt generally used these two mappings: [common](https://blog.mbedded.ninja/electronics/general/altium/altium-tricks-and-standards/#pcb-layer-standards) and [uncommon](https://www.ninedotconnects.com/back9-mechanical-layers), neither of which really lined up much at all.
-	- Still, I never did figure out what "Mechanical 255" was, and many of the others seemed fluid, to put it charitably.
-- I'm a bit confused by `U2`, the `BQ24210DQCT` with the `WSON10-EXP` footprint. Not only does it have strange fonts in its labels on the schematic, Italian field names and a visible order number, the footprint has no silkscreen, solid regions with "Kind" unspecificed (that appear as dashed lines), paste orifices that are filled in by other paste polygons, only 0.05mm between solder mask openings, no Mechanical 13 layer elements (typically used for body outline), no Mechanical 15 layer elements (typically used for courtyard and origin cross-hair), and has pin numbers on Mechanical 26! The footprint appears the same in the PCB, yet in the assembly drawing on page 7 of `n21-evt_2022-05-20_assembly.PDF` the part has an effective outline and label.
-  - I'm going to assume this is a one-off poor quality import from a FEA OrCAD project, replicate the critical elements from the manufacturing layers (silkscreen, copper, paste, etc), but create sensible BOM metadata and fabrication/assembly layers. In particular, for the symbol I'm going to translate the BOM fields to those used by other parts. And for the footprint I'm going to ignore Mechanical 26, and create courtyard and body outline (fab) layers.
+- Altium project: `01_COVER` / `02_BLOCK-DIAGRAM` / `03_NOTECARD-CONNECTION` /
+  `04_FEATHER-CONNECTION` / `05_IO` / `06_POWER-INPUT` / `07_POWER-RAILS`
+  SchDocs. Per house convention the cover and block-diagram sheets (no
+  electrical content) are not ported; the five electrical sheets are child
+  sheets of the root `Notecarrier-F.kicad_sch`, renamed
+  `Notecarrier-F_<Sheet>.kicad_sch` and given the Altium sheet titles.
+- **Layer mapping** (importer dialog, auto-match): copper, paste, mask, silk
+  and outline 1:1; Altium's unused plane layers left unmatched; the mechanical
+  layers land on `User.N`, `F/B.Fab`, `Dwgs/Cmts.User` and keep their Altium
+  names as KiCad layer user-names (`M1 Components Top`, `M11 Gerber Spec`, …).
+  The two inner copper layers were renamed from the importer's `Mid Layer 3/4`
+  to `Mid Layer 1/2` to match the `G1`/`G2` gerbers.
+- **Project name.** Files and the `(project …)` instance blocks were renamed
+  from `100275_NOTECARRIER-F` to `Notecarrier-F`.
+- **Net label scope.** Byte Lab's flat Altium design uses globally scoped net
+  labels; the importer writes every one as a sheet-local KiCad label. The 44
+  label names that appear on more than one sheet or that share a name with a
+  power net were promoted to **global labels**; the rest stay local. The
+  result was checked pad-by-pad against the nets carried by the Altium board
+  file itself (see the validation table): every board net maps to exactly one
+  KiCad net, with no conflicts.
+- **Designators.** `MOD1L`/`MOD1R` (the Feather sockets) end in a letter, which
+  KiCad's annotation treats as un-annotated. They are `MODL1`/`MODR1` in this
+  port, in both the schematic and the board; `boards.yaml` carries the
+  `refdes_map` back to the shipped names. Their silkscreen references are hidden
+  on the fabricated board, so the artwork is unaffected.
+- **Power symbols.** The importer leaves all 172 power symbols as `#PWR?`; they
+  were annotated `#PWR001`–`#PWR172`.
+- **Production variant** (from the PrjPCB, cross-checked against the released
+  BOM and pick-and-place file): `J11`, `R11`, `R12` are DNP in schematic and
+  board; `MOD2` (the Feather-outline graphic, 28 pins) is excluded from the BOM
+  and placement data and its embedded symbol uses `no_connect`-type pins;
+  `ASS1` (the M2.5 screw, a BOM line with no footprint) is excluded from the
+  board. `J9`/`J10` are fitted (see *Provenance*).
+- **Cover-sheet symbols.** `FD1`–`FD8` (fiducials), `DOC1` and `PCB1` (document
+  number pseudo-parts) live on the un-ported cover sheet. The eight fiducial
+  footprints are marked *board only / not in BOM* so schematic parity does not
+  report them; they stay in the placement data, where the shipped file lists
+  them too.
+- **48 free NPTH holes.** Altium models the anchor / tenting holes as free pads
+  with no designator; the importer wrote them as 48 nameless footprints with
+  one zero-copper NPTH pad each. They are `H1`–`H48` (numbered top-left first),
+  footprints `NPTH_free_hole` (0.8 mm, 40×), `NPTH_free_hole_2.54mm` (4×) and
+  `NPTH_free_hole_3.3mm` (4×), *board only* and excluded from BOM and
+  placement data.
+- **Footprint values.** The importer leaves the board footprints' `Value`
+  fields empty; they were filled from the schematic so parity does not flag
+  them.
+- **`OBJ1` mounting hole.** Altium's pad stack is 6 mm on the outer layers and
+  1.524 mm on the inner layers around a 3.7 mm hole — i.e. no inner copper
+  survives drilling. KiCad flags a negative annulus, so the inner-layer size
+  was set to 3.8 mm (the smallest legal ring) and the unused inner layers
+  are dropped. The change is made on the live pad *before* the footprint is
+  copied into the project library, so the board and the `.pretty` copy of
+  `DIST-WASMSIM0250` agree and *Update Footprints from Library* cannot bring
+  the invalid stack back. This is the one deliberate copper deviation; it is
+  visible in the inner-layer gerber diff and has no effect on the drilled
+  board.
+- **Symbol libraries.** The original Altium lib nicknames (`BL_Analog`,
+  `BL_Mechanical`, `BL_Passive`, `n21-p2`, `100275_NOTECARRIER-F-altium-import`)
+  are kept on the symbols and aliased in `sym-lib-table` to the single merged
+  project library `Notecarrier-F-altium-import.kicad_sym` (124 symbols,
+  regenerated from the sheets' embedded `lib_symbols`; no name collisions).
+  Footprints were saved out of the board with the KiCad Python API into
+  `Notecarrier-F-altium-import.pretty` (38 footprints; bottom-side parts
+  flipped back to the front before saving) and every footprint/symbol
+  footprint field re-pointed at that library.
+- **Nets.** The importer keeps Altium's auto-names on the board (`NetR13_1`,
+  `NetJ6_20`, …). After the schematic edits, 53 board nets were renamed to the
+  KiCad netlist's names by matching every pad (`scripts/f13_nets.py`; 0 pads
+  whose board net spanned more than one schematic net, 0 connected pads left
+  netless). **Zone fills are the ones saved at import — do not refill.**
+- **Text variables.** Altium special strings resolved as project text variables
+  (`AUTHOR`/`PCB_AUTHOR` M. Hamin, `ACCEPTOR`/`PCB_ACCEPTOR` T. Zvonc,
+  `ADDRESS1`, `WEB`, `MODULE_NAME` Notecarier F, `HW_E_DOC_NUM` 100275,
+  `PCB_NUM` 2200-814, `PCBA_BOM_NUM` 3000-653-002). Title blocks: rev
+  `11 (v1.3)`, 2023-07-10.
 
-| U2 Symbol | U2 Footprint |
-| --------- | ------------ |
-| ![U2 Symbol](media/U2-Symbol.png) | ![U2 Footprint](media/U2-Footprint.png) |
+## Design rules
 
+Rules follow the board's own Altium rule set (read from the `.PcbDoc`:
+clearance **0.1 mm**, polygon clearance 0.2 mm, track width min 0.1 mm,
+hole-to-hole 0.2 mm) rather than the v1.5 values, since this revision was
+routed to the older 0.1 mm rule — eight via/track and connector-pad gaps on
+the fabricated board are between 0.10 and 0.145 mm. KiCad settings: clearance
+**0.0999 mm** (a hair under 0.1 to absorb importer float rounding; also on the
+`Default`/`All Nets` net classes), track 0.0999 mm, via 0.6/0.3 mm, annular
+0.05 mm, hole clearance 0.0999 mm, hole-to-hole 0.1999 mm, edge clearance 0,
+`min_resolved_spokes 1`, and the four imported GND pours' clearance set to
+0.1999 mm (their imported parameter was 0.5 mm). The fabrication sheet in the
+shipped package (`M11 Gerber Spec` layer: 4-layer FR-4 Tg140, 1.6 mm, min
+track/spacing 0.15 mm, min hole 0.3 mm, ENIG) is the same as v1.5's. DRC/ERC
+severities are the Notecarrier-A/CX/F v1.5 baseline (cosmetic classes as
+warnings).
 
-- Altium can't natively generate a drill report like OrCAD. Two options are to parse the NC Drill file, or extract the drill coordinates from the imported PCB file. I've opted to do the latter for expediency. Something like (after setting the selection filter to vias and selecting all):
+## Validation results (see [`../validation/`](../validation/))
 
-```
-for t in pcb.GetTracks():
-    if t.IsSelected():
-        print(f"{t.GetWidth()};{t.GetDrill()};{t.GetPosition()}")
-```
+Gates run by `_Tools/kicad_validation/run_all.py notecarrier-f-v13` on
+2026-09-18 (KiCad 9.0.9, macOS):
 
-- The source PCB used the "Barlow (Semibold)" font heavily, such as in the silkscreen. I've been able to obtain a copy from Google Fonts and create equivalent text artefacts. However it is not appropriate for me to distribute the font with the design, so users will need to obtain and install the font themselves.
-	- On the other hand, I was [not able](https://www.eevblog.com/forum/kicad/vector-fonts/msg4836302/#msg4836302) to obtain a copy of the Altium "Default" font, which tended to be used for things like dimension labels. I tried a few alternatives and found KiCad's native font was the closest. Since the usage of the font does not affect the PCB itself, I'm satisfied with the substitution.
-	- Same story for the manufacturing instructions and fabrication notes. The source file tends to use Altium's "Sans Serif" font. I've substitued KiCad's native font.
-- The PCB had lots of tracks only connected at one end - short stubs (even one zero length one!) on top of vias and pads. They have no effect, except to flag DRC warnings, so I've deleted them.
-	- The PCB has a few vias that only have one track connected, meaning they go nowhere. Although they have no obvious electrical function (except maybe as test points?), they consist of real copper so I have left them and added exclusions in the DRC.
+| Gate | Result |
+|---|---|
+| ERC (error severity) | **PASS — 0** (`erc-errors.rpt`; warnings: 837 off-grid endpoints, 58 wire endpoints, 43 undriven power pins — importer artefacts, see `erc.rpt`; all six sheets present in the report) |
+| DRC + schematic parity (error severity) | **PASS — 0 violations, 0 unconnected, 0 parity errors** (`drc-errors.rpt`; 53 parity *warnings* are pads the schematic leaves unconnected; 231 cosmetic warnings: silk overlap, TrueType text thickness, mask bridges, and 25 library-copy mismatches that are pad-rotation-only — 20 round free holes and 5 bottom-side parts (`DS6`, `DS7`, `TVS1`, `R20`, `SW4`) whose square/180°-symmetric pads the importer rotated per instance; geometrically identical to the library copies) |
+| BOM vs `BOM-3000-653-002.xlsx` | **PASS — exact, 94 populated designators** on `BL PART NUMBER` |
+| Netlist vs shipped ODB++/IPC-356 | SKIPPED — none shipped; see the Altium-board cross-check below |
+| Gerber raster diff vs `2200-814__2023-07-10.zip` | **PASS** — F/B copper 0.001/0.001 and masks 0.004/0.009 (exact), paste 0.007/0.019, inner copper 0.054/0.053, silk 0.66/0.72; baseline frozen in `gerber-baseline.yaml` after review |
+| Placement vs `PNP-3000-653-002.pnp` | **PASS — 89/89** on side and rotation, 0 unexplained displacements |
+| KiCanvas headless render (6 sheets + board) | **PASS** |
+| RAG extract | **PASS** |
 
-| Unconnected ends example | Via with one connection example |
-| --------- | ------------ |
-| ![Unconnected ends](media/unconnected-ends.png) | ![Via to nowhere](media/via-to-nowhere.png) |
+Accepted gerber-diff classes (reviewed per layer, all cosmetic):
 
-- The copper pour settings in the original design specify islands are to be removed if they're less than 1.613 sq.mm. However, many of the pours *also* have "Remove Dead Copper" set. KiCad makes no distinction, so I've changed the setting on those pours that require it to "Always".
-	- For those pours that do not have "Remove Dead Copper" set, a lot of isolated copper fills exist. I've checked these are all as intended, and then turned off the DRC warning to suit.
-	- Altium's "Remove necks less than" setting for pours seems to have miscalculated in a few places. For example, there is room for a 0.134mm neck between the `F_D11` and `F_D12` tracks on the second inner layer, but with a setting of 0.127mm it does not appear. Same goes for between `L2` and `DS5`. I have adjusted the setting in KiCad to 0.14mm for these pours only to compensate.
+- **Signal-via / PTH inner annuli** (In1/In2): KiCad plots the unused
+  inner-layer rings that Altium suppresses — isolated inside the plane
+  clearances, no connectivity impact (same class as the CX and v1.5 ports).
+  The routed inner tracks match exactly.
+- **`OBJ1`**: Altium flashes a 1.524 mm disc inside the 3.7 mm hole on the
+  inner layers, KiCad a 3.8 mm ring (see *Structure*); neither survives drilling.
+- **Paste apertures** on the large exposed pads: the aperture outline differs
+  by a fraction of its line width.
+- **Silkscreen**: TrueType glyph-metric offsets (Calibri substituted at import).
 
-| Pour island | Severed neck |
-| --------- | ------------ |
-| ![Pour island](media/pour-island.png) | ![Neck removed](media/neck-removed.png) |
+### Cross-check: KiCad netlist vs the Altium board's nets
 
-- A couple of courtyards overlap. This was either true in the original, or true now that footprints have been consolidated in the library. In both cases, an exclusion has been added to the DRC, since the design remains faithful to the original.
+`validation/altium-netlist-compare.txt` compares the netlist exported from this
+schematic with the nets carried by the Altium `.PcbDoc` itself (read headlessly
+by KiCad 9.0.9, untouched apart from the `MOD1L/R` designators), pad by pad:
+**489 pads, 116 board nets, 0 conflicts, 0 connected pads left netless, 0
+schematic nets without a board pad.** Since the Altium board is the artwork
+that was fabricated, this ties the ported schematic to the shipped copper
+independently of the importer's schematic conversion.
 
-| Existing overlapped courtyards | New overlapped courtyards due to new `TO277` footprint. |
-| --------- | ------------ |
-| ![Existing overlapped courtyards](media/overlapped-courtyard_existing.png) | ![New overlapped courtyards](media/overlapped-courtyard_new.png) |
+## Relation to the earlier KiCad files in this folder
 
-- Silkscreens overlap a lot, despite there being an explicit SilkToSilkClearance design rule of 0.127mm. I've left the design rule in but turned off the warning so DRC is not awash with meaningless warnings.
-- In the original design, clearance around fiducials is managed with a specific design rule. In KiCad we can do that as a footprint setting, which has the same effect and is both more [appropriate](https://www.eevblog.com/forum/altium/fiducials/msg1274268/#msg1274268) (because the scoping is more accurate and because having a mask opening wider than the clearance leads to DRC warnings) and more in keeping with KiCad conventions. So I've added it to the footprint instead.
-	- Similarly, the `PolygonConnect_GND` rule has condition `InNet('GND') And HoleDiameter<=0.45`. Yet it applies to all of the `NetC4_1` pour on the top layer, which is neither `GND` nor has holes less than 0.45mm diameter. Rather than debugging, I've opted to not use a design rule and apply the settings to the zone instead.
-- Note that "Minimum annular width" should be set to 0 to mimic the absence of a corresponding rule in the source, but due to a [bug](https://gitlab.com/kicad/code/kicad/-/issues/13822) I've set it to 0.01 instead. The bug is fixed already but not available in KiCad v7.0.2. It should be available in a version soon.
-- Note KiCad pours thermal reliefs with a spoke angle of 45° by default. The source pours tend to have a setting of 90° spokes. Alas, there is no such pour setting in KiCad, but I've accommodated by applying the setting to the pads in the footprints where it matters.
-- Painfully, the `FIDUCIAL` footprint is 0.065mm off centre. This is done in Altium by offsetting the pad from the "hole". Since there's actually no hole, this is not possible in KiCad in the same way. But the difference is clearly visible in the gerbers and the precise location of fiducials is important. So I've elected to locate the pad offset from the footprint centre in KiCad, which has the same effect. Watch out - that means the rotation of the fiducial changes its location!
-- Unlike Notecarrier-B, the locating holes in the M.2 connector are *included* in the outer copper layers. But in this case they're also NPTH with pads smaller than the hole. KiCad automatically strips the copper from the hole of a NPTH if the pad is the same or smaller size. The copper is retained for PTH, or for pads larger than the hole, but this also has an impact on the manufactured product. Since copper in a hole is ultimately unimportant to the manufactured product, I've opted to leave them as NTPH and acknowledge the difference in gerbers.
-	- Same goes for the mounting holes.
-	- The *opposite* is true of PTHs and vias! Altium excludes the copper if unconnected while KiCad leaves it. This is relatively easy to change - I've updated all vias and relevant pads to have annular rings for "Front, back and connected layers only".
-		- But, Altium then applies a funny clearance rule - it seems to pretend the annulus/pad is still there, and then apply the global 0.15mm clearance.
-		- For PTHs, this is very hard to mimic since not all pads are round or centred around their hole. So for PTHs I've reverted to leaving the copper there, and have just acknowledged it in my validation. Unlike the mounting holes, this *will* have an impact on the manufactured product, leaving small invisible pads around the inners layers of PTHs. This effect is expected to be unnoticeable, except perhaps a very small extra heatsink on those pins.
-		- For vias, I've mimiced the clearance behaviour by calculating each via's effective clearance as "0.15 + (via size - hole size) / 2" and creating a custom rule for each via size, like so:
+Until 2026-09-18 this folder held a hand-made KiCad 7 port (2024) whose board
+was later shown to describe **v1.2** (BOM 3000-613-002): it lacked `U9`,
+`C33`/`C34`, `DS7` and used a different diode part and package for `DS1`–`DS6`.
+Its schematic had been delta-ported to v1.3 in August 2026 while the board was
+still v1.2 (documented in an ERRATA file at the time). Both are superseded by
+this import; the original notes are kept as
+[`History_Porting-Notes-hand-port.md`](History_Porting-Notes-hand-port.md)
+because the repository's gerber-diff recipe was first written there. The
+`SW3` pin 3 / `F_EN` wiring defect that the v1.5 cross-check attributed to the
+hand port is absent here (`SW3.3` is on `N_VIO`, as in Altium).
 
-```
-(rule Cu2Via127
-   (constraint hole_clearance (min 0.4295mm))
-   (condition "A.Type == 'Zone' && B.Type == 'Via' && B.Diameter == 1.27mm"))
-(rule Cu2Via100
-   (constraint hole_clearance (min 0.4mm))
-   (condition "A.Type == 'Zone' && B.Type == 'Via' && B.Diameter == 1.0mm"))
-(rule Cu2Via045
-   (constraint hole_clearance (min 0.275mm))
-   (condition "A.Type == 'Zone' && B.Type == 'Via' && B.Diameter == 0.45mm"))
-```
+## Fonts
 
-- The Altium source has the "GPS ANT" silkscreen on two rows, but the gerbers and the physical sample I have have it on one. I'm going to assume the source is wrapped wrong because the correct font is not available, and put it on one row.
-- In comparing non-manufactured layers, some acknowledgements:
-	- Designators on the Fab layer appear inconsistently. In the source files this information is not part of a visible layer, yet it appears in the `n21-evt_2022-05-20_assembly.PDF` file. In both cases all the information exists, but in KiCad the convention of it being visible in the footprint only applies to those footprints that didn't originate from the source files (eg. `TO277-3` and `BQ24210DQCT`).
-		- If a convention were to be established for visible designators, it could be applied at the library level and back ported into the design relatively easily.
-	- The visible drill table has not been ported. It is not a conventional thing to do in KiCad and the information is better accessed other ways.
-	- KiCad's version of a stack-up table and board characteristics table have been substituted.
-	- The impedance control table has been manually recreated, since the information is important and is difficult to source in other ways.
-	- As in Notecarrier-B, the sheet title block itself hasn't been given much attention since it serves little purpose. Just the important details like names, copyrights and versioning information has been applied.
-- Not only is the `TO277-3` footprint not in the project pcblib (it's in "notecarrier-afv2-V1I1.PcbLib" which is not available), one of the instances is different to the others! Pad 3 of `DS4` is shifted left compared to the other footprints, relative to pads 1 and 2. This is most obvious in the validation of the `B_` layers. It has little effect, and is obviously not desirable, so has been acknowledged and not ported.
-- The source footprint for the fiducial numbers the pad "1". In KiCad this is used to indicate it is an electrical pin. Since it serves no electrical purpose, and creates a number of warnings, I've adopted the KiCad convention and removed the pad number.
-	- Similarly for `JST SM04B-SRSS-TB` and `JST S2B-PH-SM4-TB` footprints. They had pads named "M", which are mechanical only. I've removed the pad names.
-- The footprint for `MOD2` doesn't make much sense to me (and the symbol only barely, to be fair), so I've just left it be. It produces lots of warnings about there being no correspondance between the pins and the pads.
-
-## 3D
-
-- The KiCad importer produced the wrong model for the `1285AS-H-2R2M=P2-INDC2016X100N` inductor footprint, `L3`. The name, `step_temp.STEP`, matches, but the model is for a DIP switch not an inductor. I've extracted the correct model from the PCB step file (using Fusion 360, because FreeCAD always messes up the origin, eDrawings doesn't export to STEP and CAD Assignment produces empty files - argh!). To identify it I've used the name embedded in the PCB step file: `6328683376` (although it also seems to go by `_328683376`).
-	- Turns out `step_temp.STEP` was for the `SW_CJS-1200TA`. I've renamed it to match that footprint's model setting (`CJS-1200TA--3DModel-STEP-56544.step`) then corrected the path.
-	- Same story for the `SOP50P310X90-8N` footprint, `U4`. I've extracted `6104714848` and matched it up.
-	- Slightly different story for `TI PVSON-14 DSJ` footprint, `U3`, and `TPS62748YFPT-DSBGA4x2` footprint, `U1`. I've extracted them as `6103526784` and `6427268096` respectively because in Altium they are extruded models, not standalone STEP files.
-- The `notecarrier-f-v1-3d-122322.step` file seems to differ from the design files in two ways:
-	- The `MOD1L`/`MOD2L` models are the same (`CES-116-01-L-S`/`CES-112-01-L-S`), but the step file *also* includes two taller pin headers (`SSW-116-01-T-S v1`/`SSW-112-01-S-S v1`). I can't find them anywhere else, so have excluded them from the port.
-	- The design files include a `NOTECARD_STEP.step` body plugged into the M.2 connector. KiCad doesn't support models without an associated footprint, so I've opted to duplicate the `J-75-0050-MOS-M2` footprint and add the body to that. The duplicate is only so the name can indicate the presence of the model - the footprint is otherwise the same, and the model can easily be shown/hidden on an instance by instance basis.
-
-
-## Library
-
-- Many footprints and models overlap with those already ported from Notecarrier-B.
-	- One of two strategies was applied:
-		1. Where substantial differences exist and the existing is not a worthy substitute, the name tends to also be different, so the new footprint/model has been retained and lives alongside the existing in the shared library.
-			- In three cases the names were the same so an alternate name was picked:
-				- `9774025151R` instead of `DIST-WASMSIM0250`.
-				- `FIDUCIAL-F` instead of `FIDUCIAL`.
-				- `DO214AA SMB.STEP` instead of `SMB.STEP`.
-			- In one case the existing model/footprint had a different name (`BQ24210DQCT` instead of `WSON10-EXP`), but it did not come from the Notecarrier-B project so as per the library convention I've written over it to consolidate footprints.
-		1. Occasionally, where differences are not substantial, or the existing is a superset of the new (eg. same copper but additional silkscreen/fab graphics), the existing has been substituted.
-			- Eg, `TO277-3`, `FS-0603` or `DIST-WASMSIM0250.step`.
-			- This did mean having to rotate each of the `TO277-3` parts 180° on the PCB.
-	- This way, nothing is lost but we also don't end up with insignificant duplicates in the library.
-	- Still, there remains multiple footprints for the same part (eg. `PTS810-SJS-250-SMTR-LFS` and `C&K PTS810`, or `CJS-1200TA` and `SW_CJS-1200TA`, or `RR-8X-1506` and `RESNET 1506-16 CONVEX`, or even the passives like `RS-0402` and `RES 0402_1005`) so to further differentiate them the "Description" field for the new footprints indicates they're from Notecarrier-F. This is intended to help filter them out in the future, so new designs can go forward with a single footprint convention.
-		- The same is true for 3D models. In this case there is no useful metadata field to distinguish them so a file naming scheme becomes important. At the moment it is difficult to identify similar footprints since those from an OrCAD original might be something like `J-5-0065-FOS-MICROUSB10118192.step` while from an Altium origin is `FCI USB 10118193-0001lfc.STEP`. Their commonality (both SMD Micro USB receptacle models) and differences (the `10118192` variant vs the `10118193`) are not easy to spot. Further, they tend to differ in subjective ways (orientiation, colour and fine detail) so it is hard to pick a favourite and tricky to backport. Other examples are:
-			- `CS-C-0603.step` vs `0603 cap.step`
-			- `9774025151R (rev1).stp` vs `DIST-WASMSIM0250.step`
-			- `S2B-PH-SM4-TB.STEP` vs `S2B-PH-SM4-TB(LF)(SN).STEP` vs `JST S2B-PH-SM4-TB.step`
-			- `DO214AA SMB.STEP` vs `SMB.step`
-	- There are two special cases:
-		- The Nano SIM footprint in the KiCad library has pin names that match the KiCad symbol. The KiCad symbol was used in place of the original symbol as per the porting conventions, but this means the pin names don't match up with the ported footprint. Since the ported footprint is significantly different to the KiCad default, the ported footprint has been modified just to match up the pin names.
-		- The `SMB` footprint in the KiCad library and the `SMB` footprint from the Notecarrier-B project follow the common convention of indicating the cathode on pin 1. The `SMB` footprint from the Notecarrier-F project indicates the cathode is on pin 2, yet the pin assignment is the same! In other words, the silkscreen is backwards. To avoid introducing confusion, I've kept the original design as is, but renamed the footprint `SMB_Backwards`.
-
-| Altium NanoSIM Footprint | KiCad NanoSIM Footprint |
-| --------- | ------------ |
-| ![Altium Footprint](media/NanoSIM-Altium.png) | ![KiCad Footprint](media/NanoSIM-KiCad.png) |
-
-
-## Validation Method
-
-1. Validate Schematic
-	1. Print both schematics at same scale.
-	1. Perform visual comparison. Confirm that any differences are expected, documented and acceptable.
-1. Validate BOM.
-	1. Export `n21-evt_Bill of Materials_2022-05-20.xlsx` columns `Reference`, `Part`, `MPN`, `MPN2`, `Description`, `Temperature` and `Pkg Type` to CSV.
-	1. Export KiCad BOM using Symbol Fields Table.
-	1. Run BeyondCompare and match column headings.
-	1. Confirm all differences are expected, documented and acceptable.
-1. Validate PCB.
-	1. Run DRC. Confirm that any errors and warnings are expected, documented and acceptable.
-	1. Produce Gerbers from KiCad according to the settings in `n21-evt.OutJob`, except:
-		1. matching the 65 layers in the `n21-evt__MFG_2022-05-20` folder is neither practical nor useful, so like in Notecarrier-B, limit Gerber comparison to just the layers that get manufacturered. Those layers, and the file extension to match (case-insensitive) with the Altium gerbers, is as follows:
-			1. F_Cu : `.gtl`
-			1. In1.Cu : `.g2`/`.G1`
-			1. In2.Cu : `.g3`/`.G2`
-			1. B_Cu : `.gbl`
-			1. F_Paste : `.gtp`
-			1. B_Paste : `.gbp`
-			1. F_Mask : `.gts`
-			1. B_Mask : `.gbs`
-			1. F_Silkscreen : `.gto`
-			1. B_Silkscreen : `.gbo`
-			1. Edge_Cuts : `.gm1`/`.GM4`
-		1. Validate the gerbers by opening pairs in Gerber Viewer and flicking between them to scan for differences. The contrasting colours of the layers automatically creates a useful visual diff, and is more definitive than the "diff" and "xor" views.
-		1. Validate the non-manufactured layers by hiding every manufactured layer in Altium and visually comparing with the equivalent in KiCad.
-	1. Produce a combined PTH and NPTH drill file in KiCad using default settings.
-		1. Validate the drill file by opening the KiCad `.drl` file in Gerber Viewer alongside `n21-evt-RoundHoles.TXT` and `n21-evt-SlotHoles.TXT`, and flicking between them to scan for differences. The contrasting colours of the layers automatically creates a useful visual diff, and is more definitive than the "diff" and "xor" views.
-		1. Since this method doesn't distinquish PTH and NPTH, also check the `n21-evt.DRR` file and confirm the 10 NPTH holes listed appear in the KiCad source files.
-
-
-## Produce Outputs
-
-The procedure for Notecarrier-B can largely be re-used. The differences are relatively minor, and given this is the only Altium port in the current scope, not worth documenting at this stage.
-
-But in short:
-
-- No need for the test point report - there's only one test point.
-- Create source pngs from `n21-evt__MFG_2022-05-20` folder:
-
-```
-cd Gerber
-mkdir pngs
-for f in *.(GTL|G1|G2|GBL|GTP|GBP|GTS|GBS|GTO|GBO)
-do
-gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B n21-evt.GM4 "$f" --export=png --dpi 1200 -o "pngs/${f}.png"
-done
-```
-
-- Alas, `gerbv` doesn't support the drill files, so `gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B --foreground=#00690B ../Gerber/n21-evt.GM4 n21-evt-RoundHoles.TXT n21-evt-SlotHoles.TXT --export=png --dpi 1200 -o Drill-Altium.png` currently fails. 
-	- Just do it manually in Gerber Viewer instead.
-- Create gerbers from KiCad in same way, but turn off X2 format to remove *thousands* of "critical" `gerbv` errors. They don't seem to have an effect, but it is a more reassuring experience.
-	- Create drill file in a similar manner, but check "Use alternate drill mode" so `gerbv` can parse the slotted holes, and as stated in the Validation section, combine PTH and NPTH into one file.
-- Revised gerber diff generator:
-
-```
-set -k # turn on commenting support
-for f in ../manufacturing/*.(gtl|g2|g3|gbl|gtp|gbp|gts|gbs|gto|gbo|drl); do
-fname=${${f:t:r}:14} # strip off path, extension, and "Notecarrier-F-" prefix
-if [ -z $fname ]; then fname="Drill"; fi
-gerbv --background=#FFFFFF --foreground=#00690B --foreground=#00690B "../manufacturing/Notecarrier-F-Edge_Cuts.gm1" "$f" --export=png --dpi 1200 -o "${fname}-KiCad.png"
-# I never did figure out why, but some of the KiCad gerbers produce
-# slightly more whitespace around the edge cuts, even when used with the
-# Altium edge cuts. So just take a knife to them here.
-if [ $fname != "F_Silkscreen" ]; then
-mogrify -gravity Center -crop 2521x5111+0-1 +repage "${fname}-KiCad.png"
-fi
-convert \( ${fname}-KiCad.png -grayscale Rec709Luminance \) \
-        \( ${fname}-Altium.png -grayscale Rec709Luminance \) \
-        \( -clone 0-1 -compose darken -composite \) \
-        -channel RGB -combine ${fname}-diff.png
-done
-```
-
-# Addendum : Rev B Notes
-
-For the most part, the existing notes are sufficient to cover the exercise of porting Rev B. Exceptions are noted here:
-
-- The included Excel BOM does not match the design files. Eg. `C1` is a X5R 25V in the design files, but a X7R 16V in the BOM. In Rev A it was different again. To ensure nothing is lost, I have included **both** part details in the BOM. The values from the design files are in fields `Design Description`, `Design Manufacturer`, `Design MPN`. `Design Supplier` and `Design Order Code`.
-- I've changed the one `N_VIO` global label on the Feather sheet to a power symbol, because the additional net created by the label causes DRC violations, is likely a mistake, and otherwise has no electrical effect.
-- There are many variations in fill behaviour around vias of the same net. In some cases it is solid, in other cases there is a small but variable clearance, and in others there is a negative clearance. These are likely not deliberate, and given they have very little physical impact, I've just lumped them into two categories, solid and not connected, and let the standard fill behaviour take place.
-- I've excluded DRC violations associated with polygons - in KiCad polygons cannot be assigned to a net. Rather than change them to zones and introduce unwanted fill behaviour, I have chosen just to exclude the warnings.
-- The stack up information that appears as text contradicts that set in the design rules. I've opted to use the former, since that is what the manufacturer will see, so I assume the latter is not used.
-- Where the 3D models were either identical, or a clear subset of those from the original port, I've replaced them with the originals. In all other cases I've used the new models to avoid introducing regressions.
-	- An example of a identical model is the `SOP50P310X90-8N`, which is clearly the same as `6104714848.step` in the original port, and so I've changed the footprint to refer to the original.
-	- Examples of a clear subset are the SOT66 and nanoSIM card models, which have the same shape but lack the colouring of the original, or the `SW-CJS1200TA` model, which has the same shape but lacks detail and introduces a rotation.
-	- Using the new models means there is now another model variation in the library for some parts. For example, for an 0402 resistor there is now:
-		- `RS-0402.step` - imported with the OrCAD ports
-		- `0402 resistor.STEP` - imported with the original Notecarrier-F port
-		- `RESC1005X38N EIA 0402.step` - imported with this new Notecarrier-F port
-	- There is an obvious opportunity to rationalise these duplicates, but I'm not in a position to make choices about which variant to standardise on, so have left them all in with clear history notes.
-- I experienced frequent crashes when viewing the PCB in 3D mode, if the Notecard model is set to partially transparent. If this persists, edit the `J-75-0050-MOS-M2_Fv1.2` footprint and set the opacity of the `Notecard-V2-Telit-WiFi.step` model to 100, then update the footprint in the PCB.
-- The `DIST-WASMSIM0250_Fv1.2` footprint has no pad on inner layers. Out of the box, KiCad puts a pad on connected layers, which the inner layers are. While it looks quite different in the gerber diff, the thermal relief remains much the same (only the 4 spokes are longer in the Altium design file). Elsewhere I've concocted custom footprints to mimic this behaviour, but here I can't see that it's warranted.
-- The zones in KiCad fill into some unused space that Altium leaves empty. They're not islands and I see no meaningful impact, so I haven't bothered removing them.
-	- Eg. `F_Cu` @ (84.1, 115.6) or `B_Cu` @ (83.7, 60.4).
-- Note that after assessing the `Notecarier-F_Panel.PcbDoc` file, I've determined that it is not a good candidate for porting and is therefore not included in the port at this stage.
-	- It is both non-novel, and specific. That is, the panelisation is a standard panel of 5x2 boards, with rails on all sides that contain fiducials, so nothing that you wouldn't see in a standard panelisation. Then it also has specific text in the silkscreen ("2200-783 Notecarrier-F Panel"), quite specific fiducial size, shape and placement, and some specific instructions associated with the stencil to ensure the fiducials are etched correctly.
-	- Since the standard parts should be done in KiCad through the use of automation, not porting, and the specific parts are closely tied to the manufacturer's requirements, my initial assessment is that the panel is not a good candidate for porting. The panel should be recreated in KiCad using a panelisation tool, and the manufacturer specific elements applied consciously.
-
-## KiCad 9 update (2026-07-31)
-
-This port was originally authored in KiCad 7 and has been upgraded in place to
-**KiCad 9** (board format 20221018 → 20241229, schematics → 20250114). The
-upgrade was verified to be lossless:
-
-* every fabrication layer — copper, mask, paste, silkscreen and Edge.Cuts —
-  is geometrically identical before and after (raster comparison at 600 dpi),
-  and the drill file is textually identical;
-* the schematic netlist is unchanged: same component set and the same net
-  partitions.
-
-**Do not refill the zones.** These ports depend on the fills preserved from the
-original import; regenerating them changes the copper. The upgrade path used
-here (load and save) does not refill.
-
-### DRC exclusions no longer suppress anything
-
-The exclusions recorded in the project file were written by KiCad 7 and its
-marker keys no longer match, so KiCad 9 re-reports the violations that were
-reviewed and accepted when this port was made. They are left in place as the
-author's record. Current state under KiCad 9: **1 ERC** (`hier_label_mismatch` on `F_NRST`) and **0 DRC errors, 0 unconnected**.
-
-DRC previously reported 171 errors. 163 of them came from 54 net-less 0.6 mm copper patches (footprint `weird-no-fill-via_Fv1.2`) that sit inside `GND` copper; they have been assigned the `GND` net they belong to, which cleared the reports without changing any copper geometry.
-
-> **⚠️ See [`../ERRATA.md`](../ERRATA.md) — this folder holds a v1.3 schematic and a v1.2 PCB.**
-> These files were originally a faithful port of **v1.2** filed under v1.3: 86/86 parts matched
-> the v1.2 released build, while v1.3 adds `U9`/`C33`/`C34` and `DS7`, re-parts all six diodes,
-> and moves both level shifters off `F_BAT` onto a regulated `F_VIO`. The porting work itself
-> was sound; the revision label was what was wrong. The schematic delta has since been applied
-> and verified; the board has not, so the two are deliberately out of step and this is not yet
-> a usable v1.3 deliverable.
+The silkscreen uses TrueType **Calibri** (substituted with DejaVu Sans Bold on
+the import machine). The font is not redistributed with this project; silkscreen
+text therefore renders with slightly different metrics than the fabricated
+board, which is the silkscreen class accepted in the gerber diff above.

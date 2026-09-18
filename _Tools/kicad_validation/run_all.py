@@ -187,17 +187,20 @@ class Gates:
         rag_py = self.repo / "_Tools" / "extract_for_rag" / ".venv" / "bin" / "python"
         if not rag_py.exists():
             raise SkipGate("extract_for_rag venv not present")
-        with tempfile.TemporaryDirectory() as td:
-            changed = [str(p.relative_to(self.repo))
-                       for p in self.sch.parent.glob("*.kicad_sch")]
-            changed_file = Path(td) / "changed.txt"
-            changed_file.write_text("\n".join(changed) + "\n")
-            r = run([rag_py, extract, "--no-vlm", "--only", "kicad",
-                     "--out", td, "--changed-from", changed_file],
-                    text=True, cwd=self.repo, capture_output=True)
-            print((r.stdout or "")[-1500:])
-            print((r.stderr or "")[-500:])
-            return r.returncode == 0
+        # The extractor indexes only the newest version of each product, so an
+        # incremental run would silently skip an older version's sheets. Parse
+        # this board's sheets explicitly instead; the extractor exits non-zero
+        # unless every one of them parses.
+        sheets = sorted(str(p.relative_to(self.repo))
+                        for p in self.sch.parent.glob("*.kicad_sch"))
+        r = run([rag_py, extract, "--parse-only", *sheets],
+                text=True, cwd=self.repo, capture_output=True)
+        print((r.stdout or "")[-1500:])
+        print((r.stderr or "")[-500:])
+        parsed = [l for l in (r.stdout or "").splitlines() if l.startswith("[parse] ")]
+        if r.returncode != 0 or len(parsed) - 1 != len(sheets):
+            return False
+        return f"{len(sheets)} of {len(sheets)} sheets parsed" in (r.stdout or "")
 
 
 class SkipGate(Exception):

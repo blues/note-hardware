@@ -46,7 +46,7 @@ remembering the right command line.
 | GERBER-DIFF | `gerber_diff.py` | per-layer raster diff vs the shipped fab package (human-reviewed; also proves the source revision matches the published release) |
 | PNP | `pnp_compare.py` | side/rotation/position match vs the shipped pick-and-place file — the only gate that checks against the *released build* rather than the design sources |
 | KICANVAS | `kicanvas_check/render_check.py` | every sheet + board parses and paints in KiCanvas, headless Chromium, zero console errors |
-| RAG | `_Tools/extract_for_rag/extract.py` | the new `.kicad_sch` files parse in the RAG pipeline that runs in CI |
+| RAG | `_Tools/extract_for_rag/extract.py --parse-only` | every `.kicad_sch` of the port parses in the RAG pipeline that runs in CI — checked sheet by sheet, so a port of an older version (which the index itself would skip in favour of the newest) is still exercised |
 
 **What a gerber baseline does and does not promise.** A board's committed
 `validation/gerber-baseline.yaml` freezes each layer's reviewed difference; the
@@ -87,8 +87,9 @@ Individual tools can be run standalone; each has a `--help`.
   Katherine Flowers), fetched from <https://kicanvas.org/kicanvas/kicanvas.js>
   on 2026-07-28. Vendoring pins the version so render results are reproducible.
 - The gerber-diff recipe (gerbv @ 1200 dpi over the board outline, ImageMagick
-  channel-combine) follows the method documented in
-  `Notecarrier-F/v1.3/KiCad_format/documentation/Porting-Notes.md`.
+  channel-combine) follows the method first documented in the original
+  Notecarrier-F hand port's notes, kept as
+  `Notecarrier-F/v1.3/KiCad_format/documentation/History_Porting-Notes-hand-port.md`.
 - KiCad file format target for new ports: **KiCad 9** (sch `20250114`, pcb
   `20241229`). Gate G0 (2026-07-28) verified KiCanvas renders KiCad 9 formats
   cleanly, including a 9-format resave of the existing Notecarrier-A port.
