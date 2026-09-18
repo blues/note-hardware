@@ -673,6 +673,10 @@ def main(argv=None) -> int:
     ap.add_argument("--no-vlm", action="store_true", help="skip schematic-PDF vision extraction")
     ap.add_argument("--limit", type=int, help="process at most N files (debug)")
     ap.add_argument("--only", choices=[BOM, KICAD, SCHEMATIC], help="restrict to one doc-type (debug)")
+    ap.add_argument("--parse-only", nargs="+", type=Path, metavar="SHEET",
+                    help="validation mode: parse these .kicad_sch files exactly as the extractor would, "
+                         "regardless of the newest-version selection, write nothing, and exit 1 unless "
+                         "every one of them parses (a sheet with no electrical content counts as parsed)")
     # `or DEFAULT` so an env var that is set-but-empty (e.g. an unset Actions `vars.*`) falls back.
     ap.add_argument("--base-url", default=os.environ.get("RAG_BASE_URL") or DEFAULT_BASE_URL,
                     help="published base URL for sitemap <loc> (env RAG_BASE_URL)")
@@ -682,6 +686,36 @@ def main(argv=None) -> int:
 
     root: Path = args.root.resolve()
     out_dir: Path = args.out.resolve()
+
+    if args.parse_only:
+        # Used by the KiCad validation harness: the index keeps only the newest version of each
+        # product, so a port of an older version would otherwise never be exercised here.
+        failures = 0
+        for p in args.parse_only:
+            path = p if p.is_absolute() else root / p
+            try:
+                text = path.read_text(encoding="utf-8", errors="replace")
+                # _parse_sexpr is deliberately lenient (a truncated file still yields a tree),
+                # so check the file is one balanced (kicad_sch ...) form before extracting.
+                opens, closes = text.count("(") - text.count("\\("), text.count(")") - text.count("\\)")
+                quoted = re.findall(r'"(?:[^"\\]|\\.)*"', text)
+                opens -= sum(q.count("(") for q in quoted)
+                closes -= sum(q.count(")") for q in quoted)
+                if opens != closes:
+                    raise ValueError(f"unbalanced s-expression ({opens} '(' vs {closes} ')')")
+                tree = _parse_sexpr(text)
+                if len(tree) != 1 or not _is_node(tree[0], "kicad_sch"):
+                    raise ValueError("file is not a single (kicad_sch ...) form")
+                body = extract_kicad(path)
+                if body is None and "\n\t(symbol\n" in text:
+                    raise ValueError("sheet places symbols but the extractor produced no page")
+                status = "OK" if body is not None else "EMPTY (no electrical content)"
+            except Exception as e:  # noqa: BLE001 - report every parse failure, whatever it is
+                failures += 1
+                status = f"FAIL: {type(e).__name__}: {e}"
+            print(f"[parse] {status:32s} {p}")
+        print(f"[parse] {len(args.parse_only) - failures} of {len(args.parse_only)} sheets parsed")
+        return 1 if failures else 0
 
     cands = gather_candidates(root)
     selected = select_latest_per_doctype(cands)

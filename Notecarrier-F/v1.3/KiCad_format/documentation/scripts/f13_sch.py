@@ -244,15 +244,41 @@ pro = json.loads((SRC / f"{OLD_PROJECT}.kicad_pro").read_text())
 v15 = json.loads(V15_PRO.read_text())
 pro["meta"]["filename"] = f"{PROJECT}.kicad_pro"
 pro["text_variables"] = TEXT_VARS
-pro["board"]["design_settings"]["rules"] = v15["board"]["design_settings"]["rules"]
+rules = dict(v15["board"]["design_settings"]["rules"])
+# v1.3 was routed to the board's own Altium rule set (read from the .PcbDoc Rules6
+# stream): clearance 0.1 mm, track 0.1 mm, hole-to-hole 0.2 mm - a hair under each.
+rules.update({"min_clearance": 0.0999, "min_track_width": 0.0999,
+              "min_hole_clearance": 0.0999, "min_hole_to_hole": 0.1999})
+pro["board"]["design_settings"]["rules"] = rules
 pro["board"]["design_settings"]["rule_severities"] = v15["board"]["design_settings"]["rule_severities"]
 pro["board"]["design_settings"]["drc_exclusions"] = []
-pro["net_settings"] = v15["net_settings"]
+pro["net_settings"] = json.loads(json.dumps(v15["net_settings"]))
+for nc in pro["net_settings"]["classes"]:
+    nc["clearance"], nc["track_width"] = 0.0999, 0.1
 pro["erc"] = v15["erc"]
 pro.pop("sheets", None)
 for k in ("pinned_symbol_libs", "pinned_footprint_libs"):
     pro.setdefault("libraries", {})[k] = []
-(DST / f"{PROJECT}.kicad_pro").write_text(json.dumps(pro, indent=2) + "\n")
+(DST / f"{PROJECT}.kicad_pro").write_text(json.dumps(pro, indent=2))
 if (SRC / f"{OLD_PROJECT}.kicad_prl").exists():
     shutil.copy(SRC / f"{OLD_PROJECT}.kicad_prl", DST / f"{PROJECT}.kicad_prl")
+
+# Graphic-only symbols (the Feather outline MOD2) have passive pins with nothing
+# attached; ERC flags each as pin_not_connected. Their embedded lib symbol - in
+# the sheet and in the merged library - gets no_connect-type pins instead.
+NO_CONNECT_PINS = {"MOD2"}
+for newf, _ in SHEETS.values():
+    t = (DST / newf).read_text()
+    for s, e in top_blocks(t, "symbol"):
+        blk = t[s:e]
+        if prop(blk, "Reference") in NO_CONNECT_PINS:
+            lib_id = re.search(r'\(lib_id "([^"]*)"', blk).group(1)
+            for path, name in ((DST / newf, lib_id), (DST / f"{LIB}.kicad_sym", lib_id.split(":", 1)[-1])):
+                txt = path.read_text()
+                i = txt.find(f'(symbol "{name}"')
+                j = block_end(txt, i)
+                n = txt[i:j].count("(pin passive")
+                path.write_text(txt[:i] + txt[i:j].replace("(pin passive", "(pin no_connect") + txt[j:])
+                print(f"{path.name}: {name}: {n} pins -> no_connect")
+            break
 print("done")

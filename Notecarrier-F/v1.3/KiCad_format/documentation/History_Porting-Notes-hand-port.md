@@ -291,7 +291,7 @@ author's record. Current state under KiCad 9: **1 ERC** (`hier_label_mismatch` o
 
 DRC previously reported 171 errors. 163 of them came from 54 net-less 0.6 mm copper patches (footprint `weird-no-fill-via_Fv1.2`) that sit inside `GND` copper; they have been assigned the `GND` net they belong to, which cleared the reports without changing any copper geometry.
 
-> **⚠️ See [`../ERRATA.md`](../ERRATA.md) — this folder holds a v1.3 schematic and a v1.2 PCB.**
+> **⚠️ At the time this addendum was written the folder held a v1.3 schematic and a v1.2 PCB, documented in an `ERRATA.md` that was removed with the hand port on 2026-09-18 (see the git history before commit `ffb847f`).**
 > These files were originally a faithful port of **v1.2** filed under v1.3: 86/86 parts matched
 > the v1.2 released build, while v1.3 adds `U9`/`C33`/`C34` and `DS7`, re-parts all six diodes,
 > and moves both level shifters off `F_BAT` onto a regulated `F_VIO`. The porting work itself

@@ -69,15 +69,16 @@ for f in fps:
 coll = {k: len(v) for k, v in sig.items() if len(v) > 1}
 print("footprint names:", len(sig), "pad-signature collisions:", coll)
 
-# zones: importer carries Altium's 0.5 mm pour clearance parameter; the fabricated
-# pours were poured at the board minimum (mirrors the v1.5 port). Fills untouched.
+# zones: the importer carries Altium's 0.5 mm zone *parameter*; the pours were
+# actually poured to the board's "Clearance Polygon" rule (0.2 mm, read from the
+# .PcbDoc Rules6 stream) - set a hair under that. Fills untouched.
 zc = collections.Counter()
 for z in b.Zones():
     if z.GetIsRuleArea():
         continue
     zc[round(z.GetLocalClearance() / 1e6, 4)] += 1
-    if z.GetLocalClearance() > pcbnew.FromMM(0.15):
-        z.SetLocalClearance(pcbnew.FromMM(0.1499))
+    if z.GetLocalClearance() > pcbnew.FromMM(0.2):
+        z.SetLocalClearance(pcbnew.FromMM(0.1999))
 print("copper zone clearances before:", dict(zc))
 
 # save footprints into the project library
@@ -102,5 +103,75 @@ for f in sorted(fps, key=lambda f: f.GetReference()):
     saved.add(name)
 print(f"saved {len(saved)} footprints into {lib.name}")
 
-pcbnew.SaveBoard(str(DST / "Notecarrier-F.kicad_pcb"), b)
+out = DST / "Notecarrier-F.kicad_pcb"
+pcbnew.SaveBoard(str(out), b)
 print("board saved")
+
+# ---- text-level passes on the saved board -------------------------------------
+import re, glob
+
+
+def block_end(text, start):
+    depth, i, in_str = 0, start, False
+    while i < len(text):
+        c = text[i]
+        if in_str:
+            if c == "\\": i += 1
+            elif c == '"': in_str = False
+        elif c == '"': in_str = True
+        elif c == "(": depth += 1
+        elif c == ")":
+            depth -= 1
+            if depth == 0: return i + 1
+        i += 1
+    raise ValueError
+
+
+def blocks(text, opener):
+    pos = 0
+    while True:
+        i = text.find(opener, pos)
+        if i < 0: return
+        e = block_end(text, i); yield i, e; pos = e
+
+
+# 1. the importer leaves every footprint's Value empty; fill it from the
+#    schematic (schematic parity otherwise reports a mismatch per part)
+vals = {}
+for f in glob.glob(str(DST / "Notecarrier-F_*.kicad_sch")):
+    s = open(f).read()
+    for i, e in blocks(s, "\n\t(symbol\n"):
+        blk = s[i:e]
+        r = re.search(r'\(property "Reference" "([^"]*)"', blk)
+        v = re.search(r'\(property "Value" "((?:[^"\\]|\\.)*)"', blk)
+        if r and v and not r.group(1).startswith("#"):
+            vals.setdefault(r.group(1), v.group(1))
+t = open(out).read(); parts = []; pos = 0; filled = 0
+for i, e in blocks(t, "\n\t(footprint "):
+    blk = t[i:e]
+    r = re.search(r'\(property "Reference" "([^"]*)"', blk)
+    if r and r.group(1) in vals:
+        new = re.sub(r'(\(property "Value" ")(?:[^"\\]|\\.)*(")',
+                     lambda m: m.group(1) + vals[r.group(1)] + m.group(2), blk, count=1)
+        filled += new != blk; blk = new
+    parts += [t[pos:i], blk]; pos = e
+parts.append(t[pos:]); t = "".join(parts)
+print(f"footprint Values filled from schematic: {filled}")
+
+# 2. OBJ1 mounting hole: Altium's pad stack is 6 mm outer / 1.524 mm inner around a
+#    3.7 mm hole (no inner copper survives drilling); KiCad flags the negative
+#    annulus, so give the inner layers the smallest legal ring (drill + 0.1) and
+#    let KiCad drop the unused inner layers.
+i = t.find('(property "Reference" "OBJ1"')
+k = t.find('(pad "1" thru_hole circle', i)
+seg_end = block_end(t, k)
+seg = t[k:seg_end]
+drill = float(re.search(r"\(drill ([0-9.]+)\)", seg).group(1))
+inner = re.search(r'\(layer "Inner"\n\t*\(shape circle\)\n\t*\(size ([0-9.]+) [0-9.]+\)', seg)
+if inner and float(inner.group(1)) < drill:
+    seg = seg.replace(inner.group(0), inner.group(0).replace(f"(size {inner.group(1)} {inner.group(1)})",
+                                                             f"(size {drill + 0.1:g} {drill + 0.1:g})"))
+    seg = seg.replace("(remove_unused_layers no)", "(remove_unused_layers yes)\n\t\t\t(keep_end_layers yes)", 1)
+    t = t[:k] + seg + t[seg_end:]
+    print(f"OBJ1 pad 1: inner size {inner.group(1)} -> {drill + 0.1:g} mm, unused inner layers removed")
+open(out, "w").write(t)
