@@ -50,6 +50,7 @@ shipped BOM's designators are mapped accordingly during validation.
 | Revision | Date | Author | Notes |
 |---|---|---|---|
 | A | 2026-07-28 | Blues Inc | Initial port of Cygnet v1.2 from Altium Designer sources, KiCad 9.0.9 |
+| B | 2026-10-07 | Blues Inc | U1 MPN corrected from `STM32L433CB` to `STM32L433CCT6` (256 KB flash), matching production boards; the same fix is in `../Cygnet v1.2 BOM.xlsx` |
 
 ### Original (Altium) revision history
 
