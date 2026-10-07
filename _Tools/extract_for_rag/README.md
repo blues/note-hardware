@@ -85,10 +85,20 @@ and regenerates everything.
 ## Automation
 
 [`.github/workflows/rag-extract.yml`](../../.github/workflows/rag-extract.yml) re-runs this tool on
-every merge to `master` (**incrementally** by default), commits the refreshed output under
+every merge to `master` (**incrementally** by default), regenerates the output under
 `_Tools/extract_for_rag/rag-extracted/`, and **publishes that folder to GitHub Pages** (the `deploy`
-job). The workflow ignores pushes that only touch the output dir so its own commit doesn't
-retrigger it. A clean full rebuild is opt-in via `workflow_dispatch` (`full: true`).
+job). `master` doesn't accept direct pushes, so the refreshed output lands through a PR from
+`bot/rag-refresh`, which needs one approval like any other. There is only ever one such PR: later
+runs fold its output in and update it rather than opening another, so nothing waiting in it is
+lost. If a later run puts the output back to what `master` already has (say a source change was
+reverted), it closes the PR. Pages is already live by the time the PR opens, so merging it just
+brings `master` in line. The workflow ignores pushes that only touch the output dir, so merging
+the PR doesn't retrigger it. A clean full rebuild is opt-in via `workflow_dispatch`
+(`full: true`). Dispatched from any branch other than `master`, the workflow is a dry run: the
+output is uploaded as the `github-pages` artifact for inspection, with no PR and no deploy.
+
+Repo **Settings → Actions → General → "Allow GitHub Actions to create and approve pull requests"**
+must stay enabled, or the PR step fails.
 
 Requires (one-time): repo **Settings → Pages → Source = GitHub Actions**, the `OPENAI_API_KEY`
 **secret** (a credential — never a variable), and a **public** repo (ragpi crawls the Pages site
