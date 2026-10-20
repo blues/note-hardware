@@ -23,6 +23,7 @@ on:
 
 env:
   PR_BRANCH: bot/rag-refresh
+  SOURCE_MARKER: _Tools/extract_for_rag/rag-extracted/.source-sha   # commit the output was last updated from
 
 # Per ref: master runs (which share $PR_BRANCH and the Pages deploy) still queue one at a time, but
 # a dry run dispatched from another branch can't displace a pending master run.
@@ -37,7 +38,7 @@ jobs:
     permissions:
       contents: write        # push the refreshed output to $PR_BRANCH
       pull-requests: write   # open the PR that lands it on master
-      actions: read          # find the last successful run (the incremental diff base)
+      actions: read          # find the last successful run (rollback guard)
     steps:
       - uses: actions/checkout@v7   # Node 24 runtime
         with:
@@ -50,40 +51,10 @@ jobs:
       - name: Install pipeline deps
         run: pip install -r _Tools/extract_for_rag/requirements.txt
 
-      # Diff from the commit of the last successful master run rather than the push's `before`, so
-      # changes from a run that failed or was cancelled are picked up by the next one.
-      - name: Compute changed source files
-        id: changed
-        env:
-          GH_TOKEN: ${{ github.token }}
-          FULL: ${{ inputs.full }}
-        run: |
-          # Incremental is the default. Only an explicit workflow_dispatch with full=true rebuilds.
-          if [ "$FULL" = "true" ]; then
-            echo "mode=full" >> "$GITHUB_OUTPUT"
-          else
-            echo "mode=incremental" >> "$GITHUB_OUTPUT"
-            base="$(gh run list --workflow rag-extract.yml --branch master --status success --limit 1 \
-                      --json headSha --jq '.[0].headSha // empty')"
-            if [ -n "$base" ] && git cat-file -e "$base^{commit}" 2>/dev/null; then
-              if [ "$GITHUB_REF" = "refs/heads/master" ] && [ "$base" != "$GITHUB_SHA" ] && \
-                 git merge-base --is-ancestor "$GITHUB_SHA" "$base"; then
-                echo "::error::$GITHUB_SHA is older than the last published commit $base, which already includes its changes. Publishing it would roll back newer output."
-                exit 1
-              fi
-              git diff --name-only "$base" "$GITHUB_SHA" > changed.txt
-              echo "Changed files since $base:"; cat changed.txt
-            else
-              : > changed.txt   # no base (first run / rewritten history): reconcile regenerates anything missing
-              echo "No diff base; relying on reconcile (generate-missing + prune)."
-            fi
-          fi
-
-      # Incremental mode only regenerates outputs whose source changed since the last successful
-      # run (or that are missing), so output still waiting in an unmerged PR would be silently
-      # dropped when this run force-pushes $PR_BRANCH. Start from that output instead, so the PR
-      # accumulates. Files the PR deleted come back from master here, but they're orphans and get
-      # pruned again.
+      # Start from the output still waiting in the open PR, if any, so it accumulates rather than
+      # being dropped when this run force-pushes $PR_BRANCH, and so the diff below starts from the
+      # commit that output was generated from. Files the PR deleted come back from master here, but
+      # they're orphans and get pruned again.
       - name: Fold in the open RAG PR, if any
         env:
           GH_TOKEN: ${{ github.token }}
@@ -92,6 +63,50 @@ jobs:
             git fetch origin "$PR_BRANCH"
             git checkout FETCH_HEAD -- _Tools/extract_for_rag/rag-extracted
             echo "Folded in output from the open $PR_BRANCH PR."
+          fi
+
+      # Diff from the commit recorded in the output itself ($SOURCE_MARKER), so every source change
+      # the output doesn't reflect yet is caught, including ones from a run that failed, was
+      # cancelled, or was reverted after its output reached the PR.
+      - name: Compute changed source files
+        id: changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FULL: ${{ inputs.full }}
+        run: |
+          base="$(cat "$SOURCE_MARKER" 2>/dev/null || true)"
+
+          # A re-run keeps its original commit, so re-running an old run (full or not) would publish
+          # output older than what's already live or waiting in the PR. Refuse rather than roll back.
+          if [ "$GITHUB_REF" = "refs/heads/master" ]; then
+            published="$(gh run list --workflow rag-extract.yml --branch master --status success --limit 1 \
+                           --json headSha --jq '.[0].headSha // empty')"
+            on_master="$(git show "origin/master:$SOURCE_MARKER" 2>/dev/null || true)"
+            for newer in "$base" "$published" "$on_master"; do
+              if [ -n "$newer" ] && [ "$newer" != "$GITHUB_SHA" ] && \
+                 git merge-base --is-ancestor "$GITHUB_SHA" "$newer" 2>/dev/null; then
+                echo "::error::$GITHUB_SHA is older than $newer, whose output is already published or waiting in the RAG PR. Publishing it would roll that back; dispatch the workflow from master instead."
+                exit 1
+              fi
+            done
+          fi
+
+          # Incremental is the default. Only an explicit workflow_dispatch with full=true rebuilds.
+          if [ "$FULL" = "true" ]; then
+            echo "mode=full" >> "$GITHUB_OUTPUT"
+          elif [ -n "$base" ] && git cat-file -e "$base^{commit}" 2>/dev/null; then
+            echo "mode=incremental" >> "$GITHUB_OUTPUT"
+            # Three dots: only this commit's side, so a dry run from a branch that lacks commits behind
+            # the marker doesn't re-extract them from its older sources.
+            git diff --name-only "$base...$GITHUB_SHA" > changed.txt
+            echo "Changed files since $base:"; cat changed.txt
+          elif [ "$GITHUB_REF" = "refs/heads/master" ]; then
+            echo "::error::Can't tell which commit the existing output was generated from ($SOURCE_MARKER is missing or names a commit that isn't in history), so changed sources could be missed. Dispatch this workflow from master with full=true to rebuild everything and record a new baseline."
+            exit 1
+          else
+            echo "mode=incremental" >> "$GITHUB_OUTPUT"
+            : > changed.txt
+            echo "::warning::No diff base ($SOURCE_MARKER is missing or not in history), so this dry run only generates missing output and prunes orphans."
           fi
 
       - name: Run extraction
@@ -107,6 +122,7 @@ jobs:
           else
             python extract.py --changed-from "$GITHUB_WORKSPACE/changed.txt"
           fi
+          echo "$GITHUB_SHA" > "$GITHUB_WORKSPACE/$SOURCE_MARKER"
 
       # One commit on top of the current master, force-pushed so the PR always holds everything
       # not yet merged. Pages is published from this workspace below, so the PR only brings
@@ -121,7 +137,12 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A _Tools/extract_for_rag/rag-extracted   # -A stages deletions too
           pr="$(gh pr list --head "$PR_BRANCH" --base master --state open --json number --jq '.[].number')"
-          if git diff --staged --quiet; then
+          # The marker moves on every run, so on its own it's only worth a PR when master lacks one.
+          ignore=()
+          if git cat-file -e "HEAD:$SOURCE_MARKER" 2>/dev/null; then
+            ignore=(":(exclude)$SOURCE_MARKER")
+          fi
+          if git diff --staged --quiet -- . "${ignore[@]}"; then
             echo "No changes to rag-extracted/."
             # The open PR's output was folded in above, so no diff means extraction put every file
             # it touched back to master's version (e.g. its source change was reverted). Close it

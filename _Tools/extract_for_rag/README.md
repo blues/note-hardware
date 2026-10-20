@@ -87,10 +87,11 @@ and regenerates everything.
 [`.github/workflows/rag-extract.yml`](../../.github/workflows/rag-extract.yml) re-runs this tool on
 every merge to `master` (**incrementally** by default), regenerates the output under
 `_Tools/extract_for_rag/rag-extracted/`, and **publishes that folder to GitHub Pages** (the `deploy`
-job). Each incremental run diffs from the commit of the last successful `master` run, not just the
-commits in its own push, so if a run fails or is cancelled, the next one picks up its changes.
-Re-running an older run after a newer one has published fails on purpose rather than roll back the
-newer output.
+job). The output records the commit it was last updated from in `rag-extracted/.source-sha`, and each
+incremental run diffs from that commit (the open PR's, if there is one), so a run that fails, is
+cancelled, or is later reverted can't cause a source change to be missed. If the marker is missing,
+a `master` run fails and asks for a full rebuild rather than guess. Re-running an older run after a
+newer one has published or updated the PR also fails on purpose, rather than roll back newer output.
 `master` doesn't accept direct pushes, so the refreshed output lands through a PR from
 `bot/rag-refresh`, which needs one approval like any other. There is only ever one such PR: later
 runs fold its output in and update it rather than opening another, so nothing waiting in it is
