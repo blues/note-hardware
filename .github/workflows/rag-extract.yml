@@ -21,58 +21,69 @@ on:
         type: boolean
         default: false
 
-permissions:
-  contents: write        # push the refreshed output to $PR_BRANCH
-  pull-requests: write   # open the PR that lands it on master
-  pages: write           # publish to GitHub Pages
-  id-token: write        # required by deploy-pages
-
 env:
   PR_BRANCH: bot/rag-refresh
 
+# Per ref: master runs (which share $PR_BRANCH and the Pages deploy) still queue one at a time, but
+# a dry run dispatched from another branch can't displace a pending master run.
 concurrency:
-  group: rag-extract
+  group: rag-extract-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   extract:
     runs-on: ubuntu-latest
+    timeout-minutes: 60   # longest run so far 11 min; a --full rebuild is est. 25-30 min
+    permissions:
+      contents: write        # push the refreshed output to $PR_BRANCH
+      pull-requests: write   # open the PR that lands it on master
+      actions: read          # find the last successful run (the incremental diff base)
     steps:
       - uses: actions/checkout@v7   # Node 24 runtime
         with:
           fetch-depth: 0   # full history for change detection
 
-      - uses: actions/setup-python@v6   # Node 24 runtime
+      - uses: actions/setup-python@v7   # Node 24 runtime
         with:
           python-version: '3.12'
 
       - name: Install pipeline deps
         run: pip install -r _Tools/extract_for_rag/requirements.txt
 
+      # Diff from the commit of the last successful master run rather than the push's `before`, so
+      # changes from a run that failed or was cancelled are picked up by the next one.
       - name: Compute changed source files
         id: changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FULL: ${{ inputs.full }}
         run: |
           # Incremental is the default. Only an explicit workflow_dispatch with full=true rebuilds.
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.full }}" = "true" ]; then
+          if [ "$FULL" = "true" ]; then
             echo "mode=full" >> "$GITHUB_OUTPUT"
           else
             echo "mode=incremental" >> "$GITHUB_OUTPUT"
-            if [ "${{ github.event_name }}" = "push" ] && \
-               [ -n "${{ github.event.before }}" ] && \
-               [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ] && \
-               git cat-file -e "${{ github.event.before }}^{commit}" 2>/dev/null; then
-              git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" > changed.txt
-              echo "Changed files:"; cat changed.txt
+            base="$(gh run list --workflow rag-extract.yml --branch master --status success --limit 1 \
+                      --json headSha --jq '.[0].headSha // empty')"
+            if [ -n "$base" ] && git cat-file -e "$base^{commit}" 2>/dev/null; then
+              if [ "$GITHUB_REF" = "refs/heads/master" ] && [ "$base" != "$GITHUB_SHA" ] && \
+                 git merge-base --is-ancestor "$GITHUB_SHA" "$base"; then
+                echo "::error::$GITHUB_SHA is older than the last published commit $base, which already includes its changes. Publishing it would roll back newer output."
+                exit 1
+              fi
+              git diff --name-only "$base" "$GITHUB_SHA" > changed.txt
+              echo "Changed files since $base:"; cat changed.txt
             else
-              : > changed.txt   # no base (first run / new branch): reconcile regenerates anything missing
+              : > changed.txt   # no base (first run / rewritten history): reconcile regenerates anything missing
               echo "No diff base; relying on reconcile (generate-missing + prune)."
             fi
           fi
 
-      # Incremental mode only regenerates outputs whose source changed in this push (or that are
-      # missing), so output still waiting in an unmerged PR would be silently dropped when this
-      # run force-pushes $PR_BRANCH. Start from that output instead, so the PR accumulates. Files
-      # the PR deleted come back from master here, but they're orphans and get pruned again.
+      # Incremental mode only regenerates outputs whose source changed since the last successful
+      # run (or that are missing), so output still waiting in an unmerged PR would be silently
+      # dropped when this run force-pushes $PR_BRANCH. Start from that output instead, so the PR
+      # accumulates. Files the PR deleted come back from master here, but they're orphans and get
+      # pruned again.
       - name: Fold in the open RAG PR, if any
         env:
           GH_TOKEN: ${{ github.token }}
@@ -141,6 +152,10 @@ jobs:
     needs: extract        # skipped if extraction failed -> never publishes broken/garbage output
     if: github.ref == 'refs/heads/master'   # the github-pages environment only accepts master
     runs-on: ubuntu-latest
+    timeout-minutes: 15   # deploy-pages gives up on its own after 10 min
+    permissions:
+      pages: write           # publish to GitHub Pages
+      id-token: write        # required by deploy-pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
