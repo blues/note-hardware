@@ -177,10 +177,24 @@ jobs:
     permissions:
       pages: write           # publish to GitHub Pages
       id-token: write        # required by deploy-pages
+      actions: read          # find the last successful run (rollback guard)
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # "Re-run failed jobs" after a failed deploy reruns only this job, skipping extract's guard,
+      # and deploys this run's original artifact. Refuse if a later run has already published.
+      - name: Check no later run has published
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          latest="$(gh run list --repo "$GITHUB_REPOSITORY" --workflow rag-extract.yml --branch master \
+                      --status success --limit 1 --json databaseId --jq '.[0].databaseId // empty')"
+          if [ -n "$latest" ] && [ "$latest" -gt "$GITHUB_RUN_ID" ]; then
+            echo "::error::Run $latest started after this one and has already published newer output. Deploying this run's artifact would roll that back; dispatch the workflow from master instead."
+            exit 1
+          fi
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5   # Node 24

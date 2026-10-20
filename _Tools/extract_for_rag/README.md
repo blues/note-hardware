@@ -90,8 +90,8 @@ every merge to `master` (**incrementally** by default), regenerates the output u
 job). The output records the commit it was last updated from in `rag-extracted/.source-sha`, and each
 incremental run diffs from that commit (the open PR's, if there is one), so a run that fails, is
 cancelled, or is later reverted can't cause a source change to be missed. If the marker is missing,
-a `master` run fails and asks for a full rebuild rather than guess. Re-running an older run after a
-newer one has published or updated the PR also fails on purpose, rather than roll back newer output.
+a `master` run fails and asks for a full rebuild rather than guess. Re-running an older run (or just
+its deploy job) also fails on purpose when that would roll back newer output.
 `master` doesn't accept direct pushes, so the refreshed output lands through a PR from
 `bot/rag-refresh`, which needs one approval like any other. There is only ever one such PR: later
 runs fold its output in and update it rather than opening another, so nothing waiting in it is
