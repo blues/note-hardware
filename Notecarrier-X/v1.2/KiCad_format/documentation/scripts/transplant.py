@@ -20,8 +20,10 @@ is a hard error. Plain python3 plus git (for `git merge-file`).
 
 usage: transplant.py <port.kicad_pcb> <dev_raw.kicad_pcb> <rev11_raw.kicad_pcb> <out.kicad_pcb>
                      --moved R4 [--models P1,P2] [--edge-width 0.199898] [--pour-clearance 0.1499]
+                     [--check-exclusions Notecarrier-XM.kicad_pro]
 """
 import argparse
+import json
 import os
 import re
 import subprocess
@@ -123,6 +125,19 @@ def net_table(bl, t):
     return tab
 
 
+def zone_key(b):
+    """Identity of a zone that survives re-import: pours by net/layers/priority,
+    rule areas by layers, keepout flags and exact outline."""
+    layers = re.search(r'\n\t\t\(layers? ([^)]*)\)', b).group(1)
+    if "(keepout" in b:
+        flags = re.sub(r"\s+", " ", b[slice(*sub_blocks(b, "keepout")[0])])
+        outline = re.sub(r"\s+", " ", b[slice(*sub_blocks(b, "polygon")[0])])
+        return ("rule-area", layers, flags, outline)
+    net = re.search(r'\(net_name "((?:[^"\\]|\\.)*)"\)', b).group(1)
+    prio = re.search(r"\n\t\t\(priority (\d+)\)", b)
+    return ("pour", net, layers, prio.group(1) if prio else "0")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("port")
@@ -133,6 +148,8 @@ def main():
     ap.add_argument("--models", default="")
     ap.add_argument("--edge-width", default="0.199898")
     ap.add_argument("--pour-clearance", default="0.1499")
+    ap.add_argument("--check-exclusions", metavar="KICAD_PRO",
+                    help="fail if a DRC exclusion in this project references a UUID the output lacks")
     a = ap.parse_args()
     moved = [x for x in a.moved.split(",") if x]
     model_refs = [x for x in a.models.split(",") if x]
@@ -292,6 +309,17 @@ def main():
     # --- assemble
     GEOM = {"segment", "arc", "via", "zone", "gr_line", "gr_arc", "gr_circle", "gr_poly", "gr_text",
             "gr_text_box", "gr_curve", "gr_bbox", "dimension", "image", "group", "target"}
+    # Zones keep the port's UUID when they correspond unambiguously: DRC
+    # exclusions in the .kicad_pro name zones by UUID, and the importer mints
+    # fresh ones on every run.
+    port_zones = {}
+    for s, e in pbl:
+        if kind(P[s:e]) == "zone":
+            port_zones.setdefault(zone_key(P[s:e]), []).append(
+                re.search(r'\(uuid "([^"]+)"\)', P[s:e]).group(1))
+    zone_uuid_kept = zone_uuid_fresh = 0
+    new_zone_keys = {}
+
     items = []
     inserted = False
     kept_rects = 0
@@ -332,11 +360,44 @@ def main():
                                     rf"\g<1>(clearance {a.pour_clearance})", rb)
                     if n != 1:
                         sys.exit("pour zone without a connect_pads clearance")
+                if rk == "zone":
+                    zk = zone_key(rb)
+                    cand = port_zones.get(zk, [])
+                    if len(cand) == 1:
+                        zid = cand.pop()
+                        zone_uuid_kept += 1
+                    else:
+                        # a zone the port lacks: derive the UUID from its identity
+                        # so every regeneration produces the same one
+                        n = new_zone_keys[zk] = new_zone_keys.get(zk, -1) + 1
+                        zid = str(uuid.uuid5(uuid.NAMESPACE_URL, f"kicad-zone:{zk!r}:{n}"))
+                        zone_uuid_fresh += 1
+                    rb = re.sub(r'\(uuid "[^"]+"\)', f'(uuid "{zid}")', rb, count=1)
                 items.append(rb)
         else:
             items.append(b)
     text = P[:pbl[0][0]] + "\n\t".join(items) + P[pbl[-1][1]:]
+    # KiCad writes a dimension's embedded text with the dimension's own UUID,
+    # so count each UUID once per dimension block.
+    seen = Counter()
+    for s, e in blocks(text):
+        ids = re.findall(r'\(uuid "([^"]+)"\)', text[s:e])
+        seen.update(set(ids) if kind(text[s:e]) == "dimension" else ids)
+    dup = [u for u, c in seen.items() if c > 1]
+    if dup:
+        sys.exit(f"duplicate UUIDs in the output: {dup[:5]}")
+    if a.check_exclusions:
+        pro = json.load(open(a.check_exclusions, encoding="utf-8"))
+        missing = []
+        for ex in pro["board"]["design_settings"].get("drc_exclusions", []):
+            key = ex[0] if isinstance(ex, list) else ex
+            for u in re.findall(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", key):
+                if u != "00000000-0000-0000-0000-000000000000" and f'(uuid "{u}")' not in text:
+                    missing.append(key)
+        if missing:
+            sys.exit(f"DRC exclusions reference UUIDs absent from the output: {missing}")
     open(a.out, "w", encoding="utf-8").write(text)
+    print(f"zones: {zone_uuid_kept} kept the port's UUID, {zone_uuid_fresh} new (deterministic)", file=sys.stderr)
     print(f"wrote {a.out}: kept {kept_rects} port gr_rect, mapped {len(name_map)-1} nets", file=sys.stderr)
 
 

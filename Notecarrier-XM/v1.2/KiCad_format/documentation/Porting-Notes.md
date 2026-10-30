@@ -79,8 +79,10 @@ their 64 reconstructed join rectangles carry over unchanged. Nets are carried
 across by name, through pad correspondence, and any unmapped name stops the
 script. The scripts are in the Notecarrier-X port's
 [`documentation/scripts/`](../../../../Notecarrier-X/v1.2/KiCad_format/documentation/scripts/).
-The importer assigns fresh UUIDs and object order on every run, so a re-run
-reproduces the board structurally, not byte for byte.
+Zone UUIDs are stable from run to run, which matters because DRC exclusions
+refer to zones by UUID. Tracks, vias and graphics get fresh UUIDs and a
+different order on every import. So a re-run reproduces the board structurally,
+not byte for byte.
 
 ## Structure and import quirks
 

@@ -73,8 +73,10 @@ KiCad 9.0.9:
 
 Nets are carried across by name, through pad correspondence, and any
 unmapped name stops the script. The scripts are in [`scripts/`](scripts/).
-The importer assigns fresh UUIDs and object order on every run, so a re-run
-reproduces the board structurally, not byte for byte.
+Zone UUIDs are stable from run to run, which matters because DRC exclusions
+refer to zones by UUID. Tracks, vias and graphics get fresh UUIDs and a
+different order on every import. So a re-run reproduces the board structurally,
+not byte for byte.
 
 **KiCad 9.0.9 importer defect worked around.** Altium stores each text's
 TrueType font name in a fixed 64-byte UTF-16 field and does not clear the
