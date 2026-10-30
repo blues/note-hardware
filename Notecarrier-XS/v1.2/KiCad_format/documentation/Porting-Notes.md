@@ -57,6 +57,25 @@ repositories in the Blues organisation found no such file for this board.
 If the exact released v1.2 Altium snapshot ever becomes available, this port
 should be regenerated from it and the disclaimer dropped.
 
+**October 2026 update: the "Rev-11" delivery is the v1.1 board.** The design
+house supplied Rev-11 release snapshots for Notecarrier-X, -XM and -XS. The
+X and XM snapshots are their released v1.2 boards, and those ports were
+regenerated from them without a disclaimer. The XS snapshot is not v1.2:
+
+- its board is 77.45 mm tall (v1.2 is 71.45 mm);
+- its silk reads V1.1;
+- its BOM number is the v1.1 one (`3000-789-001`);
+- its copper, mask and paste match the **v1.1** fab package
+  (`../../../v1.1/2200-914__2024-05-23.zip`) with no difference cluster of
+  0.045 mm² or larger.
+
+XS v1.1 and v1.2 share PCB number 2200-914 and schematic revision 11, which
+explains the mix-up. That snapshot does add one piece of evidence for this
+port: its board's connectivity groups pins into the same 57 nets as this
+port's schematic. The v1.1 release and the post-v1.2 development state
+therefore have identical netlists. Ask the design house for the v1.2
+snapshot behind `2200-914__2024-06-06` to retire this disclaimer.
+
 ## Structure and import quirks
 
 - Altium project: `01_COVER` / `02_BLOCK-DIAGRAM` / `03_IO-CONNECTION` /

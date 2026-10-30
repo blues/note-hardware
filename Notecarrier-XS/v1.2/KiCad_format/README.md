@@ -22,6 +22,11 @@ fabrication package — see
 > Since publication the port has additionally been checked against the
 > **released build's** pick-and-place file: all 44 placed parts match the
 > shipped boards on side and rotation.
+>
+> The design house's October 2026 "Rev-11" snapshot turned out to be the
+> **v1.1** board, not v1.2, so this disclaimer remains (the Notecarrier-X and
+> -XM ports were regenerated from their Rev-11 snapshots and no longer carry
+> one). See the Porting-Notes update.
 
 ## Contents
 
