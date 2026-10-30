@@ -7,62 +7,86 @@ cleanup/validation in
 [`_Tools/kicad_validation/`](../../../../_Tools/kicad_validation/). See the
 Mojo, Cygnet and Notecarrier-CX Porting-Notes for shared importer background.
 
-## ⚠️ Source-fidelity disclaimer — read first
+## Source and provenance
 
-**This port was NOT generated from the exact design snapshot that produced
-the published v1.2 fabrication package** (`2200-918__2024-06-06.zip` in the
-parent folder). That exact snapshot was never captured in the design house's
-version control; the closest available state — the post-v1.2 development
-state, captured shortly after the v1.2 release and before the v1.3 changes
-were finished — was used instead. A full per-layer gerber comparison against
-the published v1.2 fab package (see [`../validation/`](../validation/)) shows
-the following differences, all reviewed and accepted:
+The board is generated from the design house's **Rev-11 release snapshot**
+of project `100379_notecarrier-x` — the Altium sources behind the published
+v1.2 fabrication package (`2200-918__2024-06-06.zip`), schematic
+(`100379_notecarrier-x_Rev-11.PDF`) and BOM (`BOM-3000-794-001.xlsx`) in the
+parent folder. The snapshot's own project parameters carry exactly those
+document numbers (`PCB_Num 2200-918`, `PCBA_BOM_Num 3000-794-001`,
+`HW_E_Doc_Rev 11`) and its silkscreen reads **V1.2**.
 
-1. **Silkscreen**: the source silk reads **V1.3** where the published board
-   reads **V1.2**, and most legend text (STARNOTE / NOTECARD / QWIIC / LIPO /
-   ESLOV, the pin-name rows, component outlines) is slightly repositioned on
-   both sides. Same content, different layout pass.
-2. **R4 moved sides**: R4 — a 0R0 jumper between `+VACT_GPS_IN` and
-   `+VACT_GPS_OUT` that is **not populated in production** (absent from the
-   shipped BOM) — sits on the **top** side of the published board but on the
-   **bottom** side in this source, with its pads/mask/paste apertures and a
-   small amount of local routing on both copper layers differing accordingly.
-   Production boards ship without R4 fitted, so the populated product is
-   electrically identical; the difference only matters if you fit the
-   optional jumper.
-3. **Everything else matches**: outside the two clusters above, the copper,
-   mask and paste layers are exact against the published fab package, the
-   drill data matches, and the netlist was proven identical to the source
-   board (56/56 net partitions) — see the validation summary below.
+That it is the released design was checked against the published fab
+package, not assumed:
 
-One consequence of the source being the post-v1.2 dev state: the dev
-project's parameters already carry the v1.3-era document numbers
-(`PCBA_BOM_Num 3000-822-001`, `PCB_Num 2200-929`). The KiCad project's
-title-block text variables were set to the published v1.2 numbers
-(`3000-794-001` / `2200-918`) so the drawings match the published product
-documentation.
+- **Copper, solder mask and paste are exact.** After rasterising both sides
+  at 1200 dpi and removing sub-0.1 mm slivers, no difference cluster of
+  0.045 mm² or larger remains on any of the six layers (normalised
+  difference 0.001–0.010; see [`../validation/`](../validation/)).
+- **Silkscreen content matches**, including `V1.2`, `RST` on the back legend
+  and the R4 outline on the top side. What the silk diff still shows is the
+  usual font class: Altium and KiCad render TrueType text with different
+  metrics.
+- **Connectivity matches the released board pad for pad.** Every pad's net in
+  the Rev-11 PCB agrees with this port's schematic (0 conflicts,
+  [`../validation/altium-netlist-compare.txt`](../validation/altium-netlist-compare.txt)),
+  and the two netlists group pins into the same 56 nets.
 
-**What has since been confirmed against the released build.** The shipped
-pick-and-place file for this assembly is generated from the released design, so
-comparing against it tests the port independently of the source snapshot it was
-made from. All 41 placed parts are present in the port, on the same board side,
-at the same rotation as the boards that were actually built. (Position residuals are reported but not gated: the assembly file references
-each part's body centre while KiCad measures from the footprint origin, so
-asymmetric parts carry a fixed per-footprint offset — it even changes sign when
-a part is rotated 180°. Copper geometry is proven exactly by the gerber diff.)
+### History: the earlier source-fidelity disclaimer
 
-This does **not** resolve item 2 above: R4 is unpopulated in production, so it
-does not appear in the pick-and-place file at all, and which side it sits on
-remains established from the gerber comparison alone.
+This port was first published in July 2026 from the closest source then
+available, a post-v1.2 development state. That source's silk read V1.3, and
+it put the production-DNP GPS-power jumper R4 on the bottom side (the
+released board has it on top), with a little local routing around it. The
+port carried a disclaimer saying so. When the Rev-11 snapshot arrived
+(October 2026), it was compared with that development state record by
+record:
 
-What is still missing to retire this disclaimer entirely is a **netlist from the
-released snapshot** — a Protel `.NET`, or better an IPC-D-356A/ODB++ export of the
-released PCB, which would also validate geometry and plugs into the netlist gate
-already used for the Notecarrier-CX and -XI ports. A sweep of all 293
-repositories in the Blues organisation found no such file for this board.
+- **The schematics are identical in substance.** All three electrical sheets
+  have the same components, values, part numbers, labels, ports and wiring.
+  The only differences are from re-applying the sheet template (copyright
+  year, template path, sheet-number spacing). The KiCad schematic sheets
+  therefore did not need to change.
+- **The board differs only in the disclaimed areas:** R4 placement plus 36→14
+  track segments and 5→4 vias around it, a small `+VACT_GPS_IN` copper patch,
+  the re-poured GND fills, and the silk text (`V1.3`→`V1.2`, `NRST`→`RST`).
+  Every other footprint is byte-identical between the two imports.
 
-If the exact released v1.2 Altium snapshot ever becomes available, this port
-should be regenerated from it and the disclaimer dropped.
+The board was regenerated from Rev-11, and the disclaimer was retired.
+
+### How the board was regenerated
+
+Because the schematic and every other footprint were unchanged, the published
+port's file was kept: setup, rules, title block, text variables, net table,
+footprints with their schematic links and BOM fields, and embedded 3D models.
+Only the geometry was replaced, with Rev-11's as imported headlessly by
+KiCad 9.0.9:
+
+- All tracks, vias and zones were replaced. Zones keep their Altium fills and
+  are never refilled.
+- All board graphics were replaced. The Edge.Cuts width was re-set to the
+  port's 0.199898 mm convention, and pour clearance to 0.1499 as before.
+- The moved R4 footprint was produced by a three-way merge: the port's
+  metadata applied to Rev-11's geometry.
+- Rev-11's 3D-model offsets were applied to the P1/P2 headers.
+
+Nets are carried across by name, through pad correspondence, and any
+unmapped name stops the script. The scripts are in [`scripts/`](scripts/).
+Zone UUIDs are stable from run to run, which matters because DRC exclusions
+refer to zones by UUID. Tracks, vias and graphics get fresh UUIDs and a
+different order on every import. So a re-run reproduces the board structurally,
+not byte for byte.
+
+**KiCad 9.0.9 importer defect worked around.** Altium stores each text's
+TrueType font name in a fixed 64-byte UTF-16 field and does not clear the
+bytes after the terminator. KiCad converts all 64 bytes. In this file the
+leftover bytes contain an unpaired UTF-16 surrogate, so the conversion fails
+and all nine TrueType texts (Barlow, Barlow SemiBold, Arial Black, Calibri)
+silently fall back to the stroke font, at stroke-font size. The import was
+therefore run on a copy of the PcbDoc with that padding zeroed
+(`scripts/sanitize_fonts.py`). The copy has the same stream sizes and no other
+change, and its import differs from the unpatched one only in those nine texts.
 
 ## Structure and import quirks
 
@@ -107,12 +131,12 @@ Gates run by `_Tools/kicad_validation/run_all.py notecarrier-x`
 | ERC (error severity) | PASS — 0 |
 | DRC + schematic parity (error severity) | PASS — 0 violations, 0 exclusions |
 | BOM vs `BOM-3000-794-001.xlsx` | PASS — exact on `BL PART NUMBER` per refdes |
-| Netlist vs source PcbDoc (pad-to-net partitions) | PASS — 56/56 |
-| Gerber raster diff vs published `2200-918__2024-06-06.zip` | PASS with the two documented deviation clusters above |
+| Netlist vs released Rev-11 PcbDoc (pad by pad) | PASS — 0 conflicts; 56/56 net partitions (`../validation/altium-netlist-compare.txt`) |
+| Gerber raster diff vs published `2200-918__2024-06-06.zip` | PASS — copper/mask/paste 0.001–0.010, no difference cluster ≥ 0.045 mm²; silk = font-metric class only |
 | Placement vs shipped pick-and-place file | PASS — 41/41 on board side and rotation (`../validation/pnp-compare.txt`) |
 | kicanvas headless render (all sheets + board) | PASS |
 | RAG extract parse | PASS |
 
 The published fab package ships no ODB++/IPC-D-356 netlist, so the
-independent-netlist gate is replaced by the pad-to-net partition comparison
-against a fresh headless import of the source board.
+independent-netlist gate is replaced by the pad-by-pad comparison against the
+nets carried by the released Rev-11 board file.
