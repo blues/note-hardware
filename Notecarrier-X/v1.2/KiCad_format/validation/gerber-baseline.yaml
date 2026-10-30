@@ -2,11 +2,11 @@
 # against the shipped fab package, frozen after review. The gate allows
 # each value + 0.01, so this catches drift rather than excusing it.
 # Regenerate only with --update-baseline, and re-review every entry.
-B_Cu: 0.008
-B_Mask: 0.019
-B_Paste: 0.022
-B_Silkscreen: 0.319
-F_Cu: 0.009
-F_Mask: 0.013
-F_Paste: 0.01
-F_Silkscreen: 0.646
+B_Cu: 0.001
+B_Mask: 0.01
+B_Paste: 0.003
+B_Silkscreen: 0.314
+F_Cu: 0.001
+F_Mask: 0.006
+F_Paste: 0.001
+F_Silkscreen: 0.642

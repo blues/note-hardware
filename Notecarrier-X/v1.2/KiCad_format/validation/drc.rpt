@@ -1,17 +1,17 @@
 ** Drc report for Notecarrier-X.kicad_pcb **
-** Created on 2026-08-01T16:08:37-0500 **
+** Created on 2026-10-30T10:52:23-0500 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 146 DRC violations **
-[track_dangling]: Track has unconnected end
-    Local override; warning
-    @(147.6686 mm, 97.6536 mm): Track [/Power/SW] on Bottom Layer, length 0.2750 mm
+** Found 145 DRC violations **
 [via_dangling]: Via is not connected or connected on only one layer
     Local override; warning
     @(135.0936 mm, 107.7036 mm): Via [GND] on Top Layer - Bottom Layer
 [via_dangling]: Via is not connected or connected on only one layer
     Local override; warning
     @(123.5936 mm, 102.3536 mm): Via [GND] on Top Layer - Bottom Layer
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(147.6686 mm, 97.6536 mm): Track [/Power/SW] on Bottom Layer, length 0.2750 mm
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
     @(181.5586 mm, 89.7636 mm): Segment on Edge.Cuts
@@ -115,7 +115,7 @@
     @(138.9436 mm, 110.9536 mm): Footprint L1
 [lib_footprint_mismatch]: Footprint 'R-0603' does not match copy in library 'Notecarrier-X-altium-import'.
     Local override; warning
-    @(142.1435 mm, 117.9536 mm): Footprint R4
+    @(142.1436 mm, 118.0036 mm): Footprint R4
 [lib_footprint_mismatch]: Footprint 'R-0402' does not match copy in library 'Notecarrier-X-altium-import'.
     Local override; warning
     @(150.6436 mm, 100.5036 mm): Footprint R12
@@ -143,51 +143,43 @@
     @(122.8161 mm, 111.7536 mm): Pad A7 [USB_D_N] of P4 on Top Layer
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
-    @(152.9841 mm, 103.1201 mm): PCB Text Box 'V1.3' on Top Overlay
     @(156.7385 mm, 94.1917 mm): PCB Text Box 'NOTECARRIER-X' on Top Overlay
+    @(152.9841 mm, 103.1201 mm): PCB Text Box 'V1.2' on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
+    @(156.7385 mm, 94.1917 mm): PCB Text Box 'NOTECARRIER-X' on Top Overlay
     @(155.5856 mm, 90.6936 mm): PCB text 'AUX_EN' on Top Overlay
-    @(156.7385 mm, 94.1917 mm): PCB Text Box 'NOTECARRIER-X' on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
-    @(124.3136 mm, 120.2236 mm): Segment on Top Overlay
     @(124.3136 mm, 120.2436 mm): Segment of P1 on Top Overlay
+    @(124.3136 mm, 120.2236 mm): Segment on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
     @(124.3136 mm, 122.7836 mm): Segment of P1 on Top Overlay
     @(124.3136 mm, 120.2236 mm): Segment on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
-    @(124.3136 mm, 120.2236 mm): Segment on Top Overlay
     @(164.9536 mm, 122.7836 mm): Segment of P1 on Top Overlay
+    @(124.3136 mm, 120.2236 mm): Segment on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(124.3236 mm, 89.7736 mm): Segment of P2 on Top Overlay
+    @(124.3236 mm, 89.7936 mm): Segment on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
     @(124.3236 mm, 89.7936 mm): Segment on Top Overlay
     @(124.3236 mm, 89.7736 mm): Segment of P2 on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
-    @(124.3236 mm, 89.7936 mm): Segment on Top Overlay
-    @(124.3236 mm, 89.7736 mm): Segment of P2 on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(124.3236 mm, 89.7936 mm): Segment on Top Overlay
     @(164.9636 mm, 89.7736 mm): Segment of P2 on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(175.4436 mm, 103.0986 mm): Segment of LD1 on Top Overlay
-    @(176.1436 mm, 103.2036 mm): PCB Text Box 'LIPO' on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(176.1436 mm, 103.2036 mm): PCB Text Box 'LIPO' on Top Overlay
-    @(176.1436 mm, 102.9986 mm): Segment of LD1 on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(176.1436 mm, 103.2036 mm): PCB Text Box 'LIPO' on Top Overlay
-    @(176.2936 mm, 105.0036 mm): Segment of LD1 on Top Overlay
+    @(124.3236 mm, 89.7936 mm): Segment on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
     @(175.3936 mm, 103.2036 mm): Segment of LD1 on Top Overlay
+    @(176.1436 mm, 103.2036 mm): PCB Text Box 'LIPO' on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(176.2936 mm, 105.0036 mm): Segment of LD1 on Top Overlay
     @(176.1436 mm, 103.2036 mm): PCB Text Box 'LIPO' on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
@@ -530,6 +522,9 @@
 [nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
     Local override; warning
     @(117.3671 mm, 103.7036 mm): Value field of C2 (100n)
+[nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
+    Local override; warning
+    @(142.5199 mm, 118.8152 mm): Value field of R4 (0R0)
 
 ** Found 0 unconnected pads **
 
@@ -601,10 +596,10 @@
     @(164.8436 mm, 105.0036 mm): Footprint OBJ1
 [footprint_symbol_mismatch]: Notecarrier-X-altium-import:R-0603 doesn't match footprint given by symbol (R-0603).
     Local override; warning
-    @(142.1435 mm, 117.9536 mm): Footprint R4
+    @(142.1436 mm, 118.0036 mm): Footprint R4
 [footprint_symbol_mismatch]: Footprint attributes don't match symbol: 'Do not populate' settings differ.
     Local override; warning
-    @(142.1435 mm, 117.9536 mm): Footprint R4
+    @(142.1436 mm, 118.0036 mm): Footprint R4
 [footprint_symbol_mismatch]: Notecarrier-X-altium-import:R-0402 doesn't match footprint given by symbol (BL_Passive.PcbLib:R-0402).
     Local override; warning
     @(129.5936 mm, 112.2036 mm): Footprint R5

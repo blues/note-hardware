@@ -1,0 +1,14 @@
+# KiCad schematic netlist vs. the nets carried by the released Altium board file
+# left: kicad-cli sch export netlist of this port; right: the Rev-11 Notecarrier-X.PcbDoc (the design house's
+# release snapshot for v1.2; Altium net names) imported headlessly by KiCad 9.0.9, untouched. Every pad's
+# Altium net is compared with the KiCad net of the same pad; a board net spanning two KiCad nets, or a
+# KiCad-connected pad the Altium board leaves netless, would be a conflict. The renames are Altium
+# auto-names (NetC14_2 ...) and sheet-local names that the port carries under their KiCad names.
+# Produced with Notecarrier-F/v1.3/KiCad_format/documentation/scripts/f13_nets.py (report mode).
+
+schematic netlist: 255 pins, 84 nets
+board: 273 pads, 57 nets
+renames: 20   conflicts (board net spans >1 schematic nets): 0
+schematic-connected pads left netless on board: 0
+board pads absent from schematic netlist: 0 Counter()
+schematic nets with no board pad: 0 []

@@ -8,20 +8,13 @@ fabrication package — see
 [`documentation/Porting-Notes.md`](documentation/Porting-Notes.md) and
 [`validation/`](validation/).
 
-> **⚠️ Disclaimer:** the exact Altium snapshot that produced the published
-> v1.2 fabrication package was never captured in version control, so this
-> port was made from the closest available source — the post-v1.2
-> development state. It differs from the published v1.2 board in two
-> reviewed, documented ways: the silkscreen reads **V1.3** (with legend text
-> repositioned), and **R4** — a production-DNP 0R jumper for the optional
-> GPS-power path — sits on the opposite board side. Copper, mask, paste and
-> drill are otherwise exact against the published fab package, and the
-> netlist matches the source design 56/56. Details in
-> [`documentation/Porting-Notes.md`](documentation/Porting-Notes.md).
->
-> Since publication the port has additionally been checked against the
-> **released build's** pick-and-place file: all 41 placed parts match the
-> shipped boards on side and rotation.
+Generated from the design house's **Rev-11 release snapshot** — the Altium
+sources behind the published v1.2 fab package (`2200-918`). Copper, solder mask
+and paste match that fab package to within raster resolution, and every pad's
+net matches the released board. An earlier version of this port was built from a post-v1.2
+development state and carried a source-fidelity disclaimer; it was
+regenerated from Rev-11 in October 2026 and the disclaimer retired (see the
+Porting-Notes history section).
 
 ## Contents
 
@@ -36,7 +29,7 @@ fabrication package — see
 | `Notecarrier-X.kicad_wks` | Drawing sheet (shared Blues template) |
 | `Notecarrier-X-altium-import.kicad_sym` / `.pretty/` | Project libraries captured during the import |
 | `sym-lib-table` / `fp-lib-table` | Library tables |
-| `documentation/` | Porting notes (incl. the source-fidelity disclaimer) and plotted PDFs |
+| `documentation/` | Porting notes (provenance and verification), plotted PDFs, and the board-regeneration scripts (`scripts/`, also used for Notecarrier-XM) |
 | `manufacturing/Notecarrier-X_RevA.zip` | KiCad-exported gerbers + drill |
 | `validation/` | Validation-gate artifacts (ERC/DRC/BOM reports, per-layer gerber diffs, kicanvas renders) |
 
