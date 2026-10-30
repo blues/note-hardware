@@ -7,56 +7,80 @@ cleanup/validation in
 [`_Tools/kicad_validation/`](../../../../_Tools/kicad_validation/). See the
 Mojo, Cygnet and Notecarrier-CX Porting-Notes for shared importer background.
 
-## ⚠️ Source-fidelity disclaimer — read first
+## Source and provenance
 
-**This port was NOT generated from the exact design snapshot that produced
-the published v1.2 fabrication package** (`2200-917__2024-06-12.zip` in the
-parent folder). That exact snapshot was never captured in the design house's
-version control; the closest available state — the post-v1.2 development
-state — was used instead. **The Notecarrier-XM deviations are larger than on
-the Notecarrier-X/-XS ports**: beyond the silkscreen, several signals are
-routed differently. A full per-layer gerber comparison against the published
-v1.2 fab (see [`../validation/`](../validation/)) shows, all reviewed:
+The board is generated from the design house's **Rev-11 release snapshot**
+of project `100378_notecarrier-xm` — the Altium sources behind the published
+v1.2 fabrication package (`2200-917__2024-06-12.zip`), schematic
+(`100378_notecarrier-xm_Rev-11.PDF`) and BOM (`BOM-3000-793-001.xlsx`) in the
+parent folder. The snapshot's own project parameters carry exactly those
+document numbers (`PCB_Num 2200-917`, `PCBA_BOM_Num 3000-793-001`,
+`HW_E_Doc_Rev 11`) and its silkscreen reads **V1.2**.
 
-1. **Silkscreen**: the source silk reads **V1.3** where the published board
-   reads **V1.2**, with legend text repositioned on both sides.
-2. **Rerouted signals** (both copper layers): the published board routes the
-   central AUX/UART bundle (`AUX1`–`AUX4`, `AUX_EN`, `AUX_RX`, `AUX_TX`,
-   `RX`, `TX`), `AUX_NCHARGING`, and the optional GPS-power area
-   (`+VACT_GPS_IN` / `+VACT_GPS_OUT`, around the production-DNP jumper R2)
-   along different paths than this source, with the corresponding via
-   placements differing. The connectivity is the same — the same pads connect
-   to the same nets — but the copper geometry in those areas does not match
-   the published board.
-3. **Minor pour-boundary differences**: thin slivers along the GND pour
-   perimeter and castellation clearances.
-4. **Everything else matches**: the remaining copper, mask, paste and drill
-   data match the published fab package, and the netlist was proven identical
-   to the source board (37/37 net partitions).
+That it is the released design was checked against the published fab
+package, not assumed:
 
-**What has since been confirmed against the released build.** The shipped
-pick-and-place file for this assembly is generated from the released design, so
-comparing against it tests the port independently of the source snapshot it was
-made from. All 13 placed parts are present in the port, on the same board side,
-at the same rotation as the boards that were actually built. (Position residuals are reported but not gated: the assembly file references
-each part's body centre while KiCad measures from the footprint origin, so
-asymmetric parts carry a fixed per-footprint offset — it even changes sign when
-a part is rotated 180°. Copper geometry is proven exactly by the gerber diff.)
+- **Copper, solder mask and paste are exact.** After rasterising both sides
+  at 1200 dpi and removing sub-0.1 mm slivers, no difference cluster of
+  0.045 mm² or larger remains on any of the six layers (normalised
+  difference 0.000–0.007; see [`../validation/`](../validation/)). That
+  includes the central AUX/UART bundle, `AUX_NCHARGING` and the GPS-power
+  area around R2, which were the deviations the earlier disclaimer listed.
+- **Silkscreen content matches**, including `V1.2`. What the silk diff still
+  shows is the usual font class: Altium and KiCad render TrueType text with
+  different metrics.
+- **Connectivity matches the released board pad for pad.** Every pad's net in
+  the Rev-11 PCB agrees with this port's schematic (0 conflicts,
+  [`../validation/altium-netlist-compare.txt`](../validation/altium-netlist-compare.txt)),
+  and the two netlists group pins into the same 37 nets.
 
-What is still missing to retire this disclaimer entirely is a **netlist from the
-released snapshot** — a Protel `.NET`, or better an IPC-D-356A/ODB++ export of the
-released PCB, which would also validate geometry and plugs into the netlist gate
-already used for the Notecarrier-CX and -XI ports. A sweep of all 293
-repositories in the Blues organisation found no such file for this board.
+### History: the earlier source-fidelity disclaimer
 
-If the exact released v1.2 Altium snapshot ever becomes available, this port
-should be regenerated from it and the disclaimer dropped.
+This port was first published in July 2026 from the closest source then
+available, a post-v1.2 development state. Besides V1.3 silk, that state had
+the R2 jumper fix that came later ("Fixed ACT_GPS jumper position") and the
+rerouting that went with it, so the port carried a stronger disclaimer than
+Notecarrier-X/-XS. When the Rev-11 snapshot arrived (October 2026), it was
+compared with that development state record by record:
 
-The dev project's parameters carry the v1.3-era document numbers
-(`PCBA_BOM_Num 3000-825-001`, `PCB_Num 2200-932`); the KiCad project's
-title-block text variables were set to the published v1.2 numbers
-(`3000-793-001` / `2200-917`) so the drawings match the published product
-documentation.
+- **The schematics are identical in substance.** All three electrical sheets
+  have the same components, values, part numbers, labels, ports and wiring.
+  The only differences are from re-applying the sheet template. The KiCad
+  schematic sheets therefore did not need to change.
+- **The board differences are the disclaimed ones:**
+  - R2 at its released position (146.64, 118.00, 90°), not the later one;
+  - 67→29 track segments and 18→14 vias rerouted;
+  - re-poured GND fills, without the four thin edge keepouts the later state
+    added;
+  - silk `V1.2`, `RST`, and no `VGPS` label.
+
+  Every other footprint is byte-identical between the two imports.
+
+The board was regenerated from Rev-11, and the disclaimer was retired.
+
+### How the board was regenerated
+
+Because the schematic and every other footprint were unchanged, the published
+port's file was kept: setup, rules, title block, text variables, net table,
+footprints with their schematic links and BOM fields, embedded 3D models, and
+the castellation reconstruction described below. Only the geometry was
+replaced, with Rev-11's as imported headlessly by KiCad 9.0.9:
+
+- All tracks, vias and zones were replaced. Zones keep their Altium fills and
+  are never refilled.
+- All board graphics were replaced. The Edge.Cuts width was re-set to the
+  port's 0.199898 mm convention, and pour clearance to 0.1499 as before.
+- The moved R2 footprint was produced by a three-way merge: the port's
+  metadata applied to Rev-11's geometry.
+- Rev-11's 3D-model settings were applied to P1/P2.
+
+The P1/P2 castellated headers sit at the same positions in both sources, so
+their 64 reconstructed join rectangles carry over unchanged. Nets are carried
+across by name, through pad correspondence, and any unmapped name stops the
+script. The scripts are in the Notecarrier-X port's
+[`documentation/scripts/`](../../../../Notecarrier-X/v1.2/KiCad_format/documentation/scripts/).
+The importer assigns fresh UUIDs and object order on every run, so a re-run
+reproduces the board structurally, not byte for byte.
 
 ## Structure and import quirks
 
@@ -86,6 +110,15 @@ documentation.
   intentional Altium mechanical-hole modelling and are kept; the unnamed
   mount-hole footprints are named `MTG_NPTH_3.3mm`.
 - Edge.Cuts uses the Altium outline width convention (0.199898 mm).
+- **Two documented DRC exclusions** (`items_not_allowed`, one per copper
+  layer). The released GND pour's edge at x = 169.47 mm runs about 0.08 mm²
+  into the clearance circle of fiducial FD2 (top) / FD7 (bottom). The shipped
+  `2200-917` copper confirms the edge is fab-accurate (it has no notch there).
+  KiCad's importer turns the fiducial's clearance into a no-pour rule area,
+  which is why DRC reports it. Both exclusions are stored with that
+  explanation in `Notecarrier-XM.kicad_pro`. The keys use KiCad's marker
+  position: the point where the pour meets the rule-area outline, not the
+  zone anchor the report prints.
 - `kicad-cli` F8-equivalent (Update PCB from Schematic) run with *re-link by
   reference* ON and *replace footprints* OFF; the only error is the
   footprint-less assembly pseudo-symbol ASS1 (a documentation item, not a
@@ -99,14 +132,14 @@ Gates run by `_Tools/kicad_validation/run_all.py notecarrier-xm`
 | Gate | Result |
 |---|---|
 | ERC (error severity) | PASS — 0 |
-| DRC + schematic parity (error severity) | PASS — 0 violations, 0 exclusions |
+| DRC + schematic parity (error severity) | PASS — 0 violations, 2 documented exclusions (fiducial clearance, above) |
 | BOM vs `BOM-3000-793-001.xlsx` | PASS — exact on `BL PART NUMBER` per refdes |
-| Netlist vs source PcbDoc (pad-to-net partitions) | PASS — 37/37 |
-| Gerber raster diff vs published `2200-917__2024-06-12.zip` | PASS with the documented deviations above |
+| Netlist vs released Rev-11 PcbDoc (pad by pad) | PASS — 0 conflicts; 37/37 net partitions (`../validation/altium-netlist-compare.txt`) |
+| Gerber raster diff vs published `2200-917__2024-06-12.zip` | PASS — copper/mask/paste 0.000–0.007, no difference cluster ≥ 0.045 mm²; silk = font-metric class only |
 | Placement vs shipped pick-and-place file | PASS — 13/13 on board side and rotation (`../validation/pnp-compare.txt`) |
 | kicanvas headless render (all sheets + board) | PASS |
 | RAG extract parse | PASS |
 
 The published fab package ships no ODB++/IPC-D-356 netlist, so the
-independent-netlist gate is replaced by the pad-to-net partition comparison
-against a fresh headless import of the source board.
+independent-netlist gate is replaced by the pad-by-pad comparison against the
+nets carried by the released Rev-11 board file.

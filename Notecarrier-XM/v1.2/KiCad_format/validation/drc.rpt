@@ -1,11 +1,8 @@
 ** Drc report for Notecarrier-XM.kicad_pcb **
-** Created on 2026-08-01T16:09:18-0500 **
+** Created on 2026-10-30T10:53:01-0500 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 59 DRC violations **
-[track_dangling]: Track has unconnected end
-    Local override; warning
-    @(135.7436 mm, 92.1036 mm): Track [+VACT_GPS_IN] on Bottom Layer, length 0.0000 mm
+** Found 60 DRC violations **
 [via_dangling]: Via is not connected or connected on only one layer
     Local override; warning
     @(129.1936 mm, 109.1036 mm): Via [+VUSB] on Top Layer - Bottom Layer
@@ -51,16 +48,8 @@
     @(127.3161 mm, 111.7536 mm): Pad A7 [USB_D_N] of P3 on Top Layer
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
-    @(123.2435 mm, 104.6537 mm): Segment of R12 on Top Overlay
-    @(123.2437 mm, 103.7535 mm): Segment of R11 on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(123.2437 mm, 103.7535 mm): Segment of R11 on Top Overlay
-    @(121.4435 mm, 103.7537 mm): Segment of R12 on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
     @(121.4437 mm, 103.7535 mm): Segment of R11 on Top Overlay
-    @(121.4435 mm, 104.6537 mm): Segment of R12 on Top Overlay
+    @(121.4435 mm, 103.7537 mm): Segment of R12 on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
     @(121.4437 mm, 103.7535 mm): Segment of R11 on Top Overlay
@@ -75,28 +64,32 @@
     @(121.4435 mm, 103.7537 mm): Segment of R12 on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
-    @(121.4437 mm, 103.7535 mm): Segment of R11 on Top Overlay
+    @(123.2437 mm, 103.7535 mm): Segment of R11 on Top Overlay
     @(121.4435 mm, 103.7537 mm): Segment of R12 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(121.4437 mm, 103.7535 mm): Segment of R11 on Top Overlay
+    @(121.4435 mm, 104.6537 mm): Segment of R12 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(123.2435 mm, 104.6537 mm): Segment of R12 on Top Overlay
+    @(123.2437 mm, 103.7535 mm): Segment of R11 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(125.2935 mm, 97.4535 mm): Segment of L5 on Top Overlay
+    @(126.6936 mm, 97.4536 mm): Segment of C1 on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
     @(123.4936 mm, 97.4536 mm): Segment of C1 on Top Overlay
     @(125.2935 mm, 97.4535 mm): Segment of L5 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(126.6935 mm, 100.0535 mm): Segment of L5 on Top Overlay
+    @(126.6936 mm, 97.4536 mm): Segment of C1 on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
     @(123.4936 mm, 97.4536 mm): Segment of C1 on Top Overlay
     @(125.2935 mm, 100.0535 mm): Segment of L5 on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(123.4936 mm, 97.4536 mm): Segment of C1 on Top Overlay
-    @(126.6935 mm, 100.0535 mm): Segment of L5 on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(125.2935 mm, 97.4535 mm): Segment of L5 on Top Overlay
-    @(126.6936 mm, 97.4536 mm): Segment of C1 on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(126.6935 mm, 100.0535 mm): Segment of L5 on Top Overlay
-    @(126.6936 mm, 97.4536 mm): Segment of C1 on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
     @(122.0936 mm, 99.7036 mm): Segment of C3 on Top Overlay
@@ -109,6 +102,10 @@
     Rule: board setup constraints silk; warning
     @(125.2936 mm, 101.3036 mm): Segment of C3 on Top Overlay
     @(125.2935 mm, 100.0535 mm): Segment of L5 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(123.4936 mm, 97.4536 mm): Segment of C1 on Top Overlay
+    @(126.6935 mm, 100.0535 mm): Segment of L5 on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
     @(122.0936 mm, 99.7036 mm): Segment of C3 on Top Overlay
@@ -123,36 +120,36 @@
     @(121.7935 mm, 99.7035 mm): Segment of R1 on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
+    @(161.2385 mm, 94.1917 mm): PCB Text Box 'NOTECARRIER-XM' on Top Overlay
+    @(157.4841 mm, 103.1201 mm): PCB Text Box 'V1.2' on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(161.2385 mm, 94.1917 mm): PCB Text Box 'NOTECARRIER-XM' on Top Overlay
     @(160.0856 mm, 90.6936 mm): PCB text 'AUX_EN' on Top Overlay
-    @(161.2385 mm, 94.1917 mm): PCB Text Box 'NOTECARRIER-XM' on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
-    @(128.8236 mm, 89.7936 mm): Segment on Top Overlay
-    @(128.8236 mm, 89.7736 mm): Segment of P2 on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(128.8236 mm, 89.7736 mm): Segment of P2 on Top Overlay
-    @(128.8236 mm, 89.7936 mm): Segment on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(169.4636 mm, 89.7736 mm): Segment of P2 on Top Overlay
-    @(128.8236 mm, 89.7936 mm): Segment on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(157.4841 mm, 103.1201 mm): PCB Text Box 'V1.3' on Top Overlay
-    @(161.2385 mm, 94.1917 mm): PCB Text Box 'NOTECARRIER-XM' on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(128.8136 mm, 120.2236 mm): Segment on Top Overlay
     @(128.8136 mm, 120.2436 mm): Segment of P1 on Top Overlay
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
     @(128.8136 mm, 120.2236 mm): Segment on Top Overlay
-    @(169.4536 mm, 122.7836 mm): Segment of P1 on Top Overlay
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
     @(128.8136 mm, 122.7836 mm): Segment of P1 on Top Overlay
     @(128.8136 mm, 120.2236 mm): Segment on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(169.4536 mm, 122.7836 mm): Segment of P1 on Top Overlay
+    @(128.8136 mm, 120.2236 mm): Segment on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.8236 mm, 89.7936 mm): Segment on Top Overlay
+    @(128.8236 mm, 89.7736 mm): Segment of P2 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(128.8236 mm, 89.7936 mm): Segment on Top Overlay
+    @(128.8236 mm, 89.7736 mm): Segment of P2 on Top Overlay
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(169.4636 mm, 89.7736 mm): Segment of P2 on Top Overlay
+    @(128.8236 mm, 89.7936 mm): Segment on Top Overlay
 [nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
     Local override; warning
     @(253.5886 mm, 189.9836 mm): PCB text 'BOM NO.:' on M13 Assy Top Comm
@@ -176,7 +173,7 @@
     @(126.3671 mm, 105.5536 mm): Value field of L5 (MCKK1608T1R0MN)
 [nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
     Local override; warning
-    @(122.0673 mm, 93.7420 mm): Value field of R2 (0R0)
+    @(147.0199 mm, 118.8152 mm): Value field of R2 (0R0)
 [nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
     Local override; warning
     @(123.7012 mm, 102.9709 mm): Value field of C2 (10n/1000V)
@@ -207,6 +204,14 @@
 [nonmirrored_text_on_back_layer]: Non-Mirrored text on back layer
     Local override; warning
     @(143.9436 mm, 121.8771 mm): Value field of P1 (Header Castellated 2.54mm 1X16)
+[items_not_allowed]: Items not allowed (keepout area)
+    Rule: keepout area; error (excluded)
+    @(119.9436 mm, 123.8036 mm): Zone [GND] on Top Layer, priority 2
+    Fab-accurate: the released Rev-11 GND pour edge (x=169.47) runs ~0.08 mm2 into the clearance circle of fiducial FD2 (top), matching the shipped 2200-917 copper; the importer turns the fiducial clearance into a no-pour rule area
+[items_not_allowed]: Items not allowed (keepout area)
+    Rule: keepout area; error (excluded)
+    @(119.9436 mm, 123.8036 mm): Zone [GND] on Bottom Layer, priority 0
+    Fab-accurate: the released Rev-11 GND pour edge (x=169.47) runs ~0.08 mm2 into the clearance circle of fiducial FD7 (bottom), matching the shipped 2200-917 copper; the importer turns the fiducial clearance into a no-pour rule area
 
 ** Found 0 unconnected pads **
 
@@ -254,10 +259,10 @@
     @(169.3436 mm, 105.0036 mm): Footprint OBJ1
 [footprint_symbol_mismatch]: Notecarrier-XM-altium-import:R-0603 doesn't match footprint given by symbol (R-0603).
     Local override; warning
-    @(122.4436 mm, 94.5536 mm): Footprint R2
+    @(146.6436 mm, 118.0036 mm): Footprint R2
 [footprint_symbol_mismatch]: Footprint attributes don't match symbol: 'Do not populate' settings differ.
     Local override; warning
-    @(122.4436 mm, 94.5536 mm): Footprint R2
+    @(146.6436 mm, 118.0036 mm): Footprint R2
 [footprint_symbol_mismatch]: Notecarrier-XM-altium-import:C-0805 doesn't match footprint given by symbol (C-0805).
     Local override; warning
     @(125.0936 mm, 96.6536 mm): Footprint C1
